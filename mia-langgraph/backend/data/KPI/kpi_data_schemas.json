@@ -1,0 +1,181 @@
+{
+  "category": "kpi_data_products",
+  "generated_on_utc": "2026-02-02T12:50:06Z",
+  "source_reference": "kpi_data_products.xlsx",
+  "master_list": null,
+  "tables": {
+    "KPI_STORE_MONTHLY": {
+      "odh_reference_sheet": "kpi_store_monthly",
+      "record_count": 13,
+      "fields": [
+        {
+          "field_name": "MONTH",
+          "data_type": "datetime64[ns]",
+          "description": "Calendar month label (e.g., YYYY-MM)."
+        },
+        {
+          "field_name": "SITE_ID",
+          "data_type": "object",
+          "description": "Manufacturing site identifier."
+        },
+        {
+          "field_name": "PRODUCTION_VOLUME",
+          "data_type": "int64",
+          "description": "Production Volume field (description inferred from name)."
+        },
+        {
+          "field_name": "BATCH_COUNT",
+          "data_type": "int64",
+          "description": "Count of Batch."
+        },
+        {
+          "field_name": "BATCH_YIELD_AVG_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "RFT_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "SCHEDULE_ADHERENCE_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "AVG_CYCLE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "DEVIATIONS_PER_100_BATCHES",
+          "data_type": "float64",
+          "description": "Deviations per 100 batches."
+        },
+        {
+          "field_name": "ALARMS_PER_1000_HOURS",
+          "data_type": "float64",
+          "description": "Alarms per 1000 operating hours."
+        },
+        {
+          "field_name": "LAB_TURNAROUND_MEDIAN_DAYS",
+          "data_type": "float64",
+          "description": "Laboratory turnaround time (median days)."
+        },
+        {
+          "field_name": "SUPPLIER_OTIF_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "OEE_PACKAGING_PCT",
+          "data_type": "float64",
+          "description": "Overall Equipment Effectiveness for packaging (percentage)."
+        },
+        {
+          "field_name": "TARGET_OTIF_PCT",
+          "data_type": "int64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "TARGET_RFT_PCT",
+          "data_type": "int64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "TARGET_OEE_PACKAGING_PCT",
+          "data_type": "int64",
+          "description": "Overall Equipment Effectiveness for packaging (percentage)."
+        },
+        {
+          "field_name": "OTIF_RAG",
+          "data_type": "object",
+          "description": "Red/Amber/Green status derived from target and actuals."
+        },
+        {
+          "field_name": "RFT_RAG",
+          "data_type": "object",
+          "description": "Red/Amber/Green status derived from target and actuals."
+        },
+        {
+          "field_name": "OEE_RAG",
+          "data_type": "object",
+          "description": "Overall Equipment Effectiveness for packaging (percentage)."
+        }
+      ]
+    },
+    "KPI_STORE_WEEKLY": {
+      "odh_reference_sheet": "kpi_store_weekly",
+      "record_count": 52,
+      "fields": [
+        {
+          "field_name": "ISO_WEEK",
+          "data_type": "int64",
+          "description": "ISO week number for the reporting year."
+        },
+        {
+          "field_name": "SITE_ID",
+          "data_type": "object",
+          "description": "Manufacturing site identifier."
+        },
+        {
+          "field_name": "PRODUCTION_VOLUME",
+          "data_type": "int64",
+          "description": "Production Volume field (description inferred from name)."
+        },
+        {
+          "field_name": "BATCH_COUNT",
+          "data_type": "int64",
+          "description": "Count of Batch."
+        },
+        {
+          "field_name": "BATCH_YIELD_AVG_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "RFT_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "SCHEDULE_ADHERENCE_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "AVG_CYCLE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "DEVIATIONS_PER_100_BATCHES",
+          "data_type": "float64",
+          "description": "Deviations per 100 batches."
+        },
+        {
+          "field_name": "ALARMS_PER_1000_HOURS",
+          "data_type": "float64",
+          "description": "Alarms per 1000 operating hours."
+        },
+        {
+          "field_name": "STOCKOUTS_COUNT",
+          "data_type": "int64",
+          "description": "Count of Stockouts."
+        },
+        {
+          "field_name": "OEE_PACKAGING_PCT",
+          "data_type": "float64",
+          "description": "Overall Equipment Effectiveness for packaging (percentage)."
+        },
+        {
+          "field_name": "MONTH",
+          "data_type": "datetime64[ns]",
+          "description": "Calendar month label (e.g., YYYY-MM)."
+        }
+      ]
+    }
+  },
+  "missing_views_no_odh_reference": []
+}

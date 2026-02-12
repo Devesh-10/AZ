@@ -1,0 +1,216 @@
+.visualization-panel {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(124, 58, 92, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 92, 0.08);
+}
+
+.visualization-panel.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #9ca3af;
+}
+
+.empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.viz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #faf8f9 0%, #f3e8f0 100%);
+  border-bottom: 1px solid rgba(124, 58, 92, 0.08);
+}
+
+.viz-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.viz-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Chart Toggle Buttons */
+.chart-toggle {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: #7c3a5c;
+  background: rgba(124, 58, 92, 0.05);
+}
+
+.toggle-btn.active {
+  background: linear-gradient(135deg, #7c3a5c 0%, #5a2a42 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(124, 58, 92, 0.3);
+}
+
+.toggle-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.chart-type-badge {
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #7c3a5c 0%, #5a2a42 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.viz-content {
+  padding: 20px 16px;
+  background: white;
+}
+
+/* Custom Tooltip Styling */
+.custom-tooltip {
+  background: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  padding: 14px 18px;
+  min-width: 160px;
+}
+
+.custom-tooltip .tooltip-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 10px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.custom-tooltip .tooltip-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 6px 0;
+  color: #374151;
+}
+
+.custom-tooltip .tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.custom-tooltip .tooltip-value strong {
+  color: #1a1a2e;
+  font-weight: 700;
+}
+
+.custom-tooltip .tooltip-unit {
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Recharts customizations */
+.recharts-cartesian-grid-horizontal line {
+  stroke: #f5f5f5;
+}
+
+.recharts-cartesian-grid-vertical line {
+  stroke: transparent;
+}
+
+.recharts-legend-item-text {
+  font-size: 13px !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+.recharts-legend-wrapper {
+  padding-top: 16px !important;
+}
+
+.recharts-tooltip-wrapper {
+  filter: none !important;
+}
+
+/* Bar chart specific */
+.recharts-bar-rectangle {
+  transition: opacity 0.2s ease;
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.85;
+}
+
+/* Pie chart specific */
+.recharts-pie-sector {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.recharts-pie-sector:hover {
+  filter: brightness(1.05);
+}
+
+/* Active dot styling */
+.recharts-active-dot circle {
+  filter: drop-shadow(0 2px 4px rgba(124, 58, 92, 0.4));
+}
+
+/* Animation for chart elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.viz-content {
+  animation: fadeInUp 0.3s ease-out;
+}

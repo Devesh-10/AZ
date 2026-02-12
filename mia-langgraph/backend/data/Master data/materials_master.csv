@@ -1,0 +1,31 @@
+material_id,description,uom,std_batch_size,value_stream,route,type,lead_time_days,critical
+FG-VA01,Vaccine A Vial 5mL,vial,20000.0,FillFinish,Upstream→Downstream→Fill,FG,,
+FG-VA02,Vaccine A PFS 1mL,syringe,18000.0,FillFinish,Upstream→Downstream→Fill,FG,,
+FG-MAB1,mAb1 Bulk Drug Substance,L,1000.0,Downstream,Upstream→Downstream,FG,,
+FG-MAB1-FILL,mAb1 DP Vial 2mL,vial,25000.0,FillFinish,Upstream→Downstream→Fill,FG,,
+FG-SMALLM,Small Molecule Tablet 250mg,tablet,500000.0,SolidDose,Blend→Compress→Coat→Pack,FG,,
+RM-001,Raw Material 1,pcs,,,,RAW,14.0,True
+RM-002,Raw Material 2,pcs,,,,RAW,24.0,True
+RM-003,Raw Material 3,kg,,,,RAW,15.0,False
+RM-004,Raw Material 4,kg,,,,RAW,41.0,True
+RM-005,Raw Material 5,pcs,,,,RAW,34.0,True
+RM-006,Raw Material 6,kg,,,,RAW,12.0,True
+RM-007,Raw Material 7,kg,,,,RAW,39.0,False
+RM-008,Raw Material 8,kg,,,,RAW,42.0,True
+RM-009,Raw Material 9,pcs,,,,RAW,41.0,False
+RM-010,Raw Material 10,kg,,,,RAW,35.0,False
+RM-011,Raw Material 11,L,,,,RAW,7.0,True
+RM-012,Raw Material 12,pcs,,,,RAW,34.0,False
+RM-013,Raw Material 13,L,,,,RAW,16.0,True
+RM-014,Raw Material 14,L,,,,RAW,13.0,True
+RM-015,Raw Material 15,L,,,,RAW,13.0,False
+RM-016,Raw Material 16,L,,,,RAW,23.0,True
+RM-017,Raw Material 17,pcs,,,,RAW,36.0,False
+RM-018,Raw Material 18,kg,,,,RAW,31.0,True
+RM-019,Raw Material 19,pcs,,,,RAW,25.0,False
+RM-020,Raw Material 20,pcs,,,,RAW,30.0,False
+RM-021,Raw Material 21,kg,,,,RAW,11.0,True
+RM-022,Raw Material 22,pcs,,,,RAW,21.0,False
+RM-023,Raw Material 23,kg,,,,RAW,21.0,True
+RM-024,Raw Material 24,L,,,,RAW,24.0,False
+RM-025,Raw Material 25,pcs,,,,RAW,30.0,True

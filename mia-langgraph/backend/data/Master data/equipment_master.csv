@@ -1,0 +1,9 @@
+equipment_id,type,area,line,capacity_L
+R-101,Reactor,Upstream,US-1,1500.0
+R-102,Reactor,Upstream,US-2,1500.0
+C-201,Centrifuge,Downstream,DS-1,1000.0
+F-301,FilterSkid,Downstream,DS-2,1000.0
+VIAL-1,Filler,FillFinish,FF-1,20000.0
+VIAL-2,Filler,FillFinish,FF-2,25000.0
+TAB-1,TabletPress,SolidDose,SD-1,
+COAT-1,Coater,SolidDose,SD-1,

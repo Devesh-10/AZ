@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f5f5f5;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main Layout - Three Panel */
+.app-main.three-panel {
+  flex: 1;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Chat Panel - Left (50%) */
+.chat-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fafafa;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  contain: layout style;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Agent Flow Panel - Middle (25%) */
+.agent-panel {
+  width: 25%;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  overflow: hidden;
+  contain: layout style;
+}
+
+/* SQL Panel - Right (25%) */
+.sql-panel {
+  width: 25%;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  overflow: hidden;
+  contain: layout style;
+}
+
+/* Panel Header */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.panel-toggle-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Collapsed Panels */
+.agent-panel.collapsed,
+.sql-panel.collapsed {
+  width: 50px;
+  min-width: 50px;
+}
+
+.agent-panel.collapsed .panel-header,
+.sql-panel.collapsed .panel-header {
+  padding: 12px 8px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agent-panel.collapsed .panel-title,
+.sql-panel.collapsed .panel-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 11px;
+}
+
+/* Expand chat panel when side panels collapse */
+.app-main.three-panel.agent-collapsed .chat-panel {
+  width: calc(50% + 12.5% - 25px);
+}
+
+.app-main.three-panel.sql-collapsed .chat-panel {
+  width: calc(50% + 12.5% - 25px);
+}
+
+.app-main.three-panel.agent-collapsed.sql-collapsed .chat-panel {
+  width: calc(100% - 100px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .chat-panel {
+    width: 45%;
+  }
+  .agent-panel {
+    width: 28%;
+  }
+  .sql-panel {
+    width: 27%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .chat-panel {
+    width: 40%;
+  }
+  .agent-panel {
+    width: 30%;
+  }
+  .sql-panel {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-main.three-panel {
+    flex-direction: column;
+  }
+
+  .chat-panel {
+    width: 100%;
+    height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .agent-panel {
+    width: 100%;
+    height: 25vh;
+  }
+
+  .sql-panel {
+    width: 100%;
+    height: 25vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-panel {
+    height: 60vh;
+  }
+
+  .agent-panel {
+    height: 20vh;
+  }
+
+  .sql-panel {
+    height: 20vh;
+  }
+}
