@@ -1,6 +1,7 @@
 import { RoutingDecision } from "../types";
 import { callClaudeForJson } from "../core/bedrockClient";
 import { logAgentStep } from "../core/telemetryStore";
+import { loadPrompt, injectVariables, PROMPTS } from "../prompts";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -99,17 +100,34 @@ function getFallbackKpiSchema(): string {
 }
 
 /**
- * SUPERVISOR AGENT PROMPT
- *
- * Concise prompt with dynamic KPI catalogue injection.
- * Routes queries to KPI_SIMPLE (fast lookups) or KPI_COMPLEX (analysis).
+ * Build the system prompt with injected KPI catalogue
+ * Uses external markdown prompt file for maintainability
  */
-const SYSTEM_PROMPT_TEMPLATE = `You are the Supervisor Agent for AstraZeneca's Manufacturing Insight Agent. Route user queries to the correct downstream agent.
+function buildSystemPrompt(): string {
+  const kpiCatalogue = loadKpiCatalogue();
+
+  // Try to load from external prompt file first
+  const promptTemplate = loadPrompt(PROMPTS.SUPERVISOR);
+
+  if (promptTemplate) {
+    return injectVariables(promptTemplate, { KPI_CATALOGUE: kpiCatalogue });
+  }
+
+  // Fallback to inline prompt if file not found
+  console.warn("[SupervisorAgent] Using fallback inline prompt");
+  return getFallbackPrompt(kpiCatalogue);
+}
+
+/**
+ * Fallback inline prompt if external file not found
+ */
+function getFallbackPrompt(kpiCatalogue: string): string {
+  return `You are the Supervisor Agent for AstraZeneca's Manufacturing Insight Agent. Route user queries to the correct downstream agent.
 
 ## KPI Catalogue
 
 \`\`\`json
-{{KPI_CATALOGUE}}
+${kpiCatalogue}
 \`\`\`
 
 ## Field Aliases
@@ -142,13 +160,6 @@ const SYSTEM_PROMPT_TEMPLATE = `You are the Supervisor Agent for AstraZeneca's M
 | No | Batch-level, equipment, deviations | KPI_COMPLEX |
 | - | Not manufacturing related | REJECT |
 
-## Patterns
-
-- **Time**: (last|past) N (month|week)s? → set granularity
-- **Batch ID**: B\\d{4}-\\d{5} → route to KPI_COMPLEX (needs transactional data)
-- **Weekly-only fields**: STOCKOUTS_COUNT, ISO_WEEK
-- **Monthly-only fields**: LAB_TURNAROUND_MEDIAN_DAYS, SUPPLIER_OTIF_PCT, *_RAG, TARGET_*
-
 ## Output
 
 Return ONLY valid JSON:
@@ -158,13 +169,6 @@ Return ONLY valid JSON:
   "matched_field": "FIELD_NAME or null",
   "matched_table": "KPI_STORE_MONTHLY or KPI_STORE_WEEKLY or null"
 }`;
-
-/**
- * Build the system prompt with injected KPI catalogue
- */
-function buildSystemPrompt(): string {
-  const kpiCatalogue = loadKpiCatalogue();
-  return SYSTEM_PROMPT_TEMPLATE.replace("{{KPI_CATALOGUE}}", kpiCatalogue);
 }
 
 // Cache the built prompt (KPI schema doesn't change at runtime)
@@ -200,21 +204,43 @@ export async function classifyQuery(
   // Time qualifier pattern (optional at the end of queries)
   const timeQualifier = `(\\s+(this|last|current|previous)\\s+(month|week|quarter|year))?`;
 
-  // FAST: Batch ID detected → KPI_COMPLEX (needs transactional data)
+  // FAST: Batch ID detected
   const batchIdPattern = /\bB\d{4}-\d{5}\b/i;
-  if (batchIdPattern.test(lowerQuery)) {
+  const hasBatchId = batchIdPattern.test(lowerQuery);
+
+  // Check if this is a simple batch lookup (lead time, waiting time) - route to KPI_SIMPLE
+  const isBatchLeadTimeQuery = hasBatchId && (
+    /lead\s*time/i.test(lowerQuery) ||
+    /waiting\s*time/i.test(lowerQuery) ||
+    /wait\s*time/i.test(lowerQuery)
+  );
+
+  if (isBatchLeadTimeQuery) {
+    await logAgentStep({
+      sessionId,
+      agentName: "Supervisor",
+      inputSummary: userQuery,
+      outputSummary: "Classified as KPI_SIMPLE: Batch lead time lookup",
+      reasoningSummary: "Fast path: Batch lead time query. Routing to KPI Gateway for direct lookup.",
+      status: "success",
+    });
+    return { type: "KPI_SIMPLE", reason: "Batch lead time lookup - direct data retrieval" };
+  }
+
+  // Other batch queries → KPI_COMPLEX (needs analysis)
+  if (hasBatchId) {
     await logAgentStep({
       sessionId,
       agentName: "Supervisor",
       inputSummary: userQuery,
       outputSummary: "Classified as KPI_COMPLEX: Batch-level query",
-      reasoningSummary: "Fast path: Batch ID detected. Requires transactional data from MES_PASX_BATCHES.",
+      reasoningSummary: "Fast path: Batch ID detected. Requires analysis from transactional data.",
       status: "success",
     });
-    return { type: "KPI_COMPLEX", reason: "Batch-level query requires transactional data" };
+    return { type: "KPI_COMPLEX", reason: "Batch-level query requires transactional data analysis" };
   }
 
-  // FAST: Waiting time / step timing → KPI_COMPLEX
+  // FAST: Waiting time / step timing (without batch ID) → KPI_COMPLEX
   if (/waiting\s*time/i.test(lowerQuery) || /step\s*(timing|duration)/i.test(lowerQuery)) {
     await logAgentStep({
       sessionId,

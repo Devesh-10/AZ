@@ -7,12 +7,7 @@
  * - Trend interpretation
  * - Equipment comparison
  *
- * ACTUAL DATA:
- * - 376 total batches
- * - 327 Released (87.0%), 28 Quarantined (7.4%), 21 Rejected (5.6%)
- * - Average Yield: 97.4%
- * - RFT: 64% (target 92%)
- * - OEE: 76% (target 80%)
+ * Uses external prompt file: prompts/analyst_agent.md
  */
 
 import { AnalystResult, KpiResult } from "../types";
@@ -20,6 +15,7 @@ import { callClaudeForText } from "../core/bedrockClient";
 import { logAgentStep } from "../core/telemetryStore";
 import { getManufacturingDataRepository } from "../dataAccess/ManufacturingDataRepository";
 import { getConversationHistory } from "./SupervisorAgent";
+import { loadPrompt, injectVariables, PROMPTS } from "../prompts";
 
 export interface AnalystAgentResult {
   analystResult: AnalystResult;
@@ -427,7 +423,17 @@ FROM MES_PASX_BATCHES;`;
     status: "success",
   });
 
-  const narrativePrompt = `You are a Manufacturing Operations Expert at AstraZeneca. Answer this question directly.
+  // Build narrative prompt from template or use inline fallback
+  const promptTemplate = loadPrompt(PROMPTS.ANALYST);
+  const narrativePrompt = promptTemplate
+    ? injectVariables(promptTemplate, {
+        USER_QUESTION: userQuery,
+        CONVERSATION_HISTORY: conversationContext,
+        BATCH_SUMMARY: `Total: ${totalBatches}, Released: ${releasedBatches.length}, Rejected: ${rejectedBatches.length}, Quarantined: ${quarantinedBatches.length}`,
+        EQUIPMENT_STATS: worstEquipment.map(([eq, stats]) => `${eq}: ${stats.avgYield.toFixed(1)}% yield`).join(', '),
+        QUALITY_METRICS: `Avg Yield: ${avgYield.toFixed(1)}%, Low Yield Batches: ${lowYieldBatches.length}, Deviations: ${batchesWithDeviations.length}`,
+      }) + `\n\nDATA FOR YOUR ANALYSIS:\n${analysisContext}`
+    : `You are a Manufacturing Operations Expert at AstraZeneca. Answer this question directly.
 
 USER QUESTION: ${userQuery}
 

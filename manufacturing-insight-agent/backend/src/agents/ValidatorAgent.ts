@@ -1,13 +1,19 @@
 import { KpiResult, AnalystResult, ValidationResult } from "../types";
 import { callClaudeForText } from "../core/bedrockClient";
 import { logAgentStep } from "../core/telemetryStore";
+import { loadPrompt, PROMPTS } from "../prompts";
 
 /**
  * Validator Agent
  *
  * Validates KPI results and analyst outputs to ensure quality responses.
  * Can generate follow-up questions when more information is needed.
+ *
+ * Uses external prompt file: prompts/validator_agent.md
  */
+
+// Load prompt template at module init (for documentation/reference)
+const _validatorPromptTemplate = loadPrompt(PROMPTS.VALIDATOR);
 
 export async function validateKpiResults(
   sessionId: string,

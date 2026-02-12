@@ -347,12 +347,35 @@ class ManufacturingDataRepository {
     return [...new Set(this.kpiMonthly.map(r => r.month))].sort();
   }
 
-  // Get KPI values for the last N months - direct lookup, no aggregation
-  getKpiByMonth(metric: string, lastNMonths?: number, skuFilter?: string | null): { label: string; value: number }[] {
-    // Read directly from monthly KPI store - already pre-aggregated
-    let filteredData = this.kpiMonthly;
+  // Data availability result with metadata
+  getKpiByMonthWithMetadata(
+    metric: string,
+    requestedMonths?: number,
+    skuFilter?: string | null
+  ): {
+    dataPoints: { label: string; value: number }[];
+    metadata: {
+      requestedMonths: number | null;
+      availableMonths: number;
+      allAvailableMonths: string[];
+      skuFound: boolean;
+      skuFilter: string | null;
+      metricFound: boolean;
+      metric: string;
+      allAvailableSKUs: string[];
+    };
+  } {
+    const allSKUs = [...new Set(this.kpiMonthly.map(r => r.SKU))];
+    const allMonths = [...new Set(this.kpiMonthly.map(r => r.month))].sort();
 
-    // Apply SKU filter if provided
+    // Check if metric exists in data
+    const sampleRow = this.kpiMonthly[0] as any;
+    const metricFound = sampleRow && metric in sampleRow;
+
+    // Apply SKU filter
+    let filteredData = this.kpiMonthly;
+    const skuFound = !skuFilter || allSKUs.includes(skuFilter);
+
     if (skuFilter) {
       filteredData = filteredData.filter(row => row.SKU === skuFilter);
     }
@@ -365,14 +388,15 @@ class ManufacturingDataRepository {
       .filter(r => !isNaN(r.value))
       .sort((a, b) => a.month.localeCompare(b.month));
 
-    // Get unique months (in case of multiple SKUs)
+    // Get unique months for this filter
     const uniqueMonths = [...new Set(monthlyData.map(r => r.month))].sort();
+    const availableMonths = uniqueMonths.length;
 
-    // Take last N months
-    const targetMonths = lastNMonths ? uniqueMonths.slice(-lastNMonths) : uniqueMonths;
+    // Take last N months (or all if not specified)
+    const targetMonths = requestedMonths ? uniqueMonths.slice(-requestedMonths) : uniqueMonths;
 
-    // Get values for each month (average if multiple SKUs)
-    const results = targetMonths.map(month => {
+    // Get values for each month
+    const dataPoints = targetMonths.map(month => {
       const monthRows = monthlyData.filter(r => r.month === month);
       const avgValue = monthRows.reduce((sum, r) => sum + r.value, 0) / monthRows.length;
       return {
@@ -381,7 +405,24 @@ class ManufacturingDataRepository {
       };
     });
 
-    return results;
+    return {
+      dataPoints,
+      metadata: {
+        requestedMonths: requestedMonths || null,
+        availableMonths,
+        allAvailableMonths: uniqueMonths,
+        skuFound,
+        skuFilter: skuFilter || null,
+        metricFound,
+        metric,
+        allAvailableSKUs: allSKUs
+      }
+    };
+  }
+
+  // Legacy method for backward compatibility
+  getKpiByMonth(metric: string, lastNMonths?: number, skuFilter?: string | null): { label: string; value: number }[] {
+    return this.getKpiByMonthWithMetadata(metric, lastNMonths, skuFilter).dataPoints;
   }
 
   getBatchStatuses(): string[] {

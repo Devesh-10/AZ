@@ -1,12 +1,18 @@
 import { KpiResult, AnalystResult, VisualizationConfig } from "../types";
 import { logAgentStep } from "../core/telemetryStore";
+import { loadPrompt, PROMPTS } from "../prompts";
 
 /**
  * Visualization Agent
  *
  * Maps KPI results to appropriate visualization configurations.
  * Uses deterministic logic (no LLM calls) for speed and consistency.
+ *
+ * Uses external prompt file: prompts/visualization_agent.md
  */
+
+// Load prompt template at module init (for documentation/reference)
+const _visualizationPromptTemplate = loadPrompt(PROMPTS.VISUALIZATION);
 
 export async function generateVisualization(
   sessionId: string,

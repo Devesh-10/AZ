@@ -2,25 +2,37 @@ import { KpiResult } from "../types";
 import { callClaudeForJson } from "../core/bedrockClient";
 import { logAgentStep } from "../core/telemetryStore";
 import { getManufacturingDataRepository } from "../dataAccess/ManufacturingDataRepository";
+import { loadPrompt, PROMPTS } from "../prompts";
+
+// Load prompt template at module init (for documentation/reference)
+const _kpiGatewayPromptTemplate = loadPrompt(PROMPTS.KPI_GATEWAY);
 
 export interface KpiGatewayResult {
   kpiResults: KpiResult[];
   generatedSql: string;
 }
 
+// Data availability metadata interface
+interface DataAvailabilityInfo {
+  requestedMonths: number | null;
+  availableMonths: number;
+  skuFound: boolean;
+  skuFilter: string | null;
+  metricFound: boolean;
+  metric: string;
+  allAvailableSKUs: string[];
+  allAvailableMonths: string[];
+}
+
 /**
- * KPI GATEWAY AGENT - FAST METRIC LOOKUP
+ * KPI GATEWAY AGENT - FAST METRIC LOOKUP WITH SMART EDGE CASE HANDLING
  *
  * This agent handles SIMPLE queries that can be answered with direct data lookup.
- * No analysis - just retrieve the numbers and return them.
- *
- * DATA AVAILABLE:
- * - 376 batches: 327 Released (87%), 28 Quarantined (7.4%), 21 Rejected (5.6%)
- * - Average Yield: 97.3%
- * - RFT: 64%
- * - OEE: 76%
- * - Cycle Time: 18.2 hr
- * - Production Volume: 43.6M
+ * Includes intelligent handling of:
+ * - Data availability mismatches (requested vs available time ranges)
+ * - Invalid SKU filters
+ * - Missing metrics
+ * - Empty results
  */
 
 const PARSE_INTENT_PROMPT = `You are a query parser for a manufacturing KPI system.
@@ -148,16 +160,45 @@ ORDER BY iso_week DESC
 LIMIT 1;`;
 }
 
-function generateExplanation(
+/**
+ * Generate smart explanation with data availability awareness
+ */
+function generateExplanationWithMetadata(
   metrics: string[],
   values: { label: string; value: number }[],
   groupBy?: string | null,
   isMonthly?: boolean,
-  skuFilter?: string | null
+  skuFilter?: string | null,
+  availabilityInfo?: DataAvailabilityInfo | null
 ): string {
   const metric = metrics[0];
   const label = METRIC_LABELS[metric] || metric;
   const unit = METRIC_UNITS[metric] || '';
+
+  // Build data availability note if there's a mismatch
+  let availabilityNote = '';
+  if (availabilityInfo) {
+    const { requestedMonths, availableMonths, skuFound, skuFilter: sku, allAvailableSKUs } = availabilityInfo;
+
+    // Handle SKU not found
+    if (sku && !skuFound) {
+      const suggestedSKUs = allAvailableSKUs.slice(0, 3).join(', ');
+      return `**Data Not Found**\nNo data found for ${sku}. Available SKUs in the system: ${suggestedSKUs}.\n\n**Suggestions**\nTry querying for one of the available SKUs, or remove the SKU filter to see aggregated data across all products.`;
+    }
+
+    // Handle time range mismatch
+    if (requestedMonths && availableMonths < requestedMonths) {
+      if (availableMonths === 0) {
+        return `**Data Not Available**\nNo monthly data is available${sku ? ` for ${sku}` : ''}. The requested time range of ${requestedMonths} months cannot be fulfilled.\n\n**Suggestions**\nTry a different SKU or check if the data has been loaded correctly.`;
+      }
+      availabilityNote = `\n\n**Note:** You requested data for the past ${requestedMonths} months, but only ${availableMonths} month${availableMonths !== 1 ? 's' : ''} of data is available${sku ? ` for ${sku}` : ''}. Showing all available data.`;
+    }
+  }
+
+  // Handle empty results
+  if (values.length === 0) {
+    return `**No Data Found**\nNo data is available for the requested ${label.toLowerCase()}${skuFilter ? ` for ${skuFilter}` : ''}.\n\n**Suggestions**\nTry broadening your query or checking if the metric name is correct.`;
+  }
 
   if (groupBy === 'status') {
     const total = values.reduce((sum, v) => sum + v.value, 0);
@@ -167,7 +208,7 @@ function generateExplanation(
 
     const summary = `Of ${total} total batches, ${released} (${((released/total)*100).toFixed(1)}%) are Released, ${quarantined} (${((quarantined/total)*100).toFixed(1)}%) are Quarantined, and ${rejected} (${((rejected/total)*100).toFixed(1)}%) are Rejected.`;
     const suggestion = `Consider investigating the quarantined batches to identify common issues and reduce rejection rates.`;
-    return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}`;
+    return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}${availabilityNote}`;
   }
 
   // Monthly trend explanation with breakdown
@@ -185,7 +226,7 @@ function generateExplanation(
 
     const suggestion = `Consider analyzing the specific steps within the ${label.toLowerCase().replace(' hr', '').replace(' %', '')} process to identify areas for streamlining and efficiency improvements.`;
 
-    return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}`;
+    return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}${availabilityNote}`;
   }
 
   // Single value explanation
@@ -197,7 +238,7 @@ function generateExplanation(
     const summary = `The ${label.toLowerCase()}${skuText}${monthText} is ${value.toFixed(2)}${unit}.`;
     const suggestion = `Consider comparing this against historical trends or other SKUs to identify optimization opportunities.`;
 
-    return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}`;
+    return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}${availabilityNote}`;
   }
 
   // Multiple metrics overview
@@ -210,7 +251,18 @@ function generateExplanation(
   const summary = `Current KPI values: ${summaryParts.join(', ')}.`;
   const suggestion = `Consider drilling down into specific metrics to identify improvement opportunities.`;
 
-  return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}`;
+  return `**Summary**\n${summary}\n\n**Suggestions for Further Queries**\n${suggestion}${availabilityNote}`;
+}
+
+// Legacy function for backward compatibility
+function generateExplanation(
+  metrics: string[],
+  values: { label: string; value: number }[],
+  groupBy?: string | null,
+  isMonthly?: boolean,
+  skuFilter?: string | null
+): string {
+  return generateExplanationWithMetadata(metrics, values, groupBy, isMonthly, skuFilter, null);
 }
 
 // Helper to extract number of months from query
@@ -252,6 +304,19 @@ function extractBatchId(query: string): string | null {
     return batchMatch[1].toUpperCase();
   }
   return null;
+}
+
+// Helper to validate and suggest similar SKUs
+function findSimilarSKUs(requestedSku: string, availableSKUs: string[]): string[] {
+  const requested = requestedSku.toLowerCase();
+  return availableSKUs
+    .filter(sku => {
+      const skuLower = sku.toLowerCase();
+      // Match if starts with same prefix or contains similar numbers
+      return skuLower.includes(requested.replace('sku_', '').replace('sku', '')) ||
+             requested.includes(skuLower.replace('sku_', '').replace('sku', ''));
+    })
+    .slice(0, 3);
 }
 
 export async function parseAndFetchKpi(
@@ -314,13 +379,16 @@ export async function parseAndFetchKpi(
       }
     }
 
-    // Batch not found
+    // Batch not found - provide helpful suggestions
+    const allBatches = repo.getBatches({});
+    const sampleBatchIds = allBatches.slice(0, 3).map(b => b.batch_id).join(', ');
+
     return {
       kpiResults: [{
         kpiName: 'batch_not_found',
         breakdownBy: null,
         dataPoints: [],
-        explanation: `**Summary**\nBatch ${batchId} was not found in the system.\n\n**Suggestions for Further Queries**\nPlease verify the batch ID format (e.g., B2025-00007) and try again.`
+        explanation: `**Batch Not Found**\nBatch ${batchId} was not found in the system.\n\n**Available Batches**\nSample batch IDs: ${sampleBatchIds || 'No batches available'}\n\n**Suggestions**\nPlease verify the batch ID format (e.g., B2025-00007) and try again with a valid batch ID.`
       }],
       generatedSql: `SELECT * FROM MES_PASX_BATCH_STEPS WHERE batch_id = '${batchId}';`
     };
@@ -416,9 +484,10 @@ export async function parseAndFetchKpi(
   // Generate SQL
   const generatedSql = generateSql(parsedIntent, monthCount, skuFilter);
 
-  // Fetch data based on intent
+  // Fetch data based on intent with metadata for edge case handling
   let dataPoints: { label: string; value: number }[] = [];
   let kpiName = 'kpi_summary';
+  let availabilityInfo: DataAvailabilityInfo | null = null;
 
   if (parsedIntent.groupBy === 'status') {
     // Batch status breakdown
@@ -431,14 +500,18 @@ export async function parseAndFetchKpi(
     dataPoints = byEquipment.slice(0, 8).map(e => ({ label: e.equipment, value: e.count }));
     kpiName = 'equipment_batches';
   } else if (isTimeRangeQuery && monthCount) {
-    // Time range query - get monthly breakdown with optional SKU filter
+    // Time range query - get monthly breakdown with metadata
     const metric = parsedIntent.metrics?.[0] || 'oee_packaging_pct';
-    dataPoints = repo.getKpiByMonth(metric, monthCount, skuFilter);
+    const result = repo.getKpiByMonthWithMetadata(metric, monthCount, skuFilter);
+    dataPoints = result.dataPoints;
+    availabilityInfo = result.metadata;
     kpiName = skuFilter ? `${metric}_${skuFilter}` : `${metric}_monthly`;
   } else if (parsedIntent.dataType === 'monthly_kpi') {
-    // Monthly KPI query (e.g., formulation lead time) - get latest month with optional SKU filter
+    // Monthly KPI query (e.g., formulation lead time) - get latest month with metadata
     const metric = parsedIntent.metrics?.[0] || 'formulation_lead_time_hr';
-    dataPoints = repo.getKpiByMonth(metric, 1, skuFilter);
+    const result = repo.getKpiByMonthWithMetadata(metric, 1, skuFilter);
+    dataPoints = result.dataPoints;
+    availabilityInfo = result.metadata;
     kpiName = skuFilter ? `${metric}_${skuFilter}` : metric;
   } else {
     // Direct KPI metrics
@@ -456,13 +529,14 @@ export async function parseAndFetchKpi(
     kpiName = metrics.length === 1 ? metrics[0] : 'kpi_overview';
   }
 
-  // Generate explanation
-  const explanation = generateExplanation(
+  // Generate explanation with data availability awareness
+  const explanation = generateExplanationWithMetadata(
     parsedIntent.metrics || ['batch_yield_avg_pct', 'rft_pct', 'oee_packaging_pct'],
     dataPoints,
     parsedIntent.groupBy,
     isTimeRangeQuery || parsedIntent.dataType === 'monthly_kpi',
-    skuFilter
+    skuFilter,
+    availabilityInfo
   );
 
   const kpiResult: KpiResult = {
@@ -477,7 +551,9 @@ export async function parseAndFetchKpi(
     agentName: "KPI Gateway",
     inputSummary: `Retrieved ${dataPoints.length} data points`,
     outputSummary: explanation.substring(0, 100),
-    reasoningSummary: "Successfully retrieved KPI data. Returning formatted response.",
+    reasoningSummary: availabilityInfo && availabilityInfo.requestedMonths && availabilityInfo.availableMonths < availabilityInfo.requestedMonths
+      ? `Data availability: requested ${availabilityInfo.requestedMonths} months, available ${availabilityInfo.availableMonths} months`
+      : "Successfully retrieved KPI data. Returning formatted response.",
     status: "success",
   });
 
