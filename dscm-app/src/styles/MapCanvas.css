@@ -1,0 +1,22 @@
+.map-canvas {
+  position: fixed;
+  top: 108px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  background: #f8fafc;
+  padding: 20px;
+}
+
+.map-canvas.with-controls {
+  top: 172px;
+}
+
+.stages-container {
+  display: flex;
+  gap: 20px;
+  min-width: max-content;
+  padding-bottom: 80px;
+}

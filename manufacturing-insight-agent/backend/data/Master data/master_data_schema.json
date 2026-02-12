@@ -1,0 +1,111 @@
+{
+  "category": "master_data_products",
+  "generated_on_utc": "2026-02-02T13:12:17Z",
+  "source_reference": "master_data_csv_samples",
+  "master_list": "N/A",
+  "tables": {
+    "MATERIALS_MASTER": {
+      "odh_reference_sheet": "MATERIALS_MASTER",
+      "record_count": 30,
+      "fields": [
+        {
+          "field_name": "MATERIAL_ID",
+          "data_type": "object",
+          "description": "Identifier for Material Id"
+        },
+        {
+          "field_name": "DESCRIPTION",
+          "data_type": "object",
+          "description": "Description field."
+        },
+        {
+          "field_name": "UOM",
+          "data_type": "object",
+          "description": "Unit of measure."
+        },
+        {
+          "field_name": "STD_BATCH_SIZE",
+          "data_type": "float64",
+          "description": "Batch size or quantity."
+        },
+        {
+          "field_name": "VALUE_STREAM",
+          "data_type": "object",
+          "description": "Value Stream field (description inferred from name)."
+        },
+        {
+          "field_name": "ROUTE",
+          "data_type": "object",
+          "description": "Route field (description inferred from name)."
+        },
+        {
+          "field_name": "TYPE",
+          "data_type": "object",
+          "description": "Type/category classification."
+        },
+        {
+          "field_name": "LEAD_TIME_DAYS",
+          "data_type": "float64",
+          "description": "Duration in days."
+        },
+        {
+          "field_name": "CRITICAL",
+          "data_type": "object",
+          "description": "Critical field (description inferred from name)."
+        }
+      ]
+    },
+    "VENDORS_MASTER": {
+      "odh_reference_sheet": "VENDORS_MASTER",
+      "record_count": 15,
+      "fields": [
+        {
+          "field_name": "VENDOR_ID",
+          "data_type": "object",
+          "description": "Identifier for Vendor Id"
+        },
+        {
+          "field_name": "NAME",
+          "data_type": "object",
+          "description": "Name field."
+        },
+        {
+          "field_name": "PREFERRED",
+          "data_type": "object",
+          "description": "Preferred field (description inferred from name)."
+        }
+      ]
+    },
+    "EQUIPMENT_MASTER": {
+      "odh_reference_sheet": "EQUIPMENT_MASTER",
+      "record_count": 8,
+      "fields": [
+        {
+          "field_name": "EQUIPMENT_ID",
+          "data_type": "object",
+          "description": "Identifier for Equipment Id"
+        },
+        {
+          "field_name": "TYPE",
+          "data_type": "object",
+          "description": "Type/category classification."
+        },
+        {
+          "field_name": "AREA",
+          "data_type": "object",
+          "description": "Area field (description inferred from name)."
+        },
+        {
+          "field_name": "LINE",
+          "data_type": "object",
+          "description": "Line field (description inferred from name)."
+        },
+        {
+          "field_name": "CAPACITY_L",
+          "data_type": "float64",
+          "description": "Equipment capacity value."
+        }
+      ]
+    }
+  }
+}

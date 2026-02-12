@@ -1,0 +1,128 @@
+{
+  "kpis": [
+    {
+      "name": "batch_yield_avg_pct",
+      "description": "Average batch yield percentage - measures the percentage of good product produced from raw materials",
+      "unit": "%",
+      "category": "Quality",
+      "relatedKpis": ["rft_pct", "deviations_per_100_batches"]
+    },
+    {
+      "name": "rft_pct",
+      "description": "Right First Time percentage - measures batches completed without rework or rejection",
+      "unit": "%",
+      "category": "Quality",
+      "relatedKpis": ["batch_yield_avg_pct", "deviations_per_100_batches"]
+    },
+    {
+      "name": "oee_packaging_pct",
+      "description": "Overall Equipment Effectiveness for packaging - combines availability, performance, and quality",
+      "unit": "%",
+      "category": "Efficiency",
+      "relatedKpis": ["avg_cycle_time_hr", "schedule_adherence_pct"]
+    },
+    {
+      "name": "avg_cycle_time_hr",
+      "description": "Average cycle time in hours - measures the time to complete a batch",
+      "unit": "hours",
+      "category": "Efficiency",
+      "relatedKpis": ["oee_packaging_pct", "production_volume"]
+    },
+    {
+      "name": "production_volume",
+      "description": "Total production volume - total units produced",
+      "unit": "units",
+      "category": "Volume",
+      "relatedKpis": ["batch_count", "avg_cycle_time_hr"]
+    },
+    {
+      "name": "batch_count",
+      "description": "Number of batches produced",
+      "unit": "batches",
+      "category": "Volume",
+      "relatedKpis": ["production_volume", "deviations_per_100_batches"]
+    },
+    {
+      "name": "deviations_per_100_batches",
+      "description": "Number of deviations per 100 batches - measures process stability",
+      "unit": "deviations",
+      "category": "Quality",
+      "relatedKpis": ["batch_yield_avg_pct", "rft_pct"]
+    },
+    {
+      "name": "schedule_adherence_pct",
+      "description": "Schedule adherence percentage - measures production planning accuracy",
+      "unit": "%",
+      "category": "Planning",
+      "relatedKpis": ["oee_packaging_pct", "production_volume"]
+    },
+    {
+      "name": "alarms_per_1000_hours",
+      "description": "Equipment alarms per 1000 operating hours",
+      "unit": "alarms",
+      "category": "Equipment",
+      "relatedKpis": ["oee_packaging_pct", "avg_cycle_time_hr"]
+    },
+    {
+      "name": "stockouts_count",
+      "description": "Number of material stockout events",
+      "unit": "events",
+      "category": "Supply",
+      "relatedKpis": ["schedule_adherence_pct", "production_volume"]
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "site_id",
+      "description": "Manufacturing plant identifier",
+      "values": ["FCTN-PLANT-01", "FCTN-PLANT-02", "FCTN-PLANT-03"]
+    },
+    {
+      "name": "iso_week",
+      "description": "ISO week number (1-52)",
+      "values": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "name": "month",
+      "description": "Month in YYYY-MM format",
+      "values": ["2025-01", "2025-02", "2025-03"]
+    },
+    {
+      "name": "status",
+      "description": "Batch status",
+      "values": ["Completed", "Released", "In Progress"]
+    },
+    {
+      "name": "equipment",
+      "description": "Equipment identifier",
+      "values": []
+    }
+  ],
+  "relationships": [
+    {
+      "from": "batch_yield_avg_pct",
+      "to": "rft_pct",
+      "type": "correlates_with"
+    },
+    {
+      "from": "oee_packaging_pct",
+      "to": "avg_cycle_time_hr",
+      "type": "impacts"
+    },
+    {
+      "from": "deviations_per_100_batches",
+      "to": "batch_yield_avg_pct",
+      "type": "negatively_impacts"
+    },
+    {
+      "from": "schedule_adherence_pct",
+      "to": "production_volume",
+      "type": "impacts"
+    },
+    {
+      "from": "alarms_per_1000_hours",
+      "to": "oee_packaging_pct",
+      "type": "negatively_impacts"
+    }
+  ]
+}

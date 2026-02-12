@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI MVP Programme | R&D IT DA&AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --az-maroon: #830051;
+            --az-maroon-dark: #5a0038;
+            --az-gold: #c4a000;
+            --az-gold-light: #d4b000;
+            --text-dark: #2d2d2d;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --bg-cream: #faf9f7;
+            --bg-white: #ffffff;
+            --border-light: #e8e8e8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #e8e8e8;
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Slide Container */
+        .slide {
+            width: 1440px;
+            height: 810px;
+            margin: 30px auto;
+            background: var(--bg-white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        /* AZ Logo */
+        .az-logo {
+            position: absolute;
+            bottom: 25px;
+            right: 35px;
+            width: 55px;
+            height: 55px;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 28px;
+            left: 60px;
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* Title Styling - Large italic title like AZ */
+        .slide-title {
+            font-size: 38px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.25;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .slide-title strong {
+            color: var(--az-maroon);
+            font-weight: 600;
+        }
+
+        .slide-subtitle {
+            font-size: 15px;
+            color: var(--text-medium);
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 1200px;
+        }
+
+        /* Content Area */
+        .slide-content {
+            padding: 45px 60px 80px 60px;
+            height: 100%;
+        }
+
+        /* Three Column Process Layout */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 35px;
+        }
+
+        .process-step {
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -28px;
+            top: 45px;
+            font-size: 28px;
+            color: var(--az-gold);
+            font-weight: 300;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--az-maroon);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--az-maroon);
+            line-height: 1.3;
+        }
+
+        .step-content {
+            font-size: 14px;
+            color: var(--text-medium);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .step-list {
+            font-size: 13px;
+            color: var(--text-medium);
+            padding-left: 18px;
+            margin: 15px 0;
+        }
+
+        .step-list li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .step-outcome {
+            background: var(--bg-cream);
+            padding: 14px 18px;
+            border-left: 4px solid var(--az-gold);
+            font-size: 13px;
+            color: var(--text-dark);
+            margin-top: 20px;
+        }
+
+        .step-outcome .arrow {
+            color: var(--az-gold);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Image placeholder boxes */
+        .image-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .image-box {
+            background: linear-gradient(135deg, #f8f7f5 0%, #f0eeec 100%);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--az-maroon);
+        }
+
+        .image-box-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .image-box-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--az-maroon);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .image-box-text {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Footnote */
+        .footnote {
+            position: absolute;
+            bottom: 70px;
+            left: 60px;
+            right: 100px;
+            font-size: 11px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Tables - Clean AZ Style */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--az-maroon);
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-cream);
+        }
+
+        /* Score badge */
+        .score {
+            display: inline-block;
+            background: var(--az-maroon);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Phase badges */
+        .phase-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .phase-badge.p1 { background: var(--az-maroon); color: white; }
+        .phase-badge.p2 { background: var(--az-gold); color: var(--text-dark); }
+        .phase-badge.p3 { background: #2e7d32; color: white; }
+
+        /* Platform tags */
+        .platform-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .platform-tag {
+            padding: 6px 14px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .platform-tag.primary {
+            background: var(--az-maroon);
+            color: white;
+        }
+
+        .platform-tag.secondary {
+            background: var(--bg-cream);
+            color: var(--text-medium);
+            border: 1px solid var(--border-light);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--bg-cream);
+            border-bottom: 4px solid var(--az-maroon);
+        }
+
+        .metric-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--az-maroon);
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* Three Phase Cards */
+        .phase-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .phase-card {
+            border: 1px solid var(--border-light);
+            background: white;
+        }
+
+        .phase-card-header {
+            padding: 16px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .phase-card-header.p1 { background: var(--az-maroon); }
+        .phase-card-header.p2 { background: var(--az-gold); color: var(--text-dark); }
+        .phase-card-header.p3 { background: #2e7d32; }
+
+        .phase-card-subheader {
+            background: var(--bg-cream);
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .phase-card-body {
+            padding: 20px;
+        }
+
+        .phase-card-body h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--az-maroon);
+            margin: 16px 0 8px 0;
+            font-weight: 600;
+        }
+
+        .phase-card-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .phase-card-body p {
+            font-size: 13px;
+            color: var(--text-medium);
+            line-height: 1.55;
+        }
+
+        .phase-card-body ul {
+            font-size: 12px;
+            color: var(--text-medium);
+            padding-left: 16px;
+            line-height: 1.6;
+        }
+
+        .phase-card-body li {
+            margin: 6px 0;
+        }
+
+        .phase-card-body ol {
+            font-size: 12px;
+            color: var(--text-dark);
+            padding-left: 16px;
+            font-weight: 500;
+        }
+
+        /* Timeline */
+        .timeline-table th {
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .timeline-table th:first-child {
+            text-align: left;
+            width: 240px;
+        }
+
+        .timeline-table td {
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .timeline-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .timeline-table .sub-row td:first-child {
+            padding-left: 24px;
+            font-weight: 400;
+            color: var(--text-medium);
+            font-size: 11px;
+        }
+
+        .bar {
+            height: 12px;
+            border-radius: 2px;
+            margin: 0 auto;
+            width: 85%;
+        }
+
+        .bar.maroon { background: var(--az-maroon); }
+        .bar.gold { background: var(--az-gold); }
+        .bar.green { background: #2e7d32; }
+
+        .milestone {
+            color: var(--az-gold);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .legend {
+            display: flex;
+            gap: 35px;
+            margin-top: 20px;
+            font-size: 11px;
+            color: var(--text-medium);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-bar {
+            width: 25px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        /* Highlight row */
+        .highlight-row td {
+            background: #fff8e1 !important;
+            font-weight: 600;
+        }
+
+        /* Section title */
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--az-maroon);
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--az-gold);
+        }
+
+        /* Note box */
+        .note-box {
+            background: var(--bg-cream);
+            border-left: 4px solid var(--az-gold);
+            padding: 15px 20px;
+            font-size: 13px;
+            color: var(--text-medium);
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: var(--text-dark);
+        }
+
+        /* Team table */
+        .team-table td:first-child {
+            font-weight: 600;
+            color: var(--az-maroon);
+        }
+
+        /* Benefits table */
+        .benefits-table td:first-child {
+            font-weight: 600;
+            color: var(--az-maroon);
+            width: 22%;
+            vertical-align: middle;
+            background: var(--bg-cream);
+        }
+
+        /* Title slide */
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+        }
+
+        .title-slide .main-title {
+            font-size: 52px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .title-slide .main-title strong {
+            color: var(--az-maroon);
+            font-weight: 600;
+        }
+
+        .title-slide .main-subtitle {
+            font-size: 20px;
+            color: var(--text-medium);
+            font-weight: 400;
+            margin-bottom: 50px;
+        }
+
+        .title-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px 60px;
+            margin-top: 30px;
+        }
+
+        .title-meta-item {
+            border-left: 3px solid var(--az-gold);
+            padding-left: 15px;
+        }
+
+        .title-meta-label {
+            font-size: 11px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .title-meta-value {
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; }
+            .slide {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide">
+    <div class="slide-content title-slide">
+        <h1 class="main-title">Agentic AI <strong>MVP Programme</strong></h1>
+        <p class="main-subtitle">A 9-month plan to build 4 AI agents for R&D IT platforms, starting with 3DP and BIKG</p>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">4</div>
+                <div class="metric-label">AI Agents</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2-3</div>
+                <div class="metric-label">Primary Platforms</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">6</div>
+                <div class="metric-label">FTEs</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">9</div>
+                <div class="metric-label">Months</div>
+            </div>
+        </div>
+
+        <div class="title-meta-grid">
+            <div class="title-meta-item">
+                <div class="title-meta-label">Duration</div>
+                <div class="title-meta-value">March – November 2026</div>
+            </div>
+            <div class="title-meta-item">
+                <div class="title-meta-label">Primary Platforms</div>
+                <div class="title-meta-value">3DP, BIKG</div>
+            </div>
+            <div class="title-meta-item">
+                <div class="title-meta-label">Agents</div>
+                <div class="title-meta-value">Test Intelligence, Knowledge Library, Ingestion, Auto-Lineage</div>
+            </div>
+            <div class="title-meta-item">
+                <div class="title-meta-label">Extensibility</div>
+                <div class="title-meta-value">Additional platforms tailored during discovery</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">1</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 2: Team Structure -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">Team <strong>Structure</strong></h1>
+        <p class="slide-subtitle">Core team of 6 FTEs with part-time platform SME support across the 9-month programme.</p>
+
+        <table class="team-table" style="margin-top: 30px;">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Role</th>
+                    <th style="width: 12%;">Count</th>
+                    <th>Name / Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tech Lead / Architect</td>
+                    <td>1</td>
+                    <td>Devesh</td>
+                </tr>
+                <tr>
+                    <td>Senior AI/ML Engineer</td>
+                    <td>2</td>
+                    <td>Abdalla Abdakarim + 1 Offshore</td>
+                </tr>
+                <tr>
+                    <td>Backend Engineer</td>
+                    <td>2</td>
+                    <td>Offshore</td>
+                </tr>
+                <tr>
+                    <td>Frontend Engineer / Tester</td>
+                    <td>1</td>
+                    <td>Offshore</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <strong>Part-time SMEs:</strong> 3DP (20%), BIKG (20%), AI Ops (10%), Data Foundation (10%) — additional platform SMEs engaged during discovery phase as needed.
+        </div>
+
+        <div class="section-title">Team Allocation by Phase</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 22%;">Role</th>
+                    <th style="background: var(--az-maroon);">Phase 1 (Mar-May)</th>
+                    <th style="background: var(--az-gold); color: var(--text-dark);">Phase 2 (Jun-Aug)</th>
+                    <th style="background: #2e7d32;">Phase 3 (Sep-Nov)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Devesh</td>
+                    <td>Architecture, AI Ops integration</td>
+                    <td>RAG + Ingestion architecture</td>
+                    <td>Graph DB, lineage design</td>
+                </tr>
+                <tr>
+                    <td>Abdalla</td>
+                    <td>LLM test generation, prompts</td>
+                    <td>RAG pipeline, Q&A</td>
+                    <td>Lineage extraction</td>
+                </tr>
+                <tr>
+                    <td>ML Engineer</td>
+                    <td>Synthetic data generation</td>
+                    <td>Schema inference</td>
+                    <td>Impact analysis</td>
+                </tr>
+                <tr>
+                    <td>Backend Eng 1</td>
+                    <td>Test generation APIs</td>
+                    <td>Knowledge search APIs</td>
+                    <td>Lineage storage APIs</td>
+                </tr>
+                <tr>
+                    <td>Backend Eng 2</td>
+                    <td>Test runner service</td>
+                    <td>Ingestion mapping APIs</td>
+                    <td>Lineage query APIs</td>
+                </tr>
+                <tr>
+                    <td>Frontend / Tester</td>
+                    <td>Test dashboard, QA</td>
+                    <td>Chat UI, Mapping UI, QA</td>
+                    <td>Lineage graph UI, QA</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="slide-number">2</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 3: 4 Agents Overview -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">4 Agents for <strong>R&D IT Platforms</strong></h1>
+        <p class="slide-subtitle">A portfolio of Agentic AI opportunities selected for high impact on primary platforms (3DP, BIKG), with flexibility to extend to additional platforms during discovery.</p>
+
+        <table style="margin-top: 25px;">
+            <thead>
+                <tr>
+                    <th style="width: 7%;">Rank</th>
+                    <th style="width: 24%;">Agent</th>
+                    <th style="width: 9%;">Score</th>
+                    <th style="width: 18%;">Primary Platforms</th>
+                    <th>Process Bottleneck Addressed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#1</strong></td>
+                    <td><strong>Test Intelligence Agent</strong></td>
+                    <td><span class="score">4.30</span></td>
+                    <td>3DP, BIKG</td>
+                    <td>Slow Validation and Release Cycles</td>
+                </tr>
+                <tr>
+                    <td><strong>#5</strong></td>
+                    <td><strong>Knowledge Library Companion</strong></td>
+                    <td><span class="score">4.00</span></td>
+                    <td>3DP, BIKG</td>
+                    <td>Lack of Reusable & Standardised Pipeline Components</td>
+                </tr>
+                <tr>
+                    <td><strong>#6</strong></td>
+                    <td><strong>Ingestion Companion</strong></td>
+                    <td><span class="score">3.80</span></td>
+                    <td>3DP, BIKG</td>
+                    <td>Time-Consuming Data Ingestion and Preparation</td>
+                </tr>
+                <tr>
+                    <td><strong>#8</strong></td>
+                    <td><strong>Auto-Lineage Agent</strong></td>
+                    <td><span class="score">3.75</span></td>
+                    <td>3DP, BIKG</td>
+                    <td>Manual Data Management and Traceability</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title">Platform Strategy</div>
+
+        <div class="platform-tags">
+            <span class="platform-tag primary">3DP (Primary)</span>
+            <span class="platform-tag primary">BIKG (Primary)</span>
+            <span class="platform-tag secondary">Additional platforms identified during discovery</span>
+        </div>
+
+        <div class="note-box">
+            <strong>Extensibility:</strong> All agents are designed with a platform-agnostic architecture. During discovery workshops, we will identify 1-2 additional platforms (e.g., SCP, Omics, Clinical Dev) where these agents can be tailored and deployed.
+        </div>
+
+        <div class="section-title">Target Outcomes</div>
+        <div class="metrics-grid" style="margin: 15px 0;">
+            <div class="metric-card">
+                <div class="metric-value">25%</div>
+                <div class="metric-label">Less Manual Testing</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">50%</div>
+                <div class="metric-label">Faster Answers</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">25-30%</div>
+                <div class="metric-label">Faster Ingestion</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">15-25%</div>
+                <div class="metric-label">Less Manual Traceability</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">3</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 4: Agent Benefits -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">Agent Benefits: <strong>3DP & BIKG</strong></h1>
+        <p class="slide-subtitle">Detailed value proposition for the two primary pilot platforms.</p>
+
+        <table class="benefits-table" style="margin-top: 30px;">
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>3DP Benefit</th>
+                    <th>BIKG Benefit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Test Intelligence Agent</td>
+                    <td>Generate regulatory validation test cases</td>
+                    <td>Generate KG query test cases</td>
+                </tr>
+                <tr>
+                    <td>Synthetic patient data for submission testing</td>
+                    <td>Synthetic biological entity data</td>
+                </tr>
+                <tr>
+                    <td>Find similar past submission test failures</td>
+                    <td>Find similar failed BIKG queries</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Knowledge Library Companion</td>
+                    <td>"How do I prepare a Module 3 submission?"</td>
+                    <td>"How do I query gene-disease relationships?"</td>
+                </tr>
+                <tr>
+                    <td>Search regulatory guidelines, SOPs</td>
+                    <td>Search biological ontologies, data dictionaries</td>
+                </tr>
+                <tr>
+                    <td>Summarize 500-page FDA guidance docs</td>
+                    <td>Summarize pathway documentation</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Ingestion Companion</td>
+                    <td>Auto-detect regulatory data schemas</td>
+                    <td>Auto-detect biological data schemas</td>
+                </tr>
+                <tr>
+                    <td>Map source data to submission format</td>
+                    <td>Map source data to KG ontologies</td>
+                </tr>
+                <tr>
+                    <td>Improve ingestion prep by 25-30%</td>
+                    <td>Reduce manual data mapping</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Auto-Lineage Agent</td>
+                    <td>Regulatory audit trail (FDA/EMA requirement)</td>
+                    <td>Gene → Protein → Drug lineage</td>
+                </tr>
+                <tr>
+                    <td>FAIR compliance evidence</td>
+                    <td>Data provenance tracking</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="slide-number">4</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 5: Three Phase Plan -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">Main steps to <strong>mobilise and build</strong> Agentic AI</h1>
+        <p class="slide-subtitle">A structured plan to build 4 AI agents, co-design Human+AI workflows, and enable change across R&D IT.</p>
+
+        <div class="phase-cards">
+            <div class="phase-card">
+                <div class="phase-card-header p1">March – May 2026</div>
+                <div class="phase-card-subheader">Phase 1: Test Intelligence Agent</div>
+                <div class="phase-card-body">
+                    <h4>Objective</h4>
+                    <p>Build foundational testing automation for 3DP and BIKG, validating the agentic approach with high-impact MVP.</p>
+
+                    <h4>Activities</h4>
+                    <ul>
+                        <li>Conduct discovery workshops with 3DP, BIKG teams to validate pain points</li>
+                        <li>Build LLM-powered test generation, synthetic data, similar failure detection</li>
+                        <li>Integrate with 3DP (regulatory tests) and BIKG (KG query tests)</li>
+                    </ul>
+
+                    <h4>Outputs</h4>
+                    <ol>
+                        <li>Test Intelligence Agent deployed</li>
+                        <li>25% reduction in manual test effort</li>
+                        <li>Reusable prompts & templates</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-card-header p2">June – August 2026</div>
+                <div class="phase-card-subheader">Phase 2: Knowledge Library + Ingestion</div>
+                <div class="phase-card-body">
+                    <h4>Objective</h4>
+                    <p>Scale to knowledge management and data ingestion, enabling self-service docs and automated data onboarding.</p>
+
+                    <h4>Activities</h4>
+                    <ul>
+                        <li>Build RAG pipeline for document search and Q&A across platform docs</li>
+                        <li>Build schema inference and auto-mapping for data ingestion</li>
+                        <li>Design human-in-the-loop review workflows</li>
+                    </ul>
+
+                    <h4>Outputs</h4>
+                    <ol>
+                        <li>Knowledge Library with docs indexed</li>
+                        <li>Ingestion Companion with auto-schema</li>
+                        <li>50% faster answers, 25-30% faster ingestion</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-card-header p3">September – November 2026</div>
+                <div class="phase-card-subheader">Phase 3: Auto-Lineage Agent</div>
+                <div class="phase-card-body">
+                    <h4>Objective</h4>
+                    <p>Complete the data lifecycle with lineage tracking, enabling FAIR compliance and regulatory audit readiness.</p>
+
+                    <h4>Activities</h4>
+                    <ul>
+                        <li>Define lineage requirements for regulatory (3DP) and biological (BIKG) data</li>
+                        <li>Build graph-based lineage extraction and visualization</li>
+                        <li>Implement FAIR evidence generation and audit export</li>
+                    </ul>
+
+                    <h4>Outputs</h4>
+                    <ol>
+                        <li>Auto-Lineage Agent deployed</li>
+                        <li>FAIR compliance evidence for 3DP</li>
+                        <li>Training materials for scaling</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">5</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 6: Timeline -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">Proposed <strong>timelines</strong> for 9-month mobilisation</h1>
+
+        <table class="timeline-table" style="margin-top: 25px;">
+            <thead>
+                <tr>
+                    <th>Workstream</th>
+                    <th style="background: var(--az-maroon);">Mar</th>
+                    <th style="background: var(--az-maroon);">Apr</th>
+                    <th style="background: var(--az-maroon);">May</th>
+                    <th style="background: var(--az-gold); color: var(--text-dark);">Jun</th>
+                    <th style="background: var(--az-gold); color: var(--text-dark);">Jul</th>
+                    <th style="background: var(--az-gold); color: var(--text-dark);">Aug</th>
+                    <th style="background: #2e7d32;">Sep</th>
+                    <th style="background: #2e7d32;">Oct</th>
+                    <th style="background: #2e7d32;">Nov</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Opportunity Selection & Discovery</td>
+                    <td><div class="bar maroon"></div></td>
+                    <td><div class="bar maroon"></div><span class="milestone">◆</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Phase 1: Test Intelligence Agent</strong></td>
+                    <td><div class="bar maroon"></div></td>
+                    <td><div class="bar maroon"></div></td>
+                    <td><div class="bar maroon"></div><span class="milestone">◆</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="sub-row">
+                    <td>Discovery & Architecture</td>
+                    <td><div class="bar maroon"></div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="sub-row">
+                    <td>LLM Test Gen & Synthetic Data</td>
+                    <td></td>
+                    <td><div class="bar maroon"></div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="sub-row">
+                    <td>Platform Integration & Pilot</td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar maroon"></div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Phase 2: Knowledge Library</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar gold"></div></td>
+                    <td><div class="bar gold"></div></td>
+                    <td><div class="bar gold"></div><span class="milestone">◆</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Phase 2: Ingestion Companion</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar gold"></div></td>
+                    <td><div class="bar gold"></div></td>
+                    <td><div class="bar gold"></div><span class="milestone">◆</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Phase 3: Auto-Lineage Agent</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar green"></div></td>
+                    <td><div class="bar green"></div></td>
+                    <td><div class="bar green"></div><span class="milestone">◆</span></td>
+                </tr>
+                <tr class="sub-row">
+                    <td>Graph DB & Lineage Design</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar green"></div></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="sub-row">
+                    <td>Extraction & Visualization</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar green"></div></td>
+                    <td></td>
+                </tr>
+                <tr class="sub-row">
+                    <td>FAIR Compliance & Deployment</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar green"></div></td>
+                </tr>
+                <tr>
+                    <td><strong>Training & Enablement</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="bar green"></div></td>
+                    <td><div class="bar green"></div><span class="milestone">◆</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span style="color: var(--az-gold); font-size: 14px; font-weight: 700;">◆</span>
+                <span>Milestone</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar" style="background: var(--az-maroon);"></div>
+                <span>Phase 1: Test Intelligence</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar" style="background: var(--az-gold);"></div>
+                <span>Phase 2: Knowledge + Ingestion</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar" style="background: #2e7d32;"></div>
+                <span>Phase 3: Auto-Lineage</span>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">6</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 7: Success Metrics -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">Success <strong>Metrics</strong></h1>
+        <p class="slide-subtitle">Key performance indicators for each agent MVP.</p>
+
+        <table style="margin-top: 30px;">
+            <thead>
+                <tr>
+                    <th style="width: 12%;">Phase</th>
+                    <th style="width: 26%;">Agent</th>
+                    <th>Metric</th>
+                    <th style="width: 18%;">Target</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="phase-badge p1">Phase 1</span></td>
+                    <td rowspan="3"><strong>Test Intelligence Agent</strong></td>
+                    <td>Manual test effort reduction</td>
+                    <td><strong>25%</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Test coverage increase</td>
+                    <td><strong>15%</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Platforms integrated</td>
+                    <td><strong>3DP, BIKG + discovery</strong></td>
+                </tr>
+                <tr>
+                    <td><span class="phase-badge p2">Phase 2</span></td>
+                    <td rowspan="3"><strong>Knowledge Library Companion</strong></td>
+                    <td>Time-to-answer reduction</td>
+                    <td><strong>50%</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Documents indexed</td>
+                    <td><strong>1000+</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Query success rate</td>
+                    <td><strong>80%</strong></td>
+                </tr>
+                <tr>
+                    <td><span class="phase-badge p2">Phase 2</span></td>
+                    <td rowspan="3"><strong>Ingestion Companion</strong></td>
+                    <td>Ingestion prep time reduction</td>
+                    <td><strong>25-30%</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Schema inference accuracy</td>
+                    <td><strong>85%</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Platforms supported</td>
+                    <td><strong>3DP, BIKG + discovery</strong></td>
+                </tr>
+                <tr>
+                    <td><span class="phase-badge p3">Phase 3</span></td>
+                    <td rowspan="3"><strong>Auto-Lineage Agent</strong></td>
+                    <td>Manual traceability reduction</td>
+                    <td><strong>15-25%</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Lineage coverage</td>
+                    <td><strong>3DP, BIKG + discovery</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>FAIR compliance</td>
+                    <td><strong>Audit-ready</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="slide-number">7</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+<!-- Slide 8: Key Milestones -->
+<div class="slide">
+    <div class="slide-content">
+        <h1 class="slide-title">Key <strong>Milestones</strong></h1>
+        <p class="slide-subtitle">9-month delivery roadmap with clear deliverables for each phase.</p>
+
+        <table style="margin-top: 30px;">
+            <thead>
+                <tr>
+                    <th style="width: 11%;">Month</th>
+                    <th style="width: 11%;">Phase</th>
+                    <th style="width: 22%;">Milestone</th>
+                    <th>Key Deliverable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>M1 (Mar)</strong></td>
+                    <td><span class="phase-badge p1">Phase 1</span></td>
+                    <td>Discovery Complete</td>
+                    <td>Requirements from 3DP, BIKG + additional platforms identified</td>
+                </tr>
+                <tr>
+                    <td><strong>M2 (Apr)</strong></td>
+                    <td><span class="phase-badge p1">Phase 1</span></td>
+                    <td>Test Gen API Live</td>
+                    <td>LLM test generation working with Claude</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>M3 (May)</strong></td>
+                    <td><span class="phase-badge p1">Phase 1</span></td>
+                    <td><span class="milestone">◆</span> Agent 1 Pilot</td>
+                    <td>3DP + BIKG using Test Intelligence Agent</td>
+                </tr>
+                <tr>
+                    <td><strong>M4 (Jun)</strong></td>
+                    <td><span class="phase-badge p2">Phase 2</span></td>
+                    <td>RAG + Schema Ready</td>
+                    <td>Docs crawled, schema detection working</td>
+                </tr>
+                <tr>
+                    <td><strong>M5 (Jul)</strong></td>
+                    <td><span class="phase-badge p2">Phase 2</span></td>
+                    <td>Q&A + Mapping Live</td>
+                    <td>Knowledge search + ingestion mapping APIs</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>M6 (Aug)</strong></td>
+                    <td><span class="phase-badge p2">Phase 2</span></td>
+                    <td><span class="milestone">◆</span> Agents 2 & 3 Pilot</td>
+                    <td>Knowledge Library + Ingestion Companion live</td>
+                </tr>
+                <tr>
+                    <td><strong>M7 (Sep)</strong></td>
+                    <td><span class="phase-badge p3">Phase 3</span></td>
+                    <td>Graph DB Ready</td>
+                    <td>Lineage schema deployed to Neptune/Neo4j</td>
+                </tr>
+                <tr>
+                    <td><strong>M8 (Oct)</strong></td>
+                    <td><span class="phase-badge p3">Phase 3</span></td>
+                    <td>Lineage Extraction</td>
+                    <td>Metadata captured across platforms</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>M9 (Nov)</strong></td>
+                    <td><span class="phase-badge p3">Phase 3</span></td>
+                    <td><span class="milestone">◆</span> All 4 Agents Live</td>
+                    <td>FAIR compliance, full deployment, training complete</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="slide-number">8</div>
+    <div class="az-logo">
+        <svg viewBox="0 0 100 100">
+            <polygon points="50,8 92,88 8,88" fill="#d4b000"/>
+            <polygon points="50,28 75,75 25,75" fill="#830051"/>
+        </svg>
+    </div>
+</div>
+
+</body>
+</html>

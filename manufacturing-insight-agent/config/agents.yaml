@@ -1,0 +1,463 @@
+# ============================================================================
+# MANUFACTURING INSIGHT AGENT - AGENT CONFIGURATION
+# AstraZeneca Manufacturing Intelligence System
+# ============================================================================
+
+version: "1.0"
+system_name: "Manufacturing Insight Agent (MIA)"
+description: "Multi-agent system for manufacturing KPI queries and analysis"
+
+# ============================================================================
+# SUPERVISOR AGENT
+# ============================================================================
+supervisor_agent:
+  name: "SupervisorAgent"
+  description: "Routes user queries to appropriate downstream agents"
+
+  input_data_api:
+    - name: "user_query"
+      type: "string"
+      description: "Natural language query from user"
+    - name: "session_id"
+      type: "string"
+      description: "Unique session identifier for conversation context"
+    - name: "conversation_history"
+      type: "array"
+      description: "Last 10 messages for context"
+
+  output_data_api:
+    name: "memory"
+    type: "conversation_store"
+    retention: "session_based"
+    max_history: 10
+
+  model_api:
+    provider: "aws_bedrock"
+    model_id: "anthropic.claude-3-sonnet-20240229-v1:0"
+    region: "us-east-1"
+    max_tokens: 512
+    temperature: 0.1
+
+  prompt:
+    system_query: |
+      You are the Routing Agent for AstraZeneca's Manufacturing Intelligence System.
+      YOUR ONLY JOB: Classify user questions into exactly ONE category.
+
+      DATA AVAILABLE:
+      - Batch Production Data: 376 batches (87% Released, 7.4% Quarantined, 5.6% Rejected)
+      - KPI Metrics: yield (97.3%), RFT (64%), OEE (76%), cycle time (18.2hr)
+      - Time Dimensions: Weekly, Monthly (2025-01 to 2026-01)
+      - Site: FCTN-PLANT-01
+      - SKUs: SKU_123, SKU_456
+
+      ROUTING RULES:
+      - KPI_SIMPLE: Direct metric lookup ("Show me X", "What is X", value requests)
+      - KPI_COMPLEX: Analysis needed ("Why X", "How to improve", root cause, recommendations)
+      - REJECT: Completely unrelated to manufacturing
+
+    user_query_template: |
+      Classify: "{{user_query}}"
+      {{#if conversation_history}}
+      Conversation context:
+      {{conversation_history}}
+      {{/if}}
+
+    metadata:
+      fast_path_enabled: true
+      fast_path_patterns:
+        simple:
+          - "show|what|get.*yield"
+          - "show|what|get.*oee"
+          - "show|what|get.*rft"
+          - "batch.*status"
+          - "how many batches"
+          - "formulation.*lead.*time"
+          - "B\\d{4}-\\d{5}"  # Batch ID pattern
+        complex:
+          - "why.*low|high|bad"
+          - "how can we improve"
+          - "root cause"
+          - "analyze"
+          - "recommend"
+
+    output_format:
+      type: "json"
+      schema:
+        type: "KPI_SIMPLE | KPI_COMPLEX | REJECT"
+        reason: "string - brief explanation"
+
+  constraints:
+    - "Must classify every query - never leave unclassified"
+    - "Default to KPI_SIMPLE if uncertain (faster response)"
+    - "Never reject queries containing manufacturing terms"
+    - "Processing time target: <500ms for fast path, <2s for LLM path"
+
+  examples:
+    - input: "What is our batch yield?"
+      output:
+        type: "KPI_SIMPLE"
+        reason: "Direct metric lookup"
+
+    - input: "Show me OEE performance for last 3 months"
+      output:
+        type: "KPI_SIMPLE"
+        reason: "Direct metric lookup with time filter"
+
+    - input: "Why is our RFT below target?"
+      output:
+        type: "KPI_COMPLEX"
+        reason: "Root cause analysis required"
+
+    - input: "What is the waiting time between formulation and packaging for batch B2025-00007?"
+      output:
+        type: "KPI_SIMPLE"
+        reason: "Direct batch step timing lookup"
+
+  extracted_entities:
+    - name: "time_range"
+      pattern: "(last|past)\\s+(\\d+)\\s+(month|week|day)s?"
+      examples: ["last 3 months", "past week"]
+
+    - name: "sku_id"
+      pattern: "SKU[_-]?\\d+"
+      examples: ["SKU_123", "SKU_456"]
+
+    - name: "batch_id"
+      pattern: "B\\d{4}-\\d{5}"
+      examples: ["B2025-00007", "B2025-00123"]
+
+    - name: "kpi_metric"
+      pattern: "(yield|oee|rft|cycle.?time|deviation|stockout)"
+      examples: ["yield", "OEE", "RFT"]
+
+# ============================================================================
+# KPI GATEWAY AGENT
+# ============================================================================
+kpi_gateway_agent:
+  name: "KpiGatewayAgent"
+  description: "Handles simple KPI lookups from pre-aggregated data"
+
+  input_data_api:
+    - name: "kpi_mart"
+      type: "csv"
+      path: "data/KPI/kpi_store_monthly.csv"
+      description: "Pre-aggregated monthly KPI metrics"
+      schema:
+        - "SKU"
+        - "month"
+        - "site_id"
+        - "production_volume"
+        - "batch_count"
+        - "batch_yield_avg_pct"
+        - "rft_pct"
+        - "oee_packaging_pct"
+        - "avg_cycle_time_hr"
+        - "formulation_lead_time_hr"
+        - "deviations_per_100_batches"
+
+    - name: "batch_steps"
+      type: "csv"
+      path: "data/mes_pasx_batch_steps.csv"
+      description: "Batch step timing data for waiting time calculations"
+
+  output_data_api:
+    name: "memory"
+    type: "response_cache"
+    ttl: 300  # 5 minutes
+
+  model_api:
+    provider: "aws_bedrock"
+    model_id: "anthropic.claude-3-sonnet-20240229-v1:0"
+    region: "us-east-1"
+    max_tokens: 1024
+    temperature: 0.2
+
+  prompt:
+    system_query: |
+      You are the KPI Response Agent for AstraZeneca's Manufacturing Intelligence System.
+
+      Your job: Generate clear, professional responses for KPI data queries.
+
+      RESPONSE FORMAT:
+      **Summary**
+      [2-3 sentences describing the data with key metrics]
+
+      [Data breakdown if multiple values]
+
+      **Suggestions for Further Queries**
+      - [Related query 1]
+      - [Related query 2]
+      - [Related query 3]
+
+      GUIDELINES:
+      - Always include actual numbers with units
+      - Compare to targets when available
+      - Suggest relevant follow-up queries
+      - Be concise but informative
+
+    user_query_template: |
+      User asked: "{{user_query}}"
+
+      KPI Data Retrieved:
+      {{kpi_data}}
+
+      Generate a response following the format.
+
+    metadata:
+      metrics:
+        batch_yield_avg_pct:
+          label: "Batch Yield"
+          unit: "%"
+          target: 98
+        rft_pct:
+          label: "Right First Time (RFT)"
+          unit: "%"
+          target: 92
+        oee_packaging_pct:
+          label: "OEE Packaging"
+          unit: "%"
+          target: 80
+        avg_cycle_time_hr:
+          label: "Average Cycle Time"
+          unit: "hr"
+        formulation_lead_time_hr:
+          label: "Formulation Lead Time"
+          unit: "hr"
+        deviations_per_100_batches:
+          label: "Deviations per 100 Batches"
+          unit: ""
+          target: "<5"
+
+    output_format:
+      type: "structured_response"
+      sections:
+        - name: "Summary"
+          required: true
+        - name: "Suggestions for Further Queries"
+          required: true
+
+  constraints:
+    - "Must return actual data values, never estimates"
+    - "Always include units with numbers"
+    - "Response must include both Summary and Suggestions sections"
+    - "If data not found, explain clearly what's missing"
+    - "Processing time target: <3s total"
+
+  examples:
+    - input: "What is the average formulation lead time for SKU_456 over the past three months?"
+      output: |
+        **Summary**
+        The average formulation lead time for SKU_456 over the past three months (November 2025 - January 2026) is **17.33 hours**.
+
+        Monthly breakdown:
+        - November 2025: 14.21 hr
+        - December 2025: 18.32 hr
+        - January 2026: 19.45 hr
+
+        **Suggestions for Further Queries**
+        - "What is the batch yield for SKU_456 this month?"
+        - "Show me OEE performance for SKU_456"
+        - "Why has formulation lead time increased?"
+
+    - input: "Show OEE performance for the last 3 months"
+      output: |
+        **Summary**
+        OEE Packaging performance over the last 3 months shows an average of **74.09%** against a target of 80%.
+
+        Monthly breakdown:
+        - November 2025: 74.34% (Red - below target)
+        - December 2025: 73.93% (Red - below target)
+        - January 2026: Data pending
+
+        **Suggestions for Further Queries**
+        - "How can we improve OEE packaging efficiency?"
+        - "What equipment has the lowest OEE?"
+        - "Show cycle time trends"
+
+# ============================================================================
+# ANALYST AGENT
+# ============================================================================
+analyst_agent:
+  name: "AnalystAgent"
+  description: "Performs deep analysis, root cause investigation, and recommendations"
+
+  input_data_api:
+    - name: "kpi_mart"
+      type: "csv"
+      path: "data/KPI/kpi_store_monthly.csv"
+
+    - name: "batch_data"
+      type: "csv"
+      path: "data/batch_production_records.csv"
+      description: "Detailed batch records with status, equipment, deviations"
+
+    - name: "equipment_data"
+      type: "csv"
+      path: "data/equipment_logs.csv"
+      description: "Equipment performance and downtime logs"
+
+    - name: "deviation_data"
+      type: "csv"
+      path: "data/deviation_records.csv"
+      description: "Quality deviation records with root causes"
+
+  output_data_api:
+    name: "memory"
+    type: "analysis_store"
+    retention: "session_based"
+
+  model_api:
+    provider: "aws_bedrock"
+    model_id: "anthropic.claude-3-sonnet-20240229-v1:0"
+    region: "us-east-1"
+    max_tokens: 2048
+    temperature: 0.3
+
+  prompt:
+    system_query: |
+      You are the Manufacturing Analyst Agent for AstraZeneca.
+
+      Your job: Provide deep analysis, identify root causes, and recommend actions.
+
+      ANALYSIS FRAMEWORK:
+      1. Understand the question and gather relevant data
+      2. Identify patterns, trends, and anomalies
+      3. Determine root causes using available data
+      4. Provide actionable recommendations
+
+      RESPONSE FORMAT:
+      **Summary**
+      [Key finding in 2-3 sentences]
+
+      **Analysis**
+      [Detailed breakdown with supporting data]
+
+      **Root Causes** (if applicable)
+      [Identified causes ranked by impact]
+
+      **Recommendations**
+      [Actionable steps with expected impact]
+
+      **Suggestions for Further Queries**
+      - [Related analysis 1]
+      - [Related analysis 2]
+
+      GUIDELINES:
+      - Support findings with actual data
+      - Quantify impacts where possible
+      - Prioritize recommendations by impact
+      - Consider equipment, process, and human factors
+
+    user_query_template: |
+      User asked: "{{user_query}}"
+
+      Supporting Data:
+      {{analysis_data}}
+
+      Conversation Context:
+      {{conversation_history}}
+
+      Provide a thorough analysis following the format.
+
+    metadata:
+      analysis_types:
+        - root_cause_analysis
+        - trend_analysis
+        - comparative_analysis
+        - improvement_recommendations
+
+      key_metrics_with_targets:
+        rft_pct: 92
+        oee_packaging_pct: 80
+        batch_yield_avg_pct: 98
+        deviations_per_100_batches: 5
+
+    output_format:
+      type: "structured_analysis"
+      sections:
+        - name: "Summary"
+          required: true
+        - name: "Analysis"
+          required: true
+        - name: "Root Causes"
+          required: false
+        - name: "Recommendations"
+          required: true
+        - name: "Suggestions for Further Queries"
+          required: true
+
+  constraints:
+    - "Must support all claims with data"
+    - "Never speculate without evidence"
+    - "Recommendations must be actionable"
+    - "Consider operational constraints (GMP, FDA compliance)"
+    - "Processing time target: <10s total"
+
+  examples:
+    - input: "Why is our RFT below target? What are the root causes?"
+      output: |
+        **Summary**
+        RFT is currently at 64% against a target of 92%, a gap of 28 percentage points. Analysis of batch data reveals equipment-related issues and process deviations as primary contributors.
+
+        **Analysis**
+        Over the past 6 months, RFT has ranged from 52% to 76%:
+        - Equipment VIAL-1: 58% RFT (lowest performer)
+        - Equipment TAB-1: 72% RFT
+        - Equipment COAT-1: 81% RFT (best performer)
+
+        **Root Causes**
+        1. Equipment calibration drift on VIAL-1 (42% of failures)
+        2. Process parameter variations during shift changes (28% of failures)
+        3. Raw material inconsistency from Supplier B (18% of failures)
+
+        **Recommendations**
+        1. Implement weekly calibration checks on VIAL-1 (expected +8% RFT)
+        2. Standardize shift handover procedures (expected +5% RFT)
+        3. Review Supplier B qualification (expected +3% RFT)
+
+        **Suggestions for Further Queries**
+        - "Show equipment performance breakdown"
+        - "What deviations occurred on VIAL-1?"
+
+    - input: "What is the waiting time between end of formulation and start of packaging for batch B2025-00007?"
+      output: |
+        **Summary**
+        For batch B2025-00007, the waiting time between formulation completion and packaging start was **4.2 hours**.
+
+        **Analysis**
+        Batch timeline:
+        - Formulation End: 2025-01-15 14:30
+        - Packaging Start: 2025-01-15 18:42
+        - Total Wait: 4.2 hours
+
+        This is within the acceptable hold time limit of 8 hours for this product type.
+
+        **Recommendations**
+        The wait time is acceptable. No action required.
+
+        **Suggestions for Further Queries**
+        - "What is the average waiting time for all batches this month?"
+        - "Which batches exceeded hold time limits?"
+
+# ============================================================================
+# GLOBAL CONFIGURATION
+# ============================================================================
+global_config:
+  logging:
+    level: "INFO"
+    telemetry_enabled: true
+    store: "telemetry_store"
+
+  error_handling:
+    retry_attempts: 2
+    fallback_response: "I apologize, but I encountered an error processing your request. Please try again or rephrase your question."
+
+  rate_limiting:
+    requests_per_minute: 60
+    burst_limit: 10
+
+  deployment:
+    platform: "aws_lambda"
+    runtime: "nodejs18.x"
+    memory: 512
+    timeout: 30

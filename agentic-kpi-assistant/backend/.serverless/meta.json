@@ -1,0 +1,211 @@
+{
+  "/Users/devesh.b.sharma/Astra Zeneca/agentic-kpi-assistant/backend/serverless.yml": {
+    "versionFramework": "4.31.2",
+    "servicePath": "/Users/devesh.b.sharma/Astra Zeneca/agentic-kpi-assistant/backend/serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "agentic-kpi-api",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs20.x",
+        "region": "us-east-1",
+        "stage": "prod",
+        "environment": {
+          "NODE_ENV": "production",
+          "AWS_REGION_NAME": "us-east-1",
+          "BEDROCK_MODEL_ID": "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+        },
+        "iam": {
+          "role": {
+            "statements": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "bedrock:InvokeModel"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      },
+      "functions": {
+        "api": {
+          "handler": "dist/lambda.handler",
+          "timeout": 30,
+          "memorySize": 512,
+          "events": [
+            {
+              "http": {
+                "path": "/{proxy+}",
+                "method": "ANY",
+                "cors": true
+              }
+            },
+            {
+              "http": {
+                "path": "/",
+                "method": "ANY",
+                "cors": true
+              }
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-offline"
+      ],
+      "package": {
+        "patterns": [
+          "!node_modules/**",
+          "!src/**",
+          "dist/**",
+          "node_modules/**"
+        ]
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "region": "us-east-1",
+      "stage": "prod",
+      "environment": {
+        "NODE_ENV": "production",
+        "AWS_REGION_NAME": "us-east-1",
+        "BEDROCK_MODEL_ID": "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+      },
+      "iam": {
+        "role": {
+          "statements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "bedrock:InvokeModel"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    },
+    "error": {
+      "message": "You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".",
+      "stack": "Error: You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".\n    at Authentication.getAuthenticatedData (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:919:11570)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async Authentication.authenticate (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:922:4140)\n    at async TraditionalRunner.resolveVariablesAndAuthenticate (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:930:2394)\n    at async TraditionalRunner.run (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:1953:27828)\n    at async route (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:2167:2848)\n    at async Object.run (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:2168:3893)\n    at async run2 (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:2168:5047)"
+    },
+    "serviceRawFile": "service: agentic-kpi-api\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  stage: prod\n  environment:\n    NODE_ENV: production\n    AWS_REGION_NAME: us-east-1\n    BEDROCK_MODEL_ID: us.anthropic.claude-3-5-sonnet-20241022-v2:0\n  iam:\n    role:\n      statements:\n        - Effect: Allow\n          Action:\n            - bedrock:InvokeModel\n          Resource: \"*\"\n\nfunctions:\n  api:\n    handler: dist/lambda.handler\n    timeout: 30\n    memorySize: 512\n    events:\n      - http:\n          path: /{proxy+}\n          method: ANY\n          cors: true\n      - http:\n          path: /\n          method: ANY\n          cors: true\n\nplugins:\n  - serverless-offline\n\npackage:\n  patterns:\n    - '!node_modules/**'\n    - '!src/**'\n    - 'dist/**'\n    - 'node_modules/**'\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {
+      "verbose": true
+    },
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  },
+  "/Users/devesh.b.sharma/Astra Zeneca/agentic-kpi-assistant/backend/template.yaml": {
+    "versionFramework": "4.31.2",
+    "servicePath": "/Users/devesh.b.sharma/Astra Zeneca/agentic-kpi-assistant/backend/template.yaml",
+    "serviceConfigFileName": "template.yaml",
+    "service": {
+      "AWSTemplateFormatVersion": "2010-09-09",
+      "Transform": "AWS::Serverless-2016-10-31",
+      "Description": "Agentic KPI Assistant API",
+      "Globals": {
+        "Function": {
+          "Timeout": 90,
+          "MemorySize": 1024,
+          "Runtime": "nodejs20.x"
+        }
+      },
+      "Resources": {
+        "KpiApiFunction": {
+          "Type": "AWS::Serverless::Function",
+          "Properties": {
+            "FunctionName": "agentic-kpi-api",
+            "Handler": "dist/lambda.handler",
+            "CodeUri": ".",
+            "Environment": {
+              "Variables": {
+                "NODE_ENV": "production",
+                "AWS_REGION_NAME": "us-east-1",
+                "BEDROCK_MODEL_ID": "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+              }
+            },
+            "Policies": [
+              {
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "bedrock:InvokeModel"
+                    ],
+                    "Resource": "*"
+                  }
+                ]
+              }
+            ],
+            "Events": {
+              "Api": {
+                "Type": "Api",
+                "Properties": {
+                  "Path": "/{proxy+}",
+                  "Method": "ANY",
+                  "RestApiId": {
+                    "Ref": "KpiApi"
+                  }
+                }
+              },
+              "Root": {
+                "Type": "Api",
+                "Properties": {
+                  "Path": "/",
+                  "Method": "ANY",
+                  "RestApiId": {
+                    "Ref": "KpiApi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "KpiApi": {
+          "Type": "AWS::Serverless::Api",
+          "Properties": {
+            "Name": "agentic-kpi-api",
+            "StageName": "prod",
+            "Cors": {
+              "AllowOrigin": "'*'",
+              "AllowHeaders": "'Content-Type,Authorization'",
+              "AllowMethods": "'GET,POST,PUT,DELETE,OPTIONS'"
+            }
+          }
+        }
+      },
+      "Outputs": {
+        "ApiUrl": {
+          "Description": "API Gateway URL",
+          "Value": {
+            "Fn::Sub": "https://${KpiApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+          }
+        }
+      }
+    },
+    "error": {
+      "message": "You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".",
+      "stack": "Error: You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".\n    at Authentication.getAuthenticatedData (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:919:11570)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async Authentication.authenticate (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:922:4140)\n    at async CfnRunner.resolveVariablesAndAuthenticate (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:930:2394)\n    at async CfnRunner.run (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:1550:3028)\n    at async route (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:2167:2848)\n    at async Object.run (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:2168:3893)\n    at async run2 (file:///Users/devesh.b.sharma/.serverless/releases/4.31.2/package/dist/sf-core.js:2168:5047)"
+    },
+    "serviceRawFile": "AWSTemplateFormatVersion: '2010-09-09'\nTransform: AWS::Serverless-2016-10-31\nDescription: Agentic KPI Assistant API\n\nGlobals:\n  Function:\n    Timeout: 90\n    MemorySize: 1024\n    Runtime: nodejs20.x\n\nResources:\n  KpiApiFunction:\n    Type: AWS::Serverless::Function\n    Properties:\n      FunctionName: agentic-kpi-api\n      Handler: dist/lambda.handler\n      CodeUri: .\n      Environment:\n        Variables:\n          NODE_ENV: production\n          AWS_REGION_NAME: us-east-1\n          BEDROCK_MODEL_ID: us.anthropic.claude-3-5-sonnet-20241022-v2:0\n      Policies:\n        - Statement:\n            - Effect: Allow\n              Action:\n                - bedrock:InvokeModel\n              Resource: \"*\"\n      Events:\n        Api:\n          Type: Api\n          Properties:\n            Path: /{proxy+}\n            Method: ANY\n            RestApiId: !Ref KpiApi\n        Root:\n          Type: Api\n          Properties:\n            Path: /\n            Method: ANY\n            RestApiId: !Ref KpiApi\n\n  KpiApi:\n    Type: AWS::Serverless::Api\n    Properties:\n      Name: agentic-kpi-api\n      StageName: prod\n      Cors:\n        AllowOrigin: \"'*'\"\n        AllowHeaders: \"'Content-Type,Authorization'\"\n        AllowMethods: \"'GET,POST,PUT,DELETE,OPTIONS'\"\n\nOutputs:\n  ApiUrl:\n    Description: API Gateway URL\n    Value: !Sub \"https://${KpiApi}.execute-api.${AWS::Region}.amazonaws.com/prod\"\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {},
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}

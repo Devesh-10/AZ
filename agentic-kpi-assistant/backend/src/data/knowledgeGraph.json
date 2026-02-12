@@ -1,0 +1,122 @@
+{
+  "kpis": [
+    {
+      "name": "energy_consumption",
+      "description": "Total energy consumed by site measured in MWh, including both renewable and non-renewable sources",
+      "unit": "MWh",
+      "category": "Energy",
+      "relatedKpis": ["renewable_energy", "imported_energy"]
+    },
+    {
+      "name": "renewable_energy",
+      "description": "Energy from renewable sources including solar, wind, and certified renewable electricity",
+      "unit": "MWh",
+      "category": "Energy",
+      "relatedKpis": ["energy_consumption", "solar_energy"]
+    },
+    {
+      "name": "ghg_emissions_scope1",
+      "description": "Direct greenhouse gas emissions from owned or controlled sources (F-gases, road fleet)",
+      "unit": "tCO2",
+      "category": "Emissions",
+      "relatedKpis": ["ghg_emissions_scope2", "road_fleet_emissions"]
+    },
+    {
+      "name": "ghg_emissions_scope2",
+      "description": "Indirect emissions from purchased electricity, heat, and steam",
+      "unit": "tCO2",
+      "category": "Emissions",
+      "relatedKpis": ["ghg_emissions_scope1", "energy_consumption"]
+    },
+    {
+      "name": "water_usage",
+      "description": "Total water consumption including groundwater and municipal supply",
+      "unit": "Million m³",
+      "category": "Water",
+      "relatedKpis": ["groundwater_usage", "municipal_water"]
+    },
+    {
+      "name": "waste_generated",
+      "description": "Total waste generated including site waste and product waste",
+      "unit": "Tonnes",
+      "category": "Waste",
+      "relatedKpis": ["site_waste", "product_waste"]
+    },
+    {
+      "name": "ev_transition",
+      "description": "Electric vehicle adoption rate in the corporate fleet",
+      "unit": "%",
+      "category": "Fleet",
+      "relatedKpis": ["bev_count", "total_fleet"]
+    },
+    {
+      "name": "bev_count",
+      "description": "Number of Battery Electric Vehicles in the fleet",
+      "unit": "vehicles",
+      "category": "Fleet",
+      "relatedKpis": ["ev_transition", "total_fleet"]
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "site",
+      "description": "AstraZeneca site or facility location",
+      "values": ["Baar", "Macclesfield", "Gaithersburg", "Gothenburg", "Cambridge"]
+    },
+    {
+      "name": "year",
+      "description": "Reporting year",
+      "values": ["2023", "2024", "2025"]
+    },
+    {
+      "name": "quarter",
+      "description": "Reporting quarter (1-4)",
+      "values": ["1", "2", "3", "4"]
+    },
+    {
+      "name": "month",
+      "description": "Reporting month (1-12)",
+      "values": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    },
+    {
+      "name": "scope",
+      "description": "GHG emissions scope category",
+      "values": ["Scope 1", "Scope 2", "Scope 1 & 2"]
+    },
+    {
+      "name": "market",
+      "description": "Geographic market for fleet data",
+      "values": ["Global", "EMEA", "Americas", "APAC"]
+    }
+  ],
+  "relationships": [
+    { "from": "energy_consumption", "to": "ghg_emissions_scope2", "type": "contributes_to" },
+    { "from": "renewable_energy", "to": "ghg_emissions_scope2", "type": "reduces" },
+    { "from": "road_fleet_emissions", "to": "ghg_emissions_scope1", "type": "component_of" },
+    { "from": "ev_transition", "to": "road_fleet_emissions", "type": "reduces" }
+  ],
+  "dataSchema": {
+    "tables": {
+      "energy_monthly_summary": {
+        "description": "Monthly energy consumption by site",
+        "columns": ["REPORTING_YEAR_NUMBER", "REPORTING_QUARTER_NUMBER", "REPORTING_MONTH_NUMBER", "SHE_SITE_NAME", "REPORTING_SCOPE_NAME", "ENERGY_SITE_MWH_QUANTITY", "ENERGY_RENEWABLE_ELECTRICITY_HEAT_MWH_QUANTITY", "ENERGY_IMPORTED_MWH_QUANTITY"]
+      },
+      "greenhouse_gas_emissions_monthly_summary": {
+        "description": "Monthly GHG emissions by site and scope",
+        "columns": ["REPORTING_YEAR_NUMBER", "REPORTING_MONTH_NUMBER", "REPORTING_QUARTER_NUMBER", "SHE_SITE_NAME", "REPORTING_SCOPE_NAME", "SCOPE1_F_GASES_TCO2_QUANTITY", "SCOPE1_ROAD_FLEET_TCO2_QUANTITY", "SCOPE2_MARKET_BASED_TCO2_QUANTITY", "SCOPE2_LOCATION_BASED_TCO2_QUANTITY"]
+      },
+      "water_monthly_summary": {
+        "description": "Monthly water usage by site",
+        "columns": ["REPORTING_YEAR_NUMBER", "REPORTING_MONTH_NUMBER", "SHE_SITE_NAME", "GROUNDWATER_MILLION_M3_QUANTITY", "MUNICIPAL_SUPPLY_MILLION_M3_QUANTITY"]
+      },
+      "waste_monthly_summary": {
+        "description": "Monthly waste generation by site",
+        "columns": ["REPORTING_YEAR_NUMBER", "REPORTING_MONTH_NUMBER", "SHE_SITE_NAME", "WASTE_TONNES_SITE_QUANTITY", "WASTE_TONNES_PRODUCT_QUANTITY"]
+      },
+      "ev_transition_quarterly_summary": {
+        "description": "Quarterly electric vehicle fleet transition metrics",
+        "columns": ["REPORTING_YEAR_NUMBER", "REPORTING_QUARTER_NUMBER", "SHE_MARKET_NAME", "SHE_GEOGRAPHY_NAME", "TOTAL_BEV_COUNT", "TOTAL_FLEET_ASSET_COUNT"]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "agentic-kpi-backend",
+  "version": "1.0.0",
+  "description": "Backend Lambda for Agentic KPI Assistant",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "build": "tsc && cp -r src/data dist/",
+    "start": "node dist/server.js",
+    "watch": "tsc -w",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.490.0",
+    "@aws-sdk/client-dynamodb": "^3.490.0",
+    "@aws-sdk/lib-dynamodb": "^3.490.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "serverless-http": "^4.0.0",
+    "uuid": "^9.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.131",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.10.0",
+    "@types/uuid": "^9.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.0"
+  }
+}

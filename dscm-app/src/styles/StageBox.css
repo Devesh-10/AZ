@@ -1,0 +1,147 @@
+.stage-box {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  border-left: 4px solid;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.box-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  flex: 1;
+}
+
+.status-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.status-icon.success {
+  background: #22c55e;
+  color: white;
+}
+
+.status-icon.warning {
+  background: #f59e0b;
+  color: white;
+  cursor: pointer;
+}
+
+.status-icon.danger {
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border: 1px solid #e2e8f0;
+}
+
+.tooltip p {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.tooltip-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tooltip-btn {
+  padding: 6px 12px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tooltip-btn:hover {
+  background: #2563eb;
+}
+
+.box-materials {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.material-item {
+  font-size: 12px;
+}
+
+.material-name {
+  color: #334155;
+  font-weight: 500;
+}
+
+.material-placeholder {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.kpi-section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi-row {
+  display: flex;
+  gap: 4px;
+}
+
+.kpi-chip {
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.kpi-chip.peach {
+  background: #fed7aa;
+}
+
+.kpi-chip.pink {
+  background: #fbcfe8;
+}
+
+.kpi-chip.dark-blue {
+  background: #1e40af;
+  color: white;
+}

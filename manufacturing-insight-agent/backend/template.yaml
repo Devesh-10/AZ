@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Manufacturing Insight Agent API
+
+Globals:
+  Function:
+    Timeout: 90
+    MemorySize: 1024
+    Runtime: nodejs20.x
+
+Resources:
+  ManufacturingApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: manufacturing-insight-api
+      Handler: dist/lambda.handler
+      CodeUri: .
+      Environment:
+        Variables:
+          NODE_ENV: production
+          AWS_REGION_NAME: us-east-1
+          BEDROCK_MODEL_ID: us.anthropic.claude-opus-4-5-20251101-v1:0
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+              Resource: "*"
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+            RestApiId: !Ref ManufacturingApi
+        Root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+            RestApiId: !Ref ManufacturingApi
+
+  ManufacturingApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: manufacturing-insight-api
+      StageName: prod
+      Cors:
+        AllowOrigin: "'*'"
+        AllowHeaders: "'Content-Type,Authorization'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway URL
+    Value: !Sub "https://${ManufacturingApi}.execute-api.${AWS::Region}.amazonaws.com/prod"

@@ -1,0 +1,84 @@
+.brand-header {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 999;
+}
+
+.brand-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.brand-dropdown {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  color: #334155;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.brand-dropdown:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.flow-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  margin-left: 12px;
+}
+
+.brand-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-btn {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #475569;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.brand-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.brand-btn.control-toggle {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.brand-btn.control-toggle:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}

@@ -1,0 +1,4482 @@
+[
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77141,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75973,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75032,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 67739,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74752,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75649,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 70266,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77098,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74616,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76181,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74271,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 4867,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72125,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71728,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76396,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76595,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 70451,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72632,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71897,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75899,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76682,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74577,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75599,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74513,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73203,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75246,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76136,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73900,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73166,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71081,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 1493,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76816,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74800,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 264,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 153,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75947,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74882,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74331,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75291,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74591,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72628,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 603,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 1562,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 1726,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75235,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76513,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75202,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76167,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76272,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74949,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74583,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 70588,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73405,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75533,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75759,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71984,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72373,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 68732,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75171,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76095,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74223,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74359,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 237,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77140,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74534,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 3769,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73021,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75245,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75416,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 8177,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 572,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 69986,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 68806,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74842,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74313,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75503,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 1097,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 467,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 2654,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 70339,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75685,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74429,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 514,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75084,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75087,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76426,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74691,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72587,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71174,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71181,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71839,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 68626,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73492,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72831,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 2069,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72410,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 6903,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 2219,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73668,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73581,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75392,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 2522,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75887,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75454,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75099,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74047,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71663,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76172,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76525,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75464,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75647,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74484,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 4104,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73268,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77114,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 70130,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 69991,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75821,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 65193,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71420,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73912,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76363,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75601,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74201,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 5018,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76161,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73395,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 2223,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75439,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75631,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 2559,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73569,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75860,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74474,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 2406,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 70093,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76182,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76319,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76938,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74662,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 1286,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76199,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 67963,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74671,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71182,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 1238,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73761,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76648,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75713,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 1817,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74552,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75879,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76052,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76952,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74073,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73493,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 70809,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76216,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76182,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72416,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76903,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 5894,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74801,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 70941,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 4261,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 1271,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74658,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 4456,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73227,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75780,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 4544,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73899,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 69728,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74998,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75875,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76490,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75446,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76827,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76390,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74144,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74225,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73251,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71635,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75369,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71967,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76433,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76263,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 6899,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71311,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 68555,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73418,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77064,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75359,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74215,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 3168,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76154,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74617,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76155,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71738,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 5235,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75698,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 1467,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 70958,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76371,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74717,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 5467,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76188,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76632,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73079,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 5379,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 71261,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 5530,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 12067,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75995,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75500,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72754,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 1309,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75666,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 67827,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76704,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76626,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 69468,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72642,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73102,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 70271,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 69890,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73570,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 7473,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73484,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74335,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71896,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75594,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77006,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73490,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76870,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 1753,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74858,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77111,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74124,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76968,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 68093,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72255,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 71318,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 3007,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73328,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74230,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 64461,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75349,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76434,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72082,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 71407,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75322,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73200,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74361,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77033,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 70143,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75956,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76468,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 69506,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 5459,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77046,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76680,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76904,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74331,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75602,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72261,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75155,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74956,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75203,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76786,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73540,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75279,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 1099,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 4514,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 5272,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76617,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73332,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73654,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76881,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75644,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76844,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73607,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77022,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75145,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76757,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73147,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75579,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74237,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75092,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 3021,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75122,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73968,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 1079,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75037,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76599,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73645,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 72600,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76531,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76194,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 70634,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75679,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 68368,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75937,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76734,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75591,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72164,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76057,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73294,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 174,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73670,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71306,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 2778,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75104,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 7210,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76049,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 203,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75463,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72902,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 3068,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71727,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75809,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73234,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72191,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74035,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76229,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71269,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 68967,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73271,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 1471,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76673,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74921,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 74358,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71287,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73150,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75162,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73609,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 71383,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72697,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 3403,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75111,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 70629,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76524,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 67670,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 72933,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74113,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75891,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76728,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75011,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 71225,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73498,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73589,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75024,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73674,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72404,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 2353,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74563,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 2525,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 6210,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73388,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 77060,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72537,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 937,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77047,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 70086,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74933,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75586,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74529,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76002,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72863,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74974,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73236,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 77008,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 70549,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76239,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73519,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74556,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75983,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74973,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72935,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75480,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73278,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 72241,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76993,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76211,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76729,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 77105,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 77075,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73300,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76714,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 73763,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 3200,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73533,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 3661,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 2359,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75500,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 71067,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76348,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76606,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 3535,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 70160,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71435,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 1117,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76822,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73177,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73199,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73074,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76487,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 74373,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72020,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76525,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76738,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72599,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76414,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76605,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74973,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75505,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76511,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76066,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76736,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 71832,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74901,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 1810,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75819,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72232,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 77091,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 69923,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71335,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75841,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 71113,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 1968,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 73678,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75775,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 72119,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 72479,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 68813,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 71966,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76069,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 654,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 2524,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 1519,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 70172,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75129,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75194,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73633,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73721,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74180,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73956,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 72436,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75098,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75794,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 70266,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72184,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 1190,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76371,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 68106,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 66781,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 72221,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 75245,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76848,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71870,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76784,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 71459,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 74234,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 69472,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76235,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 6,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 2679,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76224,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76470,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 4995,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 72989,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 1660,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 861,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73566,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76011,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75403,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75203,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 75546,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76409,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 3857,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 76775,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74558,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 109,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 68452,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71864,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 10403,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 76245,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 82,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 74548,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 75897,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71148,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 76759,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 75820,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73158,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 67161,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 76506,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73017,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 76338,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 71944,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 70,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 75126,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C48S4",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74957,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 73928,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 3828,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C52S1",
+    "SHE_SITE_NAME": "Dominican Republic",
+    "COUNTRY_CODE": 68590,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Durham - Emperor Boulevard",
+    "COUNTRY_CODE": 73969,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dubai",
+    "COUNTRY_CODE": 73210,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74591,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR5C2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74726,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR2aC2S1",
+    "SHE_SITE_NAME": "Dublin College Park",
+    "COUNTRY_CODE": 74847,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  },
+  {
+    "SHE_SITE_IDENTIFIER": 146608,
+    "SHE_SITE_CODE": "GR6C51S4",
+    "SHE_SITE_NAME": "Dunkerque",
+    "COUNTRY_CODE": 3223,
+    "REPORTING_SCOPE_NAME": "Scope 1 & 2",
+    "SRC_SYS_NM": "ENABLON"
+  }
+]

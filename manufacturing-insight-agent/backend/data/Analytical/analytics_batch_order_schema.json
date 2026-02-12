@@ -1,0 +1,311 @@
+{
+  "category": "analytical_data_products",
+  "generated_on_utc": "2026-02-02T13:22:29Z",
+  "source_reference": "analytics_data_product_sample.xlsx",
+  "master_list": null,
+  "tables": {
+    "ANALYTICS_BATCH_STATUS": {
+      "odh_reference_sheet": "analytics_batch_status",
+      "record_count": 376,
+      "fields": [
+        {
+          "field_name": "BATCH_ID",
+          "data_type": "object",
+          "description": "Identifier for Batch"
+        },
+        {
+          "field_name": "ORDER_ID",
+          "data_type": "object",
+          "description": "Identifier for Order"
+        },
+        {
+          "field_name": "MATERIAL_ID",
+          "data_type": "object",
+          "description": "Identifier for Material"
+        },
+        {
+          "field_name": "BATCH_SIZE",
+          "data_type": "int64",
+          "description": "Batch Size field (description inferred from name)."
+        },
+        {
+          "field_name": "UOM",
+          "data_type": "object",
+          "description": "Unit of measure."
+        },
+        {
+          "field_name": "ROUTE",
+          "data_type": "object",
+          "description": "Process route description."
+        },
+        {
+          "field_name": "ACTUAL_START",
+          "data_type": "int64",
+          "description": "Timestamp or date-time value."
+        },
+        {
+          "field_name": "ACTUAL_END",
+          "data_type": "int64",
+          "description": "Timestamp or date-time value."
+        },
+        {
+          "field_name": "CYCLE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "YIELD_QTY",
+          "data_type": "int64",
+          "description": "Measured quantity/value for the record."
+        },
+        {
+          "field_name": "YIELD_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "STATUS",
+          "data_type": "object",
+          "description": "Current status value."
+        },
+        {
+          "field_name": "DEVIATIONS_COUNT",
+          "data_type": "int64",
+          "description": "Count of Deviations."
+        },
+        {
+          "field_name": "REWORK_FLAG",
+          "data_type": "bool",
+          "description": "Rework Flag indicator."
+        },
+        {
+          "field_name": "PRIMARY_EQUIPMENT_ID",
+          "data_type": "object",
+          "description": "Identifier for Primary Equipment"
+        },
+        {
+          "field_name": "SCHEDULED_START",
+          "data_type": "int64",
+          "description": "Timestamp or date-time value."
+        },
+        {
+          "field_name": "SCHEDULED_END",
+          "data_type": "int64",
+          "description": "Timestamp or date-time value."
+        },
+        {
+          "field_name": "STD_YIELD_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "STD_CYCLE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "STEPS",
+          "data_type": "int64",
+          "description": "Steps field (description inferred from name)."
+        },
+        {
+          "field_name": "WAIT_TIME_MIN",
+          "data_type": "int64",
+          "description": "Duration in minutes."
+        },
+        {
+          "field_name": "ACTIVE_TIME_MIN",
+          "data_type": "int64",
+          "description": "Duration in minutes."
+        },
+        {
+          "field_name": "LIMS_FIRST_PASS",
+          "data_type": "int64",
+          "description": "Lims First Pass field (description inferred from name)."
+        },
+        {
+          "field_name": "ALARM_COUNT",
+          "data_type": "float64",
+          "description": "Count of Alarm."
+        },
+        {
+          "field_name": "WAIT_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "ACTIVE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "DELAY_VS_SCHEDULE_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "ON_TIME",
+          "data_type": "int64",
+          "description": "On Time indicator."
+        },
+        {
+          "field_name": "RFT",
+          "data_type": "int64",
+          "description": "Rft field (description inferred from name)."
+        },
+        {
+          "field_name": "ALARMS_PER_HR",
+          "data_type": "float64",
+          "description": "Rate per hour."
+        },
+        {
+          "field_name": "MONTH",
+          "data_type": "datetime64[ns]",
+          "description": "Calendar month label (e.g., YYYY-MM)."
+        },
+        {
+          "field_name": "ISO_WEEK",
+          "data_type": "int64",
+          "description": "ISO week number for the reporting year."
+        }
+      ]
+    },
+    "ANALYTICS_ORDER_STATUS": {
+      "odh_reference_sheet": "analytics_order_status",
+      "record_count": 107,
+      "fields": [
+        {
+          "field_name": "SITE_ID",
+          "data_type": "object",
+          "description": "Identifier for Site"
+        },
+        {
+          "field_name": "PLANT",
+          "data_type": "object",
+          "description": "Site or plant identifier or name."
+        },
+        {
+          "field_name": "ORDER_ID",
+          "data_type": "object",
+          "description": "Identifier for Order"
+        },
+        {
+          "field_name": "ORDER_TYPE",
+          "data_type": "object",
+          "description": "Order Type field (description inferred from name)."
+        },
+        {
+          "field_name": "MATERIAL_ID",
+          "data_type": "object",
+          "description": "Identifier for Material"
+        },
+        {
+          "field_name": "MATERIAL_DESC",
+          "data_type": "object",
+          "description": "Description field."
+        },
+        {
+          "field_name": "UOM",
+          "data_type": "object",
+          "description": "Unit of measure."
+        },
+        {
+          "field_name": "QTY_ORDERED",
+          "data_type": "int64",
+          "description": "Measured quantity/value for the record."
+        },
+        {
+          "field_name": "SCHEDULED_START",
+          "data_type": "int64",
+          "description": "Timestamp or date-time value."
+        },
+        {
+          "field_name": "SCHEDULED_END",
+          "data_type": "int64",
+          "description": "Timestamp or date-time value."
+        },
+        {
+          "field_name": "PRIORITY",
+          "data_type": "object",
+          "description": "Priority classification."
+        },
+        {
+          "field_name": "WORK_CENTER",
+          "data_type": "object",
+          "description": "Work center or production area."
+        },
+        {
+          "field_name": "BOM_VERSION",
+          "data_type": "object",
+          "description": "Bill of Materials reference."
+        },
+        {
+          "field_name": "STD_YIELD_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "STD_CYCLE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "STATUS",
+          "data_type": "object",
+          "description": "Current status value."
+        },
+        {
+          "field_name": "BATCHES",
+          "data_type": "int64",
+          "description": "Batches field (description inferred from name)."
+        },
+        {
+          "field_name": "QTY_PRODUCED",
+          "data_type": "int64",
+          "description": "Measured quantity/value for the record."
+        },
+        {
+          "field_name": "RELEASED",
+          "data_type": "int64",
+          "description": "Released indicator."
+        },
+        {
+          "field_name": "PCT_BATCHES_ON_TIME",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        },
+        {
+          "field_name": "AVG_CYCLE_TIME_HR",
+          "data_type": "float64",
+          "description": "Duration in hours."
+        },
+        {
+          "field_name": "DEVIATION_COUNT",
+          "data_type": "int64",
+          "description": "Count of Deviation."
+        },
+        {
+          "field_name": "QTY_IN_FULL",
+          "data_type": "bool",
+          "description": "Measured quantity/value for the record."
+        },
+        {
+          "field_name": "ON_TIME",
+          "data_type": "int64",
+          "description": "On Time indicator."
+        },
+        {
+          "field_name": "OTIF",
+          "data_type": "int64",
+          "description": "Otif field (description inferred from name)."
+        },
+        {
+          "field_name": "SCHEDULE_ADHERENCE_PCT",
+          "data_type": "float64",
+          "description": "Percentage metric."
+        }
+      ]
+    }
+  },
+  "missing_views_no_odh_reference": []
+}

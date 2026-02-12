@@ -1,0 +1,43 @@
+service: agentic-kpi-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: prod
+  environment:
+    NODE_ENV: production
+    AWS_REGION_NAME: us-east-1
+    BEDROCK_MODEL_ID: us.anthropic.claude-3-5-sonnet-20241022-v2:0
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - bedrock:InvokeModel
+          Resource: "*"
+
+functions:
+  api:
+    handler: dist/lambda.handler
+    timeout: 30
+    memorySize: 512
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /
+          method: ANY
+          cors: true
+
+plugins:
+  - serverless-offline
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!src/**'
+    - 'dist/**'
+    - 'node_modules/**'

@@ -1,0 +1,40 @@
+services:
+  # Backend API
+  - type: web
+    name: agentic-kpi-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AWS_REGION
+        value: us-east-1
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: BEDROCK_MODEL_ID
+        value: us.anthropic.claude-3-5-sonnet-20241022-v2:0
+    healthCheckPath: /api/health
+
+  # Frontend
+  - type: web
+    name: agentic-kpi-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: agentic-kpi-backend
+          type: web
+          property: host
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache

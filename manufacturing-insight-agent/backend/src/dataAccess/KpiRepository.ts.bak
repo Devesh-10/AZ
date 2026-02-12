@@ -1,0 +1,157 @@
+import { KpiQuery, KpiResult, KpiDataRow } from "../types";
+import kpiMartData from "../data/kpiMart.json";
+
+export interface IKpiRepository {
+  queryKpi(q: KpiQuery): Promise<KpiResult[]>;
+  getAvailableKpis(): string[];
+  getAvailableDimensions(): Record<string, string[]>;
+}
+
+/**
+ * Local JSON-based KPI Repository
+ *
+ * This implementation loads KPI data from a local JSON file at module load time.
+ * The data is kept in memory for fast access during Lambda execution.
+ *
+ * To use your own data:
+ * 1. Replace the contents of backend/src/data/kpiMart.json
+ * 2. Ensure your data follows the KpiDataRow structure:
+ *    { date, region, product, segment?, kpi, value }
+ */
+export class LocalJsonKpiRepository implements IKpiRepository {
+  private data: KpiDataRow[];
+
+  constructor() {
+    // Load data at instantiation (cold start)
+    this.data = kpiMartData as KpiDataRow[];
+    console.log(`[KpiRepository] Loaded ${this.data.length} rows from kpiMart.json`);
+  }
+
+  /**
+   * Query KPI data based on filters and grouping
+   */
+  async queryKpi(q: KpiQuery): Promise<KpiResult[]> {
+    const results: KpiResult[] = [];
+
+    for (const kpiName of q.kpiNames) {
+      // Filter data
+      let filtered = this.data.filter((row) => row.kpi === kpiName);
+
+      // Apply date range filter
+      if (q.startDate) {
+        filtered = filtered.filter((row) => row.date >= q.startDate!);
+      }
+      if (q.endDate) {
+        filtered = filtered.filter((row) => row.date <= q.endDate!);
+      }
+
+      // Apply dimension filters
+      if (q.filters) {
+        for (const [key, value] of Object.entries(q.filters)) {
+          filtered = filtered.filter((row) => {
+            const rowValue = (row as Record<string, unknown>)[key];
+            return rowValue === value;
+          });
+        }
+      }
+
+      // Group and aggregate
+      const dataPoints = this.aggregateData(filtered, q.groupBy || null);
+
+      results.push({
+        kpiName,
+        breakdownBy: q.groupBy || null,
+        dataPoints,
+        explanation: "", // Will be filled by the agent
+      });
+    }
+
+    return results;
+  }
+
+  /**
+   * Aggregate data by grouping dimension
+   */
+  private aggregateData(
+    rows: KpiDataRow[],
+    groupBy: "date" | "month" | "region" | "product" | "segment" | null
+  ): { label: string; value: number }[] {
+    if (!groupBy || rows.length === 0) {
+      // Return total sum
+      const total = rows.reduce((sum, row) => sum + row.value, 0);
+      return [{ label: "Total", value: total }];
+    }
+
+    const groups = new Map<string, number>();
+
+    for (const row of rows) {
+      let key: string;
+
+      if (groupBy === "month") {
+        // Extract month from date (YYYY-MM)
+        key = row.date.substring(0, 7);
+      } else if (groupBy === "date") {
+        key = row.date;
+      } else {
+        key = (row as Record<string, unknown>)[groupBy] as string || "Unknown";
+      }
+
+      const current = groups.get(key) || 0;
+      groups.set(key, current + row.value);
+    }
+
+    // Sort by label
+    const sortedEntries = Array.from(groups.entries()).sort((a, b) =>
+      a[0].localeCompare(b[0])
+    );
+
+    return sortedEntries.map(([label, value]) => ({ label, value }));
+  }
+
+  /**
+   * Get list of available KPI names
+   */
+  getAvailableKpis(): string[] {
+    const kpis = new Set<string>();
+    for (const row of this.data) {
+      kpis.add(row.kpi);
+    }
+    return Array.from(kpis);
+  }
+
+  /**
+   * Get available dimension values
+   */
+  getAvailableDimensions(): Record<string, string[]> {
+    const dimensions: Record<string, Set<string>> = {
+      region: new Set(),
+      product: new Set(),
+      segment: new Set(),
+      date: new Set(),
+    };
+
+    for (const row of this.data) {
+      dimensions.region.add(row.region);
+      dimensions.product.add(row.product);
+      if (row.segment) dimensions.segment.add(row.segment);
+      dimensions.date.add(row.date);
+    }
+
+    return {
+      region: Array.from(dimensions.region),
+      product: Array.from(dimensions.product),
+      segment: Array.from(dimensions.segment),
+      date: Array.from(dimensions.date).sort(),
+    };
+  }
+}
+
+// Singleton instance
+let repositoryInstance: LocalJsonKpiRepository | null = null;
+
+export function getKpiRepository(): IKpiRepository {
+  if (!repositoryInstance) {
+    repositoryInstance = new LocalJsonKpiRepository();
+  }
+  return repositoryInstance;
+}
