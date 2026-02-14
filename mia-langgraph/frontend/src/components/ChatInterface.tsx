@@ -4,27 +4,81 @@ import { sendQuery } from "../api/chatApi";
 import VisualizationPanel from "./VisualizationPanel";
 import "./ChatInterface.css";
 
-// Simple text formatting - no table parsing (tables rendered separately)
+// Enterprise-level text formatting with markdown table support
 const formatText = (content: string): string => {
   let formatted = content;
 
-  // Remove any pipe characters or table-like content from narrative
-  formatted = formatted.replace(/\|[^|]*\|/g, '');
+  // Remove DATA_TABLE markers if present
   formatted = formatted.replace(/DATA_TABLE_START[\s\S]*?DATA_TABLE_END/g, '');
-  formatted = formatted.replace(/\|[-:\s]+\|/g, '');
+
+  // Convert markdown tables to HTML tables
+  const lines = formatted.split('\n');
+  const result: string[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Check if this is a table header row (starts and ends with |)
+    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+      // Check if next line is separator (|---|---|)
+      if (i + 1 < lines.length && /^\|[\s\-:]+\|/.test(lines[i + 1].trim())) {
+        // This is a markdown table
+        const tableRows: string[] = [];
+        const headerCells = line.split('|').filter(c => c.trim() !== '').map(c => c.trim());
+
+        // Build header row
+        tableRows.push('<thead><tr>' + headerCells.map(c => `<th>${c}</th>`).join('') + '</tr></thead>');
+
+        // Skip separator line
+        i += 2;
+
+        // Process body rows
+        const bodyRows: string[] = [];
+        while (i < lines.length && lines[i].trim().startsWith('|') && lines[i].trim().endsWith('|')) {
+          const cells = lines[i].split('|').filter(c => c.trim() !== '').map(c => c.trim());
+          bodyRows.push('<tr>' + cells.map(c => `<td>${c}</td>`).join('') + '</tr>');
+          i++;
+        }
+
+        if (bodyRows.length > 0) {
+          tableRows.push('<tbody>' + bodyRows.join('') + '</tbody>');
+        }
+
+        result.push('<div class="markdown-table"><table class="enterprise-table">' + tableRows.join('') + '</table></div>');
+        continue;
+      }
+    }
+
+    result.push(line);
+    i++;
+  }
+
+  formatted = result.join('\n');
+
+  // Convert markdown headers
+  formatted = formatted.replace(/^### (.+)$/gm, '<h4 class="section-header">$1</h4>');
+  formatted = formatted.replace(/^## (.+)$/gm, '<h3 class="section-header">$1</h3>');
 
   // Convert markdown formatting
   formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   formatted = formatted.replace(/^[•\-]\s+(.+)$/gm, '<li>$1</li>');
 
-  // Clean up
-  formatted = formatted.replace(/\n\n+/g, '</p><p>');
-  formatted = formatted.replace(/\n/g, ' ');
-  formatted = formatted.replace(/\s+/g, ' ').trim();
+  // Wrap consecutive <li> elements in <ul>
+  formatted = formatted.replace(/(<li>.*?<\/li>\n?)+/g, '<ul class="details-list">$&</ul>');
 
+  // Clean up paragraphs
+  formatted = formatted.replace(/\n\n+/g, '</p><p>');
+  formatted = formatted.replace(/(?<!<\/h[34]>|<\/table>|<\/div>|<\/ul>)\n(?!<)/g, '<br>');
+
+  // Wrap in container
   if (formatted && !formatted.startsWith('<')) {
     formatted = '<p>' + formatted + '</p>';
   }
+
+  // Clean up empty paragraphs and whitespace
+  formatted = formatted.replace(/<p>\s*<\/p>/g, '');
+  formatted = formatted.replace(/<p>\s*<br>\s*<\/p>/g, '');
 
   return formatted;
 };
@@ -158,6 +212,8 @@ interface ChatInterfaceProps {
   onNewMessage: () => void;
   onBackToDashboard?: () => void;
   onSqlGenerated?: (sql: string | null) => void;
+  onAgentLogs?: (logs: { id: string; sessionId: string; timestamp: string; agentName: string; inputSummary: string; outputSummary: string; reasoningSummary?: string; status: string; }[]) => void;
+  onLogout?: () => void;
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
@@ -166,6 +222,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   onNewMessage,
   onBackToDashboard,
   onSqlGenerated,
+  onAgentLogs,
+  onLogout,
 }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -182,7 +240,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     kpiQuestions: [
       "What is the average formulation lead time for SKU_456 over the past three months?",
       "Show OEE performance for the last 3 months",
-      "What is the batch yield for SKU_123 this month?",
+      "What is the batch yield for SKU_123 last month?",
     ],
     analystQuestions: [
       "What is the waiting time between end of formulation and start of packaging for batch B2025-00007?",
@@ -232,11 +290,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       if (response.generatedSql && onSqlGenerated) {
         onSqlGenerated(response.generatedSql);
       }
+
+      // Pass agent logs to parent
+      if (response.agentLogs && onAgentLogs) {
+        onAgentLogs(response.agentLogs);
+      }
     } catch (error) {
+      console.error('Chat error:', error);
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Sorry, I encountered an error processing your request. Please try again.",
+        content: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -346,6 +410,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
           </svg>
           New Chat
         </button>
+        {onLogout && (
+          <button className="logout-btn" onClick={onLogout}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Logout
+          </button>
+        )}
       </div>
       <div className="messages-container">
         {messages.map((msg) => (
@@ -369,7 +443,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               {msg.kpiResult && msg.kpiResult.length > 0 && (
                 <DataTable results={msg.kpiResult} />
               )}
-              {msg.visualizationConfig && (
+              {msg.visualizationConfig && msg.visualizationConfig.series && msg.visualizationConfig.series.length > 0 && (
                 <div className="message-visualization">
                   <VisualizationPanel config={msg.visualizationConfig} />
                 </div>

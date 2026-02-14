@@ -3,17 +3,26 @@ import LoginPage from "./components/LoginPage";
 import ChatInterface from "./components/ChatInterface";
 import AgentFlowPanel from "./components/AgentFlowPanel";
 import SqlPanel from "./components/SqlPanel";
+import { AgentLogEntry } from "./types";
 import "./App.css";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [generatedSql, setGeneratedSql] = useState<string | null>(null);
+  const [agentLogs, setAgentLogs] = useState<AgentLogEntry[]>([]);
   const [isAgentPanelCollapsed, setIsAgentPanelCollapsed] = useState(false);
   const [isSqlPanelCollapsed, setIsSqlPanelCollapsed] = useState(false);
 
   const handleLogin = () => {
     setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setSessionId(null);
+    setGeneratedSql(null);
+    setAgentLogs([]);
   };
 
   const handleSqlGenerated = (sql: string | null) => {
@@ -22,6 +31,12 @@ function App() {
 
   const handleSessionIdChange = (id: string | null) => {
     setSessionId(id);
+    if (!id) setAgentLogs([]); // Clear logs on new chat
+  };
+
+  const handleAgentLogs = (logs: AgentLogEntry[]) => {
+    // Replace logs instead of accumulating - each query shows only its own timeline
+    setAgentLogs(logs);
   };
 
   // Show login page if not authenticated
@@ -40,6 +55,8 @@ function App() {
             onSessionIdChange={handleSessionIdChange}
             onNewMessage={() => {}}
             onSqlGenerated={handleSqlGenerated}
+            onAgentLogs={handleAgentLogs}
+            onLogout={handleLogout}
           />
         </div>
 
@@ -70,7 +87,7 @@ function App() {
             </button>
           </div>
           {!isAgentPanelCollapsed && (
-            <AgentFlowPanel sessionId={sessionId} isCollapsed={false} />
+            <AgentFlowPanel sessionId={sessionId} isCollapsed={false} logs={agentLogs} />
           )}
         </aside>
 

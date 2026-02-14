@@ -1,6 +1,8 @@
 import { ChatResponse, AgentLogEntry, KnowledgeGraph } from "../types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+// Direct API Gateway URL for POST requests (bypasses CloudFront edge caching issues)
+const API_GATEWAY_URL = "https://dkesqjdy52.execute-api.us-east-1.amazonaws.com/prod";
 
 /**
  * Send a query to the Manufacturing Insight Agent (LangGraph Backend)
@@ -9,7 +11,8 @@ export async function sendQuery(
   sessionId: string | null,
   message: string
 ): Promise<ChatResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/chat`, {
+  // Use direct API Gateway URL for POST requests to bypass CloudFront issues
+  const response = await fetch(`${API_GATEWAY_URL}/api/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,10 +25,12 @@ export async function sendQuery(
 
   if (!response.ok) {
     const errorText = await response.text();
+    console.error('API Error:', response.status, errorText);
     throw new Error(`API error: ${response.status} - ${errorText}`);
   }
 
   const data = await response.json();
+  console.log('API Response:', data);
 
   // Helper to transform backend KPI data to frontend format
   const transformKpiResults = (kpiResults: Array<{
@@ -50,16 +55,13 @@ export async function sendQuery(
   return {
     sessionId: data.session_id,
     answer: data.answer,
+    // Backend now returns properly formatted visualization config - pass through directly
     visualizationConfig: data.visualization_config ? {
-      chartType: "bar" as const,
-      title: data.visualization_config.kpi_name || "KPI Data",
-      series: [{
-        name: data.visualization_config.kpi_name || "Value",
-        data: data.visualization_config.data?.map((d: { sku: string; site: string; period: string; value: number }) => ({
-          x: d.period || `${d.sku} (${d.site})`,  // Use period for x-axis if available
-          y: d.value
-        })) || []
-      }]
+      chartType: data.visualization_config.chartType || "bar",
+      title: data.visualization_config.title || "KPI Data",
+      xLabel: data.visualization_config.xLabel,
+      yLabel: data.visualization_config.yLabel,
+      series: data.visualization_config.series || []
     } : undefined,
     kpiResult: transformKpiResults(data.kpi_results),
     analystResult: data.analyst_result ? {
@@ -71,7 +73,17 @@ export async function sendQuery(
       isValid: data.is_valid,
       issues: data.validation_issues || []
     } : undefined,
-    generatedSql: data.generated_sql
+    generatedSql: data.generated_sql,
+    agentLogs: data.agent_logs?.map((log: { agent_name: string; input_summary: string; output_summary: string; reasoning_summary?: string; status: string; timestamp: string }, idx: number) => ({
+      id: `${data.session_id}-${idx}`,
+      sessionId: data.session_id,
+      timestamp: log.timestamp,
+      agentName: log.agent_name,
+      inputSummary: log.input_summary,
+      outputSummary: log.output_summary,
+      reasoningSummary: log.reasoning_summary,
+      status: log.status
+    }))
   };
 }
 
@@ -79,8 +91,9 @@ export async function sendQuery(
  * Get telemetry logs for a session
  */
 export async function getTelemetry(sessionId: string): Promise<AgentLogEntry[]> {
+  // Use direct API Gateway URL
   const response = await fetch(
-    `${API_BASE_URL}/api/sessions/${sessionId}/telemetry`,
+    `${API_GATEWAY_URL}/api/sessions/${sessionId}/telemetry`,
     {
       method: "GET",
       headers: {

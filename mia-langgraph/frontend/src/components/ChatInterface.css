@@ -72,6 +72,35 @@
   flex-shrink: 0;
 }
 
+/* Logout Button */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+}
+
+.logout-btn:hover {
+  background: #fef2f2;
+  border-color: #dc2626;
+  color: #dc2626;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.15);
+}
+
+.logout-btn svg {
+  flex-shrink: 0;
+}
+
 /* Welcome Screen */
 .welcome-container {
   flex: 1;
@@ -654,4 +683,88 @@
 .formatted-content .data-table td {
   padding: 12px 16px;
   border-bottom: 1px solid #f0f0f0;
+}
+
+/* Enterprise-level Markdown Table Styles */
+.markdown-table {
+  margin: 16px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(124, 58, 92, 0.10);
+  background: white;
+}
+
+.enterprise-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: white;
+}
+
+.enterprise-table th {
+  background: linear-gradient(135deg, #7c3a5c 0%, #5a2a42 100%);
+  color: white;
+  font-weight: 600;
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.enterprise-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0e8ed;
+  color: #1a1a2e;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.enterprise-table tbody tr:nth-child(even) {
+  background: #faf8f9;
+}
+
+.enterprise-table tbody tr:nth-child(odd) {
+  background: white;
+}
+
+.enterprise-table tbody tr:hover {
+  background: #f3e8f0;
+}
+
+/* Section headers in formatted content */
+.formatted-content .section-header {
+  color: #7c3a5c;
+  font-weight: 700;
+  margin: 20px 0 12px 0;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #f3e8f0;
+}
+
+.formatted-content h3.section-header {
+  font-size: 16px;
+}
+
+.formatted-content h4.section-header {
+  font-size: 14px;
+}
+
+/* Details list styling */
+.formatted-content .details-list {
+  margin: 12px 0;
+  padding-left: 0;
+  list-style: none;
+  background: #faf8f9;
+  border-radius: 8px;
+  padding: 12px 16px;
+  border-left: 3px solid #7c3a5c;
+}
+
+.formatted-content .details-list li {
+  margin-bottom: 6px;
+  padding-left: 16px;
+}
+
+.formatted-content .details-list li:last-child {
+  margin-bottom: 0;
 }

@@ -30,6 +30,11 @@ Columns: SKU, month, site_id, production_volume, batch_count, batch_yield_avg_pc
 schedule_adherence_pct, avg_cycle_time_hr, formulation_lead_time_hr, deviations_per_100_batches,
 oee_packaging_pct, OTIF_RAG, RFT_RAG, OEE_RAG
 
+IMPORTANT: This table has multiple rows per month (one per site/plant). There are 3 plants:
+- FCTN-PLANT-01 (Frederick)
+- MCLS-PLANT-02 (Macclesfield)
+- SODR-PLANT-03 (Södertälje)
+
 ### KPI_STORE_WEEKLY (use only when user asks for weekly data)
 Columns: iso_week, site_id, production_volume, batch_count, batch_yield_avg_pct, rft_pct,
 schedule_adherence_pct, avg_cycle_time_hr, deviations_per_100_batches, oee_packaging_pct, month
@@ -51,19 +56,21 @@ Note: Weekly table does NOT have SKU column
 7. For monthly data, include SKU; for weekly data, do NOT include SKU
 8. Use standard SQL syntax compatible with DuckDB
 9. IMPORTANT: Always add WHERE clause to exclude NULL values for the KPI column (e.g., WHERE kpi_column IS NOT NULL)
-10. When user says "last N months", use LIMIT N with KPI_STORE_MONTHLY to get N distinct months
+10. CRITICAL for "last N months": Use a subquery to get N DISTINCT months, NOT just LIMIT N rows.
+    Since there are multiple sites per month, LIMIT N would only return data from one or two months.
 
 ## Examples
-- "What is the batch yield?" -> SELECT SKU, site_id, month, batch_yield_avg_pct FROM KPI_STORE_MONTHLY WHERE batch_yield_avg_pct IS NOT NULL ORDER BY month DESC LIMIT 5
-- "Show RFT for past 3 months" -> SELECT SKU, site_id, month, rft_pct FROM KPI_STORE_MONTHLY WHERE rft_pct IS NOT NULL ORDER BY month DESC LIMIT 3
-- "OEE performance for last 3 months" -> SELECT SKU, site_id, month, oee_packaging_pct FROM KPI_STORE_MONTHLY WHERE oee_packaging_pct IS NOT NULL ORDER BY month DESC LIMIT 3
+- "What is the batch yield?" -> SELECT SKU, site_id, month, batch_yield_avg_pct FROM KPI_STORE_MONTHLY WHERE batch_yield_avg_pct IS NOT NULL ORDER BY month DESC LIMIT 9
+- "Show RFT for SKU_123 for past 3 months" -> SELECT SKU, site_id, month, rft_pct FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' AND rft_pct IS NOT NULL AND month IN (SELECT DISTINCT month FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' ORDER BY month DESC LIMIT 3) ORDER BY month DESC, site_id
+- "Batch yield for SKU_123 for last 3 months" -> SELECT SKU, site_id, month, batch_yield_avg_pct FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' AND batch_yield_avg_pct IS NOT NULL AND month IN (SELECT DISTINCT month FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' ORDER BY month DESC LIMIT 3) ORDER BY month DESC, site_id
+- "OEE for last 3 months" -> SELECT SKU, site_id, month, oee_packaging_pct FROM KPI_STORE_MONTHLY WHERE oee_packaging_pct IS NOT NULL AND month IN (SELECT DISTINCT month FROM KPI_STORE_MONTHLY ORDER BY month DESC LIMIT 3) ORDER BY month DESC, site_id
 - "Weekly OEE trend" -> SELECT site_id, iso_week, oee_packaging_pct FROM KPI_STORE_WEEKLY WHERE oee_packaging_pct IS NOT NULL ORDER BY iso_week DESC LIMIT 10
 - "Show yield for past 4 weeks" -> SELECT site_id, iso_week, batch_yield_avg_pct FROM KPI_STORE_WEEKLY WHERE batch_yield_avg_pct IS NOT NULL ORDER BY iso_week DESC LIMIT 4
 """
 
 # Response generation prompt
 RESPONSE_PROMPT = """You are a KPI Agent for the Manufacturing Insight Agent (MIA).
-Generate a clear, professional response explaining the KPI data.
+Generate a clear, professionally formatted response with excellent structure.
 
 ## KPI Details
 Name: {kpi_name}
@@ -71,13 +78,32 @@ Description: {kpi_description}
 Unit: {kpi_unit}
 Target: {kpi_target}
 
-## Response Format
-1. State the current value(s) clearly
-2. Compare to target if applicable
-3. Indicate RAG status (Green/Amber/Red) if available
-4. Note any trends if multiple data points
+## REQUIRED RESPONSE FORMAT (follow EXACTLY):
 
-Be concise and manufacturing-focused. Use proper units.
+**[KPI Name]** is **[average value with unit]** for [SKU] over the past [N months as requested by user] (average across all sites).
+
+**Status:** [GREEN/AMBER/RED emoji + status] - [one sentence about target comparison]
+
+### Recent Trends
+| Period | Value | Status |
+|:-------|------:|:------:|
+| [Month 1] | XX.X | [emoji] |
+| [Month 2] | XX.X | [emoji] |
+| [Month N] | XX.X | [emoji] |
+
+### Key Observations
+- **[Observation 1]**: Trend across the N months (increasing/decreasing/stable)
+- **[Observation 2]**: Site variation (which site performs best/worst)
+- **[Observation 3]**: Actionable recommendation if needed
+
+## FORMATTING RULES:
+1. First line MUST say "over the past N months" matching the user's request - NOT just one month
+2. Include the SKU in the first line if data is filtered by SKU
+3. Table MUST show ALL months from the data, not just the most recent
+4. Use status emojis: GREEN = checkmark, AMBER = warning, RED = cross
+5. Key Observations should compare across ALL periods returned
+6. Be concise but informative - manufacturing professionals need quick insights
+7. IMPORTANT: When user asks about a specific SKU, ALWAYS mention that SKU in the first line, not just the site
 """
 
 
@@ -353,16 +379,22 @@ def kpi_agent(state: MIAState) -> dict:
         kpi_target=kpi_info.get("target", "Not defined")
     )
 
+    # Check if filtering by specific SKU
+    sku_filter = filters.get("sku") if filters else None
+
     data_summary = "\n".join([
-        f"- {dp['sku']} at {dp['site']}: {dp['value']}{dp['unit']} ({dp['period']})"
-        + (f" - RAG: {dp.get('rag_status', 'N/A')}" if 'rag_status' in dp else "")
+        f"- SKU: {dp['sku']}, Site: {dp['site']}, Period: {dp['period']}, Value: {dp['value']}{dp['unit']}"
+        + (f", RAG Status: {dp.get('rag_status', 'N/A')}" if 'rag_status' in dp else "")
         for dp in data_points
     ])
+
+    sku_context = f"\nIMPORTANT: User asked about SKU: {sku_filter}. Make sure to mention this SKU in your response." if sku_filter else ""
 
     try:
         messages = [
             SystemMessage(content=response_prompt),
             HumanMessage(content=f"""User asked: {user_query}
+{sku_context}
 
 SQL Query executed:
 ```sql
@@ -374,7 +406,7 @@ Results:
 
 Target: {kpi_info.get('target', 'Not defined')}{kpi_info['unit']}
 
-Provide a clear, concise response to the user's question.""")
+Provide a clear, concise response to the user's question. If the user asked about a specific SKU, make sure to mention it prominently.""")
         ]
 
         response = llm.invoke(messages)
@@ -391,16 +423,44 @@ Provide a clear, concise response to the user's question.""")
 
         kpi_result["explanation"] = explanation
 
+        # Build visualization config in the correct format for frontend
+        # Group data by site to create multiple series (one per plant)
+        sites = list(set(d["site"] for d in data_points))
+        periods = sorted(list(set(d["period"] for d in data_points)))
+
+        if len(sites) > 1:
+            # Multiple sites - create one series per site, x-axis is period
+            series_list = []
+            for site in sorted(sites):
+                site_data = [dp for dp in data_points if dp["site"] == site]
+                series_list.append({
+                    "name": site[:4],  # Short site name (FCTN, MCLS, SODR)
+                    "data": [{"x": dp["period"], "y": float(dp["value"])} for dp in sorted(site_data, key=lambda x: x["period"])]
+                })
+
+            # Use bar chart for <= 4 periods, line for more
+            chart_type = "bar" if len(periods) <= 4 else "line"
+        else:
+            # Single site - simple series
+            series_list = [{
+                "name": kpi_info["name"],
+                "data": [{"x": dp["period"], "y": float(dp["value"])} for dp in sorted(data_points, key=lambda x: x["period"])]
+            }]
+            chart_type = "bar" if len(data_points) <= 6 else "line"
+
+        viz_config = {
+            "chartType": chart_type,
+            "title": kpi_info["name"],
+            "xLabel": "Period",
+            "yLabel": kpi_info["unit"],
+            "series": series_list
+        }
+
         return {
             "kpi_results": [kpi_result],
             "generated_sql": generated_sql,
             "final_answer": explanation,
-            "visualization_config": {
-                "type": "kpi_card",
-                "kpi_name": kpi_info["name"],
-                "data": data_points,
-                "target": kpi_info.get("target")
-            },
+            "visualization_config": viz_config,
             "agent_logs": [log_entry]
         }
 
