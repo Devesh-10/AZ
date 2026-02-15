@@ -1,0 +1,321 @@
+REPORTING_QUARTER_NUMBER,REPORTING_YEAR_NUMBER,SHE_GEOGRAPHY_NAME,SHE_MARKET_NAME,SRC_SYS_NM,TOTAL_BEV_COUNT,TOTAL_FLEET_ASSET_COUNT
+1,2022,UK,UK,ENABLON,36,486
+2,2022,UK,UK,ENABLON,35,468
+3,2022,UK,UK,ENABLON,34,488
+4,2022,UK,UK,ENABLON,35,480
+1,2023,UK,UK,ENABLON,91,480
+2,2023,UK,UK,ENABLON,92,482
+3,2023,UK,UK,ENABLON,91,487
+4,2023,UK,UK,ENABLON,97,493
+1,2024,UK,UK,ENABLON,157,512
+2,2024,UK,UK,ENABLON,163,536
+3,2024,UK,UK,ENABLON,160,508
+4,2024,UK,UK,ENABLON,159,493
+1,2025,UK,UK,ENABLON,228,515
+2,2025,UK,UK,ENABLON,228,531
+3,2025,UK,UK,ENABLON,226,539
+4,2025,UK,UK,ENABLON,218,503
+1,2022,Sweden,Europe,ENABLON,45,450
+2,2022,Sweden,Europe,ENABLON,44,447
+3,2022,Sweden,Europe,ENABLON,41,442
+4,2022,Sweden,Europe,ENABLON,44,457
+1,2023,Sweden,Europe,ENABLON,102,474
+2,2023,Sweden,Europe,ENABLON,98,454
+3,2023,Sweden,Europe,ENABLON,98,452
+4,2023,Sweden,Europe,ENABLON,101,454
+1,2024,Sweden,Europe,ENABLON,166,492
+2,2024,Sweden,Europe,ENABLON,158,464
+3,2024,Sweden,Europe,ENABLON,149,453
+4,2024,Sweden,Europe,ENABLON,166,489
+1,2025,Sweden,Europe,ENABLON,218,464
+2,2025,Sweden,Europe,ENABLON,222,489
+3,2025,Sweden,Europe,ENABLON,203,456
+4,2025,Sweden,Europe,ENABLON,209,460
+1,2022,Germany,Europe,ENABLON,16,290
+2,2022,Germany,Europe,ENABLON,16,285
+3,2022,Germany,Europe,ENABLON,15,295
+4,2022,Germany,Europe,ENABLON,15,280
+1,2023,Germany,Europe,ENABLON,50,290
+2,2023,Germany,Europe,ENABLON,48,287
+3,2023,Germany,Europe,ENABLON,50,281
+4,2023,Germany,Europe,ENABLON,51,294
+1,2024,Germany,Europe,ENABLON,86,289
+2,2024,Germany,Europe,ENABLON,82,287
+3,2024,Germany,Europe,ENABLON,91,298
+4,2024,Germany,Europe,ENABLON,86,294
+1,2025,Germany,Europe,ENABLON,133,308
+2,2025,Germany,Europe,ENABLON,137,316
+3,2025,Germany,Europe,ENABLON,131,314
+4,2025,Germany,Europe,ENABLON,118,290
+1,2022,France,Europe,ENABLON,8,125
+2,2022,France,Europe,ENABLON,8,124
+3,2022,France,Europe,ENABLON,8,125
+4,2022,France,Europe,ENABLON,8,124
+1,2023,France,Europe,ENABLON,21,120
+2,2023,France,Europe,ENABLON,23,127
+3,2023,France,Europe,ENABLON,24,123
+4,2023,France,Europe,ENABLON,23,125
+1,2024,France,Europe,ENABLON,35,119
+2,2024,France,Europe,ENABLON,36,121
+3,2024,France,Europe,ENABLON,39,124
+4,2024,France,Europe,ENABLON,38,121
+1,2025,France,Europe,ENABLON,53,125
+2,2025,France,Europe,ENABLON,54,129
+3,2025,France,Europe,ENABLON,56,129
+4,2025,France,Europe,ENABLON,53,123
+1,2022,Italy,Europe,ENABLON,35,396
+2,2022,Italy,Europe,ENABLON,34,389
+3,2022,Italy,Europe,ENABLON,38,421
+4,2022,Italy,Europe,ENABLON,36,400
+1,2023,Italy,Europe,ENABLON,91,429
+2,2023,Italy,Europe,ENABLON,82,400
+3,2023,Italy,Europe,ENABLON,87,426
+4,2023,Italy,Europe,ENABLON,91,422
+1,2024,Italy,Europe,ENABLON,141,430
+2,2024,Italy,Europe,ENABLON,141,422
+3,2024,Italy,Europe,ENABLON,141,427
+4,2024,Italy,Europe,ENABLON,139,428
+1,2025,Italy,Europe,ENABLON,198,426
+2,2025,Italy,Europe,ENABLON,195,418
+3,2025,Italy,Europe,ENABLON,195,433
+4,2025,Italy,Europe,ENABLON,186,419
+1,2022,Spain,Europe,ENABLON,18,317
+2,2022,Spain,Europe,ENABLON,17,310
+3,2022,Spain,Europe,ENABLON,16,301
+4,2022,Spain,Europe,ENABLON,17,321
+1,2023,Spain,Europe,ENABLON,52,306
+2,2023,Spain,Europe,ENABLON,52,318
+3,2023,Spain,Europe,ENABLON,53,316
+4,2023,Spain,Europe,ENABLON,53,307
+1,2024,Spain,Europe,ENABLON,93,334
+2,2024,Spain,Europe,ENABLON,98,333
+3,2024,Spain,Europe,ENABLON,91,318
+4,2024,Spain,Europe,ENABLON,94,332
+1,2025,Spain,Europe,ENABLON,140,328
+2,2025,Spain,Europe,ENABLON,125,311
+3,2025,Spain,Europe,ENABLON,141,340
+4,2025,Spain,Europe,ENABLON,125,314
+1,2022,USA,North America,ENABLON,78,522
+2,2022,USA,North America,ENABLON,71,491
+3,2022,USA,North America,ENABLON,75,518
+4,2022,USA,North America,ENABLON,77,511
+1,2023,USA,North America,ENABLON,141,516
+2,2023,USA,North America,ENABLON,140,515
+3,2023,USA,North America,ENABLON,137,508
+4,2023,USA,North America,ENABLON,131,494
+1,2024,USA,North America,ENABLON,202,531
+2,2024,USA,North America,ENABLON,203,540
+3,2024,USA,North America,ENABLON,207,537
+4,2024,USA,North America,ENABLON,197,492
+1,2025,USA,North America,ENABLON,280,542
+2,2025,USA,North America,ENABLON,263,538
+3,2025,USA,North America,ENABLON,268,532
+4,2025,USA,North America,ENABLON,258,524
+1,2022,Canada,North America,ENABLON,12,110
+2,2022,Canada,North America,ENABLON,14,120
+3,2022,Canada,North America,ENABLON,14,117
+4,2022,Canada,North America,ENABLON,12,112
+1,2023,Canada,North America,ENABLON,27,117
+2,2023,Canada,North America,ENABLON,26,112
+3,2023,Canada,North America,ENABLON,29,119
+4,2023,Canada,North America,ENABLON,28,118
+1,2024,Canada,North America,ENABLON,45,123
+2,2024,Canada,North America,ENABLON,40,115
+3,2024,Canada,North America,ENABLON,42,123
+4,2024,Canada,North America,ENABLON,45,124
+1,2025,Canada,North America,ENABLON,55,119
+2,2025,Canada,North America,ENABLON,58,126
+3,2025,Canada,North America,ENABLON,55,120
+4,2025,Canada,North America,ENABLON,60,122
+1,2022,Mexico,North America,ENABLON,27,190
+2,2022,Mexico,North America,ENABLON,28,192
+3,2022,Mexico,North America,ENABLON,28,198
+4,2022,Mexico,North America,ENABLON,29,189
+1,2023,Mexico,North America,ENABLON,47,184
+2,2023,Mexico,North America,ENABLON,55,197
+3,2023,Mexico,North America,ENABLON,56,203
+4,2023,Mexico,North America,ENABLON,49,185
+1,2024,Mexico,North America,ENABLON,76,193
+2,2024,Mexico,North America,ENABLON,76,190
+3,2024,Mexico,North America,ENABLON,78,201
+4,2024,Mexico,North America,ENABLON,73,188
+1,2025,Mexico,North America,ENABLON,102,206
+2,2025,Mexico,North America,ENABLON,104,199
+3,2025,Mexico,North America,ENABLON,104,207
+4,2025,Mexico,North America,ENABLON,105,206
+1,2022,China,Asia Pacific,ENABLON,40,444
+2,2022,China,Asia Pacific,ENABLON,43,447
+3,2022,China,Asia Pacific,ENABLON,42,435
+4,2022,China,Asia Pacific,ENABLON,41,442
+1,2023,China,Asia Pacific,ENABLON,92,448
+2,2023,China,Asia Pacific,ENABLON,92,429
+3,2023,China,Asia Pacific,ENABLON,90,430
+4,2023,China,Asia Pacific,ENABLON,96,449
+1,2024,China,Asia Pacific,ENABLON,157,459
+2,2024,China,Asia Pacific,ENABLON,152,461
+3,2024,China,Asia Pacific,ENABLON,150,458
+4,2024,China,Asia Pacific,ENABLON,146,447
+1,2025,China,Asia Pacific,ENABLON,194,448
+2,2025,China,Asia Pacific,ENABLON,201,441
+3,2025,China,Asia Pacific,ENABLON,205,436
+4,2025,China,Asia Pacific,ENABLON,214,461
+1,2022,Japan,Asia Pacific,ENABLON,36,248
+2,2022,Japan,Asia Pacific,ENABLON,37,256
+3,2022,Japan,Asia Pacific,ENABLON,37,252
+4,2022,Japan,Asia Pacific,ENABLON,37,262
+1,2023,Japan,Asia Pacific,ENABLON,67,257
+2,2023,Japan,Asia Pacific,ENABLON,67,266
+3,2023,Japan,Asia Pacific,ENABLON,66,255
+4,2023,Japan,Asia Pacific,ENABLON,68,264
+1,2024,Japan,Asia Pacific,ENABLON,108,273
+2,2024,Japan,Asia Pacific,ENABLON,107,281
+3,2024,Japan,Asia Pacific,ENABLON,100,270
+4,2024,Japan,Asia Pacific,ENABLON,98,263
+1,2025,Japan,Asia Pacific,ENABLON,140,282
+2,2025,Japan,Asia Pacific,ENABLON,141,269
+3,2025,Japan,Asia Pacific,ENABLON,133,272
+4,2025,Japan,Asia Pacific,ENABLON,133,273
+1,2022,Australia,Asia Pacific,ENABLON,16,307
+2,2022,Australia,Asia Pacific,ENABLON,14,288
+3,2022,Australia,Asia Pacific,ENABLON,15,287
+4,2022,Australia,Asia Pacific,ENABLON,16,303
+1,2023,Australia,Asia Pacific,ENABLON,51,296
+2,2023,Australia,Asia Pacific,ENABLON,56,312
+3,2023,Australia,Asia Pacific,ENABLON,55,310
+4,2023,Australia,Asia Pacific,ENABLON,53,308
+1,2024,Australia,Asia Pacific,ENABLON,84,297
+2,2024,Australia,Asia Pacific,ENABLON,90,311
+3,2024,Australia,Asia Pacific,ENABLON,84,293
+4,2024,Australia,Asia Pacific,ENABLON,86,293
+1,2025,Australia,Asia Pacific,ENABLON,132,313
+2,2025,Australia,Asia Pacific,ENABLON,139,323
+3,2025,Australia,Asia Pacific,ENABLON,123,298
+4,2025,Australia,Asia Pacific,ENABLON,122,304
+1,2022,India,Asia Pacific,ENABLON,35,499
+2,2022,India,Asia Pacific,ENABLON,32,465
+3,2022,India,Asia Pacific,ENABLON,33,463
+4,2022,India,Asia Pacific,ENABLON,31,467
+1,2023,India,Asia Pacific,ENABLON,96,499
+2,2023,India,Asia Pacific,ENABLON,100,508
+3,2023,India,Asia Pacific,ENABLON,87,470
+4,2023,India,Asia Pacific,ENABLON,87,473
+1,2024,India,Asia Pacific,ENABLON,157,510
+2,2024,India,Asia Pacific,ENABLON,153,477
+3,2024,India,Asia Pacific,ENABLON,151,475
+4,2024,India,Asia Pacific,ENABLON,146,476
+1,2025,India,Asia Pacific,ENABLON,215,504
+2,2025,India,Asia Pacific,ENABLON,210,486
+3,2025,India,Asia Pacific,ENABLON,215,512
+4,2025,India,Asia Pacific,ENABLON,205,482
+1,2022,South Korea,Asia Pacific,ENABLON,19,156
+2,2022,South Korea,Asia Pacific,ENABLON,20,158
+3,2022,South Korea,Asia Pacific,ENABLON,21,161
+4,2022,South Korea,Asia Pacific,ENABLON,18,153
+1,2023,South Korea,Asia Pacific,ENABLON,38,156
+2,2023,South Korea,Asia Pacific,ENABLON,38,157
+3,2023,South Korea,Asia Pacific,ENABLON,39,157
+4,2023,South Korea,Asia Pacific,ENABLON,38,156
+1,2024,South Korea,Asia Pacific,ENABLON,59,161
+2,2024,South Korea,Asia Pacific,ENABLON,60,163
+3,2024,South Korea,Asia Pacific,ENABLON,58,157
+4,2024,South Korea,Asia Pacific,ENABLON,54,158
+1,2025,South Korea,Asia Pacific,ENABLON,83,173
+2,2025,South Korea,Asia Pacific,ENABLON,77,166
+3,2025,South Korea,Asia Pacific,ENABLON,84,171
+4,2025,South Korea,Asia Pacific,ENABLON,80,160
+1,2022,Brazil,Latin America,ENABLON,30,276
+2,2022,Brazil,Latin America,ENABLON,33,283
+3,2022,Brazil,Latin America,ENABLON,30,267
+4,2022,Brazil,Latin America,ENABLON,31,270
+1,2023,Brazil,Latin America,ENABLON,62,269
+2,2023,Brazil,Latin America,ENABLON,67,284
+3,2023,Brazil,Latin America,ENABLON,61,271
+4,2023,Brazil,Latin America,ENABLON,69,288
+1,2024,Brazil,Latin America,ENABLON,106,296
+2,2024,Brazil,Latin America,ENABLON,102,276
+3,2024,Brazil,Latin America,ENABLON,108,300
+4,2024,Brazil,Latin America,ENABLON,107,294
+1,2025,Brazil,Latin America,ENABLON,141,285
+2,2025,Brazil,Latin America,ENABLON,143,291
+3,2025,Brazil,Latin America,ENABLON,131,286
+4,2025,Brazil,Latin America,ENABLON,134,287
+1,2022,Argentina,Latin America,ENABLON,39,472
+2,2022,Argentina,Latin America,ENABLON,38,494
+3,2022,Argentina,Latin America,ENABLON,39,502
+4,2022,Argentina,Latin America,ENABLON,39,477
+1,2023,Argentina,Latin America,ENABLON,95,473
+2,2023,Argentina,Latin America,ENABLON,100,480
+3,2023,Argentina,Latin America,ENABLON,97,476
+4,2023,Argentina,Latin America,ENABLON,100,479
+1,2024,Argentina,Latin America,ENABLON,152,476
+2,2024,Argentina,Latin America,ENABLON,160,494
+3,2024,Argentina,Latin America,ENABLON,170,512
+4,2024,Argentina,Latin America,ENABLON,162,506
+1,2025,Argentina,Latin America,ENABLON,211,498
+2,2025,Argentina,Latin America,ENABLON,223,493
+3,2025,Argentina,Latin America,ENABLON,237,532
+4,2025,Argentina,Latin America,ENABLON,246,533
+1,2022,Colombia,Latin America,ENABLON,61,508
+2,2022,Colombia,Latin America,ENABLON,56,498
+3,2022,Colombia,Latin America,ENABLON,58,504
+4,2022,Colombia,Latin America,ENABLON,56,479
+1,2023,Colombia,Latin America,ENABLON,116,498
+2,2023,Colombia,Latin America,ENABLON,120,531
+3,2023,Colombia,Latin America,ENABLON,118,490
+4,2023,Colombia,Latin America,ENABLON,121,500
+1,2024,Colombia,Latin America,ENABLON,177,514
+2,2024,Colombia,Latin America,ENABLON,175,501
+3,2024,Colombia,Latin America,ENABLON,172,503
+4,2024,Colombia,Latin America,ENABLON,181,506
+1,2025,Colombia,Latin America,ENABLON,252,543
+2,2025,Colombia,Latin America,ENABLON,247,531
+3,2025,Colombia,Latin America,ENABLON,246,504
+4,2025,Colombia,Latin America,ENABLON,248,506
+1,2022,UAE,Middle East & Africa,ENABLON,59,485
+2,2022,UAE,Middle East & Africa,ENABLON,61,477
+3,2022,UAE,Middle East & Africa,ENABLON,55,451
+4,2022,UAE,Middle East & Africa,ENABLON,55,451
+1,2023,UAE,Middle East & Africa,ENABLON,117,459
+2,2023,UAE,Middle East & Africa,ENABLON,114,462
+3,2023,UAE,Middle East & Africa,ENABLON,116,494
+4,2023,UAE,Middle East & Africa,ENABLON,116,480
+1,2024,UAE,Middle East & Africa,ENABLON,186,497
+2,2024,UAE,Middle East & Africa,ENABLON,174,499
+3,2024,UAE,Middle East & Africa,ENABLON,182,506
+4,2024,UAE,Middle East & Africa,ENABLON,186,486
+1,2025,UAE,Middle East & Africa,ENABLON,258,514
+2,2025,UAE,Middle East & Africa,ENABLON,235,483
+3,2025,UAE,Middle East & Africa,ENABLON,229,481
+4,2025,UAE,Middle East & Africa,ENABLON,218,471
+1,2022,South Africa,Middle East & Africa,ENABLON,22,151
+2,2022,South Africa,Middle East & Africa,ENABLON,23,151
+3,2022,South Africa,Middle East & Africa,ENABLON,22,141
+4,2022,South Africa,Middle East & Africa,ENABLON,23,149
+1,2023,South Africa,Middle East & Africa,ENABLON,42,154
+2,2023,South Africa,Middle East & Africa,ENABLON,39,149
+3,2023,South Africa,Middle East & Africa,ENABLON,41,149
+4,2023,South Africa,Middle East & Africa,ENABLON,42,154
+1,2024,South Africa,Middle East & Africa,ENABLON,57,146
+2,2024,South Africa,Middle East & Africa,ENABLON,58,150
+3,2024,South Africa,Middle East & Africa,ENABLON,62,156
+4,2024,South Africa,Middle East & Africa,ENABLON,56,152
+1,2025,South Africa,Middle East & Africa,ENABLON,76,157
+2,2025,South Africa,Middle East & Africa,ENABLON,78,161
+3,2025,South Africa,Middle East & Africa,ENABLON,77,152
+4,2025,South Africa,Middle East & Africa,ENABLON,75,152
+1,2022,Saudi Arabia,Middle East & Africa,ENABLON,57,446
+2,2022,Saudi Arabia,Middle East & Africa,ENABLON,57,432
+3,2022,Saudi Arabia,Middle East & Africa,ENABLON,61,464
+4,2022,Saudi Arabia,Middle East & Africa,ENABLON,58,455
+1,2023,Saudi Arabia,Middle East & Africa,ENABLON,105,440
+2,2023,Saudi Arabia,Middle East & Africa,ENABLON,105,445
+3,2023,Saudi Arabia,Middle East & Africa,ENABLON,117,455
+4,2023,Saudi Arabia,Middle East & Africa,ENABLON,103,433
+1,2024,Saudi Arabia,Middle East & Africa,ENABLON,160,456
+2,2024,Saudi Arabia,Middle East & Africa,ENABLON,184,480
+3,2024,Saudi Arabia,Middle East & Africa,ENABLON,167,470
+4,2024,Saudi Arabia,Middle East & Africa,ENABLON,172,447
+1,2025,Saudi Arabia,Middle East & Africa,ENABLON,233,459
+2,2025,Saudi Arabia,Middle East & Africa,ENABLON,225,485
+3,2025,Saudi Arabia,Middle East & Africa,ENABLON,249,490
+4,2025,Saudi Arabia,Middle East & Africa,ENABLON,231,454

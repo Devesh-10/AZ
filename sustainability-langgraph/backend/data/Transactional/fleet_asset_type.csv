@@ -1,0 +1,5 @@
+FLEET_ASSET_TYPE_NAME,FLEET_ASSET_TYPE_DESCRIPTION,SRC_SYS_NM
+Car,Passenger Car,ENABLON
+Motorbike,Two-wheeled Motor Vehicle,ENABLON
+Van,Light Commercial Vehicle,ENABLON
+Truck,Heavy Commercial Vehicle,ENABLON

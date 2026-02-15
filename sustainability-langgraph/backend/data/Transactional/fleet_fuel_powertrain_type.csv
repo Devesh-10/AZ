@@ -1,0 +1,7 @@
+FLEET_FUEL_POWERTRAIN_TYPE_NAME,FLEET_FUEL_POWERTRAIN_TYPE_DESCRIPTION,SRC_SYS_NM
+Battery,Battery Electric Vehicle (BEV),ENABLON
+Diesel,Diesel Internal Combustion Engine,ENABLON
+Petrol,Petrol/Gasoline Internal Combustion Engine,ENABLON
+Hybrid,Petrol-Electric Hybrid,ENABLON
+PluginHybrid,Plug-in Hybrid Electric Vehicle (PHEV),ENABLON
+Hydrogen,Hydrogen Fuel Cell,ENABLON

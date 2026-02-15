@@ -1,0 +1,61 @@
+FLEET_ASSET_COUNT,FLEET_ASSET_TYPE_NAME,FLEET_FUEL_POWERTRAIN_TYPE_NAME,REPORTING_YEAR_NUMBER,REPORTING_QUARTER_NUMBER,SHE_GEOGRAPHY_NAME,SHE_MARKET_NAME,SRC_SYS_NM
+218,Car,Battery,2025,4,UK,UK,ENABLON
+270,Car,Diesel,2025,4,UK,UK,ENABLON
+15,Car,Petrol,2025,4,UK,UK,ENABLON
+209,Car,Battery,2025,4,Sweden,Europe,ENABLON
+236,Car,Diesel,2025,4,Sweden,Europe,ENABLON
+15,Car,Petrol,2025,4,Sweden,Europe,ENABLON
+118,Car,Battery,2025,4,Germany,Europe,ENABLON
+162,Car,Diesel,2025,4,Germany,Europe,ENABLON
+10,Car,Petrol,2025,4,Germany,Europe,ENABLON
+53,Car,Battery,2025,4,France,Europe,ENABLON
+65,Car,Diesel,2025,4,France,Europe,ENABLON
+5,Car,Petrol,2025,4,France,Europe,ENABLON
+186,Car,Battery,2025,4,Italy,Europe,ENABLON
+218,Car,Diesel,2025,4,Italy,Europe,ENABLON
+15,Car,Petrol,2025,4,Italy,Europe,ENABLON
+125,Car,Battery,2025,4,Spain,Europe,ENABLON
+174,Car,Diesel,2025,4,Spain,Europe,ENABLON
+15,Car,Petrol,2025,4,Spain,Europe,ENABLON
+258,Car,Battery,2025,4,USA,North America,ENABLON
+246,Car,Diesel,2025,4,USA,North America,ENABLON
+20,Car,Petrol,2025,4,USA,North America,ENABLON
+60,Car,Battery,2025,4,Canada,North America,ENABLON
+57,Car,Diesel,2025,4,Canada,North America,ENABLON
+5,Car,Petrol,2025,4,Canada,North America,ENABLON
+105,Car,Battery,2025,4,Mexico,North America,ENABLON
+91,Car,Diesel,2025,4,Mexico,North America,ENABLON
+10,Car,Petrol,2025,4,Mexico,North America,ENABLON
+214,Car,Battery,2025,4,China,Asia Pacific,ENABLON
+232,Car,Diesel,2025,4,China,Asia Pacific,ENABLON
+15,Car,Petrol,2025,4,China,Asia Pacific,ENABLON
+133,Car,Battery,2025,4,Japan,Asia Pacific,ENABLON
+130,Car,Diesel,2025,4,Japan,Asia Pacific,ENABLON
+10,Car,Petrol,2025,4,Japan,Asia Pacific,ENABLON
+122,Car,Battery,2025,4,Australia,Asia Pacific,ENABLON
+172,Car,Diesel,2025,4,Australia,Asia Pacific,ENABLON
+10,Car,Petrol,2025,4,Australia,Asia Pacific,ENABLON
+205,Car,Battery,2025,4,India,Asia Pacific,ENABLON
+262,Car,Diesel,2025,4,India,Asia Pacific,ENABLON
+15,Car,Petrol,2025,4,India,Asia Pacific,ENABLON
+80,Car,Battery,2025,4,South Korea,Asia Pacific,ENABLON
+75,Car,Diesel,2025,4,South Korea,Asia Pacific,ENABLON
+5,Car,Petrol,2025,4,South Korea,Asia Pacific,ENABLON
+134,Car,Battery,2025,4,Brazil,Latin America,ENABLON
+143,Car,Diesel,2025,4,Brazil,Latin America,ENABLON
+10,Car,Petrol,2025,4,Brazil,Latin America,ENABLON
+246,Car,Battery,2025,4,Argentina,Latin America,ENABLON
+272,Car,Diesel,2025,4,Argentina,Latin America,ENABLON
+15,Car,Petrol,2025,4,Argentina,Latin America,ENABLON
+248,Car,Battery,2025,4,Colombia,Latin America,ENABLON
+243,Car,Diesel,2025,4,Colombia,Latin America,ENABLON
+15,Car,Petrol,2025,4,Colombia,Latin America,ENABLON
+218,Car,Battery,2025,4,UAE,Middle East & Africa,ENABLON
+238,Car,Diesel,2025,4,UAE,Middle East & Africa,ENABLON
+15,Car,Petrol,2025,4,UAE,Middle East & Africa,ENABLON
+75,Car,Battery,2025,4,South Africa,Middle East & Africa,ENABLON
+72,Car,Diesel,2025,4,South Africa,Middle East & Africa,ENABLON
+5,Car,Petrol,2025,4,South Africa,Middle East & Africa,ENABLON
+231,Car,Battery,2025,4,Saudi Arabia,Middle East & Africa,ENABLON
+213,Car,Diesel,2025,4,Saudi Arabia,Middle East & Africa,ENABLON
+10,Car,Petrol,2025,4,Saudi Arabia,Middle East & Africa,ENABLON
