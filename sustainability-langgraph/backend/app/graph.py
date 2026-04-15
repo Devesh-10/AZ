@@ -27,6 +27,18 @@ def route_after_supervisor(state: SIAState) -> Literal["kpi_agent", "analyst_age
         return "clarify"
 
 
+def route_after_validator(state: SIAState) -> Literal["visualization", "end"]:
+    """Route to visualization only if there's visualization config to render"""
+    viz_config = state.get("visualization_config")
+
+    # Only go to visualization if KPI Agent already set visualization_config
+    # Analyst Agent doesn't produce visualizations, so skip it
+    if viz_config and viz_config.get("series"):
+        return "visualization"
+    else:
+        return "end"
+
+
 def clarify_response(state: SIAState) -> dict:
     """Generate clarification response"""
     return {
@@ -69,8 +81,15 @@ def build_graph() -> StateGraph:
     # Analyst agent -> Validator
     workflow.add_edge("analyst_agent", "validator")
 
-    # Validator -> Visualization
-    workflow.add_edge("validator", "visualization")
+    # Validator -> Visualization (conditional - only if data exists)
+    workflow.add_conditional_edges(
+        "validator",
+        route_after_validator,
+        {
+            "visualization": "visualization",
+            "end": END
+        }
+    )
 
     # Visualization -> END
     workflow.add_edge("visualization", END)

@@ -17,8 +17,8 @@ KPI_CATALOGUE = {
         "sample_queries": [
             "What is our total energy consumption?",
             "How much energy did we use?",
-            "Energy consumption by site",
-            "Monthly energy usage"
+            "Monthly energy usage",
+            "Energy consumption last year"
         ]
     },
 
@@ -64,10 +64,9 @@ KPI_CATALOGUE = {
         "aliases": ["emissions", "ghg", "greenhouse gas", "carbon emissions", "CO2", "carbon footprint"],
         "sample_queries": [
             "What are our total emissions?",
-            "GHG emissions breakdown",
+            "GHG emissions last quarter",
             "Carbon footprint",
-            "Show me emissions data",
-            "CO2 emissions by site"
+            "Show me emissions data"
         ]
     },
 
@@ -129,7 +128,7 @@ KPI_CATALOGUE = {
             "How much water did we use?",
             "Water consumption",
             "Total water usage",
-            "Water withdrawn by site"
+            "Water usage last month"
         ]
     },
 
@@ -187,8 +186,8 @@ KPI_CATALOGUE = {
         "sample_queries": [
             "How much waste did we generate?",
             "Total waste",
-            "Waste by site",
-            "Monthly waste generation"
+            "Monthly waste generation",
+            "Waste generated last year"
         ]
     },
 
@@ -278,10 +277,10 @@ FOUNDATION_DATA_PRODUCTS = {
         "description": "Detailed energy consumption data by site, source type, and time period",
         "tables": ["energy_monthly_summary", "energy_quarterly_summary", "energy_consumption"],
         "sample_queries": [
+            "Compare energy consumption across sites",
+            "Energy consumption by site",
             "Why is our energy consumption high?",
-            "How can we reduce energy usage?",
-            "Energy efficiency analysis",
-            "Compare energy consumption across sites"
+            "How can we reduce energy usage?"
         ]
     },
 
@@ -290,10 +289,10 @@ FOUNDATION_DATA_PRODUCTS = {
         "description": "Comprehensive emissions data across scopes, sources, and locations",
         "tables": ["greenhouse_gas_emissions_monthly_summary", "greenhouse_gas_emissions_quarterly_summary", "greenhouse_gas_emissions"],
         "sample_queries": [
+            "Compare emissions across sites",
+            "CO2 emissions by site",
             "Why are our emissions high?",
-            "Main contributors to emissions",
-            "How can we reduce carbon footprint?",
-            "Emissions reduction opportunities"
+            "How can we reduce carbon footprint?"
         ]
     },
 
@@ -302,7 +301,8 @@ FOUNDATION_DATA_PRODUCTS = {
         "description": "Water consumption patterns, sources, and efficiency metrics",
         "tables": ["water_monthly_summary", "water_usage"],
         "sample_queries": [
-            "Water efficiency analysis",
+            "Compare water usage across facilities",
+            "Water withdrawn by site",
             "How can we reduce water usage?",
             "Water sources breakdown"
         ]
@@ -313,9 +313,10 @@ FOUNDATION_DATA_PRODUCTS = {
         "description": "Waste generation, disposal methods, and recycling rates",
         "tables": ["waste_monthly_summary", "waste_record"],
         "sample_queries": [
+            "Compare waste across sites",
+            "Waste by site",
             "How can we improve recycling?",
-            "Waste reduction opportunities",
-            "Hazardous waste management"
+            "Waste reduction opportunities"
         ]
     },
 

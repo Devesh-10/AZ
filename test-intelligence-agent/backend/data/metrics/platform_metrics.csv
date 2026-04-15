@@ -1,0 +1,10 @@
+platform_id,platform_name,total_tests,pass_rate,avg_execution_time_min,tests_this_month,active_users
+3dp,Drug Development Data Platform,1247,94.6,3.2,312,18
+bikg,Biological Intelligence Knowledge Graph,983,97.1,2.8,245,12
+patient_safety,Pharmacovigilance System,1562,92.3,4.1,421,24
+clinical_trials,CDISC/SDTM Platform,2104,91.8,5.6,534,31
+cdisc_adam,CDISC ADaM Analytics,876,93.4,3.9,198,14
+regulatory_docs,Regulatory Document Management,654,96.2,2.1,143,9
+study_pldb,Study Protocol & Design Database,512,95.7,1.8,128,11
+gxp_systems,GxP Validated Systems,738,98.1,2.4,167,15
+hpc_environment,High-Performance Computing Environment,423,97.5,1.5,95,7

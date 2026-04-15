@@ -16,7 +16,7 @@ export async function sendQuery(
     },
     body: JSON.stringify({
       sessionId,
-      message: message,
+      question: message,
     }),
   });
 

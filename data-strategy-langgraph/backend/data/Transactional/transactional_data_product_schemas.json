@@ -1,0 +1,592 @@
+{
+  "category": "transactional_data_products",
+  "generated_on_utc": "2026-02-02T12:49:21Z",
+  "source_reference": [
+    "sap_orders.csv",
+    "procurement_pos.csv",
+    "goods_receipts.csv",
+    "events_alarms.csv",
+    "mes_pasx_batches.csv",
+    "inventory_snapshots.csv",
+    "mes_pasx_batch_steps.csv",
+    "consumption_movements.csv",
+    "lims_results.csv"
+  ],
+  "tables": {
+    "SAP_ORDERS": {
+      "record_count": 107,
+      "fields": [
+        {
+          "field_name": "site_id",
+          "data_type": "object",
+          "description": "Site Id."
+        },
+        {
+          "field_name": "plant",
+          "data_type": "object",
+          "description": "Plant."
+        },
+        {
+          "field_name": "order_id",
+          "data_type": "object",
+          "description": "Order Id."
+        },
+        {
+          "field_name": "order_type",
+          "data_type": "object",
+          "description": "Order Type."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "material_desc",
+          "data_type": "object",
+          "description": "Material Desc."
+        },
+        {
+          "field_name": "uom",
+          "data_type": "object",
+          "description": "Uom."
+        },
+        {
+          "field_name": "qty_ordered",
+          "data_type": "int64",
+          "description": "Qty Ordered."
+        },
+        {
+          "field_name": "scheduled_start",
+          "data_type": "object",
+          "description": "Scheduled Start."
+        },
+        {
+          "field_name": "scheduled_end",
+          "data_type": "object",
+          "description": "Scheduled End."
+        },
+        {
+          "field_name": "priority",
+          "data_type": "object",
+          "description": "Priority."
+        },
+        {
+          "field_name": "work_center",
+          "data_type": "object",
+          "description": "Work Center."
+        },
+        {
+          "field_name": "bom_version",
+          "data_type": "object",
+          "description": "Bom Version."
+        },
+        {
+          "field_name": "std_yield_pct",
+          "data_type": "float64",
+          "description": "Std Yield Pct."
+        },
+        {
+          "field_name": "std_cycle_time_hr",
+          "data_type": "float64",
+          "description": "Std Cycle Time Hr."
+        },
+        {
+          "field_name": "status",
+          "data_type": "object",
+          "description": "Status."
+        }
+      ]
+    },
+    "PROCUREMENT_POS": {
+      "record_count": 182,
+      "fields": [
+        {
+          "field_name": "po_id",
+          "data_type": "object",
+          "description": "Po Id."
+        },
+        {
+          "field_name": "vendor_id",
+          "data_type": "object",
+          "description": "Vendor Id."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "qty_ordered",
+          "data_type": "int64",
+          "description": "Qty Ordered."
+        },
+        {
+          "field_name": "uom",
+          "data_type": "object",
+          "description": "Uom."
+        },
+        {
+          "field_name": "order_date",
+          "data_type": "object",
+          "description": "Order Date."
+        },
+        {
+          "field_name": "promised_date",
+          "data_type": "object",
+          "description": "Promised Date."
+        },
+        {
+          "field_name": "delivery_date",
+          "data_type": "object",
+          "description": "Delivery Date."
+        },
+        {
+          "field_name": "status",
+          "data_type": "object",
+          "description": "Status."
+        },
+        {
+          "field_name": "price_per_uom",
+          "data_type": "float64",
+          "description": "Price Per Uom."
+        },
+        {
+          "field_name": "currency",
+          "data_type": "object",
+          "description": "Currency."
+        },
+        {
+          "field_name": "month",
+          "data_type": "object",
+          "description": "Month."
+        },
+        {
+          "field_name": "on_time",
+          "data_type": "int64",
+          "description": "On Time."
+        }
+      ]
+    },
+    "GOODS_RECEIPTS": {
+      "record_count": 244,
+      "fields": [
+        {
+          "field_name": "gr_id",
+          "data_type": "object",
+          "description": "Gr Id."
+        },
+        {
+          "field_name": "po_id",
+          "data_type": "object",
+          "description": "Po Id."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "qty_received",
+          "data_type": "int64",
+          "description": "Qty Received."
+        },
+        {
+          "field_name": "uom",
+          "data_type": "object",
+          "description": "Uom."
+        },
+        {
+          "field_name": "receipt_date",
+          "data_type": "object",
+          "description": "Receipt Date."
+        },
+        {
+          "field_name": "lot_id",
+          "data_type": "object",
+          "description": "Lot Id."
+        },
+        {
+          "field_name": "coa_status",
+          "data_type": "object",
+          "description": "Coa Status."
+        },
+        {
+          "field_name": "qc_release_ts",
+          "data_type": "object",
+          "description": "Qc Release Ts."
+        }
+      ]
+    },
+    "EVENTS_ALARMS": {
+      "record_count": 345,
+      "fields": [
+        {
+          "field_name": "timestamp",
+          "data_type": "object",
+          "description": "Timestamp."
+        },
+        {
+          "field_name": "equipment_id",
+          "data_type": "object",
+          "description": "Equipment Id."
+        },
+        {
+          "field_name": "batch_id",
+          "data_type": "object",
+          "description": "Batch Id."
+        },
+        {
+          "field_name": "step_id",
+          "data_type": "object",
+          "description": "Step Id."
+        },
+        {
+          "field_name": "event_type",
+          "data_type": "object",
+          "description": "Event Type."
+        },
+        {
+          "field_name": "code",
+          "data_type": "object",
+          "description": "Code."
+        },
+        {
+          "field_name": "severity",
+          "data_type": "object",
+          "description": "Severity."
+        },
+        {
+          "field_name": "description",
+          "data_type": "object",
+          "description": "Description."
+        },
+        {
+          "field_name": "duration_sec",
+          "data_type": "int64",
+          "description": "Duration Sec."
+        },
+        {
+          "field_name": "ack_ts",
+          "data_type": "object",
+          "description": "Ack Ts."
+        },
+        {
+          "field_name": "cleared_ts",
+          "data_type": "object",
+          "description": "Cleared Ts."
+        }
+      ]
+    },
+    "MES_PASX_BATCHES": {
+      "record_count": 376,
+      "fields": [
+        {
+          "field_name": "batch_id",
+          "data_type": "object",
+          "description": "Batch Id."
+        },
+        {
+          "field_name": "order_id",
+          "data_type": "object",
+          "description": "Order Id."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "batch_size",
+          "data_type": "int64",
+          "description": "Batch Size."
+        },
+        {
+          "field_name": "uom",
+          "data_type": "object",
+          "description": "Uom."
+        },
+        {
+          "field_name": "route",
+          "data_type": "object",
+          "description": "Route."
+        },
+        {
+          "field_name": "actual_start",
+          "data_type": "object",
+          "description": "Actual Start."
+        },
+        {
+          "field_name": "actual_end",
+          "data_type": "object",
+          "description": "Actual End."
+        },
+        {
+          "field_name": "cycle_time_hr",
+          "data_type": "float64",
+          "description": "Cycle Time Hr."
+        },
+        {
+          "field_name": "yield_qty",
+          "data_type": "int64",
+          "description": "Yield Qty."
+        },
+        {
+          "field_name": "yield_pct",
+          "data_type": "float64",
+          "description": "Yield Pct."
+        },
+        {
+          "field_name": "status",
+          "data_type": "object",
+          "description": "Status."
+        },
+        {
+          "field_name": "deviations_count",
+          "data_type": "int64",
+          "description": "Deviations Count."
+        },
+        {
+          "field_name": "rework_flag",
+          "data_type": "bool",
+          "description": "Rework Flag."
+        },
+        {
+          "field_name": "primary_equipment_id",
+          "data_type": "object",
+          "description": "Primary Equipment Id."
+        }
+      ]
+    },
+    "INVENTORY_SNAPSHOTS": {
+      "record_count": 1325,
+      "fields": [
+        {
+          "field_name": "date",
+          "data_type": "object",
+          "description": "Date."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "on_hand_qty",
+          "data_type": "float64",
+          "description": "On Hand Qty."
+        },
+        {
+          "field_name": "uom",
+          "data_type": "object",
+          "description": "Uom."
+        },
+        {
+          "field_name": "lot_count",
+          "data_type": "int64",
+          "description": "Lot Count."
+        },
+        {
+          "field_name": "days_on_hand",
+          "data_type": "float64",
+          "description": "Days On Hand."
+        },
+        {
+          "field_name": "iso_week",
+          "data_type": "int64",
+          "description": "Iso Week."
+        }
+      ]
+    },
+    "MES_PASX_BATCH_STEPS": {
+      "record_count": 2474,
+      "fields": [
+        {
+          "field_name": "batch_id",
+          "data_type": "object",
+          "description": "Batch Id."
+        },
+        {
+          "field_name": "step_id",
+          "data_type": "object",
+          "description": "Step Id."
+        },
+        {
+          "field_name": "step_code",
+          "data_type": "object",
+          "description": "Step Code."
+        },
+        {
+          "field_name": "step_name",
+          "data_type": "object",
+          "description": "Step Name."
+        },
+        {
+          "field_name": "sequence",
+          "data_type": "int64",
+          "description": "Sequence."
+        },
+        {
+          "field_name": "step_start",
+          "data_type": "object",
+          "description": "Step Start."
+        },
+        {
+          "field_name": "step_end",
+          "data_type": "object",
+          "description": "Step End."
+        },
+        {
+          "field_name": "duration_min",
+          "data_type": "int64",
+          "description": "Duration Min."
+        },
+        {
+          "field_name": "wait_before_min",
+          "data_type": "int64",
+          "description": "Wait Before Min."
+        },
+        {
+          "field_name": "target_temp_C",
+          "data_type": "int64",
+          "description": "Target Temp C."
+        },
+        {
+          "field_name": "target_pH",
+          "data_type": "float64",
+          "description": "Target Ph."
+        },
+        {
+          "field_name": "equipment_id",
+          "data_type": "object",
+          "description": "Equipment Id."
+        }
+      ]
+    },
+    "CONSUMPTION_MOVEMENTS": {
+      "record_count": 3161,
+      "fields": [
+        {
+          "field_name": "move_id",
+          "data_type": "object",
+          "description": "Move Id."
+        },
+        {
+          "field_name": "batch_id",
+          "data_type": "object",
+          "description": "Batch Id."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "qty_issued",
+          "data_type": "float64",
+          "description": "Qty Issued."
+        },
+        {
+          "field_name": "uom",
+          "data_type": "object",
+          "description": "Uom."
+        },
+        {
+          "field_name": "issue_date",
+          "data_type": "object",
+          "description": "Issue Date."
+        },
+        {
+          "field_name": "storage_location",
+          "data_type": "object",
+          "description": "Storage Location."
+        },
+        {
+          "field_name": "lot_id",
+          "data_type": "object",
+          "description": "Lot Id."
+        }
+      ]
+    },
+    "LIMS_RESULTS": {
+      "record_count": 1880,
+      "fields": [
+        {
+          "field_name": "sample_id",
+          "data_type": "object",
+          "description": "Sample Id."
+        },
+        {
+          "field_name": "batch_id",
+          "data_type": "object",
+          "description": "Batch Id."
+        },
+        {
+          "field_name": "material_id",
+          "data_type": "object",
+          "description": "Material Id."
+        },
+        {
+          "field_name": "test_name",
+          "data_type": "object",
+          "description": "Test Name."
+        },
+        {
+          "field_name": "analyte",
+          "data_type": "object",
+          "description": "Analyte."
+        },
+        {
+          "field_name": "result_value",
+          "data_type": "float64",
+          "description": "Result Value."
+        },
+        {
+          "field_name": "unit",
+          "data_type": "object",
+          "description": "Unit."
+        },
+        {
+          "field_name": "spec_low",
+          "data_type": "float64",
+          "description": "Spec Low."
+        },
+        {
+          "field_name": "spec_high",
+          "data_type": "float64",
+          "description": "Spec High."
+        },
+        {
+          "field_name": "result_status",
+          "data_type": "object",
+          "description": "Result Status."
+        },
+        {
+          "field_name": "sampled_ts",
+          "data_type": "object",
+          "description": "Sampled Ts."
+        },
+        {
+          "field_name": "received_ts",
+          "data_type": "object",
+          "description": "Received Ts."
+        },
+        {
+          "field_name": "approved_ts",
+          "data_type": "object",
+          "description": "Approved Ts."
+        },
+        {
+          "field_name": "analyst_id",
+          "data_type": "object",
+          "description": "Analyst Id."
+        },
+        {
+          "field_name": "tat_days",
+          "data_type": "float64",
+          "description": "Tat Days."
+        }
+      ]
+    }
+  }
+}

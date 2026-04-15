@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Intelligence Agent - Monitoring & Benefits</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff;
+            margin: 20px auto;
+            padding: 50px 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* Header styles */
+        .slide-header {
+            margin-bottom: 35px;
+        }
+
+        .slide-header h1 {
+            font-size: 36px;
+            font-weight: 300;
+            color: #333;
+        }
+
+        .slide-header h1 strong {
+            font-weight: 600;
+            color: #830051;
+        }
+
+        .slide-header .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .slide-header .tag {
+            display: inline-block;
+            background: #830051;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        /* Two column layout */
+        .two-col {
+            display: flex;
+            gap: 40px;
+        }
+
+        .col-left {
+            flex: 1;
+        }
+
+        .col-right {
+            flex: 1.2;
+        }
+
+        /* Section titles */
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #830051;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        /* Benefit cards */
+        .benefit {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-left: 4px solid #2e7d32;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .benefit.gold { border-left-color: #c4a000; }
+        .benefit.blue { border-left-color: #1565c0; }
+
+        .benefit h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .benefit p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Dashboard panel */
+        .dashboard {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        /* KPI row */
+        .kpi-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .kpi {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 14px 12px;
+            text-align: center;
+        }
+
+        .kpi .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+
+        .kpi.gold .value { color: #c4a000; }
+        .kpi.blue .value { color: #1565c0; }
+
+        .kpi .label {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        /* Metrics grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .metric-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .metric-box h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #830051;
+            margin-bottom: 12px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-row .name {
+            font-size: 11px;
+            color: #555;
+        }
+
+        .metric-row .val {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .metric-row .val.gold { color: #c4a000; }
+        .metric-row .val.blue { color: #1565c0; }
+
+        /* Platform badges */
+        .platform {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: #f1f8e9;
+            border: 1px solid #c5e1a5;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .platform .name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .platform .name span {
+            font-weight: 400;
+            color: #666;
+            font-size: 10px;
+            display: block;
+        }
+
+        .platform .status {
+            background: #2e7d32;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* Progress bar */
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .progress-item .name {
+            font-size: 11px;
+            color: #555;
+            width: 100px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 16px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar .fill {
+            height: 100%;
+            background: #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+        }
+
+        .progress-bar .fill span {
+            font-size: 9px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Status footer */
+        .status-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .status-badge {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-badge.green {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .status-badge.maroon {
+            background: #830051;
+            color: #fff;
+        }
+
+        /* Footer */
+        .slide-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-footer .page {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .slide-footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-footer .logo-icon {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 20px solid #c4a000;
+            position: relative;
+        }
+
+        .slide-footer .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: -7px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 12px solid #830051;
+        }
+
+        /* Slide 2 - Metrics explanation */
+        .metric-explain {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .explain-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .explain-card .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .explain-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .explain-card .badge {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .explain-card .badge.green { background: #e8f5e9; color: #2e7d32; }
+        .explain-card .badge.gold { background: #fff8e1; color: #c4a000; }
+        .explain-card .badge.blue { background: #e3f2fd; color: #1565c0; }
+
+        .explain-card .desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .explain-card .detail {
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .explain-card .detail strong {
+            color: #830051;
+        }
+
+        /* Slide 3 - Use cases */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .usecase {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid #830051;
+            border-radius: 0 0 10px 10px;
+            padding: 20px;
+        }
+
+        .usecase.green { border-top-color: #2e7d32; }
+        .usecase.gold { border-top-color: #c4a000; }
+
+        .usecase h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .usecase p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .usecase ul {
+            font-size: 11px;
+            color: #555;
+            padding-left: 16px;
+        }
+
+        .usecase li {
+            margin-bottom: 6px;
+        }
+
+        .platform-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .platform-tag.dp { background: #e8f5e9; color: #2e7d32; }
+        .platform-tag.bikg { background: #e3f2fd; color: #1565c0; }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: Dashboard Overview -->
+<div class="slide">
+    <div class="slide-header">
+        <h1>Monitoring & <strong>Benefits Dashboard</strong></h1>
+        <p class="subtitle">Test Intelligence Agent — Phase 1 <span class="tag">3DP & BIKG</span></p>
+    </div>
+
+    <div class="two-col">
+        <div class="col-left">
+            <div class="section-label">Benefits</div>
+
+            <div class="benefit">
+                <h3>Reduced Manual Testing Effort</h3>
+                <p>AI generates test cases automatically for regulatory validation, freeing engineers to focus on development work</p>
+            </div>
+
+            <div class="benefit">
+                <h3>Increased Test Coverage</h3>
+                <p>Discovers edge cases and validation scenarios that manual testing often misses, improving quality</p>
+            </div>
+
+            <div class="benefit gold">
+                <h3>Faster Release Cycles</h3>
+                <p>Automated test generation accelerates validation timelines for submissions and data pipelines</p>
+            </div>
+
+            <div class="benefit blue">
+                <h3>Regulatory Compliance</h3>
+                <p>Consistent, auditable test coverage for FDA/EMA submission requirements and GxP validation</p>
+            </div>
+        </div>
+
+        <div class="col-right">
+            <div class="section-label">Monitoring</div>
+
+            <div class="dashboard">
+                <div class="kpi-row">
+                    <div class="kpi">
+                        <div class="value">25%</div>
+                        <div class="label">Test Effort<br>Reduction</div>
+                    </div>
+                    <div class="kpi">
+                        <div class="value">15%</div>
+                        <div class="label">Coverage<br>Increase</div>
+                    </div>
+                    <div class="kpi gold">
+                        <div class="value">23</div>
+                        <div class="label">Defects<br>Caught</div>
+                    </div>
+                    <div class="kpi blue">
+                        <div class="value">2</div>
+                        <div class="label">Platforms<br>Integrated</div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <h4>Usage Metrics</h4>
+                        <div class="metric-row">
+                            <span class="name">Tests Generated</span>
+                            <span class="val">1,247</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="name">Test Suites Created</span>
+                            <span class="val blue">34</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="name">Success Rate</span>
+                            <span class="val">98.2%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="name">Avg Generation Time</span>
+                            <span class="val gold">2.3s</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-box">
+                        <h4>Platform Integration</h4>
+                        <div class="platform">
+                            <div class="name">3DP <span>Drug Development Platform</span></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                        <div class="platform">
+                            <div class="name">BIKG <span>Knowledge Graph</span></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-box">
+                        <h4>Cost Tracking</h4>
+                        <div class="metric-row">
+                            <span class="name">LLM API (Bedrock)</span>
+                            <span class="val gold">$4,200</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="name">Embedding Service</span>
+                            <span class="val gold">$850</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="name">Infrastructure</span>
+                            <span class="val gold">$500</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-box">
+                        <h4>Model Performance</h4>
+                        <div class="progress-item">
+                            <span class="name">Test Accuracy</span>
+                            <div class="progress-bar">
+                                <div class="fill" style="width: 94%"><span>94%</span></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="name">Data Validity</span>
+                            <div class="progress-bar">
+                                <div class="fill" style="width: 91%"><span>91%</span></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="name">First Review Approval</span>
+                            <div class="progress-bar">
+                                <div class="fill" style="width: 89%"><span>89%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-row">
+                    <div class="status-badge green">Budget: $5,550/mo (Under $7.5K target)</div>
+                    <div class="status-badge maroon">ROI: $48K Annual Savings</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span class="page">1</span>
+        <div class="logo">
+            <div class="logo-icon"></div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 2: KPI Definitions -->
+<div class="slide">
+    <div class="slide-header">
+        <h1>Key Performance <strong>Indicators</strong></h1>
+        <p class="subtitle">Definition and measurement methodology for each KPI</p>
+    </div>
+
+    <div class="metric-explain">
+        <div class="explain-card">
+            <div class="header">
+                <h3>Test Effort Reduction</h3>
+                <span class="badge green">25%</span>
+            </div>
+            <p class="desc">Percentage decrease in manual hours spent writing test cases compared to baseline.</p>
+            <div class="detail">
+                <strong>Measurement:</strong> (Baseline Hours − Current Hours) / Baseline Hours × 100<br><br>
+                <strong>Example:</strong> Before: 40 hrs/sprint for Module 2/3 validation tests → After: 30 hrs/sprint = 25% reduction
+            </div>
+        </div>
+
+        <div class="explain-card">
+            <div class="header">
+                <h3>Coverage Increase</h3>
+                <span class="badge green">15%</span>
+            </div>
+            <p class="desc">Increase in test scenarios covered, including edge cases previously untested.</p>
+            <div class="detail">
+                <strong>Measurement:</strong> (New Scenarios − Original) / Original × 100<br><br>
+                <strong>Example:</strong> AI discovered 47 new edge cases for GxP validation and CDISC format compliance
+            </div>
+        </div>
+
+        <div class="explain-card">
+            <div class="header">
+                <h3>Data Quality Score</h3>
+                <span class="badge gold">90%</span>
+            </div>
+            <p class="desc">Validity rate of AI-generated synthetic test data passing all schema validations.</p>
+            <div class="detail">
+                <strong>Measurement:</strong> Valid Records / Total Generated × 100<br><br>
+                <strong>Example:</strong> Synthetic patient data for submissions — 90% passes CDISC and regulatory checks
+            </div>
+        </div>
+
+        <div class="explain-card">
+            <div class="header">
+                <h3>Platforms Integrated</h3>
+                <span class="badge blue">2</span>
+            </div>
+            <p class="desc">Number of R&D IT platforms where the agent is deployed and generating tests.</p>
+            <div class="detail">
+                <strong>Current:</strong> 3DP (Drug Development Data Platform) and BIKG (Biological Intelligence KG)<br><br>
+                <strong>Target:</strong> 2 primary platforms in Phase 1, extensible to additional platforms
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span class="page">2</span>
+        <div class="logo">
+            <div class="logo-icon"></div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: Platform Use Cases -->
+<div class="slide">
+    <div class="slide-header">
+        <h1>Platform <strong>Use Cases</strong></h1>
+        <p class="subtitle">How Test Intelligence Agent delivers value on 3DP and BIKG</p>
+    </div>
+
+    <div class="usecase-grid">
+        <div class="usecase green">
+            <span class="platform-tag dp">3DP</span>
+            <h3>Regulatory Validation Testing</h3>
+            <p>Auto-generate validation tests for FDA/EMA submission modules and GxP compliance.</p>
+            <ul>
+                <li>Module 2/3 submission validation</li>
+                <li>Patient Safety data checks</li>
+                <li>GxP compliance testing</li>
+                <li>Audit trail validation</li>
+            </ul>
+        </div>
+
+        <div class="usecase green">
+            <span class="platform-tag dp">3DP</span>
+            <h3>Data Pipeline Testing</h3>
+            <p>Validate data transformations and integrations across the platform.</p>
+            <ul>
+                <li>Portfolio Tower ingestion tests</li>
+                <li>Study Cycle Time benchmarking</li>
+                <li>CRO operational data validation</li>
+                <li>Cross-reference integrity checks</li>
+            </ul>
+        </div>
+
+        <div class="usecase gold">
+            <span class="platform-tag dp">3DP</span>
+            <h3>Synthetic Test Data</h3>
+            <p>Generate compliant synthetic data for testing without using real patient data.</p>
+            <ul>
+                <li>CDISC-compliant patient records</li>
+                <li>Adverse event test data</li>
+                <li>Lab results within valid ranges</li>
+                <li>Clinical trial mock data</li>
+            </ul>
+        </div>
+
+        <div class="usecase">
+            <span class="platform-tag bikg">BIKG</span>
+            <h3>Knowledge Graph Query Testing</h3>
+            <p>Generate test cases for graph traversal and relationship queries.</p>
+            <ul>
+                <li>Gene-disease relationship queries</li>
+                <li>Protein-drug interactions</li>
+                <li>Pathway traversal validation</li>
+                <li>Query performance testing</li>
+            </ul>
+        </div>
+
+        <div class="usecase">
+            <span class="platform-tag bikg">BIKG</span>
+            <h3>Entity Validation</h3>
+            <p>Validate biological entity data integrity and ontology consistency.</p>
+            <ul>
+                <li>Entity attribute completeness</li>
+                <li>Ontology term consistency</li>
+                <li>Cross-reference accuracy</li>
+                <li>Relationship cardinality checks</li>
+            </ul>
+        </div>
+
+        <div class="usecase gold">
+            <span class="platform-tag bikg">BIKG</span>
+            <h3>Synthetic Biological Data</h3>
+            <p>Generate test data for biological entities and relationships.</p>
+            <ul>
+                <li>Mock gene expression data</li>
+                <li>Synthetic pathway data</li>
+                <li>Test entity relationships</li>
+                <li>Sample KG traversal results</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span class="page">3</span>
+        <div class="logo">
+            <div class="logo-icon"></div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: ROI & Cost Analysis -->
+<div class="slide">
+    <div class="slide-header">
+        <h1>ROI & <strong>Cost Analysis</strong></h1>
+        <p class="subtitle">Investment breakdown and return calculation</p>
+    </div>
+
+    <div class="two-col">
+        <div class="col-left">
+            <div class="section-label">Monthly Operating Costs</div>
+
+            <div class="explain-card" style="margin-bottom: 20px;">
+                <div class="header">
+                    <h3>LLM API (AWS Bedrock)</h3>
+                    <span class="badge gold">$4,200</span>
+                </div>
+                <p class="desc">Claude API calls for test generation, code analysis, and requirement parsing.</p>
+                <div class="detail">
+                    ~3.2M input tokens + ~1.8M output tokens monthly<br>
+                    Cost per generated test: ~$0.12
+                </div>
+            </div>
+
+            <div class="explain-card" style="margin-bottom: 20px;">
+                <div class="header">
+                    <h3>Embedding Service</h3>
+                    <span class="badge gold">$850</span>
+                </div>
+                <p class="desc">Vector embeddings for similar test failure detection and semantic search.</p>
+                <div class="detail">
+                    ~15M tokens embedded monthly for RAG-based retrieval
+                </div>
+            </div>
+
+            <div class="explain-card">
+                <div class="header">
+                    <h3>Infrastructure</h3>
+                    <span class="badge gold">$500</span>
+                </div>
+                <p class="desc">AWS compute and storage: Lambda, API Gateway, OpenSearch, S3.</p>
+                <div class="detail">
+                    Serverless architecture keeps costs low and scales with usage
+                </div>
+            </div>
+        </div>
+
+        <div class="col-right">
+            <div class="section-label">Return on Investment</div>
+
+            <div class="dashboard" style="padding: 30px;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="font-size: 48px; font-weight: 700; color: #2e7d32;">$48,000</div>
+                    <div style="font-size: 14px; color: #666; margin-top: 5px;">Projected Annual Savings</div>
+                </div>
+
+                <div class="metric-box" style="margin-bottom: 20px;">
+                    <h4>Savings Calculation</h4>
+                    <div class="metric-row">
+                        <span class="name">Hours Saved per Sprint</span>
+                        <span class="val">32 hrs</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="name">Blended Hourly Rate</span>
+                        <span class="val gold">$75/hr</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="name">Sprints per Year</span>
+                        <span class="val blue">20</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="name">Annual Savings</span>
+                        <span class="val">$48,000</span>
+                    </div>
+                </div>
+
+                <div class="metric-box">
+                    <h4>Investment Summary</h4>
+                    <div class="metric-row">
+                        <span class="name">Annual Operating Cost</span>
+                        <span class="val gold">$66,600</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="name">Development Cost (one-time)</span>
+                        <span class="val gold">$45,000</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="name">Year 1 Total Investment</span>
+                        <span class="val gold">$111,600</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="name">Year 1 Net Benefit</span>
+                        <span class="val">+$48,000</span>
+                    </div>
+                </div>
+
+                <div class="status-row" style="margin-top: 20px;">
+                    <div class="status-badge maroon" style="font-size: 14px; padding: 14px;">
+                        ROI: 3.2x by Year 3 &nbsp;|&nbsp; Payback: 5.2 months
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span class="page">4</span>
+        <div class="logo">
+            <div class="logo-icon"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

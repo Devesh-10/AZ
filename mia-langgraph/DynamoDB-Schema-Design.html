@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIA DynamoDB Schema Design</title>
+    <style>
+        :root {
+            --az-purple: #830051;
+            --az-purple-light: #a8006e;
+            --az-gold: #f0ab00;
+            --az-teal: #00857c;
+            --az-blue: #0063be;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #1a1a2e;
+            --text-light: #555;
+            --border: #e2e8f0;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--az-purple) 0%, var(--az-purple-light) 100%);
+            color: white;
+            padding: 48px 0;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .header .meta {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .nav .container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .nav a:hover {
+            background: var(--az-purple);
+            color: white;
+        }
+
+        /* Sections */
+        .section {
+            margin: 40px 0;
+        }
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--az-purple);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 12px;
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--az-purple);
+        }
+        .card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 16px 0 8px;
+            color: var(--text);
+        }
+
+        /* Problem/Solution boxes */
+        .highlight-box {
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 16px 0;
+        }
+        .highlight-box.problem {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+        }
+        .highlight-box.solution {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+        }
+        .highlight-box.info {
+            background: #eff6ff;
+            border-left: 4px solid var(--az-blue);
+        }
+        .highlight-box.warning {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+        }
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+        th {
+            background: var(--az-purple);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        th:first-child { border-radius: 8px 0 0 0; }
+        th:last-child { border-radius: 0 8px 0 0; }
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        tr:hover td { background: #faf5ff; }
+        tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+        tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+        td code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            color: var(--az-purple);
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        .code-block .comment { color: #94a3b8; }
+        .code-block .key { color: #7dd3fc; }
+        .code-block .string { color: #86efac; }
+        .code-block .number { color: #fbbf24; }
+        .code-block .label {
+            color: var(--az-gold);
+            font-weight: 600;
+        }
+
+        /* Schema box */
+        .schema-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 20px 0;
+            color: #e2e8f0;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            border: 1px solid #334155;
+        }
+        .schema-box .pk { color: #f472b6; font-weight: 700; }
+        .schema-box .sk { color: #38bdf8; font-weight: 700; }
+        .schema-box .example { color: #94a3b8; font-style: italic; }
+        .schema-box .title {
+            color: var(--az-gold);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Flow diagram */
+        .flow {
+            background: linear-gradient(135deg, #f8f4ff, #f0e6ff);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #e9d5ff;
+        }
+        .flow-step {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 2px solid var(--az-purple);
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin: 6px;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+        .flow-step.active {
+            background: var(--az-purple);
+            color: white;
+        }
+        .flow-arrow {
+            display: block;
+            color: var(--az-purple);
+            font-size: 1.5rem;
+            margin: 4px 0;
+        }
+        .flow-split {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 8px 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge.safe { background: #dcfce7; color: #166534; }
+        .badge.risky { background: #fef9c3; color: #854d0e; }
+        .badge.fail { background: #fecaca; color: #991b1b; }
+        .badge.cache { background: #dbeafe; color: #1e40af; }
+        .badge.fast { background: #dcfce7; color: #166534; }
+        .badge.slow { background: #fef9c3; color: #854d0e; }
+
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* Summary cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+        .summary-card {
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid;
+        }
+        .summary-card.turns {
+            border-color: var(--az-teal);
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+        }
+        .summary-card.sessions {
+            border-color: var(--az-blue);
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        }
+        .summary-card h3 {
+            margin-bottom: 4px;
+        }
+        .summary-card .analogy {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+        .summary-card .detail {
+            font-size: 0.85rem;
+            margin: 6px 0;
+            display: flex;
+            gap: 8px;
+        }
+        .summary-card .detail-label {
+            font-weight: 600;
+            min-width: 60px;
+            color: var(--text-light);
+        }
+
+        /* Cost pill */
+        .cost-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .cost-row:last-child { border-bottom: none; }
+        .cost-label { flex: 1; font-size: 0.9rem; }
+        .cost-value {
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .cost-value.free { background: #dcfce7; color: #166534; }
+        .cost-value.savings { background: #dbeafe; color: #1e40af; }
+
+        /* JSON example */
+        .json-example {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 12px 0;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            overflow-x: auto;
+        }
+        .json-example .k { color: #7dd3fc; }
+        .json-example .s { color: #86efac; }
+        .json-example .n { color: #fbbf24; }
+        .json-example .c { color: #64748b; }
+        .json-example .pk-hl { color: #f472b6; font-weight: 700; }
+        .json-example .sk-hl { color: #38bdf8; font-weight: 700; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+
+        /* Animated flow */
+        .request-flow {
+            position: relative;
+            padding: 20px 0;
+        }
+        .flow-node {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 0 auto 12px;
+            max-width: 460px;
+            font-size: 0.88rem;
+            position: relative;
+        }
+        .flow-node::after {
+            content: '▼';
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--az-purple);
+            font-size: 0.9rem;
+        }
+        .flow-node:last-child::after { display: none; }
+        .flow-node .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--az-purple);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        .flow-node.cache-hit {
+            border-color: var(--success);
+            background: #f0fdf4;
+        }
+        .flow-node.cache-miss {
+            border-color: var(--warning);
+            background: #fffbeb;
+        }
+        .flow-branch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 460px;
+            margin: 0 auto 12px;
+        }
+        .flow-branch .flow-node {
+            margin: 0;
+        }
+        .flow-branch .flow-node::after { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="container">
+        <h1>MIA DynamoDB Schema Design</h1>
+        <div class="subtitle">Manufacturing Insight Agent — Data Persistence Architecture</div>
+        <div class="meta">
+            <span>Version 2.0</span>
+            <span>March 2026</span>
+            <span>AI Architecture Team</span>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+    <div class="container">
+        <a href="#why">Why DynamoDB</a>
+        <a href="#how-mia-works">How MIA Works</a>
+        <a href="#table-1">Table 1: Traces</a>
+        <a href="#table-2">Table 2: Sessions</a>
+        <a href="#flow">Request Flow</a>
+        <a href="#cost">Cost</a>
+        <a href="#cdk">Infrastructure</a>
+        <a href="#summary">Summary</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Section 1: Why DynamoDB -->
+    <div class="section" id="why">
+        <h2><span class="section-number">1</span> Why Do We Need DynamoDB?</h2>
+
+        <div class="card">
+            <p>MIA runs on <strong>AWS Lambda</strong> — a serverless function that spins up, processes a request, and shuts down. Lambda has <strong>no memory between requests</strong>.</p>
+
+            <div class="two-col" style="margin-top: 16px;">
+                <div class="highlight-box problem">
+                    <strong>Problem 1: Lambda Forgets</strong>
+                    User asks "What is the batch yield?" then "Break that down by site." Lambda has <em>no idea</em> what "that" refers to — the first request is gone.
+                </div>
+                <div class="highlight-box problem">
+                    <strong>Problem 2: Duplicate Work</strong>
+                    10 users ask the same question → Lambda runs the full AI pipeline 10 times. That's <strong>10x the cost and latency</strong> for the same answer.
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-top: 8px;">
+                <div class="highlight-box solution">
+                    <strong>Solution: mia_chat_sessions</strong>
+                    Store conversation history persistently so the AI remembers context across messages.
+                </div>
+                <div class="highlight-box solution">
+                    <strong>Solution: mia_session_turns</strong>
+                    Cache results so repeated questions return instantly without re-running the pipeline.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: How MIA Works -->
+    <div class="section" id="how-mia-works">
+        <h2><span class="section-number">2</span> How MIA Works (Simplified)</h2>
+
+        <div class="card">
+            <p>Each step below is an <strong>agent</strong> that calls Claude (AI model) on AWS Bedrock. Each call costs money ($0.003-0.01) and takes 1-3 seconds.</p>
+
+            <div class="flow" style="margin-top: 20px;">
+                <div class="flow-step active">User Question</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">Supervisor — Routes the query</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-split">
+                    <div>
+                        <div class="flow-step" style="border-color: var(--success);">KPI Agent</div>
+                        <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px;">Simple lookups</div>
+                    </div>
+                    <div>
+                        <div class="flow-step" style="border-color: var(--warning);">Analyst Agent</div>
+                        <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px;">Complex analysis</div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">Validator — Checks accuracy</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">Visualization — Creates charts</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step active">Answer + Chart</div>
+            </div>
+
+            <div class="highlight-box info" style="margin-top: 20px;">
+                <strong>Why caching matters</strong>
+                A full pipeline run takes <strong>5-15 seconds</strong> and costs <strong>~$0.01-0.05</strong>. A cached answer returns in <strong>&lt;100ms</strong> for <strong>$0.00</strong>.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Table 1 -->
+    <div class="section" id="table-1">
+        <h2><span class="section-number">3</span> Table 1: <code>mia_session_turns</code></h2>
+
+        <div class="card">
+            <h3>What Is This Table?</h3>
+            <p>Think of it as a <strong>flight recorder</strong> for every AI interaction. Every time a user asks a question, one row is written with what they asked, which path the AI took, and the answer summary.</p>
+
+            <h4>Why It Exists</h4>
+            <table>
+                <tr><th>Purpose</th><th>What It Enables</th></tr>
+                <tr><td><strong>Query Caching</strong></td><td>Before running the AI pipeline, check: "Has this exact question been answered before?" If yes, return cached answer instantly.</td></tr>
+                <tr><td><strong>Audit Trail</strong></td><td>For compliance: "What did the AI tell User X at 3pm yesterday?"</td></tr>
+                <tr><td><strong>Analytics</strong></td><td>"Which KPIs are most asked about?" "How often does the AI take the slow path?"</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Key Design</h3>
+            <div class="schema-box">
+                <div class="title">mia_session_turns</div>
+                <span class="pk">Partition Key (pk):</span> {tenant_id}#{session_id}<br>
+                <span class="example">&nbsp;&nbsp;&nbsp;&nbsp;Example: "default#sess-abc123"</span><br><br>
+                <span class="sk">Sort Key (sk):</span> {timestamp_iso}#{request_id}<br>
+                <span class="example">&nbsp;&nbsp;&nbsp;&nbsp;Example: "2026-03-09T10:30:15Z#req-xyz789"</span>
+            </div>
+
+            <h4>Why This Design?</h4>
+            <ul style="margin: 8px 0 0 20px; font-size: 0.9rem;">
+                <li><strong>Partition Key</strong> combines <code>tenant_id</code> (multi-tenancy — different teams/orgs) with <code>session_id</code> (groups all turns in one conversation). Query: <em>"Give me everything in this session"</em> → single fast DynamoDB call.</li>
+                <li style="margin-top: 6px;"><strong>Sort Key</strong> uses timestamp + request_id. Timestamp ensures chronological ordering. Request ID prevents collisions at the same millisecond.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>All Attributes Explained</h3>
+            <table>
+                <tr><th>Attribute</th><th>Type</th><th>Example</th><th>Why It Exists</th></tr>
+                <tr><td><code>pk</code></td><td>String</td><td><code>"default#sess-abc123"</code></td><td>Partition Key. Groups turns by tenant + session.</td></tr>
+                <tr><td><code>sk</code></td><td>String</td><td><code>"2026-03-09T10:30:15Z#req-xyz789"</code></td><td>Sort Key. Chronological ordering + deduplication.</td></tr>
+                <tr><td><code>tenant_id</code></td><td>String</td><td><code>"default"</code></td><td>Which organization/team. Enables multi-tenancy.</td></tr>
+                <tr><td><code>session_id</code></td><td>String</td><td><code>"sess-abc123"</code></td><td>Which conversation this turn belongs to.</td></tr>
+                <tr><td><code>request_id</code></td><td>String</td><td><code>"req-xyz789"</code></td><td>Unique request ID for tracing and deduplication.</td></tr>
+                <tr><td><code>query_hash</code></td><td>String</td><td><code>"a1b2c3d4e5f6g7h8"</code></td><td>SHA-256 of normalized question. Used for cache lookups via GSI.</td></tr>
+                <tr><td><code>user_id</code></td><td>String</td><td><code>"harish"</code></td><td>Who asked. For audit trail.</td></tr>
+                <tr><td><code>role</code></td><td>String</td><td><code>"admin"</code></td><td>User's role. For access control auditing.</td></tr>
+                <tr><td><code>user_query</code></td><td>String</td><td><code>"What is the batch yield?"</code></td><td>The exact question (truncated to 500 chars).</td></tr>
+                <tr><td><code>path_taken</code></td><td>String</td><td><code>"SLOW_PATH"</code></td><td>Which execution path the AI chose (see below).</td></tr>
+                <tr><td><code>route_type</code></td><td>String</td><td><code>"KPI"</code></td><td>Supervisor routing: KPI, COMPLEX, or CLARIFY.</td></tr>
+                <tr><td><code>matched_kpi</code></td><td>String</td><td><code>"batch_yield"</code></td><td>Which KPI matched (null for complex queries).</td></tr>
+                <tr><td><code>narrative_summary</code></td><td>String</td><td><code>"The batch yield is 94.2%..."</code></td><td>AI's answer (truncated to 2000 chars).</td></tr>
+                <tr><td><code>generated_sql</code></td><td>String</td><td><code>"SELECT avg(yield)..."</code></td><td>SQL generated for debugging.</td></tr>
+                <tr><td><code>visualization_config</code></td><td>Map</td><td><code>{"type": "bar", ...}</code></td><td>Chart config. Native DynamoDB Map (readable in console).</td></tr>
+                <tr><td><code>agent_logs</code></td><td>List</td><td><code>[{"agent": "Supervisor",...}]</code></td><td>Execution trace — agents, duration, status.</td></tr>
+                <tr><td><code>total_execution_ms</code></td><td>Number</td><td><code>1250</code></td><td>Total response time in milliseconds.</td></tr>
+                <tr><td><code>cache_hit_count</code></td><td>Number</td><td><code>3</code></td><td>Times this cached result was reused.</td></tr>
+                <tr><td><code>created_at_utc</code></td><td>String</td><td><code>"2026-03-09T10:30:15Z"</code></td><td>Creation timestamp (ISO 8601).</td></tr>
+                <tr><td><code>ttl</code></td><td>Number</td><td><code>1741607415</code></td><td>DynamoDB auto-deletes after this Unix timestamp.</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Path Types</h3>
+            <table>
+                <tr><th>Path</th><th>What Happens</th><th>Latency</th><th>Cost</th></tr>
+                <tr>
+                    <td><span class="badge cache">CACHE_HIT</span></td>
+                    <td>Same question asked before → return cached answer</td>
+                    <td><strong>&lt;100ms</strong></td>
+                    <td>~$0.00</td>
+                </tr>
+                <tr>
+                    <td><span class="badge fast">FAST_PATH</span></td>
+                    <td>Simple KPI lookup → Supervisor → KPI Agent → Validator → Viz</td>
+                    <td><strong>3-5 sec</strong></td>
+                    <td>~$0.01</td>
+                </tr>
+                <tr>
+                    <td><span class="badge slow">SLOW_PATH</span></td>
+                    <td>Complex analysis → Supervisor → Analyst → Validator → Viz</td>
+                    <td><strong>8-15 sec</strong></td>
+                    <td>~$0.03-0.05</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>TTL Strategy (Auto-Deletion)</h3>
+            <table>
+                <tr><th>Route Type</th><th>TTL</th><th>Why</th></tr>
+                <tr><td>KPI queries</td><td><strong>6 hours</strong></td><td>KPI data updates periodically. A 6-hour-old answer may be stale.</td></tr>
+                <tr><td>Complex analysis</td><td><strong>2 hours</strong></td><td>Analysis depends on current data. Goes stale faster.</td></tr>
+                <tr><td>Clarification</td><td><strong>5 minutes</strong></td><td>Session-specific. No reuse value.</td></tr>
+                <tr><td>Audit records</td><td><strong>24 hours</strong></td><td>Keep for daily compliance review.</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>GSI: QueryCacheIndex</h3>
+            <div class="schema-box">
+                <div class="title">Global Secondary Index</div>
+                <span class="pk">Partition Key:</span> query_hash (String)<br>
+                <span class="sk">Sort Key:</span> created_at_utc (String)<br><br>
+                <span style="color: #94a3b8;">Projected Attributes:</span> narrative_summary, visualization_config,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;generated_sql, agent_logs, route_type, matched_kpi, is_valid
+            </div>
+
+            <div class="highlight-box info">
+                <strong>What this enables</strong>
+                When a user asks a question, we hash it and query this GSI: <em>"Has this exact question been answered before?"</em> If yes, return the cached result without running any agents. The main table is keyed by session — this GSI re-indexes by question content.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Table 2 -->
+    <div class="section" id="table-2">
+        <h2><span class="section-number">4</span> Table 2: <code>mia_chat_sessions</code></h2>
+
+        <div class="card">
+            <h3>What Is This Table?</h3>
+            <p>Think of it as <strong>ChatGPT's sidebar</strong> — a list of your past conversations, and clicking one shows the full message thread. It stores the complete conversation history so the AI can understand follow-up questions.</p>
+
+            <h4>Why It Exists</h4>
+            <table>
+                <tr><th>Purpose</th><th>What It Enables</th></tr>
+                <tr><td><strong>Conversation Context</strong></td><td>When a user asks "Break that down by site," the AI knows what "that" refers to from previous messages.</td></tr>
+                <tr><td><strong>Session Resumption</strong></td><td>User closes browser, comes back tomorrow, continues the conversation.</td></tr>
+                <tr><td><strong>User Experience</strong></td><td>Show past sessions in sidebar with titles like "Batch Yield Analysis."</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Key Design</h3>
+            <div class="schema-box">
+                <div class="title">mia_chat_sessions</div>
+                <span class="pk">Partition Key (pk):</span> {tenant_id}#{user_id}<br>
+                <span class="example">&nbsp;&nbsp;&nbsp;&nbsp;Example: "default#harish"</span><br><br>
+                <span class="sk">Sort Key (sk):</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;SESSION#{session_id} <span class="example">← for session metadata</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;MSG#{session_id}#{timestamp}#{index} <span class="example">← for individual messages</span>
+            </div>
+
+            <h4>Why This Design?</h4>
+            <ul style="margin: 8px 0 0 20px; font-size: 0.9rem;">
+                <li><strong>Partition Key</strong> is <code>tenant_id#user_id</code>. <em>"Show me all of Harish's sessions"</em> is a single Query — no GSI needed.</li>
+                <li style="margin-top: 6px;"><strong>Sort Key</strong> uses prefixes to store <strong>two types of items</strong> in the same partition: session metadata (<code>SESSION#...</code>) and individual messages (<code>MSG#...</code>). This is called <strong>vertical partitioning</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Why Individual Messages (Not a JSON Blob)?</h3>
+            <div class="highlight-box warning">
+                <strong>DynamoDB has a 400KB item size limit</strong>
+                Storing all messages in one JSON blob risks hitting this limit for long sessions.
+            </div>
+            <table>
+                <tr><th>Scenario</th><th>Msg Size</th><th>Count</th><th>Total</th><th>Status</th></tr>
+                <tr><td>Short KPI session</td><td>~2 KB</td><td>10</td><td>20 KB</td><td><span class="badge safe">Safe</span></td></tr>
+                <tr><td>Medium analysis</td><td>~5 KB</td><td>20</td><td>100 KB</td><td><span class="badge safe">Safe</span></td></tr>
+                <tr><td>Long power-user</td><td>~8 KB</td><td>40</td><td>320 KB</td><td><span class="badge risky">Risky</span></td></tr>
+                <tr><td>Heavy session</td><td>~10 KB</td><td>50</td><td>500 KB</td><td><span class="badge fail">FAILS</span></td></tr>
+            </table>
+
+            <p style="margin-top: 12px; font-size: 0.9rem;">With individual items, each message is 2-10 KB — well under the limit. A session can have <strong>thousands</strong> of messages safely.</p>
+
+            <table style="margin-top: 16px;">
+                <tr><th>Benefit</th><th>JSON Blob</th><th>Individual Items</th></tr>
+                <tr><td>Write a new message</td><td>Read blob → parse → append → serialize → write</td><td>Single PutItem call</td></tr>
+                <tr><td>Read last 20 messages</td><td>Read entire blob</td><td><code>Limit=20, ScanIndexForward=False</code></td></tr>
+                <tr><td>Concurrent writes</td><td>Race condition risk</td><td>No conflicts (append-only)</td></tr>
+                <tr><td>400KB risk</td><td>Grows with session</td><td>Each item is 2-10 KB</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Item Type 1: Session Metadata</h3>
+            <p style="margin-bottom: 12px; font-size: 0.9rem;">One item per session — the "header" shown in the sidebar.</p>
+            <div class="json-example">
+{<br>
+&nbsp;&nbsp;<span class="k">"pk"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="pk-hl">"default#harish"</span>,<br>
+&nbsp;&nbsp;<span class="k">"sk"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sk-hl">"SESSION#sess-abc123"</span>,<br>
+&nbsp;&nbsp;<span class="k">"session_id"</span>:&nbsp;&nbsp;&nbsp;<span class="s">"sess-abc123"</span>,<br>
+&nbsp;&nbsp;<span class="k">"tenant_id"</span>:&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"default"</span>,<br>
+&nbsp;&nbsp;<span class="k">"user_id"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"harish"</span>,<br>
+&nbsp;&nbsp;<span class="k">"title"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"Batch Yield Analysis"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// Auto-generated from first question</span><br>
+&nbsp;&nbsp;<span class="k">"created_at"</span>:&nbsp;&nbsp;&nbsp;<span class="s">"2026-03-09T10:30:00Z"</span>,<br>
+&nbsp;&nbsp;<span class="k">"last_active"</span>:&nbsp;&nbsp;<span class="s">"2026-03-09T11:45:00Z"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// Updated on every message</span><br>
+&nbsp;&nbsp;<span class="k">"message_count"</span>: <span class="n">12</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// Quick count for sidebar</span><br>
+&nbsp;&nbsp;<span class="k">"status"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"active"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// active | archived</span><br>
+&nbsp;&nbsp;<span class="k">"ttl"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">1744300000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// 30 days from last_active</span><br>
+}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Item Type 2: Individual Message</h3>
+            <p style="margin-bottom: 12px; font-size: 0.9rem;">One item per message — user questions and AI answers stored separately.</p>
+
+            <h4>User Message</h4>
+            <div class="json-example">
+{<br>
+&nbsp;&nbsp;<span class="k">"pk"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="pk-hl">"default#harish"</span>,<br>
+&nbsp;&nbsp;<span class="k">"sk"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sk-hl">"MSG#sess-abc123#2026-03-09T10:30:15Z#001"</span>,<br>
+&nbsp;&nbsp;<span class="k">"session_id"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"sess-abc123"</span>,<br>
+&nbsp;&nbsp;<span class="k">"role"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"human"</span>,<br>
+&nbsp;&nbsp;<span class="k">"content"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"What is the batch yield for Site A?"</span>,<br>
+&nbsp;&nbsp;<span class="k">"timestamp"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"2026-03-09T10:30:15Z"</span>,<br>
+&nbsp;&nbsp;<span class="k">"message_index"</span>:&nbsp;&nbsp;<span class="n">1</span>,<br>
+&nbsp;&nbsp;<span class="k">"ttl"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">1744300000</span><br>
+}
+            </div>
+
+            <h4>AI Response</h4>
+            <div class="json-example">
+{<br>
+&nbsp;&nbsp;<span class="k">"pk"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="pk-hl">"default#harish"</span>,<br>
+&nbsp;&nbsp;<span class="k">"sk"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sk-hl">"MSG#sess-abc123#2026-03-09T10:30:20Z#002"</span>,<br>
+&nbsp;&nbsp;<span class="k">"session_id"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"sess-abc123"</span>,<br>
+&nbsp;&nbsp;<span class="k">"role"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"ai"</span>,<br>
+&nbsp;&nbsp;<span class="k">"content"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"The batch yield for Site A is 94.2%..."</span>,<br>
+&nbsp;&nbsp;<span class="k">"timestamp"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"2026-03-09T10:30:20Z"</span>,<br>
+&nbsp;&nbsp;<span class="k">"message_index"</span>:&nbsp;&nbsp;<span class="n">2</span>,<br>
+&nbsp;&nbsp;<span class="k">"metadata"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"route_type"</span>:&nbsp;&nbsp;&nbsp;<span class="s">"KPI"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"matched_kpi"</span>:&nbsp;&nbsp;<span class="s">"batch_yield"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"execution_ms"</span>:&nbsp;<span class="n">1250</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="k">"visualization_config"</span>: {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// Only on AI msgs with charts</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"type"</span>:&nbsp;&nbsp;&nbsp;<span class="s">"bar"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"x_axis"</span>:&nbsp;<span class="s">"month"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"y_axis"</span>:&nbsp;<span class="s">"yield_pct"</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="k">"ttl"</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">1744300000</span><br>
+}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Common Access Patterns</h3>
+            <table>
+                <tr><th>What You Want</th><th>DynamoDB Query</th></tr>
+                <tr><td>List all of Harish's sessions</td><td><code>pk = "default#harish", sk begins_with "SESSION#"</code></td></tr>
+                <tr><td>Get last 20 messages in a session</td><td><code>pk = "default#harish", sk begins_with "MSG#sess-abc123", Limit=20, Descending</code></td></tr>
+                <tr><td>Get session metadata only</td><td><code>GetItem pk = "default#harish", sk = "SESSION#sess-abc123"</code></td></tr>
+                <tr><td>Delete a session + all messages</td><td>Query all matching items → BatchWriteItem delete</td></tr>
+            </table>
+
+            <h4 style="margin-top: 20px;">TTL Strategy</h4>
+            <ul style="margin: 8px 0 0 20px; font-size: 0.9rem;">
+                <li><strong>Active sessions:</strong> TTL = last_active + 30 days. Resets on every new message.</li>
+                <li><strong>Archived sessions:</strong> TTL = archive date + 90 days.</li>
+                <li><strong>All messages inherit the session's TTL</strong> — when a session expires, its messages expire too.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 5: Flow -->
+    <div class="section" id="flow">
+        <h2><span class="section-number">5</span> How the Two Tables Work Together</h2>
+
+        <div class="card">
+            <p style="margin-bottom: 16px;">Here's what happens when a user sends <strong>"What is the batch yield for Site A?"</strong></p>
+
+            <div class="request-flow">
+                <div class="flow-node">
+                    <span class="step-num">1</span>
+                    <strong>Hash the question</strong> → <code>"a1b2c3d4..."</code>
+                </div>
+
+                <div class="flow-node">
+                    <span class="step-num">2</span>
+                    <strong>Check <code>mia_session_turns</code> GSI</strong> — Has this question been answered before?
+                </div>
+
+                <div class="flow-branch">
+                    <div class="flow-node cache-hit" style="text-align: center;">
+                        <span class="badge cache">CACHE HIT</span><br>
+                        <span style="font-size: 0.85rem;">Return cached answer<br><strong>&lt;100ms</strong></span>
+                    </div>
+                    <div class="flow-node cache-miss" style="text-align: center;">
+                        <span class="badge slow">CACHE MISS</span><br>
+                        <span style="font-size: 0.85rem;">Run full AI pipeline<br><strong>5-15 sec</strong></span>
+                    </div>
+                </div>
+
+                <div class="flow-node">
+                    <span class="step-num">3</span>
+                    <strong>Save trace</strong> to <code>mia_session_turns</code> (for future cache hits + audit)
+                </div>
+
+                <div class="flow-node">
+                    <span class="step-num">4</span>
+                    <strong>Save messages</strong> to <code>mia_chat_sessions</code> (user question + AI answer as 2 items)
+                </div>
+
+                <div class="flow-node" style="border-color: var(--az-purple);">
+                    <span class="step-num">5</span>
+                    <strong>Update session META</strong> — last_active, message_count, reset TTL
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 6: Cost -->
+    <div class="section" id="cost">
+        <h2><span class="section-number">6</span> Cost Estimate</h2>
+
+        <div class="card">
+            <h3>DynamoDB On-Demand Pricing (us-east-1)</h3>
+            <table>
+                <tr><th>Operation</th><th>Price</th></tr>
+                <tr><td>Write (1 KB item)</td><td>$1.25 per million requests</td></tr>
+                <tr><td>Read (4 KB item)</td><td>$0.25 per million requests</td></tr>
+                <tr><td>Storage</td><td>$0.25 per GB / month</td></tr>
+            </table>
+
+            <h4 style="margin-top: 20px;">Per Question Cost</h4>
+            <div class="cost-row">
+                <div class="cost-label"><strong>Cache Miss</strong> — 1 trace write + 2 message writes + 1 META update</div>
+                <div class="cost-value free">~$0.000009</div>
+            </div>
+            <div class="cost-row">
+                <div class="cost-label"><strong>Cache Hit</strong> — 1 GSI read + 2 message writes</div>
+                <div class="cost-value free">~$0.000005</div>
+            </div>
+            <div class="cost-row">
+                <div class="cost-label"><strong>Savings per cache hit</strong> — Avoided Bedrock (Claude) API cost</div>
+                <div class="cost-value savings">$0.01 – $0.05 saved</div>
+            </div>
+
+            <div class="highlight-box solution" style="margin-top: 16px;">
+                <strong>Bottom Line</strong>
+                DynamoDB costs are negligible (~$0.01 per 1000 questions). The real savings come from <strong>caching</strong>: if 30% of questions are repeated, you save <strong>$3-15 per 1000 questions</strong> in AI (Bedrock) costs.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 7: CDK -->
+    <div class="section" id="cdk">
+        <h2><span class="section-number">7</span> Infrastructure (CDK)</h2>
+
+        <div class="card">
+            <h3>Deployment</h3>
+            <div class="code-block">
+<span class="comment"># From the mia-langgraph directory:</span>
+bash scripts/build-lambda.sh      <span class="comment"># Rebuild Lambda with new code</span>
+cd infra && npx cdk deploy         <span class="comment"># Deploy infrastructure</span>
+            </div>
+
+            <h3 style="margin-top: 24px;">Session Table CDK</h3>
+            <div class="code-block">
+<span class="comment">// mia-langgraph/infra/lib/mia-stack.ts</span>
+
+<span class="key">const</span> sessionTable = <span class="key">new</span> dynamodb.Table(<span class="key">this</span>, <span class="string">"MiaChatSessions"</span>, {
+  tableName:    <span class="string">"mia_chat_sessions"</span>,
+  partitionKey: { name: <span class="string">"pk"</span>, type: dynamodb.AttributeType.STRING },
+  sortKey:      { name: <span class="string">"sk"</span>, type: dynamodb.AttributeType.STRING },
+  billingMode:  dynamodb.BillingMode.PAY_PER_REQUEST,
+  removalPolicy: cdk.RemovalPolicy.DESTROY,
+  timeToLiveAttribute: <span class="string">"ttl"</span>,
+});
+            </div>
+
+            <h3 style="margin-top: 24px;">Trace Table CDK</h3>
+            <div class="code-block">
+<span class="key">const</span> traceTable = <span class="key">new</span> dynamodb.Table(<span class="key">this</span>, <span class="string">"MiaSessionTurns"</span>, {
+  tableName:    <span class="string">"mia_session_turns"</span>,
+  partitionKey: { name: <span class="string">"pk"</span>, type: dynamodb.AttributeType.STRING },
+  sortKey:      { name: <span class="string">"sk"</span>, type: dynamodb.AttributeType.STRING },
+  billingMode:  dynamodb.BillingMode.PAY_PER_REQUEST,
+  removalPolicy: cdk.RemovalPolicy.DESTROY,
+  timeToLiveAttribute: <span class="string">"ttl"</span>,
+});
+
+<span class="comment">// GSI for cache lookups by question hash</span>
+traceTable.addGlobalSecondaryIndex({
+  indexName:    <span class="string">"QueryCacheIndex"</span>,
+  partitionKey: { name: <span class="string">"query_hash"</span>, type: dynamodb.AttributeType.STRING },
+  sortKey:      { name: <span class="string">"created_at_utc"</span>, type: dynamodb.AttributeType.STRING },
+  projectionType: dynamodb.ProjectionType.INCLUDE,
+  nonKeyAttributes: [
+    <span class="string">"narrative_summary"</span>, <span class="string">"visualization_config"</span>, <span class="string">"generated_sql"</span>,
+    <span class="string">"agent_logs"</span>, <span class="string">"route_type"</span>, <span class="string">"matched_kpi"</span>, <span class="string">"is_valid"</span>,
+  ],
+});
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 8: Summary -->
+    <div class="section" id="summary">
+        <h2><span class="section-number">8</span> Summary</h2>
+
+        <div class="summary-grid">
+            <div class="summary-card turns">
+                <h3 style="color: var(--az-teal);"><code>mia_session_turns</code></h3>
+                <div class="analogy">Think of it as: <strong>Flight Recorder</strong></div>
+                <div class="detail"><span class="detail-label">Purpose</span> Audit trail + query cache</div>
+                <div class="detail"><span class="detail-label">PK</span> <code>tenant#session</code></div>
+                <div class="detail"><span class="detail-label">SK</span> <code>timestamp#request</code></div>
+                <div class="detail"><span class="detail-label">TTL</span> 2-24 hours (route-based)</div>
+                <div class="detail"><span class="detail-label">GSI</span> QueryCacheIndex (by query_hash)</div>
+                <div class="detail"><span class="detail-label">Items</span> 1 per question asked</div>
+                <div class="detail"><span class="detail-label">Benefit</span> Saves AI costs via caching</div>
+            </div>
+            <div class="summary-card sessions">
+                <h3 style="color: var(--az-blue);"><code>mia_chat_sessions</code></h3>
+                <div class="analogy">Think of it as: <strong>Chat History Sidebar</strong></div>
+                <div class="detail"><span class="detail-label">Purpose</span> Conversation memory</div>
+                <div class="detail"><span class="detail-label">PK</span> <code>tenant#user</code></div>
+                <div class="detail"><span class="detail-label">SK</span> <code>SESSION#id</code> or <code>MSG#id#time</code></div>
+                <div class="detail"><span class="detail-label">TTL</span> 30 days (resets on activity)</div>
+                <div class="detail"><span class="detail-label">GSI</span> None needed</div>
+                <div class="detail"><span class="detail-label">Items</span> 1 META + 1 per message</div>
+                <div class="detail"><span class="detail-label">Benefit</span> Enables follow-up conversations</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="container">
+        MIA DynamoDB Schema Design &middot; AI Architecture Team &middot; AstraZeneca R&D IT &middot; March 2026
+    </div>
+</div>
+
+</body>
+</html>

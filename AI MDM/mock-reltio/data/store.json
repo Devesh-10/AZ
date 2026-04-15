@@ -1,0 +1,1859 @@
+{
+  "entities": {
+    "entities/cbbd8265701c": {
+      "uri": "entities/cbbd8265701c",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Sarah",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Chen",
+            "ov": true
+          }
+        ],
+        "MiddleName": [
+          {
+            "value": "L",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "1234567890",
+            "ov": true
+          }
+        ],
+        "Email": [
+          {
+            "value": "schen@mgh.org",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/3699c218c72a": {
+      "uri": "entities/3699c218c72a",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "S",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Chen",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "1234567890",
+            "ov": true
+          }
+        ],
+        "Email": [
+          {
+            "value": "sarah.chen@partners.org",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/0d5fd6d8e9e6": {
+      "uri": "entities/0d5fd6d8e9e6",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Sara",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Chen",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Hematology Oncology",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD, PhD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/4f871cda89e5": {
+      "uri": "entities/4f871cda89e5",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "John",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Smith",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Cardiology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "2345678901",
+            "ov": true
+          }
+        ],
+        "Email": [
+          {
+            "value": "jsmith@ccf.org",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Cleveland",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "OH",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/1feabe6a0e37": {
+      "uri": "entities/1feabe6a0e37",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Jonathan",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Smith",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Cardiology",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Cleveland",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "OH",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/0eb9f649de93": {
+      "uri": "entities/0eb9f649de93",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Anjali",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Patel",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Endocrinology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "3456789012",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Houston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "TX",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/799d33be4c74": {
+      "uri": "entities/799d33be4c74",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Anjali",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Patel",
+            "ov": true
+          }
+        ],
+        "MiddleName": [
+          {
+            "value": "K",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Endocrinology Diabetes",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Houston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "TX",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/01a2a3e90cfd": {
+      "uri": "entities/01a2a3e90cfd",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Maria",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Garcia",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Pulmonology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "4567890123",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Miami",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "FL",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/bc6c14c5f913": {
+      "uri": "entities/bc6c14c5f913",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Maria",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Garcia-Lopez",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Pulmonology",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Miami",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "FL",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206743,
+      "updatedTime": 1776157206743
+    },
+    "entities/c01acb434ff7": {
+      "uri": "entities/c01acb434ff7",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "David",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Wong",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Neurology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "5678901234",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "San Francisco",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "CA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/76edd47821e1": {
+      "uri": "entities/76edd47821e1",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Dave",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Wong",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Neurology",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "San Francisco",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "CA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/fd9534e88f94": {
+      "uri": "entities/fd9534e88f94",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Priya",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Krishnan",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Rheumatology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "6789012345",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Chicago",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "IL",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/d9b30685d7ca": {
+      "uri": "entities/d9b30685d7ca",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Michael",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "OBrien",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Gastroenterology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "7890123456",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Philadelphia",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "PA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/daaad16769f0": {
+      "uri": "entities/daaad16769f0",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Emily",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Taylor",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Dermatology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "8901234567",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Seattle",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "WA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/8e0d9ac18162": {
+      "uri": "entities/8e0d9ac18162",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Robert",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Johnson",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Psychiatry",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "9012345678",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Atlanta",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "GA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/3531545081f8": {
+      "uri": "entities/3531545081f8",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Linda",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Martinez",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Nephrology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "1123456789",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Phoenix",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "AZ",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/e71405426975": {
+      "uri": "entities/e71405426975",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "James",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Anderson",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "2234567890",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/664a6aad38aa": {
+      "uri": "entities/664a6aad38aa",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Karen",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Lee",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "3345678901",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/3d32fe278c3c": {
+      "uri": "entities/3d32fe278c3c",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Thomas",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Brown",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Cardiology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "4456789012",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Dallas",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "TX",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/c8e02e2eae92": {
+      "uri": "entities/c8e02e2eae92",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Susan",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Davis",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Endocrinology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "5567890123",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Minneapolis",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MN",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/563eb4d8feb3": {
+      "uri": "entities/563eb4d8feb3",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Brian",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Wilson",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Pulmonology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "6678901234",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Denver",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "CO",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/40cc6e6870ab": {
+      "uri": "entities/40cc6e6870ab",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Jessica",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Moore",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Neurology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "7789012345",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Portland",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "OR",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/a53f5390e8e0": {
+      "uri": "entities/a53f5390e8e0",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Daniel",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Clark",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "8890123456",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Nashville",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "TN",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/f1d1ea9489c8": {
+      "uri": "entities/f1d1ea9489c8",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Rachel",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Hall",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Hematology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "9901234567",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/7ae9fcbb9eaf": {
+      "uri": "entities/7ae9fcbb9eaf",
+      "type": "configuration/entityTypes/HCP",
+      "attributes": {
+        "FirstName": [
+          {
+            "value": "Kevin",
+            "ov": true
+          }
+        ],
+        "LastName": [
+          {
+            "value": "Young",
+            "ov": true
+          }
+        ],
+        "Specialty": [
+          {
+            "value": "Cardiology",
+            "ov": true
+          }
+        ],
+        "NPI": [
+          {
+            "value": "1012345678",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Cleveland",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "OH",
+            "ov": true
+          }
+        ],
+        "Degree": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/fa009bdbfdc4": {
+      "uri": "entities/fa009bdbfdc4",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Massachusetts General Hospital",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Academic Medical Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ],
+        "DEA": [
+          {
+            "value": "MA0001",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/fdb5482d15fe": {
+      "uri": "entities/fdb5482d15fe",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Mass General Hospital",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Hospital",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/4a038d73b043": {
+      "uri": "entities/4a038d73b043",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "MGH",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Hospital",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/ba87153daa38": {
+      "uri": "entities/ba87153daa38",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Cleveland Clinic",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Academic Medical Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Cleveland",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "OH",
+            "ov": true
+          }
+        ],
+        "DEA": [
+          {
+            "value": "OH0001",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/55782e12cd7f": {
+      "uri": "entities/55782e12cd7f",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Cleveland Clinic Foundation",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Hospital",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Cleveland",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "OH",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/423990bc391c": {
+      "uri": "entities/423990bc391c",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "MD Anderson Cancer Center",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Cancer Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Houston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "TX",
+            "ov": true
+          }
+        ],
+        "DEA": [
+          {
+            "value": "TX0001",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/02ff5f766ecd": {
+      "uri": "entities/02ff5f766ecd",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "UT MD Anderson",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Cancer Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Houston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "TX",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/3ca30bd4a142": {
+      "uri": "entities/3ca30bd4a142",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "UCSF Medical Center",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Academic Medical Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "San Francisco",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "CA",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/367a2093a26a": {
+      "uri": "entities/367a2093a26a",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Mayo Clinic Rochester",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Academic Medical Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Rochester",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MN",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/cd5ccadd004e": {
+      "uri": "entities/cd5ccadd004e",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Johns Hopkins Hospital",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Academic Medical Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Baltimore",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MD",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/121f24e3d950": {
+      "uri": "entities/121f24e3d950",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Memorial Sloan Kettering",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Cancer Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "New York",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "NY",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/6b5465e56e84": {
+      "uri": "entities/6b5465e56e84",
+      "type": "configuration/entityTypes/HCO",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Dana-Farber Cancer Institute",
+            "ov": true
+          }
+        ],
+        "Type": [
+          {
+            "value": "Cancer Center",
+            "ov": true
+          }
+        ],
+        "City": [
+          {
+            "value": "Boston",
+            "ov": true
+          }
+        ],
+        "State": [
+          {
+            "value": "MA",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/57cfba8f7e25": {
+      "uri": "entities/57cfba8f7e25",
+      "type": "configuration/entityTypes/Product",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Tagrisso",
+            "ov": true
+          }
+        ],
+        "Therapy": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "Indication": [
+          {
+            "value": "EGFR-mutated NSCLC",
+            "ov": true
+          }
+        ],
+        "Status": [
+          {
+            "value": "Marketed",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/9954827cf708": {
+      "uri": "entities/9954827cf708",
+      "type": "configuration/entityTypes/Product",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Imfinzi",
+            "ov": true
+          }
+        ],
+        "Therapy": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "Indication": [
+          {
+            "value": "Stage III NSCLC",
+            "ov": true
+          }
+        ],
+        "Status": [
+          {
+            "value": "Marketed",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/458bef79b9da": {
+      "uri": "entities/458bef79b9da",
+      "type": "configuration/entityTypes/Product",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Lynparza",
+            "ov": true
+          }
+        ],
+        "Therapy": [
+          {
+            "value": "Oncology",
+            "ov": true
+          }
+        ],
+        "Indication": [
+          {
+            "value": "BRCA-mutated breast cancer",
+            "ov": true
+          }
+        ],
+        "Status": [
+          {
+            "value": "Marketed",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/86342af72ffc": {
+      "uri": "entities/86342af72ffc",
+      "type": "configuration/entityTypes/Product",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Farxiga",
+            "ov": true
+          }
+        ],
+        "Therapy": [
+          {
+            "value": "Cardiovascular Renal Metabolic",
+            "ov": true
+          }
+        ],
+        "Indication": [
+          {
+            "value": "Type 2 Diabetes",
+            "ov": true
+          }
+        ],
+        "Status": [
+          {
+            "value": "Marketed",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    },
+    "entities/d7955027e564": {
+      "uri": "entities/d7955027e564",
+      "type": "configuration/entityTypes/Product",
+      "attributes": {
+        "Name": [
+          {
+            "value": "Brilinta",
+            "ov": true
+          }
+        ],
+        "Therapy": [
+          {
+            "value": "Cardiovascular Renal Metabolic",
+            "ov": true
+          }
+        ],
+        "Indication": [
+          {
+            "value": "Acute Coronary Syndrome",
+            "ov": true
+          }
+        ],
+        "Status": [
+          {
+            "value": "Marketed",
+            "ov": true
+          }
+        ]
+      },
+      "crosswalks": [],
+      "createdTime": 1776157206744,
+      "updatedTime": 1776157206744
+    }
+  },
+  "merged": {}
+}

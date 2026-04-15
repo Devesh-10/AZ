@@ -1,0 +1,1636 @@
+ontology:
+  metadata:
+    versionIRI: https://pid.astrazeneca.net/ontology/app/mia/1.0
+    imports: https://pid.astrazeneca.net/ref-ops/
+    abstract: Defines manufacturing entities, processes, and relationships for pharmaceutical operations and supply chain
+      management.
+    contributor: Gen AI Manufacturing Insight Agent Development
+    created: '2025-09-05'
+    creator: Manufacturing Insight Agent Development Team
+    description: |-
+      A comprehensive ontology for manufacturing data integration, enabling semantic reasoning across batch processing, equipment management, and operational workflows in pharmaceutical manufacturing environments.
+    language: en
+    license: https://creativecommons.org/licenses/by/4.0/
+    maintainer: Manufacturing Ontology Team
+    modified: '2025-09-05'
+    subject: Manufacturing, Batch Processing, Process Orders, Semantic Reasoning
+    title: Manufacturing Insight Agent Ontology (MIA)
+    version: '1.0'
+    comment: |-
+      Production-ready v1.0 ontology supporting the Gen AI Manufacturing Insight Agent with comprehensive semantic modeling of pharmaceutical manufacturing operations, batch processing, and quality management workflows.
+    label: Manufacturing Insight Agent Ontology
+    versionInfo: '1.0'
+    changeNote: |-
+      v1.0 (2025-09-05): Production release consolidating all development iterations with stable class hierarchy, refined property domains/ranges, and comprehensive manufacturing workflow coverage.
+  prefixes:
+    mia: https://pid.astrazeneca.net/ontology/app/mia/
+    def-ops: https://pid.astrazeneca.net/def-ops/
+    ref-ops: https://pid.astrazeneca.net/ref-ops/
+    skos: http://www.w3.org/2004/02/skos/core#
+    owl: http://www.w3.org/2002/07/owl#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    xsd: http://www.w3.org/2001/XMLSchema#
+    dcterms: http://purl.org/dc/terms/
+  datatypes:
+  - rdf:PlainLiteral
+  - xsd:boolean
+  - xsd:date
+  - xsd:dateTime
+  - xsd:dateTimeStamp
+  - xsd:decimal
+  - xsd:integer
+  - xsd:string
+  annotation_properties:
+  - dcterms:abstract
+  - dcterms:contributor
+  - dcterms:created
+  - dcterms:creator
+  - dcterms:description
+  - dcterms:language
+  - dcterms:license
+  - dcterms:maintainer
+  - dcterms:modified
+  - dcterms:references
+  - dcterms:subject
+  - dcterms:title
+  - dcterms:version
+  - rdfs:comment
+  - rdfs:label
+  - skos:changeNote
+  - skos:definition
+  - skos:inScheme
+  - skos:prefLabel
+  classes:
+    def-ops:Area:
+      uri: https://pid.astrazeneca.net/def-ops/Area
+      subClassOf: def-ops:Site
+    def-ops:Batch:
+      uri: https://pid.astrazeneca.net/def-ops/Batch
+    def-ops:Enterprise:
+      uri: https://pid.astrazeneca.net/def-ops/Enterprise
+    def-ops:Lot:
+      uri: https://pid.astrazeneca.net/def-ops/Lot
+    def-ops:Material:
+      uri: https://pid.astrazeneca.net/def-ops/Material
+    def-ops:Operation:
+      uri: https://pid.astrazeneca.net/def-ops/Operation
+    def-ops:Order:
+      uri: https://pid.astrazeneca.net/def-ops/Order
+    def-ops:Site:
+      uri: https://pid.astrazeneca.net/def-ops/Site
+      subClassOf: def-ops:Enterprise
+    mia:PlannedOrder:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/PlannedOrder
+      label: Planned Order
+      description: |-
+        A planned production order that exists in the planning phase before being converted to a process order. Planned orders are used for material requirements planning and capacity planning.
+      references: Order Status Data Product
+      subClassOf: def-ops:Order
+    mia:ProcessOrder:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/ProcessOrder
+      label: Process Order
+      description: |-
+        An individual process or production order executed at manufacturing sites. Identity: processOrderNumber + productionPlantCode uniquely identifies instances across all SAP systems.
+      references: Order Status Data Product
+      subClassOf: def-ops:Order
+    mia:ProcessOrderOperation:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/ProcessOrderOperation
+      label: Process Order Operation
+      description: |-
+        Individual operations or steps within a process order. Each operation represents a specific manufacturing activity with its own timing, resources, and status tracking.
+      references: Order Status Data Product - Operations
+      subClassOf: def-ops:Operation
+    mia:QualityEvent:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/QualityEvent
+      label: Quality Event
+      description: |-
+        Quality events affecting batches. Populated from qualityEventIdentifiersText, qualityEventTypeCodesText properties in existing tables.
+    mia:QualityNotification:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/QualityNotification
+      label: Quality Notification
+      description: |-
+        A formal notification regarding quality issues, deviations, or concerns in manufacturing processes. Quality notifications trigger investigations and corrective actions to maintain product quality and compliance.
+      references: Quality Notifications Data Product
+    skos:Concept:
+      uri: http://www.w3.org/2004/02/skos/core#Concept
+      label: Concept
+    skos:ConceptScheme:
+      uri: http://www.w3.org/2004/02/skos/core#ConceptScheme
+      label: Concept Scheme
+  object_properties:
+    def-ops:consumes:
+      uri: https://pid.astrazeneca.net/def-ops/consumes
+      label: consumes
+      description: Order → Batch consumption edge; cardinalities and value-sets enforced in SHACL.
+      domain: mia:ProcessOrder
+      range: def-ops:Batch
+    def-ops:executedAt:
+      uri: https://pid.astrazeneca.net/def-ops/executedAt
+    def-ops:hasEvent:
+      uri: https://pid.astrazeneca.net/def-ops/hasEvent
+    def-ops:hasOrderStatus:
+      uri: https://pid.astrazeneca.net/def-ops/hasOrderStatus
+      label: has order status
+      description: Links process order to a status concept; values constrained to ref-ops:OrderStatusScheme in SHACL.
+      domain: mia:ProcessOrder
+      range: skos:Concept
+    def-ops:produces:
+      uri: https://pid.astrazeneca.net/def-ops/produces
+      label: produces
+      description: Order → Batch production edge; cardinalities and value-sets enforced in SHACL.
+      domain: mia:ProcessOrder
+      range: def-ops:Batch
+    def-ops:relatedTo:
+      uri: https://pid.astrazeneca.net/def-ops/relatedTo
+    mia:adjusts:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/adjusts
+      label: adjusts
+      description: Process order adjusts allocated/consumed batch; event facts live on the relationship via SHACL shapes.
+      subPropertyOf: def-ops:relatedTo
+      domain: mia:ProcessOrder
+      range: def-ops:Batch
+    mia:consistsOfMaterial:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/consistsOfMaterial
+      label: consists of material
+      description: Links orders/batches to their material via materialIdentifier, localMaterialCode.
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: def-ops:Material
+    mia:executedAtSite:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/executedAtSite
+      label: executed at site
+      description: Process order executed at a specific site (plant).
+      subPropertyOf: def-ops:executedAt
+      domain: mia:ProcessOrder
+      range: def-ops:Site
+    mia:hasBatchStatus:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasBatchStatus
+      label: has batch status
+      description: Links batch to a status concept (values constrained to ref-ops:BatchStatusScheme in SHACL).
+      domain: def-ops:Batch
+      range: skos:Concept
+    mia:hasInspectionLot:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasInspectionLot
+      label: has inspection lot
+      description: Links batches to inspection lots via referenceInspectionLotNumber.
+      domain: def-ops:Batch
+      range: def-ops:Lot
+    mia:hasInspectionType:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasInspectionType
+      label: has inspection type
+      description: Links to an inspection type concept (values constrained to ref-ops:InspectionTypeScheme in SHACL).
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: skos:Concept
+    mia:hasOperation:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasOperation
+      label: has operation
+      description: Process order contains specific manufacturing operations as sequential steps.
+      references: RO:0002351 has member
+      domain: mia:ProcessOrder
+      range: mia:ProcessOrderOperation
+    mia:hasProcessOrderType:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasProcessOrderType
+      label: has process order type
+      description: Links process order to a type concept (values constrained to ref-ops:ProcessOrderTypeScheme in SHACL).
+      domain: mia:ProcessOrder
+      range: skos:Concept
+    mia:hasProcurementType:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasProcurementType
+      label: has procurement type
+      description: Links to a procurement type concept (values constrained to ref-ops:ProcurementTypeScheme in SHACL).
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: skos:Concept
+    mia:hasProductLocationType:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasProductLocationType
+      label: has product location type
+      description: Links to a product location type concept (values constrained to ref-ops:LocationTypeScheme in SHACL).
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: skos:Concept
+    mia:hasQualityEvent:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasQualityEvent
+      label: has quality event
+      description: Binds a batch to its related quality events; no direct Lot or Order links in scope.
+      domain: def-ops:Batch
+      range: mia:QualityEvent
+    mia:hasQualityNotification:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasQualityNotification
+      label: has quality notification
+      description: Binds a batch to its related quality notifications.
+      domain: def-ops:Batch
+      range: mia:QualityNotification
+    mia:hasUsageDecision:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/hasUsageDecision
+      label: has usage decision
+      description: Links to a usage decision concept (values constrained to ref-ops:UsageDecisionScheme in SHACL).
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: skos:Concept
+    mia:recommends:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/recommends
+      label: recommends
+      description: Planned order recommends batch; event facts live on the relationship via SHACL shapes.
+      subPropertyOf: def-ops:relatedTo
+      domain: mia:PlannedOrder
+      range: def-ops:Batch
+  data_properties:
+    def-ops:operational:
+      uri: https://pid.astrazeneca.net/def-ops/operational
+    def-ops:physical:
+      uri: https://pid.astrazeneca.net/def-ops/physical
+    def-ops:tag:
+      uri: https://pid.astrazeneca.net/def-ops/tag
+    mia:actualDeliveryFinishDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/actualDeliveryFinishDate
+      label: actual delivery finish date
+      description: Actual delivery finish date for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:actualFinishDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/actualFinishDate
+      label: actual finish date
+      description: Actual finish date for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:actualReleaseDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/actualReleaseDate
+      label: actual release date
+      description: Actual release date for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:actualStartDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/actualStartDatetime
+      label: actual start datetime
+      description: Actual start datetime for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:apoGoodsIssueProcessingDaysNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/apoGoodsIssueProcessingDaysNumber
+      label: APO goods issue processing days number
+      description: Number of days for APO goods issue processing.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:apoGoodsReceiptProcessingDaysNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/apoGoodsReceiptProcessingDaysNumber
+      label: APO goods receipt processing days number
+      description: Number of days for APO goods receipt processing.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:apoMaximumLotSizeQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/apoMaximumLotSizeQuantity
+      label: APO maximum lot size quantity
+      description: Maximum lot size quantity in APO.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:decimal
+    mia:apoMinimumLotSizeQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/apoMinimumLotSizeQuantity
+      label: APO minimum lot size quantity
+      description: Minimum lot size quantity in APO.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:decimal
+    mia:availabilityDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/availabilityDate
+      label: availability date
+      description: Date when the batch becomes available.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:averageInspectionDurationNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/averageInspectionDurationNumber
+      label: average inspection duration number
+      description: Average duration of inspections in numbers.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:decimal
+    mia:baseGoodsReceivedQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/baseGoodsReceivedQuantity
+      label: base goods received quantity
+      description: Base quantity of goods received.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:baseOrderItemQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/baseOrderItemQuantity
+      label: base order item quantity
+      description: Base quantity for the order item.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:baseTotalPlannedQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/baseTotalPlannedQuantity
+      label: base total planned quantity
+      description: Base total planned quantity.
+      subPropertyOf: def-ops:physical
+      domain: mia:PlannedOrder
+      range: xsd:decimal
+    mia:baseTotalScrapQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/baseTotalScrapQuantity
+      label: base total scrap quantity
+      description: Base total scrap quantity.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:baseUnitOfMeasureCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/baseUnitOfMeasureCode
+      label: base unit of measure code
+      description: Base unit of measure for the batch.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:baseUnitOfMeasureIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/baseUnitOfMeasureIdentifier
+      label: base unit of measure identifier
+      description: Identifier for the base unit of measure.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:basicFinishDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/basicFinishDatetime
+      label: basic finish datetime
+      description: Basic finish datetime for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:basicStartDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/basicStartDatetime
+      label: basic start datetime
+      description: Basic start datetime for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:batchCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchCode
+      label: batch code
+      description: Unique identifier code for the batch.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:batchCreationDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchCreationDate
+      label: batch creation date
+      description: Date when the batch was created.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:batchExclusionFromAnalysisIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchExclusionFromAnalysisIndicator
+      label: batch exclusion from analysis indicator
+      description: Indicator if batch is excluded from analysis.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:boolean
+    mia:batchGoodsIssueEntryDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchGoodsIssueEntryDatetime
+      label: batch goods issue entry datetime
+      description: Datetime of batch goods issue entry.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchGoodsIssuePostingDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchGoodsIssuePostingDatetime
+      label: batch goods issue posting datetime
+      description: Datetime of batch goods issue posting.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchLastGoodsReceiptEntryDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchLastGoodsReceiptEntryDatetime
+      label: batch last goods receipt entry datetime
+      description: Datetime of last goods receipt entry for batch.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchLastGoodsReceiptPostingDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchLastGoodsReceiptPostingDatetime
+      label: batch last goods receipt posting datetime
+      description: Datetime of last goods receipt posting for batch.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchPickEntryDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchPickEntryDatetime
+      label: batch pick entry datetime
+      description: Datetime of batch pick entry.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchPickPostingDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchPickPostingDatetime
+      label: batch pick posting datetime
+      description: Datetime of batch pick posting.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchRecordIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchRecordIdentifier
+      label: batch record identifier
+      description: Unique identifier for the batch record.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:batchReleaseEntryDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchReleaseEntryDatetime
+      label: batch release entry datetime
+      description: Datetime of batch release entry.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchReleasePostingDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchReleasePostingDatetime
+      label: batch release posting datetime
+      description: Datetime of batch release posting.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchSamplingEntryDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchSamplingEntryDatetime
+      label: batch sampling entry datetime
+      description: Datetime of batch sampling entry.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchSamplingPostingDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchSamplingPostingDatetime
+      label: batch sampling posting datetime
+      description: Datetime of batch sampling posting.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:batchTotalQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/batchTotalQuantity
+      label: batch total quantity
+      description: Total quantity of material in the batch.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:decimal
+    mia:bestBeforeDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/bestBeforeDate
+      label: best before date
+      description: Best before date for the batch.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:billOfMaterialsIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/billOfMaterialsIdentifier
+      label: bill of materials identifier
+      description: Identifier for the bill of materials.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:cancelledIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/cancelledIndicator
+      label: cancelled indicator
+      description: Indicator if the order is cancelled.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:categoryName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/categoryName
+      label: order category name
+      description: Name of the order category.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:cleanedLocalMaterialCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/cleanedLocalMaterialCode
+      label: cleaned local material code
+      description: Cleaned version of the local material code.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:closedIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/closedIndicator
+      label: closed indicator
+      description: Indicator if the order is closed.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:closedLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/closedLastUpdatedDatetime
+      label: closed last updated datetime
+      description: Datetime when the closed status was last updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:confirmedIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/confirmedIndicator
+      label: confirmed indicator
+      description: Indicator if the order is confirmed.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:confirmedLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/confirmedLastUpdatedDatetime
+      label: confirmed last updated datetime
+      description: Datetime when confirmed status was last updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:confirmedOrderFinishDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/confirmedOrderFinishDatetime
+      label: confirmed order finish datetime
+      description: Confirmed finish datetime for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:createdIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/createdIndicator
+      label: created indicator
+      description: Indicator if the order is created.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:createdLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/createdLastUpdatedDatetime
+      label: created last updated datetime
+      description: Datetime when created status was last updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:deletionIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/deletionIndicator
+      label: deletion indicator
+      description: Indicator if the batch is marked for deletion.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: xsd:boolean
+    mia:deliveryCompletedIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/deliveryCompletedIndicator
+      label: delivery completed indicator
+      description: Indicator if delivery is completed.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:deliveryLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/deliveryLastUpdatedDatetime
+      label: delivery last updated datetime
+      description: Datetime when delivery status was last updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:enteredGoodsReceivedQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/enteredGoodsReceivedQuantity
+      label: entered goods received quantity
+      description: Entered quantity of goods received.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:enteredOrderItemQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/enteredOrderItemQuantity
+      label: entered order item quantity
+      description: Entered quantity for the order item.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:enteredTotalScrapQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/enteredTotalScrapQuantity
+      label: entered total scrap quantity
+      description: Entered total scrap quantity.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:enteredUnitOfMeasureIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/enteredUnitOfMeasureIdentifier
+      label: entered unit of measure identifier
+      description: Identifier for the entered unit of measure.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:erpGoodsReceiptProcessingDaysNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/erpGoodsReceiptProcessingDaysNumber
+      label: ERP goods receipt processing days number
+      description: Number of days for ERP goods receipt processing.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:erpMaximumLotSizeQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/erpMaximumLotSizeQuantity
+      label: ERP maximum lot size quantity
+      description: Maximum lot size quantity in ERP.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:decimal
+    mia:erpMinimumLotSizeQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/erpMinimumLotSizeQuantity
+      label: ERP minimum lot size quantity
+      description: Minimum lot size quantity in ERP.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:decimal
+    mia:expectedGoodsReceiptFinishDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/expectedGoodsReceiptFinishDate
+      label: expected goods receipt finish date
+      description: Expected finish date for goods receipt.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:expectedUsageDecisionDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/expectedUsageDecisionDate
+      label: expected usage decision date
+      description: Expected date for usage decision.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:finishedOperationsCount:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/finishedOperationsCount
+      label: finished operations count
+      description: Count of finished operations.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:integer
+    mia:globalMaterialCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/globalMaterialCode
+      label: global material code
+      description: Global code for the material in the batch.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:globalSupplyPlannerName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/globalSupplyPlannerName
+      label: global supply planner name
+      description: Name of the global supply planner.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:goodsReceiptProcessingTimeInDays:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/goodsReceiptProcessingTimeInDays
+      label: goods receipt processing time in days
+      description: Time in days for goods receipt processing.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:inspectionLotCreationDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/inspectionLotCreationDatetime
+      label: inspection lot creation datetime
+      description: Datetime when the inspection lot was created.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:inspectionLotOriginText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/inspectionLotOriginText
+      label: inspection lot origin text
+      description: Text describing the origin of the inspection lot.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:inspectionLotStorageLocationCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/inspectionLotStorageLocationCode
+      label: inspection lot storage location code
+      description: Code for inspection lot storage location.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:keyCharacteristicsResultsText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/keyCharacteristicsResultsText
+      label: key characteristics results text
+      description: Text of results for key characteristics.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:keyCharacteristicsText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/keyCharacteristicsText
+      label: key characteristics text
+      description: Text describing key characteristics.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:lastChangeDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/lastChangeDate
+      label: last change date
+      description: Date of the last change to the batch.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:lastGoodsReceiptDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/lastGoodsReceiptDate
+      label: last goods receipt date
+      description: Date of the last goods receipt for the batch.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:lifecycleStateCodesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/lifecycleStateCodesText
+      label: lifecycle state codes text
+      description: Text of lifecycle state codes.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:limsDispositionCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsDispositionCode
+      label: lims disposition code
+      description: LIMS disposition code.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:limsDispositionDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsDispositionDatetime
+      label: lims disposition datetime
+      description: LIMS disposition datetime.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:limsFinishedTestsCount:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsFinishedTestsCount
+      label: lims finished tests count
+      description: Count of finished LIMS tests.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:limsLotName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsLotName
+      label: lims lot name
+      description: LIMS lot name.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:limsLotNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsLotNumber
+      label: lims lot number
+      description: LIMS lot number.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:limsSampleRecordDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsSampleRecordDatetime
+      label: lims sample record datetime
+      description: Datetime of LIMS sample record.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:limsSamplesStatusesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsSamplesStatusesText
+      label: lims samples statuses text
+      description: Text of LIMS samples statuses.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:limsSamplesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsSamplesText
+      label: lims samples text
+      description: Text describing LIMS samples.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:limsTotalTestsCount:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/limsTotalTestsCount
+      label: lims total tests count
+      description: Total count of LIMS tests.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:localMaterialCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/localMaterialCode
+      label: local material code
+      description: Local code for the material, applicable to both orders and batches.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:lockedIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/lockedIndicator
+      label: locked indicator
+      description: Indicator if the order is locked.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:lockedLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/lockedLastUpdatedDatetime
+      label: locked last updated datetime
+      description: Datetime when the locked status was last updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:lotSizeCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/lotSizeCode
+      label: lot size code
+      description: Code for the lot size.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:manufactureDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/manufactureDate
+      label: manufacture date
+      description: Date when the batch was manufactured.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:marketsText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/marketsText
+      label: markets text
+      description: Text describing associated markets.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:materialAuthorisationGroupDescription:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/materialAuthorisationGroupDescription
+      label: material authorisation group description
+      description: Description of the material authorization group.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:materialGroupCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/materialGroupCode
+      label: material group code
+      description: Code for the material group.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:materialIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/materialIdentifier
+      label: material identifier
+      description: Identifier of the material associated with the batch.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:materialName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/materialName
+      label: material name
+      description: Name of the material in the batch.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:materialType:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/materialType
+      label: material type
+      description: .
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Material
+      range: xsd:string
+    mia:nextOperationCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/nextOperationCode
+      label: next operation code
+      description: Code for the next operation.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:nextOperationName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/nextOperationName
+      label: next operation name
+      description: Name of the next operation.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:operationCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationCode
+      label: operation code
+      description: Code for the operation.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrderOperation
+      range: xsd:string
+    mia:operationDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationDatetime
+      label: operation datetime
+      description: Datetime of the operation.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrderOperation
+      range: xsd:dateTime
+    mia:operationDescription:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationDescription
+      label: operation description
+      description: Detailed description of the operation activities.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrderOperation
+      range: xsd:string
+    mia:operationName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationName
+      label: operation name
+      description: Name of the operation.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrderOperation
+      range: xsd:string
+    mia:operationNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationNumber
+      label: operation number
+      description: Sequential number of the operation within the process order.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrderOperation
+      range: xsd:string
+    mia:operationStatus:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationStatus
+      label: operation status
+      description: Current status of the operation (e.g., planned, in progress, completed).
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrderOperation
+      range: xsd:string
+    mia:operationStatusName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationStatusName
+      label: operation status name
+      description: Name of the operation status.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrderOperation
+      range: xsd:string
+    mia:operationsText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/operationsText
+      label: operations text
+      description: Text describing operations.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:orderCreationDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/orderCreationDate
+      label: order creation date
+      description: Date when the process order was created.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:orderItemHasActualFinishDateIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/orderItemHasActualFinishDateIndicator
+      label: order item has actual finish date indicator
+      description: Indicator if order item has an actual finish date.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:orderQualityNotificationsText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/orderQualityNotificationsText
+      label: order quality notifications text
+      description: Text describing quality notifications in the order.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:orderReferenceRelativeWeekNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/orderReferenceRelativeWeekNumber
+      label: order reference relative week number
+      description: Relative week number for order reference.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:integer
+    mia:orderReferenceYearWeekNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/orderReferenceYearWeekNumber
+      label: order reference year week number
+      description: Year and week number for order reference.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:originalFullReleaseDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/originalFullReleaseDate
+      label: original full release date
+      description: Original date for full release.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:plannedInspectionLotQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plannedInspectionLotQuantity
+      label: planned inspection lot quantity
+      description: Planned quantity for the inspection lot.
+      subPropertyOf: def-ops:physical
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: xsd:decimal
+    mia:plannedOrderIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plannedOrderIdentifier
+      label: planned order identifier
+      description: Identifier for the planned order.
+      subPropertyOf: def-ops:tag
+      domain: mia:PlannedOrder
+      range: xsd:string
+    mia:plannedOrderNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plannedOrderNumber
+      label: planned order number
+      description: |-
+        Number of the planned order; aligns to source PLANNED_ORDER_NUMBER in ORDER_BATCH_RELATIONSHIP and is used during planning prior to conversion to a process order.
+      subPropertyOf: def-ops:tag
+      domain: mia:PlannedOrder
+      range: xsd:string
+    mia:plannedOrderStartDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plannedOrderStartDate
+      label: planned order start date
+      description: Planned start date for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:PlannedOrder
+      range: xsd:date
+    mia:plannedReleaseDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plannedReleaseDate
+      label: planned release date
+      description: Planned release date for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:PlannedOrder
+      range: xsd:date
+    mia:planningPlantCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/planningPlantCode
+      label: planning plant code
+      description: Code identifying the planning plant for the planned order; used for MRP and capacity planning.
+      subPropertyOf: def-ops:tag
+      domain: mia:PlannedOrder
+      range: xsd:string
+    mia:plantLevelBatchCreationDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plantLevelBatchCreationDate
+      label: plant level batch creation date
+      description: Creation date of the batch at the plant level.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:plantLevelLastGoodsReceiptDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/plantLevelLastGoodsReceiptDate
+      label: plant level last goods receipt date
+      description: Last goods receipt date at the plant level for the batch.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:date
+    mia:processOrderActualFinishDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/processOrderActualFinishDate
+      label: process order actual finish date
+      description: Actual finish date of the process order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:processOrderCategoryCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/processOrderCategoryCode
+      label: process order category code
+      description: Code for the process order category.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:processOrderIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/processOrderIdentifier
+      label: process order identifier
+      description: Unique identifier for the process order.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:processOrderNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/processOrderNumber
+      label: process order number
+      description: Number of the process order.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:processOrderScheduledFinishDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/processOrderScheduledFinishDate
+      label: process order scheduled finish date
+      description: Scheduled finish date of the process order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:processingOfGoodsReceiptInDaysNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/processingOfGoodsReceiptInDaysNumber
+      label: processing of goods receipt in days number
+      description: Number of days for processing goods receipt.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:integer
+    mia:producedBatchCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/producedBatchCode
+      label: produced batch code
+      description: Batch code associated with the order.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:producingProcessOrderNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/producingProcessOrderNumber
+      label: producing process order number
+      description: Number of the process order that produced this batch.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:productFamilyName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productFamilyName
+      label: product family name
+      description: Name of the product family.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:productLocationTypeName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productLocationTypeName
+      label: product location type name
+      description: Name of the product location type.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:productSubFamilyName:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productSubFamilyName
+      label: product sub family name
+      description: Name of the product sub-family.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:productionPlannerControllerCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productionPlannerControllerCode
+      label: production planner controller code
+      description: Code for the production planner controller.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:productionPlantCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productionPlantCode
+      label: production plant code
+      description: Code linking batches and orders to manufacturing sites.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:productionSupervisorIdentifier:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productionSupervisorIdentifier
+      label: production supervisor identifier
+      description: Identifier for the production supervisor.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:productionVersionDescription:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productionVersionDescription
+      label: production version description
+      description: Description of the production version.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:productionVersionNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/productionVersionNumber
+      label: production version number
+      description: Number of the production version.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:purchaseOrderItemNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/purchaseOrderItemNumber
+      label: purchase order item number
+      description: Item number in the purchase order.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:purchaseOrderNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/purchaseOrderNumber
+      label: purchase order number
+      description: Number of the associated purchase order.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:qualityEventIdentifiersText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/qualityEventIdentifiersText
+      label: quality event identifiers text
+      description: Text listing quality event identifiers.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:qualityEventTypeCodesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/qualityEventTypeCodesText
+      label: quality event type codes text
+      description: Text of quality event type codes.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:qualityNotificationsSystemStatusesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/qualityNotificationsSystemStatusesText
+      label: quality notifications system statuses text
+      description: Text of quality notifications system statuses.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:qualityNotificationsText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/qualityNotificationsText
+      label: quality notifications text
+      description: Text describing quality notifications.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:qualityNotificationsTypeCodesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/qualityNotificationsTypeCodesText
+      label: quality notifications type codes text
+      description: Text of quality notifications type codes.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:qualityNotificationsUserStatusesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/qualityNotificationsUserStatusesText
+      label: quality notifications user statuses text
+      description: Text of quality notifications user statuses.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:recordCreationDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/recordCreationDatetime
+      label: record creation datetime
+      description: Datetime when the record was created.
+      subPropertyOf: def-ops:operational
+      domain: def-ops:Batch
+      range: xsd:dateTime
+    mia:referenceInspectionLotNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/referenceInspectionLotNumber
+      label: reference inspection lot number
+      description: Reference number for the inspection lot.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:releasedIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/releasedIndicator
+      label: released indicator
+      description: Indicator if the order is released.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:releasedLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/releasedLastUpdatedDatetime
+      label: released last updated datetime
+      description: Datetime when released status was last updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:reservationNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/reservationNumber
+      label: reservation number
+      description: Number of the reservation.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:reworkOrderIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/reworkOrderIndicator
+      label: rework order indicator
+      description: Indicator if it's a rework order.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:roundingRuleDescription:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/roundingRuleDescription
+      label: rounding rule description
+      description: Description of the rounding rule for quantities.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:scheduledFinishDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/scheduledFinishDatetime
+      label: scheduled finish datetime
+      description: Scheduled finish datetime for the process order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:scheduledReleaseDate:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/scheduledReleaseDate
+      label: scheduled release date
+      description: Scheduled release date for the order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:date
+    mia:scheduledStartDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/scheduledStartDatetime
+      label: scheduled start datetime
+      description: Scheduled start datetime for the process order.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:shelfLifePeriodNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/shelfLifePeriodNumber
+      label: shelf life period number
+      description: Number of periods for shelf life.
+      subPropertyOf: def-ops:physical
+      domain: def-ops:Batch
+      range: xsd:integer
+    mia:shelfLifePeriodUnitOfMeasureDescription:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/shelfLifePeriodUnitOfMeasureDescription
+      label: shelf life period unit of measure description
+      description: Description of the unit for shelf life period.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:sourceSystemCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/sourceSystemCode
+      label: source system code
+      description: Code for the source system.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:stockStatusesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/stockStatusesText
+      label: stock statuses text
+      description: Text describing stock statuses.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:storageLocationCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/storageLocationCode
+      label: storage location code
+      description: Code for the storage location.
+      subPropertyOf: def-ops:tag
+      domain:
+      - def-ops:Batch
+      - mia:PlannedOrder
+      - mia:ProcessOrder
+      range: xsd:string
+    mia:storageLocationCodesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/storageLocationCodesText
+      label: storage location codes text
+      description: Text listing storage location codes.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:strengthText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/strengthText
+      label: strength text
+      description: Text describing the strength (e.g., concentration).
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:supplyNetworkPlannerCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/supplyNetworkPlannerCode
+      label: supply network planner code
+      description: Code for the supply network planner.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:systemStatusesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/systemStatusesText
+      label: system statuses text
+      description: Text describing system statuses.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:technicallyCompletedIndicator:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/technicallyCompletedIndicator
+      label: technically completed indicator
+      description: Indicator if the order is technically completed.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:boolean
+    mia:technicallyCompletedLastUpdatedDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/technicallyCompletedLastUpdatedDatetime
+      label: technically completed last updated datetime
+      description: Datetime when technically completed status was updated.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:totalOperationsCount:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/totalOperationsCount
+      label: total operations count
+      description: Total count of operations.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:integer
+    mia:totalOrderQuantity:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/totalOrderQuantity
+      label: total order quantity
+      description: Total quantity specified in the process order.
+      subPropertyOf: def-ops:physical
+      domain: mia:ProcessOrder
+      range: xsd:decimal
+    mia:usageDecisionDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/usageDecisionDatetime
+      label: usage decision datetime
+      description: Datetime of the usage decision.
+      subPropertyOf: def-ops:operational
+      domain:
+      - def-ops:Batch
+      - mia:ProcessOrder
+      range: xsd:dateTime
+    mia:userStatusesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/userStatusesText
+      label: user statuses text
+      description: Text describing user statuses.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:validInspectionLotNumbersText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/validInspectionLotNumbersText
+      label: valid inspection lot numbers text
+      description: Text listing valid inspection lot numbers.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:vendorAccountNumber:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/vendorAccountNumber
+      label: vendor account number
+      description: Account number of the vendor for the batch.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:vendorBatchCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/vendorBatchCode
+      label: vendor batch code
+      description: Batch code provided by the vendor.
+      subPropertyOf: def-ops:tag
+      domain: def-ops:Batch
+      range: xsd:string
+    mia:workCentreCode:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/workCentreCode
+      label: work centre code
+      description: Code for the work centre.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:workCentreCodesText:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/workCentreCodesText
+      label: work centre codes text
+      description: Text listing work centre codes.
+      subPropertyOf: def-ops:tag
+      domain: mia:ProcessOrder
+      range: xsd:string
+    mia:workflowEntryExecutionDatetime:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/workflowEntryExecutionDatetime
+      label: workflow entry execution datetime
+      description: Datetime of workflow entry execution.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:dateTime
+    mia:workflowLogEntryDescription:
+      uri: https://pid.astrazeneca.net/ontology/app/mia/workflowLogEntryDescription
+      label: workflow log entry description
+      description: Description of the workflow log entry.
+      subPropertyOf: def-ops:operational
+      domain: mia:ProcessOrder
+      range: xsd:string
+  reference_data:
+    ref-ops:BatchStatusScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/BatchStatusScheme
+      label: Batch Status Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:BatchStatus_Blocked
+        uri: https://pid.astrazeneca.net/ref-ops/BatchStatus_Blocked
+        label: Blocked
+        prefLabel: Blocked
+      - id: ref-ops:BatchStatus_Created
+        uri: https://pid.astrazeneca.net/ref-ops/BatchStatus_Created
+        label: Created
+        prefLabel: Created
+      - id: ref-ops:BatchStatus_InProduction
+        uri: https://pid.astrazeneca.net/ref-ops/BatchStatus_InProduction
+        label: In Production
+        prefLabel: In Production
+      - id: ref-ops:BatchStatus_QualityControl
+        uri: https://pid.astrazeneca.net/ref-ops/BatchStatus_QualityControl
+        label: Quality Control
+        prefLabel: Quality Control
+      - id: ref-ops:BatchStatus_Released
+        uri: https://pid.astrazeneca.net/ref-ops/BatchStatus_Released
+        label: Released
+        prefLabel: Released
+      definition: Controlled vocabulary for batch status values in manufacturing processes
+    ref-ops:InspectionTypeScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/InspectionTypeScheme
+      label: Inspection Type Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:InspectionType_Final
+        uri: https://pid.astrazeneca.net/ref-ops/InspectionType_Final
+        label: Final
+        prefLabel: Final
+      - id: ref-ops:InspectionType_InProcess
+        uri: https://pid.astrazeneca.net/ref-ops/InspectionType_InProcess
+        label: In-Process
+        prefLabel: In-Process
+      - id: ref-ops:InspectionType_Incoming
+        uri: https://pid.astrazeneca.net/ref-ops/InspectionType_Incoming
+        label: Incoming
+        prefLabel: Incoming
+      definition: Controlled vocabulary for inspection types
+    ref-ops:LocationTypeScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/LocationTypeScheme
+      label: Location Type Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:LocationType_Production
+        uri: https://pid.astrazeneca.net/ref-ops/LocationType_Production
+        label: Production
+        prefLabel: Production
+      - id: ref-ops:LocationType_QualityControl
+        uri: https://pid.astrazeneca.net/ref-ops/LocationType_QualityControl
+        label: Quality Control
+        prefLabel: Quality Control
+      - id: ref-ops:LocationType_Warehouse
+        uri: https://pid.astrazeneca.net/ref-ops/LocationType_Warehouse
+        label: Warehouse
+        prefLabel: Warehouse
+      definition: Controlled vocabulary for product location types
+    ref-ops:MaterialTypeScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/MaterialTypeScheme
+      label: Material Type Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:MaterialType_FinishedProduct
+        uri: https://pid.astrazeneca.net/ref-ops/MaterialType_FinishedProduct
+        label: Finished Product
+        prefLabel: Finished Product
+      - id: ref-ops:MaterialType_Intermediate
+        uri: https://pid.astrazeneca.net/ref-ops/MaterialType_Intermediate
+        label: Intermediate
+        prefLabel: Intermediate
+      - id: ref-ops:MaterialType_RawMaterial
+        uri: https://pid.astrazeneca.net/ref-ops/MaterialType_RawMaterial
+        label: Raw Material
+        prefLabel: Raw Material
+      definition: Controlled vocabulary for material types
+    ref-ops:OrderStatusScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/OrderStatusScheme
+      label: Order Status Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:OrderStatus_Cancelled
+        uri: https://pid.astrazeneca.net/ref-ops/OrderStatus_Cancelled
+        label: Cancelled
+        prefLabel: Cancelled
+      - id: ref-ops:OrderStatus_Completed
+        uri: https://pid.astrazeneca.net/ref-ops/OrderStatus_Completed
+        label: Completed
+        prefLabel: Completed
+      - id: ref-ops:OrderStatus_Created
+        uri: https://pid.astrazeneca.net/ref-ops/OrderStatus_Created
+        label: Created
+        prefLabel: Created
+      - id: ref-ops:OrderStatus_InProgress
+        uri: https://pid.astrazeneca.net/ref-ops/OrderStatus_InProgress
+        label: In Progress
+        prefLabel: In Progress
+      - id: ref-ops:OrderStatus_Released
+        uri: https://pid.astrazeneca.net/ref-ops/OrderStatus_Released
+        label: Released
+        prefLabel: Released
+      - id: ref-ops:OrderStatus_TechnicallyCompleted
+        uri: https://pid.astrazeneca.net/ref-ops/OrderStatus_TechnicallyCompleted
+        label: Technically Completed
+        prefLabel: Technically Completed
+      definition: Controlled vocabulary for process order status values
+    ref-ops:ProcessOrderTypeScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/ProcessOrderTypeScheme
+      label: Process Order Type Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:ProcessOrderType_Production
+        uri: https://pid.astrazeneca.net/ref-ops/ProcessOrderType_Production
+        label: Production
+        prefLabel: Production
+      - id: ref-ops:ProcessOrderType_Rework
+        uri: https://pid.astrazeneca.net/ref-ops/ProcessOrderType_Rework
+        label: Rework
+        prefLabel: Rework
+      - id: ref-ops:ProcessOrderType_Sampling
+        uri: https://pid.astrazeneca.net/ref-ops/ProcessOrderType_Sampling
+        label: Sampling
+        prefLabel: Sampling
+      definition: Controlled vocabulary for process order types
+    ref-ops:ProcurementTypeScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/ProcurementTypeScheme
+      label: Procurement Type Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:ProcurementType_Manufacturing
+        uri: https://pid.astrazeneca.net/ref-ops/ProcurementType_Manufacturing
+        label: Manufacturing
+        prefLabel: Manufacturing
+      - id: ref-ops:ProcurementType_Production
+        uri: https://pid.astrazeneca.net/ref-ops/ProcurementType_Production
+        label: Production
+        prefLabel: Production
+      - id: ref-ops:ProcurementType_Purchase
+        uri: https://pid.astrazeneca.net/ref-ops/ProcurementType_Purchase
+        label: Purchase
+        prefLabel: Purchase
+      - id: ref-ops:ProcurementType_Transfer
+        uri: https://pid.astrazeneca.net/ref-ops/ProcurementType_Transfer
+        label: Transfer
+        prefLabel: Transfer
+      definition: Controlled vocabulary for procurement types
+    ref-ops:UsageDecisionScheme:
+      uri: https://pid.astrazeneca.net/ref-ops/UsageDecisionScheme
+      label: Usage Decision Scheme
+      type: skos:ConceptScheme
+      concepts:
+      - id: ref-ops:UsageDecision_Approved
+        uri: https://pid.astrazeneca.net/ref-ops/UsageDecision_Approved
+        label: Approved
+        prefLabel: Approved
+      - id: ref-ops:UsageDecision_Pending
+        uri: https://pid.astrazeneca.net/ref-ops/UsageDecision_Pending
+        label: Pending
+        prefLabel: Pending
+      - id: ref-ops:UsageDecision_Rejected
+        uri: https://pid.astrazeneca.net/ref-ops/UsageDecision_Rejected
+        label: Rejected
+        prefLabel: Rejected
+      definition: Controlled vocabulary for usage decision types

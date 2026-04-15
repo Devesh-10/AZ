@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astrazeneca.com/test-intelligence-agent/schemas/patient_safety/icsr.json",
+  "title": "ICSR (Individual Case Safety Report) Schema",
+  "description": "JSON Schema for validating Individual Case Safety Report data used in pharmacovigilance adverse event reporting. Aligned with ICH E2B(R3) data elements.",
+  "type": "object",
+  "required": [
+    "patient_id",
+    "drug_name",
+    "adverse_event_term",
+    "severity",
+    "onset_date",
+    "reporter_name",
+    "report_type",
+    "meddra_code"
+  ],
+  "properties": {
+    "patient_id": {
+      "type": "string",
+      "description": "Unique patient identifier for the case",
+      "pattern": "^PTID-[A-Z0-9]{8}$",
+      "maxLength": 64,
+      "examples": ["PTID-A1B2C3D4"]
+    },
+    "drug_name": {
+      "type": "string",
+      "description": "Name of the suspect drug (INN preferred)",
+      "minLength": 1,
+      "maxLength": 200,
+      "examples": ["Osimertinib", "Durvalumab"]
+    },
+    "adverse_event_term": {
+      "type": "string",
+      "description": "Reported adverse event term as coded to MedDRA LLT",
+      "minLength": 1,
+      "maxLength": 250,
+      "pattern": "^[A-Za-z0-9 \\-]+$",
+      "examples": ["Nausea", "Hepatotoxicity", "Rash maculopapular"]
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity grading of the adverse event",
+      "enum": ["mild", "moderate", "severe", "life-threatening", "fatal"]
+    },
+    "onset_date": {
+      "type": "string",
+      "description": "Date of adverse event onset in ISO 8601 format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-15"]
+    },
+    "reporter_name": {
+      "type": "string",
+      "description": "Name of the person reporting the adverse event",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z ._\\-]+$",
+      "examples": ["Smith_John", "Dr. A. Patel"]
+    },
+    "report_type": {
+      "type": "string",
+      "description": "Type of safety report submission",
+      "enum": ["initial", "follow-up", "final"]
+    },
+    "meddra_code": {
+      "type": "integer",
+      "description": "MedDRA Lowest Level Term (LLT) code",
+      "minimum": 10000000,
+      "maximum": 99999999,
+      "examples": [10028813, 10019851]
+    },
+    "outcome": {
+      "type": "string",
+      "description": "Patient outcome at time of report",
+      "enum": ["recovered", "recovering", "not_recovered", "fatal", "unknown"]
+    },
+    "causality_assessment": {
+      "type": "string",
+      "description": "WHO-UMC causality assessment category",
+      "enum": ["certain", "probable", "possible", "unlikely", "conditional", "unassessable"]
+    },
+    "seriousness_criteria": {
+      "type": "array",
+      "description": "Applicable seriousness criteria flags",
+      "items": {
+        "type": "string",
+        "enum": [
+          "results_in_death",
+          "life_threatening",
+          "hospitalization",
+          "disability",
+          "congenital_anomaly",
+          "medically_important"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "report_date": {
+      "type": "string",
+      "description": "Date the report was created or received",
+      "format": "date"
+    },
+    "narrative": {
+      "type": "string",
+      "description": "Free-text case narrative describing the adverse event",
+      "maxLength": 10000
+    }
+  },
+  "additionalProperties": false
+}

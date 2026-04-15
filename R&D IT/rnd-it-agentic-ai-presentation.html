@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>R&D IT Agentic AI - Complete Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f0f0f0;
+        }
+
+        .slide {
+            width: 1400px;
+            min-height: 788px;
+            background: #fff;
+            margin: 20px auto;
+            padding: 40px 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+            page-break-after: always;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Typography */
+        .slide-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .slide-title span {
+            color: #830051;
+        }
+
+        .slide-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #830051;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(90deg, #830051, #a3006a);
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .col {
+            display: table-cell;
+            vertical-align: top;
+            padding: 0 15px;
+        }
+
+        .col:first-child { padding-left: 0; }
+        .col:last-child { padding-right: 0; }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Metrics */
+        .metrics-row {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .metric-box {
+            display: table-cell;
+            text-align: center;
+            padding: 20px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .metric-box + .metric-box {
+            margin-left: 15px;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #830051;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Benefits list */
+        .benefit-item {
+            padding: 15px;
+            border-left: 4px solid #c9a227;
+            background: #fafafa;
+            margin-bottom: 12px;
+        }
+
+        .benefit-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .benefit-item p {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Platform badges */
+        .platform-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .platform-badge.tdp {
+            background: #830051;
+            color: #fff;
+        }
+
+        .platform-badge.bikg {
+            background: #c9a227;
+            color: #fff;
+        }
+
+        /* Usage metrics table */
+        .usage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .usage-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+        }
+
+        .usage-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: #830051;
+        }
+
+        /* Progress bars */
+        .progress-item {
+            margin-bottom: 12px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #830051, #c9a227);
+            border-radius: 4px;
+        }
+
+        /* Platform integration boxes */
+        .integration-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .integration-box .name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .integration-box .desc {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .live-badge {
+            background: #2e7d32;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Cost tracking */
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+        }
+
+        .cost-row .amount {
+            font-weight: 700;
+            color: #830051;
+        }
+
+        /* Budget bar */
+        .budget-bar {
+            background: #e8f5e9;
+            border: 2px solid #2e7d32;
+            border-radius: 6px;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        /* ROI bar */
+        .roi-bar {
+            background: linear-gradient(90deg, #2e7d32, #43a047);
+            border-radius: 6px;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .kpi-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .kpi-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .kpi-value {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .kpi-desc {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .kpi-detail {
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-detail-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 3px;
+        }
+
+        .kpi-detail-text {
+            font-size: 11px;
+            color: #555;
+        }
+
+        /* Use Cases Grid */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .usecase-card {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .usecase-card.tdp {
+            border-top: 4px solid #830051;
+        }
+
+        .usecase-card.bikg {
+            border-top: 4px solid #c9a227;
+        }
+
+        .usecase-card-inner {
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            padding: 20px;
+            background: #fff;
+            min-height: 200px;
+        }
+
+        .usecase-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .usecase-card p {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .usecase-card ul {
+            list-style: none;
+            font-size: 11px;
+            color: #555;
+        }
+
+        .usecase-card li {
+            padding: 4px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .usecase-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #830051;
+        }
+
+        /* Architecture diagram placeholder */
+        .arch-container {
+            border: 2px solid #c62828;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .arch-note {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            width: 350px;
+        }
+
+        .arch-note p {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .arch-note strong {
+            color: #1a1a1a;
+        }
+
+        /* Main Table for AI for AI slide */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .main-table th,
+        .main-table td {
+            border: 1px solid #ddd;
+            padding: 12px 10px;
+            text-align: center;
+            vertical-align: top;
+            font-size: 11px;
+        }
+
+        .main-table thead th {
+            background: #830051;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 14px 10px;
+        }
+
+        .main-table thead th:first-child {
+            background: #5c3d6e;
+            width: 90px;
+        }
+
+        .main-table thead th small {
+            display: block;
+            font-weight: 400;
+            font-size: 9px;
+            opacity: 0.8;
+        }
+
+        .row-label {
+            font-weight: 700;
+            font-size: 11px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .row-label.today { background: #5c3d6e; color: #fff; }
+        .row-label.tomorrow { background: #c9a227; color: #fff; }
+        .row-label.tools { background: #f5f5f5; color: #333; }
+        .row-label.value { background: #2e7d32; color: #fff; }
+
+        .today-cell {
+            background: #fafafa;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .today-cell .duration {
+            font-weight: 700;
+            color: #830051;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .today-cell .pain { color: #c62828; }
+
+        .tomorrow-cell {
+            background: #fffdf5;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .tomorrow-cell .duration {
+            font-weight: 700;
+            color: #2e7d32;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tomorrow-cell .benefit { color: #2e7d32; font-weight: 600; }
+
+        .tools-cell {
+            background: #fff;
+            padding: 10px;
+        }
+
+        .tool-logo {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 600;
+            margin: 3px;
+        }
+
+        .tool-logo.claude { background: #d97706; color: #fff; }
+        .tool-logo.copilot { background: #24292e; color: #fff; }
+
+        .agent-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 700;
+            margin: 3px;
+            border: 2px solid;
+        }
+
+        .agent-badge.test { background: #e8f5e9; border-color: #2e7d32; color: #2e7d32; }
+        .agent-badge.dep { background: #e3f2fd; border-color: #1565c0; color: #1565c0; }
+        .agent-badge.change { background: #fff3e0; border-color: #ff6f00; color: #e65100; }
+        .agent-badge.reg { background: #f3e5f5; border-color: #7b1fa2; color: #7b1fa2; }
+
+        .value-cell {
+            background: #e8f5e9;
+            font-weight: 700;
+            color: #2e7d32;
+            line-height: 1.5;
+        }
+
+        .value-cell .number {
+            font-size: 16px;
+            color: #1b5e20;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Impact footer */
+        .impact-footer {
+            background: #1a1a1a;
+            border-radius: 6px;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .impact-label {
+            color: #c9a227;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 30px;
+            white-space: nowrap;
+        }
+
+        .impact-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .impact-item {
+            color: #fff;
+            font-size: 11px;
+            padding-left: 15px;
+            border-left: 3px solid #c9a227;
+        }
+
+        .impact-item .check {
+            color: #4caf50;
+            margin-right: 5px;
+        }
+
+        /* Column colors for table headers */
+        .col-test { border-top: 4px solid #2e7d32 !important; }
+        .col-dep { border-top: 4px solid #1565c0 !important; }
+        .col-change { border-top: 4px solid #ff6f00 !important; }
+        .col-reg { border-top: 4px solid #7b1fa2 !important; }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: Monitoring & Benefits Dashboard -->
+<div class="slide">
+    <p style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px;">Example of Monitoring and Benefits Dashboard</p>
+    <p style="font-size: 14px; color: #830051; margin-bottom: 30px;">Use an example for one of our four agents</p>
+
+    <div class="slide-title">Monitoring & <span>Benefits Dashboard</span></div>
+    <p style="font-size: 13px; color: #666; margin-bottom: 25px;">
+        Test Intelligence Agent — Phase 1
+        <span class="platform-badge tdp" style="margin-left: 15px;">3DP & BIKG</span>
+    </p>
+
+    <div class="two-col">
+        <div class="col" style="width: 45%;">
+            <div class="section-title">Benefits</div>
+
+            <div class="benefit-item">
+                <h4>Reduced Manual Testing Effort</h4>
+                <p>AI generates test cases automatically for regulatory validation, freeing engineers to focus on development work</p>
+            </div>
+
+            <div class="benefit-item">
+                <h4>Increased Test Coverage</h4>
+                <p>Discovers edge cases and validation scenarios that manual testing often misses, improving quality</p>
+            </div>
+
+            <div class="benefit-item">
+                <h4>Faster Release Cycles</h4>
+                <p>Automated test generation accelerates validation timelines for submissions and data pipelines</p>
+            </div>
+
+            <div class="benefit-item">
+                <h4>Regulatory Compliance</h4>
+                <p>Consistent, auditable test coverage for FDA/EMA submission requirements and GxP validation</p>
+            </div>
+        </div>
+
+        <div class="col" style="width: 55%;">
+            <div class="section-title">Monitoring</div>
+
+            <div class="metrics-row" style="display: flex; gap: 15px; margin-bottom: 20px;">
+                <div class="metric-box" style="flex: 1;">
+                    <div class="metric-value">25%</div>
+                    <div class="metric-label">Test Effort<br>Reduction</div>
+                </div>
+                <div class="metric-box" style="flex: 1;">
+                    <div class="metric-value">15%</div>
+                    <div class="metric-label">Coverage<br>Increase</div>
+                </div>
+                <div class="metric-box" style="flex: 1;">
+                    <div class="metric-value" style="color: #2e7d32;">23</div>
+                    <div class="metric-label">Defects<br>Caught</div>
+                </div>
+                <div class="metric-box" style="flex: 1;">
+                    <div class="metric-value" style="color: #1565c0;">2</div>
+                    <div class="metric-label">Platforms<br>Integrated</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <div class="section-title" style="font-size: 12px;">Usage Metrics</div>
+                    <table class="usage-table">
+                        <tr><td>Tests Generated</td><td>1,247</td></tr>
+                        <tr><td>Test Suites Created</td><td>34</td></tr>
+                        <tr><td>Success Rate</td><td>98.2%</td></tr>
+                        <tr><td>Avg Generation Time</td><td>2.3s</td></tr>
+                    </table>
+
+                    <div class="section-title" style="font-size: 12px; margin-top: 15px;">Cost Tracking</div>
+                    <div class="cost-row"><span>LLM API (Bedrock)</span><span class="amount">$4,200</span></div>
+                    <div class="cost-row"><span>Embedding Service</span><span class="amount">$850</span></div>
+                    <div class="cost-row"><span>Infrastructure</span><span class="amount">$500</span></div>
+                </div>
+
+                <div style="flex: 1;">
+                    <div class="section-title" style="font-size: 12px;">Platform Integration</div>
+                    <div class="integration-box">
+                        <div>
+                            <div class="name">3DP</div>
+                            <div class="desc">Drug Development Platform</div>
+                        </div>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+                    <div class="integration-box">
+                        <div>
+                            <div class="name">BIKG</div>
+                            <div class="desc">Knowledge Graph</div>
+                        </div>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+
+                    <div class="section-title" style="font-size: 12px; margin-top: 15px;">Model Performance</div>
+                    <div class="progress-item">
+                        <div class="progress-label"><span>Test Accuracy</span><span style="color: #2e7d32; font-weight: 600;">94%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 94%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label"><span>Data Validity</span><span style="color: #2e7d32; font-weight: 600;">91%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 91%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label"><span>First Review Approval</span><span style="color: #2e7d32; font-weight: 600;">89%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 89%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <div class="budget-bar" style="flex: 1;">Budget: $5,550/mo (Under $7.5K target)</div>
+                <div class="roi-bar" style="flex: 1;">ROI: $48K Annual Savings</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">1</div>
+</div>
+
+<!-- SLIDE 2: Key Performance Indicators -->
+<div class="slide">
+    <div class="slide-title">Key Performance <span>Indicators</span></div>
+    <p class="slide-subtitle">Definition and measurement methodology for each KPI</p>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <div class="kpi-title">Test Effort Reduction</div>
+                <div class="kpi-value">25%</div>
+            </div>
+            <p class="kpi-desc">Percentage decrease in manual hours spent writing test cases compared to baseline.</p>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Measurement:</div>
+                <div class="kpi-detail-text">(Baseline Hours − Current Hours) / Baseline Hours × 100</div>
+            </div>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Example:</div>
+                <div class="kpi-detail-text">Before: 40 hrs/sprint for Module 2/3 validation tests → After: 30 hrs/sprint = 25% reduction</div>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <div class="kpi-title">Coverage Increase</div>
+                <div class="kpi-value">15%</div>
+            </div>
+            <p class="kpi-desc">Increase in test scenarios covered, including edge cases previously untested.</p>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Measurement:</div>
+                <div class="kpi-detail-text">(New Scenarios − Original) / Original × 100</div>
+            </div>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Example:</div>
+                <div class="kpi-detail-text">AI discovered 47 new edge cases for GxP validation and CDISC format compliance</div>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <div class="kpi-title">Data Quality Score</div>
+                <div class="kpi-value" style="color: #830051; background: #f3e5f5;">90%</div>
+            </div>
+            <p class="kpi-desc">Validity rate of AI-generated synthetic test data passing all schema validations.</p>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Measurement:</div>
+                <div class="kpi-detail-text">Valid Records / Total Generated × 100</div>
+            </div>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Example:</div>
+                <div class="kpi-detail-text">Synthetic patient data for submissions — 90% passes CDISC and regulatory checks</div>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <div class="kpi-title">Platforms Integrated</div>
+                <div class="kpi-value" style="color: #1565c0; background: #e3f2fd;">2</div>
+            </div>
+            <p class="kpi-desc">Number of R&D IT platforms where the agent is deployed and generating tests.</p>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Current:</div>
+                <div class="kpi-detail-text">3DP (Drug Development Data Platform) and BIKG (Biological Intelligence KG)</div>
+            </div>
+            <div class="kpi-detail">
+                <div class="kpi-detail-label">Target:</div>
+                <div class="kpi-detail-text">2 primary platforms in Phase 1, extensible to additional platforms</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">2</div>
+</div>
+
+<!-- SLIDE 3: Platform Use Cases -->
+<div class="slide">
+    <div class="slide-title">Platform <span>Use Cases</span></div>
+    <p class="slide-subtitle">How Test Intelligence Agent delivers value on 3DP and BIKG</p>
+
+    <div class="usecase-grid" style="margin-bottom: 30px;">
+        <div class="usecase-card tdp">
+            <div class="usecase-card-inner">
+                <span class="platform-badge tdp">3DP</span>
+                <h4 style="margin-top: 10px;">Regulatory Validation Testing</h4>
+                <p>Auto-generate validation tests for FDA/EMA submission modules and GxP compliance.</p>
+                <ul>
+                    <li>Module 2/3 submission validation</li>
+                    <li>Patient Safety data checks</li>
+                    <li>GxP compliance testing</li>
+                    <li>Audit trail validation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="usecase-card tdp">
+            <div class="usecase-card-inner">
+                <span class="platform-badge tdp">3DP</span>
+                <h4 style="margin-top: 10px;">Data Pipeline Testing</h4>
+                <p>Validate data transformations and integrations across the platform.</p>
+                <ul>
+                    <li>Portfolio Tower ingestion tests</li>
+                    <li>Study Cycle Time benchmarking</li>
+                    <li>CRO operational data validation</li>
+                    <li>Cross-reference integrity checks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="usecase-card tdp">
+            <div class="usecase-card-inner">
+                <span class="platform-badge tdp">3DP</span>
+                <h4 style="margin-top: 10px;">Synthetic Test Data</h4>
+                <p>Generate compliant synthetic data for testing without using real patient data.</p>
+                <ul>
+                    <li>CDISC-compliant patient records</li>
+                    <li>Adverse event test data</li>
+                    <li>Lab results within valid ranges</li>
+                    <li>Clinical trial mock data</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="usecase-grid">
+        <div class="usecase-card bikg">
+            <div class="usecase-card-inner">
+                <span class="platform-badge bikg">BIKG</span>
+                <h4 style="margin-top: 10px;">Knowledge Graph Query Testing</h4>
+                <p>Generate test cases for graph traversal and relationship queries.</p>
+                <ul>
+                    <li>Gene-disease relationship queries</li>
+                    <li>Protein-drug interactions</li>
+                    <li>Pathway traversal validation</li>
+                    <li>Query performance testing</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="usecase-card bikg">
+            <div class="usecase-card-inner">
+                <span class="platform-badge bikg">BIKG</span>
+                <h4 style="margin-top: 10px;">Entity Validation</h4>
+                <p>Validate biological entity data integrity and ontology consistency.</p>
+                <ul>
+                    <li>Entity attribute completeness</li>
+                    <li>Ontology term consistency</li>
+                    <li>Cross-reference accuracy</li>
+                    <li>Relationship cardinality checks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="usecase-card bikg">
+            <div class="usecase-card-inner">
+                <span class="platform-badge bikg">BIKG</span>
+                <h4 style="margin-top: 10px;">Synthetic Biological Data</h4>
+                <p>Generate test data for biological entities and relationships.</p>
+                <ul>
+                    <li>Mock gene expression data</li>
+                    <li>Synthetic pathway data</li>
+                    <li>Test entity relationships</li>
+                    <li>Sample KG traversal results</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">3</div>
+</div>
+
+<!-- SLIDE 4: Architecture -->
+<div class="slide">
+    <div class="slide-title" style="font-size: 26px;">Scalable, Agent Mesh, future proof architecture for AZ's R&D Agentic ambition</div>
+
+    <div style="display: flex; gap: 30px; margin-top: 20px;">
+        <div class="arch-container" style="flex: 2;">
+            <div style="text-align: center; padding: 30px; color: #999;">
+                <p style="font-size: 14px; margin-bottom: 20px;">[Architecture Diagram]</p>
+                <p style="font-size: 12px;">AWS Cloud | VPC | ECS Fargate | Agent Runtime | Mesh Control Plane</p>
+                <p style="font-size: 12px; margin-top: 10px;">Azure AD → Route 53 → ALB → Frontend ECS → Agent Runtime ECS → Bedrock</p>
+                <p style="font-size: 12px; margin-top: 10px;">MCP Server/Client | Agent Registry | Tool Registry | PDP</p>
+                <p style="font-size: 12px; margin-top: 10px;">4 Agents: Test Intelligence | Dependency | Deployment | Regulatory</p>
+                <p style="font-size: 12px; margin-top: 20px;">CI/CD: CodeCommit → CodeBuild → CodeDeploy → ECR</p>
+                <p style="font-size: 12px; margin-top: 10px;">Observability: Grafana | OpenTelemetry | Prometheus | CloudWatch</p>
+            </div>
+        </div>
+
+        <div style="flex: 1;">
+            <div style="margin-bottom: 25px;">
+                <p style="font-size: 12px; color: #555; line-height: 1.7; margin-bottom: 15px;">
+                    <strong>1.</strong> These four agents collectively form a modular R&D intelligence fabric — enabling knowledge retrieval, experiment validation, data reasoning, and governed orchestration — all operating within a secure, federated <strong>Agent Mesh architecture aligned to AZ's Enterprise Agentic AI blueprint</strong>.
+                </p>
+            </div>
+
+            <div>
+                <p style="font-size: 12px; color: #555; line-height: 1.7;">
+                    <strong>2.</strong> To accelerate implementation, we will leverage AI-assisted engineering (Claude Code) to generate validated scaffolding, typed contracts, test harnesses, and infrastructure templates — <strong>while maintaining full human governance, security review, and CI/CD controls</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">5</div>
+</div>
+
+<!-- SLIDE 5: AI for AI Delivery (Table Format) -->
+<div class="slide">
+    <div class="slide-title" style="font-size: 24px; font-style: italic;">From Manual Processes to Intelligent Automation: AI-Powered R&D IT Platform Delivery</div>
+    <p class="slide-subtitle">AI Agents reduce cycle time by 40-60% while improving compliance, quality, and cross-team coordination for 3DP & BIKG Platforms</p>
+
+    <div class="banner">
+        Accelerate delivery by 40-60% | AI-Orchestrated intelligent workflow across Testing, Dependencies, Deployments & Compliance
+    </div>
+
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>Phase<br>Duration</th>
+                <th class="col-test">🧪 Test Intelligence<br><small>Wave 1</small></th>
+                <th class="col-dep">🔗 Dependency Coordinator<br><small>Wave 1</small></th>
+                <th class="col-change">🚀 Deployment & Change<br><small>Wave 2</small></th>
+                <th class="col-reg">📋 Regulatory Readiness<br><small>Wave 2</small></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="row-label today">Today<br>(Human-Led)</td>
+                <td class="today-cell">
+                    <span class="duration">3-4 weeks</span>
+                    Manual test authoring across test scripts. <span class="pain">Long regression cycles</span>, significant effort to identify and log defects. <span class="pain">Defect leakage</span> to production.
+                </td>
+                <td class="today-cell">
+                    <span class="duration">2-3 weeks</span>
+                    Manual tracking via Jira/ADO. <span class="pain">Cross-team friction</span> causes rework. <span class="pain">Approval delays</span> and blocked-work with limited visibility.
+                </td>
+                <td class="today-cell">
+                    <span class="duration">1-2 weeks</span>
+                    Manual IaC code writing and configurations. <span class="pain">High change failure rate</span>, frequent <span class="pain">drift incidents</span>, and slow MTTR.
+                </td>
+                <td class="today-cell">
+                    <span class="duration">2-4 weeks</span>
+                    Manual evidence gathering across documents. <span class="pain">Long audit prep time</span> with <span class="pain">missing artefacts</span> detected late.
+                </td>
+            </tr>
+            <tr>
+                <td class="row-label tomorrow">Tomorrow<br>(AI-Powered)</td>
+                <td class="tomorrow-cell">
+                    <span class="duration">1 week</span>
+                    <span class="benefit">Automated test case generation</span> from user stories & requirements. Standardised artefacts in pipelines. <span class="benefit">25% reduction</span> in test effort.
+                </td>
+                <td class="tomorrow-cell">
+                    <span class="duration">Days</span>
+                    <span class="benefit">Automated dependency tracking</span> with Jira/ADO, Confluence. <span class="benefit">Early conflict detection</span> and reduced rework rate.
+                </td>
+                <td class="tomorrow-cell">
+                    <span class="duration">Hours</span>
+                    <span class="benefit">Common IaC patterns</span> with CI-CD adapters. <span class="benefit">Reduced change failure rate</span>, faster MTTR, automated drift detection.
+                </td>
+                <td class="tomorrow-cell">
+                    <span class="duration">Hours</span>
+                    <span class="benefit">Automated evidence generation</span> with templates & evidence packs. QMS integrated. <span class="benefit">100% complete evidence</span>.
+                </td>
+            </tr>
+            <tr>
+                <td class="row-label tools">AI Tools<br>Used</td>
+                <td class="tools-cell">
+                    <span class="tool-logo claude">☀️ Claude</span><br>
+                    <span class="agent-badge test">🧪 Test Intelligence Agent</span>
+                </td>
+                <td class="tools-cell">
+                    <span class="tool-logo claude">☀️ Claude</span><br>
+                    <span class="agent-badge dep">🔗 Dependency Coordinator</span>
+                </td>
+                <td class="tools-cell">
+                    <span class="tool-logo claude">☀️ Claude</span>
+                    <span class="tool-logo copilot">GitHub Copilot</span><br>
+                    <span class="agent-badge change">🚀 Deploy & Change Agent</span>
+                </td>
+                <td class="tools-cell">
+                    <span class="tool-logo claude">☀️ Claude</span><br>
+                    <span class="agent-badge reg">📋 Regulatory Readiness Agent</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="row-label value">Value<br>Delivered</td>
+                <td class="value-cell">
+                    <span class="number">25% faster</span>
+                    Reduced test authoring effort<br>
+                    Higher coverage, less defect leakage
+                </td>
+                <td class="value-cell">
+                    <span class="number">50% faster</span>
+                    Reduced approval cycle time<br>
+                    Early conflict detection
+                </td>
+                <td class="value-cell">
+                    <span class="number">70% faster</span>
+                    Near-instant deployments<br>
+                    Reduced change failure rate
+                </td>
+                <td class="value-cell">
+                    <span class="number">100% compliant</span>
+                    Complete evidence packs<br>
+                    Faster audit readiness
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="impact-footer">
+        <div class="impact-label">AI for AI Delivery Impact:</div>
+        <div class="impact-items">
+            <span class="impact-item"><span class="check">✓</span> Launch readiness accelerated by 40-60%</span>
+            <span class="impact-item"><span class="check">✓</span> 70% reduction in manual effort</span>
+            <span class="impact-item"><span class="check">✓</span> 100% regulatory compliance</span>
+            <span class="impact-item"><span class="check">✓</span> Enterprise-grade quality & governance</span>
+        </div>
+    </div>
+
+    <div class="slide-number">6</div>
+</div>
+
+<!-- SLIDE 6: AI for AI Delivery (3-Column Format) -->
+<div class="slide">
+    <div class="slide-title">'<span>AI for AI</span>' approach for delivery with R&D IT Platforms</div>
+    <p class="slide-subtitle">Leveraging an AI-first & Agentic approach to establish the AI foundation in AZ's environment for 3DP & BIKG Platforms</p>
+
+    <div class="two-col" style="margin-top: 20px;">
+        <!-- TODAY Column -->
+        <div class="col" style="width: 32%;">
+            <div class="card" style="background: #f9f9f9; border: 2px solid #ddd;">
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 5px;">Today:</h3>
+                <p style="font-size: 10px; color: #830051; margin-bottom: 15px;">Manual, error-prone processes with significant human effort across testing, dependencies, deployments, and compliance</p>
+
+                <p style="font-size: 9px; font-weight: 700; color: #2e7d32; margin-bottom: 8px;">WAVE 1 (MONTHS 0-3)</p>
+
+                <div style="display: flex; margin-bottom: 10px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #2e7d32; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">🧪</div>
+                        <div style="font-size: 8px; font-weight: 700;">Testing</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">3-4 wks</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #830051;">Manual test authoring</strong> requires significant effort. <span style="color: #c62828; text-decoration: underline;">Error-prone testing</span> with long regression cycles.</div>
+                </div>
+
+                <div style="display: flex; margin-bottom: 15px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #1565c0; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">🔗</div>
+                        <div style="font-size: 8px; font-weight: 700;">Dependencies</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">2-3 wks</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #830051;">Cross-team friction</strong> causes rework and <span style="color: #c62828; text-decoration: underline;">approval delays</span>. Manual tracking.</div>
+                </div>
+
+                <p style="font-size: 9px; font-weight: 700; color: #7b1fa2; margin-bottom: 8px; border-top: 1px dashed #ccc; padding-top: 10px;">WAVE 2 (MONTHS 3-6)</p>
+
+                <div style="display: flex; margin-bottom: 10px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #ff6f00; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">🚀</div>
+                        <div style="font-size: 8px; font-weight: 700;">Deployment</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">1-2 wks</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;">Manual IaC with <span style="color: #c62828; text-decoration: underline;">high change failure rate</span>. Long lead time, <span style="color: #c62828; text-decoration: underline;">drift incidents</span>.</div>
+                </div>
+
+                <div style="display: flex; margin-bottom: 15px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #7b1fa2; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">📋</div>
+                        <div style="font-size: 8px; font-weight: 700;">Compliance</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">2-4 wks</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #830051;">Compliance-heavy</strong> manual evidence. Long <span style="color: #c62828; text-decoration: underline;">audit prep time</span>.</div>
+                </div>
+
+                <div style="background: #5c3d6e; color: #fff; padding: 10px; border-radius: 5px; font-size: 10px;">
+                    <strong>Siloed processes</strong> across testing, dependencies, deployments & compliance with limited visibility
+                </div>
+            </div>
+        </div>
+
+        <!-- TOMORROW Column -->
+        <div class="col" style="width: 38%;">
+            <div class="card" style="background: #fffdf5; border: 2px solid #c9a227;">
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 5px;">Tomorrow:</h3>
+                <p style="font-size: 10px; color: #830051; margin-bottom: 15px;">Agentic AI-powered automation accelerating testing, dependency management, deployments, and regulatory compliance</p>
+
+                <p style="font-size: 9px; font-weight: 700; color: #2e7d32; margin-bottom: 8px;">WAVE 1 (MONTHS 0-3)</p>
+
+                <div style="display: flex; margin-bottom: 10px; background: linear-gradient(90deg, #fffde7, #fff); border: 1px solid #c9a227; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #2e7d32; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">🧪</div>
+                        <div style="font-size: 8px; font-weight: 700;">Testing</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">1 week</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #2e7d32;">Automated test case generation</strong> from user stories. <strong style="color: #2e7d32;">25% reduction</strong> in test effort.</div>
+                </div>
+
+                <div style="display: flex; margin-bottom: 15px; background: linear-gradient(90deg, #fffde7, #fff); border: 1px solid #c9a227; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #1565c0; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">🔗</div>
+                        <div style="font-size: 8px; font-weight: 700;">Dependencies</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">Days</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #2e7d32;">Automated dependency tracking</strong> with Jira/ADO. <strong style="color: #2e7d32;">Reduced rework</strong> and early conflict detection.</div>
+                </div>
+
+                <p style="font-size: 9px; font-weight: 700; color: #7b1fa2; margin-bottom: 8px; border-top: 1px dashed #c9a227; padding-top: 10px;">WAVE 2 (MONTHS 3-6)</p>
+
+                <div style="display: flex; margin-bottom: 10px; background: linear-gradient(90deg, #fffde7, #fff); border: 1px solid #c9a227; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #ff6f00; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">🚀</div>
+                        <div style="font-size: 8px; font-weight: 700;">Deployment</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">Hours</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #2e7d32;">Common IaC patterns</strong> with CI-CD adapters. <strong style="color: #2e7d32;">Reduced change failure rate</strong>, faster MTTR.</div>
+                </div>
+
+                <div style="display: flex; margin-bottom: 15px; background: linear-gradient(90deg, #fffde7, #fff); border: 1px solid #c9a227; border-radius: 6px; overflow: hidden;">
+                    <div style="width: 70px; background: #7b1fa2; color: #fff; padding: 10px; text-align: center;">
+                        <div style="font-size: 18px;">📋</div>
+                        <div style="font-size: 8px; font-weight: 700;">Compliance</div>
+                    </div>
+                    <div style="width: 45px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600;">Hours</div>
+                    <div style="flex: 1; padding: 10px; font-size: 10px; line-height: 1.4;"><strong style="color: #2e7d32;">Automated evidence generation</strong>. QMS integrated. <strong style="color: #2e7d32;">100% complete evidence</strong>.</div>
+                </div>
+
+                <div style="background: #c9a227; color: #fff; padding: 10px; border-radius: 5px; font-size: 10px;">
+                    <strong>Unified Agent Mesh</strong> with integrated workflows across all 4 agents, end-to-end visibility and automated handoffs
+                </div>
+            </div>
+        </div>
+
+        <!-- AI TOOLS Column -->
+        <div class="col" style="width: 30%;">
+            <h3 style="font-size: 16px; font-weight: 700; color: #830051; text-align: right; padding-bottom: 8px; border-bottom: 3px solid #830051; margin-bottom: 15px;">AI for AI Delivery</h3>
+
+            <div style="background: linear-gradient(90deg, #f5f5ff, #f8f8f8); border-left: 4px solid #6366f1; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                <div style="font-size: 11px; font-weight: 700; margin-bottom: 3px;">Design Acceleration</div>
+                <div style="font-size: 9px; color: #666; margin-bottom: 8px;">Move away from manual docs, accelerate front-end design through prompting</div>
+                <div style="text-align: right;">
+                    <span style="display: inline-block; background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 600; margin-right: 5px;">R Replit</span>
+                    <span style="display: inline-block; background: #000; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 600;">V0 v0.dev</span>
+                </div>
+            </div>
+
+            <div style="background: #f8f8f8; border-left: 4px solid #24292e; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                <div style="font-size: 11px; font-weight: 700; margin-bottom: 3px;">Code Generation</div>
+                <div style="font-size: 9px; color: #666; margin-bottom: 8px;">Fast track code generation with minimal errors using AI coding assistants</div>
+                <div style="text-align: right;">
+                    <span style="display: inline-block; background: #24292e; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 600; margin-right: 5px;">GH Copilot</span>
+                    <span style="display: inline-block; background: #d97706; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 600;">C Claude</span>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(90deg, #f0f8f0, #f8f8f8); border-left: 4px solid #2e7d32; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                <div style="font-size: 11px; font-weight: 700; margin-bottom: 3px;">Test Intelligence Agent</div>
+                <div style="font-size: 9px; color: #666; margin-bottom: 5px;">Highest-ranked (4.30). Automates manual, error-prone testing across 3DP & BIKG.</div>
+                <div><span style="display: inline-block; background: #e8f5e9; border: 1px solid #2e7d32; color: #2e7d32; padding: 2px 6px; border-radius: 3px; font-size: 8px; font-weight: 600; margin-right: 3px;">-25% test effort</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px; margin-right: 3px;">Regression time</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px;">Defect leakage</span></div>
+            </div>
+
+            <div style="background: linear-gradient(90deg, #f0f5ff, #f8f8f8); border-left: 4px solid #1565c0; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                <div style="font-size: 11px; font-weight: 700; margin-bottom: 3px;">Dependency Coordinator</div>
+                <div style="font-size: 9px; color: #666; margin-bottom: 5px;">Cross-team friction reducer. Reduces rework and approval delays.</div>
+                <div><span style="display: inline-block; background: #e3f2fd; border: 1px solid #1565c0; color: #1565c0; padding: 2px 6px; border-radius: 3px; font-size: 8px; font-weight: 600; margin-right: 3px;">Approval cycle</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px; margin-right: 3px;">Blocked-work</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px;">Conflicts</span></div>
+            </div>
+
+            <div style="background: linear-gradient(90deg, #fff8f0, #f8f8f8); border-left: 4px solid #ff6f00; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                <div style="font-size: 11px; font-weight: 700; margin-bottom: 3px;">Deployment & Change Agent</div>
+                <div style="font-size: 9px; color: #666; margin-bottom: 5px;">Benefits from Wave 1 patterns. IaC maturity with high compliance value.</div>
+                <div><span style="display: inline-block; background: #fff3e0; border: 1px solid #ff6f00; color: #e65100; padding: 2px 6px; border-radius: 3px; font-size: 8px; font-weight: 600; margin-right: 3px;">Lead time</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px; margin-right: 3px;">Change failure</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px;">MTTR</span></div>
+            </div>
+
+            <div style="background: linear-gradient(90deg, #f8f0fa, #f8f8f8); border-left: 4px solid #7b1fa2; border-radius: 6px; padding: 12px;">
+                <div style="font-size: 11px; font-weight: 700; margin-bottom: 3px;">Regulatory Readiness Agent</div>
+                <div style="font-size: 9px; color: #666; margin-bottom: 5px;">Compliance-heavy, evidence-focused. Integrates with QMS and doc repos.</div>
+                <div><span style="display: inline-block; background: #f3e5f5; border: 1px solid #7b1fa2; color: #7b1fa2; padding: 2px 6px; border-radius: 3px; font-size: 8px; font-weight: 600; margin-right: 3px;">100% evidence</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px; margin-right: 3px;">Audit prep</span><span style="display: inline-block; background: #fff; border: 1px solid #ddd; color: #666; padding: 2px 6px; border-radius: 3px; font-size: 8px;">Missing artefacts</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">7</div>
+</div>
+
+</body>
+</html>

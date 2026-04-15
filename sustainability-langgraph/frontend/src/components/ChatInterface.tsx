@@ -240,10 +240,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     kpiQuestions: [
       "What was our total energy consumption last year?",
       "What EV fleet data do we have for UK?",
-      "Compare water usage across facilities",
       "What are the greenhouse gas emissions by scope type?",
+      "Total water withdrawn last quarter",
     ],
     analystQuestions: [
+      "Compare water usage across facilities",
       "What is the count of fleet assets by vehicle type?",
       "What is the fleet asset count by powertrain type and year?",
       "What is the fleet diesel car count trend by year?",

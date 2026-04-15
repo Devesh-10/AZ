@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astrazeneca.com/test-intelligence-agent/schemas/clinical_trials/sdtm_domain.json",
+  "title": "SDTM Domain Record Schema",
+  "description": "JSON Schema for validating clinical trial data records conforming to CDISC Study Data Tabulation Model (SDTM) Implementation Guide v3.4. This schema covers the common identifier, timing, qualifier, and result variables present across SDTM domains.",
+  "type": "object",
+  "required": [
+    "studyid",
+    "usubjid",
+    "domain",
+    "seq_variable",
+    "visitnum",
+    "dtc_variable",
+    "testcd",
+    "orres"
+  ],
+  "properties": {
+    "studyid": {
+      "type": "string",
+      "description": "Unique identifier for a study (STUDYID)",
+      "minLength": 1,
+      "maxLength": 20,
+      "pattern": "^[A-Za-z0-9\\-]+$",
+      "examples": ["AZ-ONCO-2024-001", "D5084C00001"]
+    },
+    "usubjid": {
+      "type": "string",
+      "description": "Unique subject identifier across all studies (USUBJID)",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[A-Za-z0-9\\-]+$",
+      "examples": ["AZ-ONCO-2024-001-0101-001"]
+    },
+    "domain": {
+      "type": "string",
+      "description": "Two-character SDTM domain abbreviation",
+      "pattern": "^[A-Z]{2}$",
+      "enum": [
+        "DM", "AE", "LB", "VS", "CM", "EX", "MH", "DS", "SV", "TU",
+        "TR", "RS", "PE", "EG", "SC", "QS", "FA", "IE", "CE", "HO"
+      ],
+      "examples": ["DM", "AE", "LB"]
+    },
+    "seq_variable": {
+      "type": "integer",
+      "description": "Sequence number (--SEQ) unique within subject and domain",
+      "minimum": 1,
+      "examples": [1, 2, 15]
+    },
+    "visitnum": {
+      "type": "number",
+      "description": "Clinical encounter/visit number (VISITNUM)",
+      "minimum": 0,
+      "examples": [1, 2, 3.1, 99]
+    },
+    "visit": {
+      "type": "string",
+      "description": "Protocol-defined visit name (VISIT)",
+      "maxLength": 200,
+      "examples": ["SCREENING", "BASELINE", "WEEK 4", "END OF TREATMENT"]
+    },
+    "dtc_variable": {
+      "type": "string",
+      "description": "Date/time of collection in ISO 8601 format (--DTC)",
+      "pattern": "^\\d{4}(-\\d{2}(-\\d{2}(T\\d{2}(:\\d{2}(:\\d{2})?)?)?)?)?$",
+      "examples": ["2025-03-15", "2025-03-15T10:30:00", "2025-03"]
+    },
+    "testcd": {
+      "type": "string",
+      "description": "Short name for the test/measurement (--TESTCD)",
+      "pattern": "^[A-Z0-9]{1,8}$",
+      "maxLength": 8,
+      "examples": ["ALT", "AST", "GLUC", "HGB", "WBC"]
+    },
+    "test": {
+      "type": "string",
+      "description": "Long name for the test/measurement (--TEST)",
+      "maxLength": 40,
+      "examples": ["Alanine Aminotransferase", "Glucose", "Hemoglobin"]
+    },
+    "orres": {
+      "type": "string",
+      "description": "Result or finding as originally collected (--ORRES)",
+      "maxLength": 200,
+      "examples": ["45", "NORMAL", "3.5", "Headache"]
+    },
+    "orresu": {
+      "type": "string",
+      "description": "Original units for the result (--ORRESU)",
+      "maxLength": 40,
+      "examples": ["U/L", "mg/dL", "mmHg", "beats/min"]
+    },
+    "stresc": {
+      "type": "string",
+      "description": "Character result standardised to facilitate analysis (--STRESC)",
+      "maxLength": 200
+    },
+    "stresn": {
+      "type": "number",
+      "description": "Numeric result standardised to facilitate analysis (--STRESN)"
+    },
+    "stresu": {
+      "type": "string",
+      "description": "Standard units for the standardised result (--STRESU)",
+      "maxLength": 40
+    },
+    "stat": {
+      "type": "string",
+      "description": "Completion status of the observation (STAT)",
+      "enum": ["NOT DONE"],
+      "examples": ["NOT DONE"]
+    },
+    "reasnd": {
+      "type": "string",
+      "description": "Reason not done (REASND) when STAT is NOT DONE",
+      "maxLength": 200,
+      "examples": ["Sample hemolyzed", "Patient refused"]
+    },
+    "epoch": {
+      "type": "string",
+      "description": "Trial epoch (EPOCH) in which the observation was made",
+      "enum": ["SCREENING", "RUN-IN", "TREATMENT", "FOLLOW-UP"],
+      "examples": ["TREATMENT"]
+    },
+    "siteid": {
+      "type": "string",
+      "description": "Unique identifier for the study site (SITEID)",
+      "maxLength": 20,
+      "examples": ["0101", "0205"]
+    },
+    "subjid": {
+      "type": "string",
+      "description": "Subject identifier within the site (SUBJID)",
+      "maxLength": 20,
+      "examples": ["001", "042"]
+    }
+  },
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "stat": { "const": "NOT DONE" }
+    },
+    "required": ["stat"]
+  },
+  "then": {
+    "required": ["reasnd"]
+  }
+}

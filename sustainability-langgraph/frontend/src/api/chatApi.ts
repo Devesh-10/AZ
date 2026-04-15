@@ -64,13 +64,25 @@ export async function sendQuery(
   console.log('vizData?.data?.length:', vizData?.data?.length);
 
   // Build visualization config
-  let visualizationConfig: { chartType: "bar"; title: string; series: { name: string; data: { x: string; y: number }[] }[] } | undefined = undefined;
-  if (vizData && vizData.data && vizData.data.length > 0) {
+  let visualizationConfig: { chartType: "bar" | "line" | "pie"; title: string; series: { name: string; data: { x: string; y: number }[] }[]; yLabel?: string } | undefined = undefined;
+
+  // Check if backend already returns proper series format (new format)
+  if (vizData && vizData.series && vizData.series.length > 0) {
+    console.log('Using new series format from backend');
+    visualizationConfig = {
+      chartType: vizData.chartType || "bar",
+      title: vizData.title || "KPI Data",
+      series: vizData.series,
+      yLabel: vizData.yLabel
+    };
+  }
+  // Fallback to old data array format (legacy)
+  else if (vizData && vizData.data && vizData.data.length > 0) {
     const seriesData = vizData.data.map((d: { sku?: string; site?: string; period?: string; value: number }) => ({
       x: d.site || d.period || "Unknown",
       y: d.value
     }));
-    console.log('Visualization series data:', seriesData);
+    console.log('Using legacy data format, converted series data:', seriesData);
 
     visualizationConfig = {
       chartType: "bar" as const,
@@ -80,9 +92,8 @@ export async function sendQuery(
         data: seriesData
       }]
     };
-    console.log('Built visualizationConfig:', JSON.stringify(visualizationConfig));
   } else {
-    console.log('NO VISUALIZATION - conditions not met');
+    console.log('NO VISUALIZATION - no series or data in response');
   }
   console.log('Final visualizationConfig:', visualizationConfig);
 

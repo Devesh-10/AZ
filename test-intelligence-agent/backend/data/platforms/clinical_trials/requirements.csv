@@ -1,0 +1,9 @@
+field_id,field_name,data_type,mandatory,validation_rules,source_spec,module
+CT-001,STUDYID,string,yes,"Non-empty; max 20 chars; alphanumeric with hyphens allowed; must be consistent across all domains in the study",CDISC SDTM IG v3.4,Identifier Variables
+CT-002,USUBJID,string,yes,"Non-empty; globally unique subject identifier; format STUDYID-SITEID-SUBJID; max 40 chars",CDISC SDTM IG v3.4,Identifier Variables
+CT-003,Domain,string,yes,"Non-empty; exactly 2 chars uppercase; must be a valid SDTM domain code (DM|AE|LB|VS|CM|EX|MH|DS|SV|TU etc.)",CDISC SDTM IG v3.4,Identifier Variables
+CT-004,SEQ Variable,integer,yes,"Positive integer; unique within subject and domain; sequential with no gaps; column name must follow --SEQ pattern",CDISC SDTM IG v3.4,Identifier Variables
+CT-005,VISITNUM,float,yes,"Non-negative numeric; must correspond to planned visit in TV domain; decimal allowed for unscheduled visits",CDISC SDTM IG v3.4,Timing Variables
+CT-006,DTC Variable,string,yes,"ISO 8601 partial or complete datetime; format YYYY-MM-DDThh:mm:ss; must not be future date; column name must follow --DTC pattern",CDISC SDTM IG v3.4,Timing Variables
+CT-007,TestCD,string,yes,"Non-empty; max 8 chars uppercase; must match CDISC Controlled Terminology for the domain; column name follows --TESTCD pattern",CDISC SDTM IG v3.4,Qualifier Variables
+CT-008,ORRES,string,yes,"Original result as collected; max 200 chars; must be populated when STAT is not NOT DONE; column name follows --ORRES pattern",CDISC SDTM IG v3.4,Result Variables

@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1600, height=900">
+    <title>R&D IT Agentic AI - Agent Mesh Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .slide {
+            width: 1550px;
+            min-height: 850px;
+            background: #fff;
+            margin: 0 auto 30px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            page-break-after: always;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #830051;
+            padding-bottom: 10px;
+        }
+
+        .header-left h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #830051;
+        }
+
+        .header-left p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badge {
+            background: #830051;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .badge.mvp { background: #2e7d32; }
+        .badge.future { background: #1565c0; }
+
+        /* Architecture Container */
+        .arch-container {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Layer Styles */
+        .layer {
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .layer-label {
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 9px;
+            font-weight: 700;
+            color: #fff;
+            background: #830051;
+            padding: 4px 10px;
+            border-radius: 3px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .layer-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #830051;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+        }
+
+        /* User Experience Layer */
+        .user-layer {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #2e7d32;
+        }
+
+        /* Control Plane Layer */
+        .control-layer {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border: 2px solid #830051;
+        }
+
+        /* Execution Layer */
+        .execution-layer {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #1565c0;
+        }
+
+        /* Tools Layer */
+        .tools-layer {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #c4a000;
+        }
+
+        /* Platform Layer */
+        .platform-layer {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+        }
+
+        /* Component Boxes */
+        .components-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding-left: 20px;
+        }
+
+        .component {
+            background: #fff;
+            border-radius: 6px;
+            padding: 8px 12px;
+            border: 1.5px solid #ddd;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .component.highlight {
+            border-color: #830051;
+            background: linear-gradient(180deg, #fff 0%, #fce4ec 100%);
+        }
+
+        .component .icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .component h4 {
+            font-size: 9px;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 2px;
+        }
+
+        .component p {
+            font-size: 7px;
+            color: #666;
+            line-height: 1.2;
+        }
+
+        /* AWS Service Boxes */
+        .aws-service {
+            background: linear-gradient(180deg, #ff9900 0%, #ffad33 100%);
+            color: #232f3e;
+            border: none;
+        }
+
+        .aws-service h4 {
+            color: #232f3e;
+        }
+
+        .aws-service p {
+            color: #232f3e;
+            opacity: 0.8;
+        }
+
+        /* Vertical Gateway */
+        .gateway-column {
+            position: absolute;
+            right: 30px;
+            top: 120px;
+            width: 110px;
+            background: linear-gradient(180deg, #7b1fa2 0%, #9c27b0 100%);
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            z-index: 10;
+        }
+
+        .gateway-column h3 {
+            font-size: 9px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gateway-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+            padding: 6px;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .gateway-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .gateway-item h5 {
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .gateway-item p {
+            font-size: 6px;
+            opacity: 0.8;
+        }
+
+        /* External Systems */
+        .external-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .external-box {
+            flex: 1;
+            background: #f5f5f5;
+            border: 2px dashed #999;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .external-box h4 {
+            font-size: 9px;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .external-items {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .external-item {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 8px;
+            color: #555;
+        }
+
+        /* Legend */
+        .legend {
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            font-size: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-color.green { background: #2e7d32; }
+        .legend-color.pink { background: #830051; }
+        .legend-color.blue { background: #1565c0; }
+        .legend-color.gold { background: #c4a000; }
+        .legend-color.orange { background: #ff9900; }
+        .legend-color.purple { background: #7b1fa2; }
+
+        /* Page Number */
+        .page-num {
+            position: absolute;
+            bottom: 15px;
+            left: 30px;
+            font-size: 10px;
+            color: #999;
+        }
+
+        /* AZ Logo */
+        .az-logo {
+            width: 35px;
+            height: 35px;
+            position: relative;
+        }
+
+        .az-logo .outer {
+            width: 0;
+            height: 0;
+            border-left: 17px solid transparent;
+            border-right: 17px solid transparent;
+            border-bottom: 30px solid #c4a000;
+            position: absolute;
+        }
+
+        .az-logo .inner {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 18px solid #830051;
+            position: absolute;
+            top: 12px;
+            left: 7px;
+        }
+
+        /* Slide 2+ Styles */
+        .agent-arch {
+            display: flex;
+            gap: 20px;
+        }
+
+        .agent-main {
+            flex: 1;
+        }
+
+        .agent-sidebar {
+            width: 280px;
+        }
+
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .agent-header.test { background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%); }
+        .agent-header.dep { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); }
+        .agent-header.know { background: linear-gradient(135deg, #c4a000 0%, #d4b100 100%); }
+        .agent-header.lineage { background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%); }
+
+        .agent-header .agent-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .agent-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .agent-header p {
+            font-size: 10px;
+            opacity: 0.9;
+        }
+
+        .info-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .info-card h4 {
+            font-size: 10px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 5px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            font-size: 9px;
+            color: #444;
+            padding: 4px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list li::before {
+            content: ">";
+            color: #830051;
+            font-weight: 700;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        /* Flow Diagram */
+        .flow-container {
+            background: #faf9f7;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flow-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .flow-step .step-num {
+            width: 28px;
+            height: 28px;
+            background: #830051;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            margin: 0 auto 5px;
+        }
+
+        .flow-step h5 {
+            font-size: 9px;
+            font-weight: 700;
+            color: #2d2d2d;
+        }
+
+        .flow-step p {
+            font-size: 7px;
+            color: #666;
+        }
+
+        .flow-arrow {
+            font-size: 16px;
+            color: #c4a000;
+            flex-shrink: 0;
+        }
+
+        /* Connection Lines (CSS) */
+        .connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: flex;
+            gap: 20px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        /* Data Flow Boxes */
+        .data-flow-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid #830051;
+            margin-bottom: 15px;
+        }
+
+        .data-flow-box h3 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+        }
+
+        .numbered-list li {
+            font-size: 9px;
+            color: #444;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .numbered-list li:last-child {
+            border-bottom: none;
+        }
+
+        .numbered-list li::before {
+            counter-increment: item;
+            content: counter(item);
+            background: #830051;
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Overview Architecture -->
+    <div class="slide">
+        <div class="header">
+            <div class="header-left">
+                <h1>R&D IT Agentic AI - Agent Mesh Integration Architecture</h1>
+                <p>4 AI Agents integrated with AstraZeneca Agent Mesh Framework | Platforms: 3DP & BIKG</p>
+            </div>
+            <div class="header-right">
+                <span class="badge mvp">MVP Phase</span>
+                <span class="badge future">Future Enhancement</span>
+                <div class="az-logo">
+                    <div class="outer"></div>
+                    <div class="inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arch-container">
+            <!-- Mesh Gateway (Vertical) -->
+            <div class="gateway-column" style="height: 520px;">
+                <h3>Mesh Gateway</h3>
+                <div class="gateway-item">
+                    <h5>Agent to LLM</h5>
+                    <p>Bedrock Runtime</p>
+                </div>
+                <div class="gateway-item">
+                    <h5>Agent to Tools/MCP</h5>
+                    <p>Tool Invocation</p>
+                </div>
+                <div class="gateway-item">
+                    <h5>Agent to Agent</h5>
+                    <p>A2A Protocol</p>
+                </div>
+                <div class="gateway-item">
+                    <h5>Schema Registry</h5>
+                    <p>JSON Schema</p>
+                </div>
+                <div class="gateway-item">
+                    <h5>PEP</h5>
+                    <p>Policy Enforcement</p>
+                </div>
+            </div>
+
+            <!-- User Experience Layer -->
+            <div class="layer user-layer">
+                <span class="layer-label" style="background: #2e7d32;">USE CASES & EXPERIENCE</span>
+                <div class="layer-title">User Experience</div>
+                <div class="components-row">
+                    <div class="component highlight">
+                        <div class="icon">💬</div>
+                        <h4>Chat UI</h4>
+                        <p>Task request, Agent selection</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">📝</div>
+                        <h4>Prompting</h4>
+                        <p>Natural language input</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🔧</div>
+                        <h4>Agents/Workflows Schema</h4>
+                        <p>Configure workflows</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🔔</div>
+                        <h4>Webhooks</h4>
+                        <p>Event-driven tasks</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">🔐</div>
+                        <h4>Cognito</h4>
+                        <p>Identity Federation</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">🌐</div>
+                        <h4>Route 53 + ALB</h4>
+                        <p>DNS & Load Balancer</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control & Management Plane -->
+            <div class="layer control-layer">
+                <span class="layer-label">MESH CONTROL PLANE</span>
+                <div class="layer-title">Mesh Control & Management Plane</div>
+                <div class="components-row">
+                    <div class="component highlight">
+                        <div class="icon">📚</div>
+                        <h4>Agent Registry</h4>
+                        <p>4 R&D IT Agents</p>
+                    </div>
+                    <div class="component highlight">
+                        <div class="icon">🛠️</div>
+                        <h4>Tool Registry</h4>
+                        <p>MCP Tools Catalog</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">📦</div>
+                        <h4>Artifacts Registry</h4>
+                        <p>Prompts, LLM Configs</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🧭</div>
+                        <h4>Planner/Router</h4>
+                        <p>Execution Planning</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">👁️</div>
+                        <h4>Observability</h4>
+                        <p>Traces, Metrics, Logs</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">✅</div>
+                        <h4>Eval</h4>
+                        <p>Agent Evaluation</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🔑</div>
+                        <h4>Identity & Secrets</h4>
+                        <p>Secrets Manager</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">📜</div>
+                        <h4>PDP (Policy)</h4>
+                        <p>Allow/Deny Decisions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Runtimes & Workflows -->
+            <div class="layer execution-layer">
+                <span class="layer-label" style="background: #1565c0;">EXECUTION PLANE</span>
+                <div class="layer-title">Agent Runtimes & Workflows (ECS Fargate)</div>
+                <div class="components-row">
+                    <div class="component highlight" style="border-color: #2e7d32; min-width: 130px;">
+                        <div class="icon">🧪</div>
+                        <h4>Test Intelligence Agent</h4>
+                        <p>Auto test generation</p>
+                    </div>
+                    <div class="component highlight" style="border-color: #1565c0; min-width: 130px;">
+                        <div class="icon">🔗</div>
+                        <h4>Dependency Coordinator</h4>
+                        <p>Timeline tracking</p>
+                    </div>
+                    <div class="component highlight" style="border-color: #c4a000; min-width: 130px;">
+                        <div class="icon">📚</div>
+                        <h4>Knowledge Library</h4>
+                        <p>RAG Q&A</p>
+                    </div>
+                    <div class="component highlight" style="border-color: #7b1fa2; min-width: 130px;">
+                        <div class="icon">🌳</div>
+                        <h4>Auto-Lineage Agent</h4>
+                        <p>Data lineage</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🔄</div>
+                        <h4>Agent Loop</h4>
+                        <p>Execution Runtime</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">👥</div>
+                        <h4>Multi-Agents</h4>
+                        <p>Orchestration</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🛡️</div>
+                        <h4>Guardian Agents</h4>
+                        <p>Supervisor/Verifier</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reasoning & Memory -->
+            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <div class="layer" style="flex: 1; background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); border: 2px solid #7b1fa2;">
+                    <div class="layer-title" style="padding-left: 0;">Reasoning Engine</div>
+                    <div class="components-row" style="padding-left: 0;">
+                        <div class="component">
+                            <div class="icon">🤖</div>
+                            <h4>LLM (Claude)</h4>
+                            <p>Bedrock Runtime</p>
+                        </div>
+                        <div class="component">
+                            <div class="icon">⚡</div>
+                            <h4>Function Calling</h4>
+                            <p>Schema Enforcement</p>
+                        </div>
+                        <div class="component">
+                            <div class="icon">📋</div>
+                            <h4>Structured Output</h4>
+                            <p>JSON Schema</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layer" style="flex: 1; background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%); border: 2px solid #00838f;">
+                    <div class="layer-title" style="padding-left: 0;">Memory & Context</div>
+                    <div class="components-row" style="padding-left: 0;">
+                        <div class="component">
+                            <div class="icon">🧠</div>
+                            <h4>RAG Pipeline</h4>
+                            <p>Retrieval</p>
+                        </div>
+                        <div class="component">
+                            <div class="icon">⏱️</div>
+                            <h4>Short-term Memory</h4>
+                            <p>ElastiCache (Redis)</p>
+                        </div>
+                        <div class="component">
+                            <div class="icon">💾</div>
+                            <h4>Long-term Memory</h4>
+                            <p>Keyspaces</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Services -->
+            <div class="layer tools-layer">
+                <span class="layer-label" style="background: #c4a000;">TOOLS & SERVICES</span>
+                <div class="layer-title">Tools & Services (MCP Servers)</div>
+                <div class="components-row">
+                    <div class="component highlight">
+                        <div class="icon">🔬</div>
+                        <h4>3DP MCP Server</h4>
+                        <p>Drug Dev Platform</p>
+                    </div>
+                    <div class="component highlight">
+                        <div class="icon">🧬</div>
+                        <h4>BIKG MCP Server</h4>
+                        <p>Knowledge Graph</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">📋</div>
+                        <h4>Jira/ADO MCP</h4>
+                        <p>Issue Tracking</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">📄</div>
+                        <h4>Confluence MCP</h4>
+                        <p>Documentation</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">🗄️</div>
+                        <h4>Data Catalog MCP</h4>
+                        <p>Collibra/Starburst</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">💻</div>
+                        <h4>GitHub MCP</h4>
+                        <p>Code Repos</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">📊</div>
+                        <h4>Reader Tools</h4>
+                        <p>Search/Analytics</p>
+                    </div>
+                    <div class="component">
+                        <div class="icon">✏️</div>
+                        <h4>Actor Tools</h4>
+                        <p>Write Actions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform & Ops -->
+            <div class="layer platform-layer">
+                <span class="layer-label" style="background: #ff9800;">PLATFORM & OPS</span>
+                <div class="layer-title">Platform & Ops (AWS)</div>
+                <div class="components-row">
+                    <div class="component aws-service">
+                        <div class="icon">🚀</div>
+                        <h4>ECS Fargate</h4>
+                        <p>Containers</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">🤖</div>
+                        <h4>Bedrock</h4>
+                        <p>LLM API</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">⚡</div>
+                        <h4>ElastiCache</h4>
+                        <p>Redis Cache</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">🗄️</div>
+                        <h4>Keyspaces</h4>
+                        <p>Cassandra</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">📬</div>
+                        <h4>SQS</h4>
+                        <p>Message Queue</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">🔐</div>
+                        <h4>Secrets Manager</h4>
+                        <p>Credentials</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">📦</div>
+                        <h4>ECR</h4>
+                        <p>Container Registry</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">🔄</div>
+                        <h4>CodePipeline</h4>
+                        <p>CI/CD</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">📊</div>
+                        <h4>CloudWatch</h4>
+                        <p>Monitoring</p>
+                    </div>
+                    <div class="component aws-service">
+                        <div class="icon">📝</div>
+                        <h4>CloudTrail</h4>
+                        <p>Audit Logs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Target Platforms -->
+            <div class="external-row">
+                <div class="external-box">
+                    <h4>Target Platforms</h4>
+                    <div class="external-items">
+                        <div class="external-item" style="border-color: #830051; background: #fce4ec;"><strong>3DP</strong> - Drug Development Data Platform</div>
+                        <div class="external-item" style="border-color: #830051; background: #fce4ec;"><strong>BIKG</strong> - Biological Intelligence Knowledge Graph</div>
+                    </div>
+                </div>
+                <div class="external-box">
+                    <h4>Enterprise Systems</h4>
+                    <div class="external-items">
+                        <div class="external-item">Starburst/Trino</div>
+                        <div class="external-item">Collibra</div>
+                        <div class="external-item">Jira/ADO</div>
+                        <div class="external-item">Confluence</div>
+                        <div class="external-item">GitHub</div>
+                        <div class="external-item">Entra ID (SSO)</div>
+                    </div>
+                </div>
+                <div class="external-box">
+                    <h4>Observability Stack</h4>
+                    <div class="external-items">
+                        <div class="external-item">OpenTelemetry</div>
+                        <div class="external-item">Prometheus</div>
+                        <div class="external-item">Grafana</div>
+                        <div class="external-item">CloudWatch</div>
+                        <div class="external-item">CloudTrail</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color green"></div> User Experience</div>
+            <div class="legend-item"><div class="legend-color pink"></div> Control Plane</div>
+            <div class="legend-item"><div class="legend-color blue"></div> Execution Plane</div>
+            <div class="legend-item"><div class="legend-color gold"></div> Tools & Services</div>
+            <div class="legend-item"><div class="legend-color orange"></div> Platform & Ops</div>
+            <div class="legend-item"><div class="legend-color purple"></div> Mesh Gateway</div>
+        </div>
+
+        <div class="page-num">1 / 5</div>
+    </div>
+
+    <!-- SLIDE 2: Test Intelligence Agent -->
+    <div class="slide">
+        <div class="header">
+            <div class="header-left">
+                <h1>Test Intelligence Agent - Agent Mesh Architecture</h1>
+                <p>Automated test case generation for regulatory validation | Phase 1 MVP</p>
+            </div>
+            <div class="header-right">
+                <span class="badge mvp">Phase 1</span>
+                <div class="az-logo">
+                    <div class="outer"></div>
+                    <div class="inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-arch">
+            <div class="agent-main">
+                <div class="agent-header test">
+                    <div class="agent-icon">🧪</div>
+                    <div>
+                        <h2>Test Intelligence Agent</h2>
+                        <p>Auto-generate test cases for FDA/EMA submission validation, GxP compliance, CDISC format validation</p>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Agent Mesh Registration</h4>
+                            <ul class="info-list">
+                                <li><strong>Agent ID:</strong> rnd-it-test-intelligence</li>
+                                <li><strong>Agent Registry:</strong> Registered with capabilities, I/O contracts</li>
+                                <li><strong>Tool Dependencies:</strong> 3DP MCP, GitHub MCP, Confluence MCP</li>
+                                <li><strong>Policy:</strong> GxP compliance guardrails enabled</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>MCP Tools (Tool Registry)</h4>
+                            <ul class="info-list">
+                                <li><strong>3dp-data-access</strong> - Query 3DP schemas & APIs</li>
+                                <li><strong>bikg-query</strong> - KG entity validation</li>
+                                <li><strong>code-scanner</strong> - Analyze source code repos</li>
+                                <li><strong>test-executor</strong> - Run generated tests</li>
+                                <li><strong>confluence-reader</strong> - Fetch requirements docs</li>
+                                <li><strong>jira-writer</strong> - Create defect tickets</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Reasoning Engine</h4>
+                            <ul class="info-list">
+                                <li><strong>LLM:</strong> Claude 3.5 Sonnet (Bedrock)</li>
+                                <li><strong>Function Calling:</strong> Typed JSON Schema contracts</li>
+                                <li><strong>Guardrails:</strong> PII filtering, rate limiting</li>
+                                <li><strong>Output:</strong> GxP-compliant test case format</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Memory & Context</h4>
+                            <ul class="info-list">
+                                <li><strong>Short-term:</strong> ElastiCache (Redis) - Session state</li>
+                                <li><strong>Long-term:</strong> Keyspaces - Test history, patterns</li>
+                                <li><strong>RAG:</strong> Similar test failure lookup (OpenSearch)</li>
+                                <li><strong>Embeddings:</strong> Titan Embeddings for semantic search</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Platform Integration (3DP & BIKG)</h4>
+                            <ul class="info-list">
+                                <li><strong>3DP:</strong> Module 2/3 submission validation tests</li>
+                                <li><strong>3DP:</strong> CDISC format edge case detection</li>
+                                <li><strong>3DP:</strong> Patient safety data validation</li>
+                                <li><strong>BIKG:</strong> KG query validation testing</li>
+                                <li><strong>BIKG:</strong> Ontology integrity checks</li>
+                                <li><strong>Both:</strong> Audit trail compliance documentation</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Output Artifacts (S3)</h4>
+                            <ul class="info-list">
+                                <li>Generated test cases (GxP JSON/YAML)</li>
+                                <li>Coverage reports (HTML/PDF)</li>
+                                <li>Validation evidence documents</li>
+                                <li>Defect predictions → Jira tickets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-container">
+                    <div class="flow-row">
+                        <div class="flow-step">
+                            <div class="step-num">1</div>
+                            <h5>Ingest</h5>
+                            <p>Code, docs, schemas via MCP</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num">2</div>
+                            <h5>Analyze</h5>
+                            <p>LLM parsing (Bedrock)</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num">3</div>
+                            <h5>Generate</h5>
+                            <p>Test cases + edge cases</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num">4</div>
+                            <h5>Validate</h5>
+                            <p>Guardian Agent review</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num">5</div>
+                            <h5>Deliver</h5>
+                            <p>Tests + evidence to S3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent-sidebar">
+                <div class="info-card" style="background: linear-gradient(180deg, #e8f5e9 0%, #fff 100%); border-color: #2e7d32;">
+                    <h4 style="color: #2e7d32;">AWS Services Used</h4>
+                    <ul class="info-list">
+                        <li>ECS Fargate (Agent Runtime)</li>
+                        <li>Bedrock (Claude LLM)</li>
+                        <li>ElastiCache (Redis)</li>
+                        <li>Keyspaces (Cassandra)</li>
+                        <li>SQS (Task Queue)</li>
+                        <li>S3 (Artifacts)</li>
+                        <li>Secrets Manager</li>
+                        <li>CloudWatch/CloudTrail</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #fff8e1 0%, #fff 100%); border-color: #c4a000;">
+                    <h4 style="color: #c4a000;">Success Metrics</h4>
+                    <ul class="info-list">
+                        <li><strong>25%</strong> Test effort reduction</li>
+                        <li><strong>15%</strong> Coverage increase</li>
+                        <li><strong>23+</strong> Defects caught early</li>
+                        <li><strong>94%</strong> Test accuracy</li>
+                        <li><strong>2.3s</strong> Avg generation time</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #e3f2fd 0%, #fff 100%); border-color: #1565c0;">
+                    <h4 style="color: #1565c0;">Observability</h4>
+                    <ul class="info-list">
+                        <li>OpenTelemetry traces</li>
+                        <li>Prometheus metrics</li>
+                        <li>Grafana dashboards</li>
+                        <li>CloudTrail audit logs</li>
+                        <li>LangSmith evaluation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-num">2 / 5</div>
+    </div>
+
+    <!-- SLIDE 3: Dependency Coordinator -->
+    <div class="slide">
+        <div class="header">
+            <div class="header-left">
+                <h1>Dependency Coordinator - Agent Mesh Architecture</h1>
+                <p>Cross-platform dependency tracking and conflict resolution | Phase 2</p>
+            </div>
+            <div class="header-right">
+                <span class="badge" style="background: #1565c0;">Phase 2</span>
+                <div class="az-logo">
+                    <div class="outer"></div>
+                    <div class="inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-arch">
+            <div class="agent-main">
+                <div class="agent-header dep">
+                    <div class="agent-icon">🔗</div>
+                    <div>
+                        <h2>Dependency Coordinator</h2>
+                        <p>Map, visualize, and predict dependencies across FDA/EMA submissions and data pipelines</p>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Agent Mesh Registration</h4>
+                            <ul class="info-list">
+                                <li><strong>Agent ID:</strong> rnd-it-dependency-coordinator</li>
+                                <li><strong>Agent Registry:</strong> Graph-based capability</li>
+                                <li><strong>Tool Dependencies:</strong> Jira MCP, ADO MCP, Confluence MCP</li>
+                                <li><strong>A2A:</strong> Can invoke Test Intelligence Agent</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>MCP Tools (Tool Registry)</h4>
+                            <ul class="info-list">
+                                <li><strong>jira-reader</strong> - Read tickets, epics, sprints</li>
+                                <li><strong>ado-connector</strong> - Azure DevOps work items</li>
+                                <li><strong>confluence-reader</strong> - Roadmap documents</li>
+                                <li><strong>slack-notifier</strong> - Send conflict alerts</li>
+                                <li><strong>calendar-api</strong> - Team capacity data</li>
+                                <li><strong>graph-builder</strong> - Neptune graph operations</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Graph Model (Neptune)</h4>
+                            <ul class="info-list">
+                                <li><strong>Nodes:</strong> Work Items, Milestones, Resources, Platforms</li>
+                                <li><strong>Edges:</strong> DEPENDS_ON, RELATED_TO, ASSIGNED_TO</li>
+                                <li><strong>Queries:</strong> Critical path, conflict detection</li>
+                                <li><strong>Visualization:</strong> Interactive dependency graphs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Reasoning Engine</h4>
+                            <ul class="info-list">
+                                <li><strong>LLM:</strong> Claude 3.5 Sonnet (Bedrock)</li>
+                                <li><strong>Capability:</strong> Parse dependencies from text</li>
+                                <li><strong>Prediction:</strong> Conflict & delay forecasting</li>
+                                <li><strong>Output:</strong> Structured graph updates</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Platform Integration (3DP & BIKG)</h4>
+                            <ul class="info-list">
+                                <li><strong>3DP:</strong> FDA/EMA submission timelines</li>
+                                <li><strong>3DP:</strong> Cross-module dependencies</li>
+                                <li><strong>3DP:</strong> Regulatory approval paths</li>
+                                <li><strong>BIKG:</strong> Data pipeline schedules</li>
+                                <li><strong>BIKG:</strong> KG update dependencies</li>
+                                <li><strong>Both:</strong> Release coordination</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Output Artifacts</h4>
+                            <ul class="info-list">
+                                <li>Interactive dependency graphs</li>
+                                <li>Conflict alerts (Slack/Email)</li>
+                                <li>Timeline risk reports</li>
+                                <li>Resolution recommendations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-container">
+                    <div class="flow-row">
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #1565c0;">1</div>
+                            <h5>Collect</h5>
+                            <p>Jira, ADO, roadmaps</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #1565c0;">2</div>
+                            <h5>Extract</h5>
+                            <p>LLM parses dependencies</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #1565c0;">3</div>
+                            <h5>Model</h5>
+                            <p>Build graph (Neptune)</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #1565c0;">4</div>
+                            <h5>Analyze</h5>
+                            <p>Detect conflicts & risks</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #1565c0;">5</div>
+                            <h5>Alert</h5>
+                            <p>Notify + recommend</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent-sidebar">
+                <div class="info-card" style="background: linear-gradient(180deg, #e3f2fd 0%, #fff 100%); border-color: #1565c0;">
+                    <h4 style="color: #1565c0;">AWS Services Used</h4>
+                    <ul class="info-list">
+                        <li>ECS Fargate (Agent Runtime)</li>
+                        <li>Bedrock (Claude LLM)</li>
+                        <li>Neptune (Graph DB)</li>
+                        <li>ElastiCache (Real-time)</li>
+                        <li>SNS (Notifications)</li>
+                        <li>Lambda (Event processing)</li>
+                        <li>Keyspaces (History)</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #fff8e1 0%, #fff 100%); border-color: #c4a000;">
+                    <h4 style="color: #c4a000;">Success Metrics</h4>
+                    <ul class="info-list">
+                        <li><strong>100+</strong> Dependencies mapped</li>
+                        <li><strong>3+</strong> Conflicts flagged early</li>
+                        <li><strong>85%</strong> Timeline accuracy</li>
+                        <li><strong>2 weeks</strong> Avg lead time saved</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #fce4ec 0%, #fff 100%); border-color: #830051;">
+                    <h4 style="color: #830051;">A2A Collaboration</h4>
+                    <ul class="info-list">
+                        <li>Can request Test Intelligence to validate dependency impacts</li>
+                        <li>Shares context with Knowledge Library for doc lookup</li>
+                        <li>Uses Guardian Agent for high-risk alerts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-num">3 / 5</div>
+    </div>
+
+    <!-- SLIDE 4: Knowledge Library Companion -->
+    <div class="slide">
+        <div class="header">
+            <div class="header-left">
+                <h1>Knowledge Library Companion - Agent Mesh Architecture</h1>
+                <p>RAG-powered documentation search and Q&A | Phase 3</p>
+            </div>
+            <div class="header-right">
+                <span class="badge" style="background: #c4a000;">Phase 3</span>
+                <div class="az-logo">
+                    <div class="outer"></div>
+                    <div class="inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-arch">
+            <div class="agent-main">
+                <div class="agent-header know">
+                    <div class="agent-icon">📚</div>
+                    <div>
+                        <h2>Knowledge Library Companion</h2>
+                        <p>Natural language Q&A across regulatory guidelines, platform docs, and biological knowledge</p>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Agent Mesh Registration</h4>
+                            <ul class="info-list">
+                                <li><strong>Agent ID:</strong> rnd-it-knowledge-library</li>
+                                <li><strong>Agent Registry:</strong> RAG capability, Q&A specialist</li>
+                                <li><strong>Tool Dependencies:</strong> Confluence MCP, SharePoint MCP, 3DP Docs MCP</li>
+                                <li><strong>Embedding Model:</strong> Titan Embeddings</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>MCP Tools (Tool Registry)</h4>
+                            <ul class="info-list">
+                                <li><strong>confluence-api</strong> - Platform docs, SOPs</li>
+                                <li><strong>sharepoint-connector</strong> - Regulatory guidance</li>
+                                <li><strong>3dp-doc-repo</strong> - API documentation</li>
+                                <li><strong>bikg-ontology-api</strong> - Ontology definitions</li>
+                                <li><strong>feedback-collector</strong> - User feedback loop</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>RAG Pipeline Architecture</h4>
+                            <ul class="info-list">
+                                <li><strong>Ingestion:</strong> Textract → Chunking (512 tokens)</li>
+                                <li><strong>Embeddings:</strong> Titan Embeddings (1536 dim)</li>
+                                <li><strong>Vector Store:</strong> OpenSearch Serverless</li>
+                                <li><strong>Retrieval:</strong> Semantic search (Top-K=5)</li>
+                                <li><strong>Generation:</strong> Claude + context → Answer</li>
+                                <li><strong>Citation:</strong> Source linking to original docs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Document Sources</h4>
+                            <ul class="info-list">
+                                <li><strong>Confluence:</strong> Platform docs, SOPs (on change)</li>
+                                <li><strong>SharePoint:</strong> Regulatory guidance (weekly)</li>
+                                <li><strong>3DP Docs:</strong> API documentation (on release)</li>
+                                <li><strong>BIKG Ontologies:</strong> Definitions (monthly)</li>
+                                <li><strong>FDA/EMA:</strong> Regulatory guidelines (quarterly)</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Platform Integration (3DP & BIKG)</h4>
+                            <ul class="info-list">
+                                <li><strong>3DP:</strong> "How to prepare Module 3?"</li>
+                                <li><strong>3DP:</strong> SOP lookup & guidance search</li>
+                                <li><strong>3DP:</strong> Regulatory compliance questions</li>
+                                <li><strong>BIKG:</strong> "What genes affect disease X?"</li>
+                                <li><strong>BIKG:</strong> Ontology definitions & pathways</li>
+                                <li><strong>Both:</strong> New team onboarding assistance</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Output Artifacts</h4>
+                            <ul class="info-list">
+                                <li>Answers with source citations</li>
+                                <li>Document summaries</li>
+                                <li>Related content suggestions</li>
+                                <li>Auto-generated FAQs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-container">
+                    <div class="flow-row">
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #c4a000;">1</div>
+                            <h5>Index</h5>
+                            <p>Chunk & embed docs</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #c4a000;">2</div>
+                            <h5>Query</h5>
+                            <p>User asks question</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #c4a000;">3</div>
+                            <h5>Retrieve</h5>
+                            <p>Semantic search (Top-5)</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #c4a000;">4</div>
+                            <h5>Generate</h5>
+                            <p>LLM synthesizes answer</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #c4a000;">5</div>
+                            <h5>Cite</h5>
+                            <p>Link sources + feedback</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent-sidebar">
+                <div class="info-card" style="background: linear-gradient(180deg, #fff8e1 0%, #fff 100%); border-color: #c4a000;">
+                    <h4 style="color: #c4a000;">AWS Services Used</h4>
+                    <ul class="info-list">
+                        <li>ECS Fargate (Agent Runtime)</li>
+                        <li>Bedrock (Claude LLM)</li>
+                        <li>Bedrock (Titan Embeddings)</li>
+                        <li>OpenSearch Serverless</li>
+                        <li>S3 (Document storage)</li>
+                        <li>Textract (PDF extraction)</li>
+                        <li>Keyspaces (Q&A history)</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #e8f5e9 0%, #fff 100%); border-color: #2e7d32;">
+                    <h4 style="color: #2e7d32;">Success Metrics</h4>
+                    <ul class="info-list">
+                        <li><strong>50%</strong> Time-to-answer reduction</li>
+                        <li><strong>80%</strong> Query success rate</li>
+                        <li><strong>1000+</strong> Documents indexed</li>
+                        <li><strong>4.2/5</strong> User satisfaction</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #ede7f6 0%, #fff 100%); border-color: #7b1fa2;">
+                    <h4 style="color: #7b1fa2;">Memory & Context</h4>
+                    <ul class="info-list">
+                        <li>Conversation history (Keyspaces)</li>
+                        <li>User preferences (personalization)</li>
+                        <li>Feedback loop for RAG improvement</li>
+                        <li>Cross-session context retrieval</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-num">4 / 5</div>
+    </div>
+
+    <!-- SLIDE 5: Auto-Lineage Agent -->
+    <div class="slide">
+        <div class="header">
+            <div class="header-left">
+                <h1>Auto-Lineage Agent - Agent Mesh Architecture</h1>
+                <p>Automated data lineage tracking and impact analysis | Future Enhancement</p>
+            </div>
+            <div class="header-right">
+                <span class="badge future">Enhancement</span>
+                <div class="az-logo">
+                    <div class="outer"></div>
+                    <div class="inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-arch">
+            <div class="agent-main">
+                <div class="agent-header lineage">
+                    <div class="agent-icon">🌳</div>
+                    <div>
+                        <h2>Auto-Lineage Agent</h2>
+                        <p>Automatically trace data flows, detect schema changes, and assess downstream impact</p>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Agent Mesh Registration</h4>
+                            <ul class="info-list">
+                                <li><strong>Agent ID:</strong> rnd-it-auto-lineage</li>
+                                <li><strong>Agent Registry:</strong> Data lineage specialist</li>
+                                <li><strong>Tool Dependencies:</strong> Data Catalog MCP, Starburst MCP, dbt MCP</li>
+                                <li><strong>A2A:</strong> Notifies Dependency Coordinator on changes</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>MCP Tools (Tool Registry)</h4>
+                            <ul class="info-list">
+                                <li><strong>collibra-api</strong> - Data catalog metadata</li>
+                                <li><strong>starburst-connector</strong> - Query lineage extraction</li>
+                                <li><strong>schema-registry</strong> - Schema definitions</li>
+                                <li><strong>dbt-metadata</strong> - dbt model lineage</li>
+                                <li><strong>db-introspector</strong> - Database schema queries</li>
+                                <li><strong>slack-notifier</strong> - Change alerts</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Lineage Graph Model (Neptune)</h4>
+                            <ul class="info-list">
+                                <li><strong>Nodes:</strong> Tables, Columns, ETL Jobs, Reports</li>
+                                <li><strong>Edges:</strong> DERIVES_FROM, TRANSFORMS_TO, JOINS</li>
+                                <li><strong>Column-level:</strong> Fine-grained lineage tracking</li>
+                                <li><strong>Impact Analysis:</strong> What-if scenario queries</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card">
+                            <h4>Core Capabilities</h4>
+                            <ul class="info-list">
+                                <li><strong>Schema Discovery:</strong> Auto-detect database schemas</li>
+                                <li><strong>Lineage Extraction:</strong> Parse SQL/ETL for data flow</li>
+                                <li><strong>Change Detection:</strong> Monitor schema changes</li>
+                                <li><strong>Impact Analysis:</strong> Assess downstream effects</li>
+                                <li><strong>Documentation:</strong> Auto-generate lineage docs</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Platform Integration (3DP & BIKG)</h4>
+                            <ul class="info-list">
+                                <li><strong>3DP:</strong> Clinical data lineage tracking</li>
+                                <li><strong>3DP:</strong> Submission data tracing</li>
+                                <li><strong>3DP:</strong> Regulatory audit documentation</li>
+                                <li><strong>BIKG:</strong> KG data provenance</li>
+                                <li><strong>BIKG:</strong> Ontology version tracking</li>
+                                <li><strong>Both:</strong> Compliance audit trails</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Output Artifacts</h4>
+                            <ul class="info-list">
+                                <li>Interactive lineage graphs</li>
+                                <li>Impact assessment reports</li>
+                                <li>Schema change alerts</li>
+                                <li>Data catalog updates (Collibra)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-container">
+                    <div class="flow-row">
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #7b1fa2;">1</div>
+                            <h5>Discover</h5>
+                            <p>Scan schemas & pipelines</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #7b1fa2;">2</div>
+                            <h5>Parse</h5>
+                            <p>Extract relationships</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #7b1fa2;">3</div>
+                            <h5>Model</h5>
+                            <p>Build lineage graph</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #7b1fa2;">4</div>
+                            <h5>Monitor</h5>
+                            <p>Detect changes</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num" style="background: #7b1fa2;">5</div>
+                            <h5>Alert</h5>
+                            <p>Impact assessment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent-sidebar">
+                <div class="info-card" style="background: linear-gradient(180deg, #ede7f6 0%, #fff 100%); border-color: #7b1fa2;">
+                    <h4 style="color: #7b1fa2;">AWS Services Used</h4>
+                    <ul class="info-list">
+                        <li>ECS Fargate (Agent Runtime)</li>
+                        <li>Bedrock (Claude LLM)</li>
+                        <li>Neptune (Lineage Graph)</li>
+                        <li>Glue Data Catalog</li>
+                        <li>EventBridge (Change events)</li>
+                        <li>Step Functions (Workflows)</li>
+                        <li>SNS (Notifications)</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #fff8e1 0%, #fff 100%); border-color: #c4a000;">
+                    <h4 style="color: #c4a000;">Success Metrics</h4>
+                    <ul class="info-list">
+                        <li><strong>500+</strong> Data assets tracked</li>
+                        <li><strong>100%</strong> Column-level lineage</li>
+                        <li><strong>&lt;5 min</strong> Change detection time</li>
+                        <li><strong>90%</strong> Auto-documented lineage</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: linear-gradient(180deg, #e3f2fd 0%, #fff 100%); border-color: #1565c0;">
+                    <h4 style="color: #1565c0;">A2A Collaboration</h4>
+                    <ul class="info-list">
+                        <li>Notifies Dependency Coordinator of data changes</li>
+                        <li>Feeds Test Intelligence for impact testing</li>
+                        <li>Updates Knowledge Library docs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-num">5 / 5</div>
+    </div>
+
+</body>
+</html>

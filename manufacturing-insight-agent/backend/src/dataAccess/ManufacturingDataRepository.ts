@@ -39,7 +39,11 @@ export interface KpiMonthlySummary {
   rft_pct: number;
   schedule_adherence_pct: number;
   avg_cycle_time_hr: number;
+  formulation_lead_time_hr: number;
   deviations_per_100_batches: number;
+  alarms_per_1000_hours: number;
+  lab_turnaround_median_days: number;
+  supplier_otif_pct: number;
   oee_packaging_pct: number;
   OTIF_RAG: string;
   RFT_RAG: string;
@@ -135,7 +139,9 @@ class ManufacturingDataRepository {
   private loadData(): void {
     if (this.isLoaded) return;
 
-    const dataDir = path.join(__dirname, '../data');
+    // __dirname is /backend/src/dataAccess, data is at /backend/data
+    const dataDir = path.join(__dirname, '../../data');
+    console.log(`[ManufacturingRepo] Loading data from: ${dataDir}`);
 
     try {
       // Load KPI Weekly
@@ -148,10 +154,15 @@ class ManufacturingDataRepository {
 
       // Load KPI Monthly
       const kpiMonthlyPath = path.join(dataDir, 'KPI/kpi_store_monthly.csv');
+      console.log(`[ManufacturingRepo] Checking path: ${kpiMonthlyPath}, exists: ${fs.existsSync(kpiMonthlyPath)}`);
       if (fs.existsSync(kpiMonthlyPath)) {
         const content = fs.readFileSync(kpiMonthlyPath, 'utf-8');
         this.kpiMonthly = parse(content, { columns: true, skip_empty_lines: true });
+        const skus = [...new Set(this.kpiMonthly.map(r => r.SKU))];
         console.log(`[ManufacturingRepo] Loaded ${this.kpiMonthly.length} monthly KPI records`);
+        console.log(`[ManufacturingRepo] Available SKUs: ${skus.join(', ')}`);
+      } else {
+        console.error(`[ManufacturingRepo] ERROR: Monthly KPI file not found at ${kpiMonthlyPath}`);
       }
 
       // Load Batches

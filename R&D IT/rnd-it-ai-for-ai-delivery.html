@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>R&D IT - AI for AI Delivery Approach</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #fff;
+            padding: 25px 35px;
+        }
+
+        /* Header */
+        .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #830051;
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+
+        .main-subtitle {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(90deg, #830051, #a3006a);
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Main Table */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .main-table th,
+        .main-table td {
+            border: 1px solid #ddd;
+            padding: 12px 10px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        /* Header Row */
+        .main-table thead th {
+            background: #830051;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 14px 10px;
+        }
+
+        .main-table thead th:first-child {
+            background: #5c3d6e;
+            width: 100px;
+        }
+
+        /* Row Labels */
+        .row-label {
+            background: #f5f0f3;
+            font-weight: 700;
+            font-size: 12px;
+            color: #830051;
+            width: 100px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .row-label.today {
+            background: #5c3d6e;
+            color: #fff;
+        }
+
+        .row-label.tomorrow {
+            background: #c9a227;
+            color: #fff;
+        }
+
+        .row-label.tools {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .row-label.value {
+            background: #2e7d32;
+            color: #fff;
+        }
+
+        /* Today Row */
+        .today-cell {
+            background: #fafafa;
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .today-cell .duration {
+            font-weight: 700;
+            color: #830051;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .today-cell .pain {
+            color: #c62828;
+        }
+
+        /* Tomorrow Row */
+        .tomorrow-cell {
+            background: #fffdf5;
+            font-size: 10px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .tomorrow-cell .duration {
+            font-weight: 700;
+            color: #2e7d32;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tomorrow-cell .benefit {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        /* Arrow between cells */
+        .arrow-cell {
+            width: 30px;
+            background: #fffdf5;
+            color: #c9a227;
+            font-size: 20px;
+            padding: 0;
+            border: none;
+        }
+
+        /* Tools Row */
+        .tools-cell {
+            background: #fff;
+            padding: 10px;
+        }
+
+        .tool-logo {
+            display: inline-block;
+            margin: 3px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+
+        .tool-logo.claude {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: #fff;
+        }
+
+        .tool-logo.replit {
+            background: #f26522;
+            color: #fff;
+        }
+
+        .tool-logo.copilot {
+            background: #24292e;
+            color: #fff;
+        }
+
+        .tool-logo.agent {
+            background: linear-gradient(135deg, #830051, #a3006a);
+            color: #fff;
+            border: 2px solid #830051;
+        }
+
+        /* Agent badges */
+        .agent-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 700;
+            margin: 2px;
+        }
+
+        .agent-badge.test {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+        }
+
+        .agent-badge.dep {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #1565c0;
+            color: #1565c0;
+        }
+
+        .agent-badge.change {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 2px solid #ff6f00;
+            color: #e65100;
+        }
+
+        .agent-badge.reg {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border: 2px solid #7b1fa2;
+            color: #7b1fa2;
+        }
+
+        .agent-badge .emoji {
+            font-size: 14px;
+        }
+
+        /* Value Row */
+        .value-cell {
+            background: linear-gradient(180deg, #e8f5e9, #fff);
+            font-size: 11px;
+            font-weight: 700;
+            color: #2e7d32;
+            line-height: 1.4;
+        }
+
+        .value-cell .number {
+            font-size: 14px;
+            color: #1b5e20;
+            display: block;
+        }
+
+        /* Impact Footer */
+        .impact-footer {
+            background: linear-gradient(90deg, #1a1a1a, #333);
+            border-radius: 6px;
+            padding: 15px 25px;
+            display: table;
+            width: 100%;
+        }
+
+        .impact-label {
+            display: table-cell;
+            width: 200px;
+            vertical-align: middle;
+            color: #c9a227;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .impact-items {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .impact-item {
+            display: inline-block;
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 20px;
+            margin-right: 15px;
+            border-left: 3px solid #c9a227;
+        }
+
+        .impact-item .check {
+            color: #4caf50;
+            margin-right: 5px;
+        }
+
+        /* Responsive column colors */
+        .col-test { border-top: 4px solid #2e7d32; }
+        .col-dep { border-top: 4px solid #1565c0; }
+        .col-change { border-top: 4px solid #ff6f00; }
+        .col-reg { border-top: 4px solid #7b1fa2; }
+    </style>
+</head>
+<body>
+
+<div class="main-title">From Manual Processes to Intelligent Automation: AI-Powered R&D IT Platform Delivery</div>
+<div class="main-subtitle">AI Agents reduce cycle time by 40-60% while improving compliance, quality, and cross-team coordination for 3DP & BIKG Platforms</div>
+
+<div class="banner">
+    Accelerate delivery by 40-60% | AI-Orchestrated intelligent workflow across Testing, Dependencies, Deployments & Compliance
+</div>
+
+<table class="main-table">
+    <thead>
+        <tr>
+            <th>Phase<br>Duration</th>
+            <th class="col-test">🧪 Test Intelligence<br><small>Wave 1</small></th>
+            <th class="col-dep">🔗 Dependency Coordinator<br><small>Wave 1</small></th>
+            <th class="col-change">🚀 Deployment & Change<br><small>Wave 2</small></th>
+            <th class="col-reg">📋 Regulatory Readiness<br><small>Wave 2</small></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- TODAY ROW -->
+        <tr>
+            <td class="row-label today">Today<br>(Human-Led)</td>
+            <td class="today-cell">
+                <span class="duration">3-4 weeks</span>
+                Manual test authoring across test scripts. <span class="pain">Long regression cycles</span>, significant effort to identify and log defects. <span class="pain">Defect leakage</span> to production.
+            </td>
+            <td class="today-cell">
+                <span class="duration">2-3 weeks</span>
+                Manual tracking via Jira/ADO. <span class="pain">Cross-team friction</span> causes rework. <span class="pain">Approval delays</span> and blocked-work with limited visibility.
+            </td>
+            <td class="today-cell">
+                <span class="duration">1-2 weeks</span>
+                Manual IaC code writing and configurations. <span class="pain">High change failure rate</span>, frequent <span class="pain">drift incidents</span>, and slow MTTR.
+            </td>
+            <td class="today-cell">
+                <span class="duration">2-4 weeks</span>
+                Manual evidence gathering across documents. <span class="pain">Long audit prep time</span> with <span class="pain">missing artefacts</span> detected late in cycle.
+            </td>
+        </tr>
+
+        <!-- TOMORROW ROW -->
+        <tr>
+            <td class="row-label tomorrow">Tomorrow<br>(AI-Powered)</td>
+            <td class="tomorrow-cell">
+                <span class="duration">1 week</span>
+                <span class="benefit">Automated test case generation</span> from user stories & requirements. Standardised artefacts plugged into platform pipelines. <span class="benefit">25% reduction</span> in test effort.
+            </td>
+            <td class="tomorrow-cell">
+                <span class="duration">Days</span>
+                <span class="benefit">Automated dependency tracking</span> integrated with Jira/ADO, Confluence, service catalogs. <span class="benefit">Early conflict detection</span> and reduced rework rate.
+            </td>
+            <td class="tomorrow-cell">
+                <span class="duration">Hours</span>
+                <span class="benefit">Common IaC patterns</span> with adapters into each platform's CI-CD tooling. <span class="benefit">Reduced change failure rate</span>, faster MTTR, automated drift detection.
+            </td>
+            <td class="tomorrow-cell">
+                <span class="duration">Hours</span>
+                <span class="benefit">Automated evidence generation</span> with aligned templates & evidence packs. Integrated with QMS. <span class="benefit">100% releases with complete evidence</span>.
+            </td>
+        </tr>
+
+        <!-- AI TOOLS ROW -->
+        <tr>
+            <td class="row-label tools">AI Tools<br>Used</td>
+            <td class="tools-cell">
+                <span class="tool-logo claude">☀️ Claude</span><br>
+                <span class="agent-badge test"><span class="emoji">🧪</span> Test Intelligence Agent</span>
+            </td>
+            <td class="tools-cell">
+                <span class="tool-logo claude">☀️ Claude</span><br>
+                <span class="agent-badge dep"><span class="emoji">🔗</span> Dependency Coordinator</span>
+            </td>
+            <td class="tools-cell">
+                <span class="tool-logo claude">☀️ Claude</span>
+                <span class="tool-logo copilot">GitHub Copilot</span><br>
+                <span class="agent-badge change"><span class="emoji">🚀</span> Deploy & Change Agent</span>
+            </td>
+            <td class="tools-cell">
+                <span class="tool-logo claude">☀️ Claude</span><br>
+                <span class="agent-badge reg"><span class="emoji">📋</span> Regulatory Readiness Agent</span>
+            </td>
+        </tr>
+
+        <!-- VALUE ROW -->
+        <tr>
+            <td class="row-label value">Value<br>Delivered</td>
+            <td class="value-cell">
+                <span class="number">25% faster</span>
+                Reduced test authoring effort<br>
+                Higher coverage, less defect leakage
+            </td>
+            <td class="value-cell">
+                <span class="number">50% faster</span>
+                Reduced approval cycle time<br>
+                Early conflict detection
+            </td>
+            <td class="value-cell">
+                <span class="number">70% faster</span>
+                Near-instant deployments<br>
+                Reduced change failure rate
+            </td>
+            <td class="value-cell">
+                <span class="number">100% compliant</span>
+                Complete evidence packs<br>
+                Faster audit readiness
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="impact-footer">
+    <div class="impact-label">AI for AI Delivery Impact:</div>
+    <div class="impact-items">
+        <span class="impact-item"><span class="check">✓</span> Launch readiness accelerated by 40-60%</span>
+        <span class="impact-item"><span class="check">✓</span> 70% reduction in manual effort</span>
+        <span class="impact-item"><span class="check">✓</span> 100% regulatory compliance</span>
+        <span class="impact-item"><span class="check">✓</span> Enterprise-grade quality & governance</span>
+    </div>
+</div>
+
+</body>
+</html>

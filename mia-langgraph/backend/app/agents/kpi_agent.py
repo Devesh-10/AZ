@@ -46,64 +46,32 @@ Note: Weekly table does NOT have SKU column
 ## Rules
 1. Return ONLY the SQL query, no explanations or markdown
 2. Use the exact column names provided above
-3. TABLE SELECTION IS CRITICAL:
-   - Use KPI_STORE_MONTHLY when user mentions "months", "monthly", or a specific number of months (e.g., "3 months", "last 6 months")
-   - Use KPI_STORE_WEEKLY ONLY when user explicitly says "week", "weekly", or "weeks"
-   - Default to KPI_STORE_MONTHLY if unclear
-4. For monthly data: ORDER BY month DESC
-5. For weekly data: ORDER BY iso_week DESC
-6. Always include site_id in SELECT
-7. For monthly data, include SKU; for weekly data, do NOT include SKU
-8. Use standard SQL syntax compatible with DuckDB
-9. IMPORTANT: Always add WHERE clause to exclude NULL values for the KPI column (e.g., WHERE kpi_column IS NOT NULL)
-10. CRITICAL for "last N months": Use a subquery to get N DISTINCT months, NOT just LIMIT N rows.
-    Since there are multiple sites per month, LIMIT N would only return data from one or two months.
+3. Use standard SQL syntax compatible with DuckDB
+4. Always add WHERE clause to exclude NULL values for the KPI column
+5. CRITICAL - WHEN TO USE AGGREGATIONS:
+   - If user asks for "total", "sum", "overall", "across sites", "by site" -> USE SUM() with GROUP BY
+   - If user asks for "average", "mean", "avg" -> USE AVG() with GROUP BY
+   - When aggregating, alias result to ORIGINAL column name: SUM(production_volume) as production_volume
+6. TABLE SELECTION:
+   - Use KPI_STORE_MONTHLY by default
+   - Use KPI_STORE_WEEKLY only when user says "week" or "weekly"
+7. For "last N months": Use subquery for DISTINCT months, not just LIMIT N
 
 ## Examples
 - "What is the batch yield?" -> SELECT SKU, site_id, month, batch_yield_avg_pct FROM KPI_STORE_MONTHLY WHERE batch_yield_avg_pct IS NOT NULL ORDER BY month DESC LIMIT 9
 - "Show RFT for SKU_123 for past 3 months" -> SELECT SKU, site_id, month, rft_pct FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' AND rft_pct IS NOT NULL AND month IN (SELECT DISTINCT month FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' ORDER BY month DESC LIMIT 3) ORDER BY month DESC, site_id
-- "Batch yield for SKU_123 for last 3 months" -> SELECT SKU, site_id, month, batch_yield_avg_pct FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' AND batch_yield_avg_pct IS NOT NULL AND month IN (SELECT DISTINCT month FROM KPI_STORE_MONTHLY WHERE SKU = 'SKU_123' ORDER BY month DESC LIMIT 3) ORDER BY month DESC, site_id
-- "OEE for last 3 months" -> SELECT SKU, site_id, month, oee_packaging_pct FROM KPI_STORE_MONTHLY WHERE oee_packaging_pct IS NOT NULL AND month IN (SELECT DISTINCT month FROM KPI_STORE_MONTHLY ORDER BY month DESC LIMIT 3) ORDER BY month DESC, site_id
+- "Total production volume by site" -> SELECT site_id, SUM(production_volume) as production_volume FROM KPI_STORE_MONTHLY WHERE production_volume IS NOT NULL GROUP BY site_id ORDER BY site_id
+- "Total production across sites" -> SELECT site_id, SUM(production_volume) as production_volume FROM KPI_STORE_MONTHLY WHERE production_volume IS NOT NULL GROUP BY site_id ORDER BY site_id
+- "What is total production" -> SELECT site_id, SUM(production_volume) as production_volume FROM KPI_STORE_MONTHLY WHERE production_volume IS NOT NULL GROUP BY site_id ORDER BY site_id
+- "Production volume by site" -> SELECT site_id, SUM(production_volume) as production_volume FROM KPI_STORE_MONTHLY WHERE production_volume IS NOT NULL GROUP BY site_id ORDER BY site_id
 - "Weekly OEE trend" -> SELECT site_id, iso_week, oee_packaging_pct FROM KPI_STORE_WEEKLY WHERE oee_packaging_pct IS NOT NULL ORDER BY iso_week DESC LIMIT 10
-- "Show yield for past 4 weeks" -> SELECT site_id, iso_week, batch_yield_avg_pct FROM KPI_STORE_WEEKLY WHERE batch_yield_avg_pct IS NOT NULL ORDER BY iso_week DESC LIMIT 4
 """
 
-# Response generation prompt
-RESPONSE_PROMPT = """You are a KPI Agent for the Manufacturing Insight Agent (MIA).
-Generate a clear, professionally formatted response with excellent structure.
+# Response generation prompt - minimal to let Claude be intelligent
+RESPONSE_PROMPT = """You are a manufacturing analytics assistant. Answer the user's question based on the provided data.
 
-## KPI Details
-Name: {kpi_name}
-Description: {kpi_description}
-Unit: {kpi_unit}
+KPI: {kpi_name} ({kpi_unit})
 Target: {kpi_target}
-
-## REQUIRED RESPONSE FORMAT (follow EXACTLY):
-
-**[KPI Name]** is **[average value with unit]** for [SKU] over the past [N months as requested by user] (average across all sites).
-
-**Status:** [GREEN/AMBER/RED emoji + status] - [one sentence about target comparison]
-
-### Recent Trends
-| Period | Value | Status |
-|:-------|------:|:------:|
-| [Month 1] | XX.X | [emoji] |
-| [Month 2] | XX.X | [emoji] |
-| [Month N] | XX.X | [emoji] |
-
-### Key Observations
-- **[Observation 1]**: Trend across the N months (increasing/decreasing/stable)
-- **[Observation 2]**: Site variation (which site performs best/worst)
-- **[Observation 3]**: Actionable recommendation if needed
-
-## FORMATTING RULES:
-1. First line MUST say "over the past N months" matching the user's request - NOT just one month
-2. Include the SKU in the first line if data is filtered by SKU
-3. Table MUST show ALL months from the data, not just the most recent
-4. Use status emojis: GREEN = checkmark, AMBER = warning, RED = cross
-5. Key Observations should compare across ALL periods returned
-6. Be concise but informative - manufacturing professionals need quick insights
-7. IMPORTANT: When user asks about a specific SKU, ALWAYS mention that SKU in the first line, not just the site
 """
 
 
@@ -124,15 +92,17 @@ def _generate_sql(user_query: str, kpi_id: str, kpi_info: dict, filters: dict | 
 
     prompt = SQL_GENERATION_PROMPT.format(kpi_column_mapping=_get_kpi_column_mapping())
 
-    # Determine table based on time period filter
-    table = kpi_info['table']
-    if filters:
-        time_period = filters.get("time_period", "")
-        # Override to MONTHLY if user asks for month-based data or specific SKU (weekly has no SKU)
-        if time_period in ["current_month", "last_month"] or filters.get("month") or filters.get("sku"):
-            table = "KPI_STORE_MONTHLY"
-        elif time_period in ["current_week", "last_week"]:
-            table = "KPI_STORE_WEEKLY"
+    # Let LLM decide table based on user query
+    # Only force table selection if user explicitly mentioned time granularity
+    query_lower = user_query.lower()
+    if "week" in query_lower:
+        table = "KPI_STORE_WEEKLY"
+    elif "month" in query_lower or (filters and filters.get("sku")):
+        # Use monthly for month queries or when SKU is specified (weekly has no SKU)
+        table = "KPI_STORE_MONTHLY"
+    else:
+        # Default to monthly as it has more complete data (all plants, all SKUs)
+        table = "KPI_STORE_MONTHLY"
 
     filter_context = ""
     if filters:
@@ -140,15 +110,6 @@ def _generate_sql(user_query: str, kpi_id: str, kpi_info: dict, filters: dict | 
             filter_context += f"\nIMPORTANT: Filter by SKU = '{filters['sku']}' (add WHERE SKU = '{filters['sku']}')"
         if filters.get("site"):
             filter_context += f"\nFilter by site_id = '{filters['site']}'"
-        if filters.get("time_period"):
-            if filters["time_period"] == "current_month":
-                filter_context += "\nTime period: current month only (use WHERE month = (SELECT MAX(month) FROM table))"
-            elif filters["time_period"] == "last_month":
-                filter_context += "\nTime period: last month"
-            elif filters["time_period"] == "current_week":
-                filter_context += "\nTime period: current week (use WHERE iso_week = (SELECT MAX(iso_week) FROM table))"
-            elif filters["time_period"] == "last_week":
-                filter_context += "\nTime period: last week"
 
     messages = [
         SystemMessage(content=prompt),
@@ -173,11 +134,18 @@ Return ONLY the SQL query.""")
         sql = sql.rsplit("```", 1)[0]
     sql = sql.strip()
 
+    print(f"[KPI Agent] Generated SQL: {sql}")
     return sql
 
 
-def _execute_sql(sql: str, kpi_info: dict) -> tuple[list[dict], str | None]:
-    """Execute SQL using DuckDB and return results"""
+def _execute_sql(sql: str, kpi_id: str, kpi_info: dict) -> tuple[list[dict], str | None]:
+    """Execute SQL using DuckDB and return results
+
+    Args:
+        sql: The SQL query to execute
+        kpi_id: The KPI column name from catalogue (e.g., 'production_volume', 'batch_yield_avg_pct')
+        kpi_info: The KPI metadata from catalogue
+    """
     try:
         conn = duckdb.connect(":memory:")
 
@@ -195,7 +163,12 @@ def _execute_sql(sql: str, kpi_info: dict) -> tuple[list[dict], str | None]:
         conn.close()
 
         if result.empty:
+            print(f"[KPI Agent] SQL returned empty result")
             return [], None
+
+        print(f"[KPI Agent] SQL result columns: {list(result.columns)}")
+        print(f"[KPI Agent] Looking for kpi_id: {kpi_id}")
+        print(f"[KPI Agent] Result shape: {result.shape}")
 
         # Convert to list of dicts with standardized format
         data_points = []
@@ -207,7 +180,7 @@ def _execute_sql(sql: str, kpi_info: dict) -> tuple[list[dict], str | None]:
                 "unit": kpi_info["unit"]
             }
 
-            # Find the period column
+            # Find the period column - if no time column, use site_id as x-axis label
             if "month" in row.index:
                 dp["period"] = str(row["month"])
             elif "week_end_date" in row.index:
@@ -215,16 +188,27 @@ def _execute_sql(sql: str, kpi_info: dict) -> tuple[list[dict], str | None]:
             elif "iso_week" in row.index:
                 dp["period"] = f"Week {row['iso_week']}"
             else:
-                dp["period"] = "N/A"
+                # No time period - this is likely an aggregation by site only
+                # Use the site as the period for chart x-axis
+                dp["period"] = str(row.get("site_id", "Total"))
 
-            # Find the KPI value column (look for columns ending in _pct or _hr)
-            for col in result.columns:
-                if col.endswith("_pct") or col.endswith("_hr") or col == "deviations_per_100_batches":
-                    if col not in ["site_id", "SKU", "month", "week_end_date", "iso_week"]:
-                        val = row.get(col)
-                        if val is not None and str(val) != "nan":
-                            dp["value"] = float(val)
+            # Get KPI value from the result - let the SQL decide what column to return
+            # Find the first numeric column that's not a metadata column (site_id, SKU, month, etc.)
+            metadata_cols = {'sku', 'site_id', 'month', 'iso_week', 'week_end_date'}
+            val = None
+            for col in row.index:
+                col_lower = col.lower()
+                if col_lower not in metadata_cols and '_rag' not in col_lower:
+                    candidate = row.get(col)
+                    if candidate is not None and str(candidate) != "nan":
+                        try:
+                            val = float(candidate)
                             break
+                        except (ValueError, TypeError):
+                            continue
+
+            if val is not None:
+                dp["value"] = val
 
             # Check for RAG status
             for col in result.columns:
@@ -295,7 +279,7 @@ def kpi_agent(state: MIAState) -> dict:
         }
 
     # Step 2: Execute SQL using DuckDB
-    data_points, exec_error = _execute_sql(generated_sql, kpi_info)
+    data_points, exec_error = _execute_sql(generated_sql, matched_kpi, kpi_info)
 
     if exec_error:
         error_msg = f"## Query Error\n\n"
@@ -388,25 +372,17 @@ def kpi_agent(state: MIAState) -> dict:
         for dp in data_points
     ])
 
-    sku_context = f"\nIMPORTANT: User asked about SKU: {sku_filter}. Make sure to mention this SKU in your response." if sku_filter else ""
-
     try:
         messages = [
             SystemMessage(content=response_prompt),
-            HumanMessage(content=f"""User asked: {user_query}
-{sku_context}
+            HumanMessage(content=f"""User question: {user_query}
 
-SQL Query executed:
-```sql
-{generated_sql}
-```
-
-Results:
+Data retrieved:
 {data_summary}
 
 Target: {kpi_info.get('target', 'Not defined')}{kpi_info['unit']}
 
-Provide a clear, concise response to the user's question. If the user asked about a specific SKU, make sure to mention it prominently.""")
+Answer the user's question based on the data above.""")
         ]
 
         response = llm.invoke(messages)

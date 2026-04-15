@@ -1,0 +1,50 @@
+.agent-trace {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #5a6478;
+}
+.agent-trace summary {
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+}
+.agent-trace ol {
+  margin: 6px 0 0 0;
+  padding-left: 18px;
+  background: #fafbfc;
+  border-left: 2px solid #d8dde7;
+  padding: 8px 8px 8px 24px;
+  border-radius: 4px;
+}
+.agent-trace .step {
+  margin-bottom: 4px;
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.agent-trace .badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #e0e7ff;
+  color: #3b3f8a;
+}
+.agent-trace .badge-result {
+  background: #d1fae5;
+  color: #065f46;
+}
+.agent-trace code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  background: #eef1f6;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 11px;
+}
+.agent-trace .args {
+  color: #6b7280;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+}

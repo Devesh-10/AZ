@@ -1,0 +1,8 @@
+step,step_name,manual_time_hours,agent_time_seconds,manual_fte_count
+1,Requirements Analysis,24,30,3
+2,Test Case Generation,24,30,4
+3,Synthetic Data Creation,8,15,2
+4,Test Execution,16,120,3
+5,Failure Analysis,8,20,2
+6,Code Refactor,16,25,3
+7,Compliance Reporting,8,15,2

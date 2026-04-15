@@ -9,6 +9,12 @@ from typing import Optional
 import uuid
 
 from app.core.config import get_settings
+from app.core.session_store import (
+    get_session_history,
+    save_session_history,
+    delete_session,
+)
+from app.core.trace_store import get_trace_telemetry
 from app.graph import run_query
 
 settings = get_settings()
@@ -62,11 +68,6 @@ class HealthResponse(BaseModel):
     version: str
 
 
-# In-memory session storage (for conversation history and telemetry)
-sessions: dict[str, list] = {}
-session_telemetry: dict[str, list] = {}  # Store agent logs per session
-
-
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
     """Health check endpoint"""
@@ -81,8 +82,8 @@ async def chat(request: ChatRequest):
     # Generate or use provided session ID
     session_id = request.session_id or str(uuid.uuid4())
 
-    # Get conversation history for session
-    conversation_history = sessions.get(session_id, [])
+    # Get conversation history from DynamoDB
+    conversation_history = get_session_history(session_id)
 
     try:
         # Run query through LangGraph
@@ -95,10 +96,10 @@ async def chat(request: ChatRequest):
         # Extract response
         answer = result.get("final_answer", "I apologize, but I couldn't generate a response.")
 
-        # Update session history
+        # Update session history in DynamoDB
         conversation_history.append({"role": "user", "content": request.question})
         conversation_history.append({"role": "assistant", "content": answer})
-        sessions[session_id] = conversation_history[-20:]  # Keep last 20 messages
+        save_session_history(session_id, conversation_history)
 
         # Build agent logs response
         agent_logs = []
@@ -111,13 +112,6 @@ async def chat(request: ChatRequest):
                 status=log.get("status", "unknown"),
                 timestamp=log.get("timestamp", "")
             ))
-
-        # Store telemetry for this session
-        if session_id not in session_telemetry:
-            session_telemetry[session_id] = []
-        session_telemetry[session_id].extend(agent_logs)
-        # Keep only last 50 logs per session
-        session_telemetry[session_id] = session_telemetry[session_id][-50:]
 
         return ChatResponse(
             answer=answer,
@@ -136,24 +130,25 @@ async def chat(request: ChatRequest):
 
 
 @app.get("/api/sessions/{session_id}/history")
-async def get_session_history(session_id: str):
-    """Get conversation history for a session"""
-    history = sessions.get(session_id, [])
+async def fetch_session_history(session_id: str):
+    """Get conversation history for a session from DynamoDB"""
+    history = get_session_history(session_id)
     return {"session_id": session_id, "history": history}
 
 
-@app.get("/api/sessions/{session_id}/telemetry")
-async def get_session_telemetry(session_id: str):
-    """Get agent telemetry logs for a session"""
-    logs = session_telemetry.get(session_id, [])
-    return logs
+@app.get("/api/traces/{query_hash}")
+async def fetch_trace(query_hash: str):
+    """Get LangGraph execution trace by query hash"""
+    trace = get_trace_telemetry(query_hash)
+    if not trace:
+        raise HTTPException(status_code=404, detail="Trace not found")
+    return trace
 
 
 @app.delete("/api/sessions/{session_id}")
 async def clear_session(session_id: str):
-    """Clear session history"""
-    if session_id in sessions:
-        del sessions[session_id]
+    """Clear session history from DynamoDB"""
+    delete_session(session_id)
     return {"status": "cleared", "session_id": session_id}
 
 

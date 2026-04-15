@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIA Ontology Sign-Off — Manufacturing Insight Agent</title>
+<style>
+  :root {
+    --az-purple: #5B2D8E;
+    --az-dark-purple: #3C1361;
+    --az-light-purple: #7B4FAF;
+    --az-pale-purple: #F3EDF8;
+    --az-white: #FFFFFF;
+    --az-grey: #F5F5F5;
+    --az-border: #E0D4EC;
+    --az-text: #2D2D2D;
+    --az-mfg: #5B2D8E;
+    --az-quality: #C0392B;
+    --az-material: #2471A3;
+    --az-planning: #1E8449;
+    --az-infra: #7D6608;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    color: var(--az-text);
+    line-height: 1.6;
+    background: var(--az-white);
+  }
+
+  /* ── Header ── */
+  .doc-header {
+    background: linear-gradient(135deg, var(--az-dark-purple), var(--az-purple));
+    color: var(--az-white);
+    padding: 48px 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::after {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .doc-header .logo-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+  .doc-header .logo-bar .company {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .doc-header .logo-bar .badge {
+    background: rgba(255,255,255,0.15);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .doc-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .doc-header .subtitle {
+    font-size: 16px;
+    opacity: 0.85;
+    margin-bottom: 18px;
+  }
+  .doc-header .meta-row {
+    display: flex;
+    gap: 32px;
+    font-size: 13px;
+    opacity: 0.8;
+  }
+  .doc-header .meta-row span { display: flex; align-items: center; gap: 6px; }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 40px 0; border-bottom: 1px solid var(--az-border); }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-size: 22px;
+    color: var(--az-purple);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--az-purple);
+    display: inline-block;
+  }
+  h3 {
+    font-size: 17px;
+    color: var(--az-dark-purple);
+    margin: 24px 0 10px;
+  }
+  h4 { font-size: 15px; color: var(--az-purple); margin: 16px 0 8px; }
+
+  p, li { font-size: 14px; }
+  p { margin-bottom: 12px; }
+  ul, ol { margin-left: 20px; margin-bottom: 14px; }
+  li { margin-bottom: 4px; }
+
+  /* ── Table of Contents ── */
+  .toc {
+    background: var(--az-pale-purple);
+    border-radius: 8px;
+    padding: 28px 36px;
+    margin: 32px 0;
+  }
+  .toc h2 { border-bottom-color: var(--az-light-purple); }
+  .toc ol { counter-reset: toc; list-style: none; margin-left: 0; }
+  .toc ol li { counter-increment: toc; margin-bottom: 6px; }
+  .toc ol li::before {
+    content: counter(toc) ".";
+    color: var(--az-purple);
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  .toc a { color: var(--az-dark-purple); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--az-purple);
+    color: var(--az-white);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #E8E0EF;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--az-grey); }
+  tbody tr:hover { background: #EDE5F5; }
+
+  /* ── Cards / Callouts ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: var(--az-pale-purple);
+    border-radius: 8px;
+    padding: 20px 22px;
+    text-align: center;
+    border-left: 4px solid var(--az-purple);
+  }
+  .stat-card .number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--az-purple);
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .callout {
+    background: var(--az-pale-purple);
+    border-left: 4px solid var(--az-purple);
+    padding: 16px 20px;
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0;
+  }
+
+  /* ── Code / Cypher ── */
+  pre {
+    background: #1E1E2E;
+    color: #CDD6F4;
+    padding: 18px 22px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 0 20px;
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  }
+  pre .kw { color: #CBA6F7; }
+  pre .fn { color: #89B4FA; }
+  pre .str { color: #A6E3A1; }
+  pre .var { color: #F9E2AF; }
+  pre .comment { color: #6C7086; font-style: italic; }
+
+  code {
+    background: #EDE5F5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+  }
+
+  /* ── SVG Diagram ── */
+  .diagram-wrap {
+    background: var(--az-white);
+    border: 1px solid var(--az-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .diagram-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 12px 0 8px;
+    font-size: 13px;
+  }
+  .diagram-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ── Vocab chips ── */
+  .vocab-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 18px;
+  }
+  .vocab-chip {
+    background: var(--az-pale-purple);
+    border: 1px solid var(--az-border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: var(--az-dark-purple);
+  }
+
+  /* ── Sign-off ── */
+  .signoff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 24px 0;
+  }
+  .signoff-box {
+    border: 1px solid var(--az-border);
+    border-radius: 8px;
+    padding: 22px 26px;
+  }
+  .signoff-box .role {
+    font-weight: 700;
+    color: var(--az-purple);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .signoff-box .field {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 0;
+    font-size: 13px;
+    color: #555;
+  }
+  .signoff-box .field:last-child { border-bottom: none; }
+
+  /* ── Node breakdown bar ── */
+  .node-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+    font-size: 13px;
+  }
+  .node-bar .bar {
+    height: 20px;
+    border-radius: 3px;
+    min-width: 2px;
+  }
+  .node-bar .bar-label { min-width: 160px; font-weight: 500; }
+  .node-bar .bar-count { color: #666; min-width: 80px; text-align: right; }
+
+  /* ── Footer ── */
+  .doc-footer {
+    background: var(--az-dark-purple);
+    color: rgba(255,255,255,0.7);
+    padding: 24px 60px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { font-size: 11px; }
+    .doc-header { padding: 28px 40px 24px; }
+    .doc-header h1 { font-size: 24px; }
+    .container { padding: 0 30px; max-width: 100%; }
+    section { padding: 24px 0; page-break-inside: avoid; }
+    .diagram-wrap { page-break-inside: avoid; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+    .signoff-grid { page-break-inside: avoid; }
+    pre { font-size: 10px; padding: 12px 14px; }
+    .stat-grid { grid-template-columns: repeat(4, 1fr); }
+    @page { margin: 1.5cm; }
+    .doc-footer { position: fixed; bottom: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="doc-header">
+  <div class="logo-bar">
+    <span class="company">AstraZeneca</span>
+    <span class="badge">CONFIDENTIAL</span>
+  </div>
+  <h1>Manufacturing Insight Agent Ontology</h1>
+  <p class="subtitle">Knowledge Graph Schema — Client Sign-Off Document</p>
+  <div class="meta-row">
+    <span><strong>Version:</strong>&nbsp;1.0</span>
+    <span><strong>Created:</strong>&nbsp;2025-09-05</span>
+    <span><strong>URI:</strong>&nbsp;https://pid.astrazeneca.net/ontology/app/mia/1.0</span>
+    <span><strong>Status:</strong>&nbsp;For Approval</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ═══════════════ TABLE OF CONTENTS ═══════════════ -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#exec-summary">Executive Summary</a></li>
+    <li><a href="#ontology-overview">Ontology Overview &amp; Entity-Relationship Diagram</a></li>
+    <li><a href="#class-descriptions">Detailed Class Descriptions</a></li>
+    <li><a href="#relationships">Relationship Definitions</a></li>
+    <li><a href="#reference-data">Reference Data / Controlled Vocabularies</a></li>
+    <li><a href="#data-sources">Data Sources &amp; Volume</a></li>
+    <li><a href="#graph-stats">Graph Statistics</a></li>
+    <li><a href="#source-systems">Source System Coverage</a></li>
+    <li><a href="#business-questions">Business Questions &amp; Example Cypher Queries</a></li>
+    <li><a href="#glossary">Glossary of Key Terms</a></li>
+    <li><a href="#version-history">Version History</a></li>
+    <li><a href="#sign-off">Sign-Off</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════ 1. EXECUTIVE SUMMARY ═══════════════ -->
+<section id="exec-summary">
+  <h2>1. Executive Summary</h2>
+  <p>
+    The <strong>Manufacturing Insight Agent (MIA)</strong> ontology defines a standardised knowledge graph schema that models AstraZeneca's end-to-end pharmaceutical manufacturing landscape. It captures the full lifecycle of production batches — from planned orders through process execution, quality inspection, and material genealogy — across six SAP ERP source systems spanning North America, Europe, Asia, France, Puerto Rico, and Latin America.
+  </p>
+  <p>
+    The ontology comprises <strong>16 classes</strong> (node types), <strong>23 relationship types</strong>, and <strong>8 controlled vocabularies</strong> that together provide a unified semantic layer over three core data tables totalling <strong>1.35 million source rows</strong>. When loaded into the Neo4j knowledge graph, the schema materialises <strong>810,276 nodes</strong> and <strong>2,060,803 relationships</strong>.
+  </p>
+  <div class="callout">
+    <strong>Purpose of this document:</strong> To present the finalised ontology schema for stakeholder review and formal sign-off, confirming that the data model accurately represents AstraZeneca's manufacturing domain and supports the intended analytical and agentic-AI use cases.
+  </div>
+  <p>
+    The ontology imports the AstraZeneca reference operations vocabulary (<code>def-ops</code>) at <code>https://pid.astrazeneca.net/ref-ops/</code>, ensuring alignment with enterprise-wide data standards and enabling interoperability with other knowledge graphs within the organisation.
+  </p>
+</section>
+
+<!-- ═══════════════ 2. ONTOLOGY OVERVIEW + DIAGRAM ═══════════════ -->
+<section id="ontology-overview">
+  <h2>2. Ontology Overview</h2>
+  <p>The diagram below illustrates all 16 entity classes and their interconnecting relationships. Nodes are colour-coded by domain for readability.</p>
+
+  <div class="diagram-legend">
+    <span><span class="legend-dot" style="background:#5B2D8E;"></span> Manufacturing</span>
+    <span><span class="legend-dot" style="background:#C0392B;"></span> Quality</span>
+    <span><span class="legend-dot" style="background:#2471A3;"></span> Material &amp; Product</span>
+    <span><span class="legend-dot" style="background:#1E8449;"></span> Planning &amp; Orders</span>
+    <span><span class="legend-dot" style="background:#7D6608;"></span> Infrastructure</span>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1100 780" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+        </marker>
+        <marker id="arrowP" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#5B2D8E"/>
+        </marker>
+        <marker id="arrowR" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#C0392B"/>
+        </marker>
+        <marker id="arrowB" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#2471A3"/>
+        </marker>
+        <marker id="arrowG" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#1E8449"/>
+        </marker>
+        <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+          <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+        </filter>
+      </defs>
+
+      <!-- ── Relationship Lines ── -->
+      <!-- Batch → Material -->
+      <line x1="440" y1="320" x2="200" y2="180" stroke="#2471A3" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="300" y="240" font-size="9" fill="#2471A3" transform="rotate(-33 300 240)">MADE_OF</text>
+
+      <!-- Batch → Plant -->
+      <line x1="540" y1="300" x2="740" y2="180" stroke="#5B2D8E" stroke-width="1.5" marker-end="url(#arrowP)"/>
+      <text x="640" y="228" font-size="9" fill="#5B2D8E" transform="rotate(30 640 228)">MANUFACTURED_AT</text>
+
+      <!-- Batch → StorageLocation -->
+      <line x1="540" y1="340" x2="860" y2="280" stroke="#7D6608" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="710" y="296" font-size="9" fill="#7D6608">STORED_IN</text>
+
+      <!-- Plant → StorageLocation -->
+      <line x1="790" y1="180" x2="870" y2="260" stroke="#7D6608" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="850" y="222" font-size="9" fill="#7D6608">HAS_STORAGE</text>
+
+      <!-- Batch → Vendor -->
+      <line x1="440" y1="340" x2="140" y2="400" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="270" y="380" font-size="9" fill="#666">SUPPLIED_BY</text>
+
+      <!-- Batch → InspectionLot -->
+      <line x1="440" y1="350" x2="200" y2="490" stroke="#C0392B" stroke-width="1.5" marker-end="url(#arrowR)"/>
+      <text x="290" y="430" font-size="9" fill="#C0392B">HAS_INSPECTION</text>
+
+      <!-- Batch → LIMSLot -->
+      <line x1="460" y1="360" x2="200" y2="570" stroke="#C0392B" stroke-width="1.5" marker-end="url(#arrowR)"/>
+      <text x="300" y="480" font-size="9" fill="#C0392B">HAS_LIMS_LOT</text>
+
+      <!-- Batch → QualityEvent -->
+      <line x1="540" y1="360" x2="620" y2="500" stroke="#C0392B" stroke-width="1.5" marker-end="url(#arrowR)"/>
+      <text x="596" y="438" font-size="9" fill="#C0392B">HAS_QUALITY_EVENT</text>
+
+      <!-- Batch → QualityNotification -->
+      <line x1="540" y1="350" x2="760" y2="500" stroke="#C0392B" stroke-width="1.5" marker-end="url(#arrowR)"/>
+      <text x="670" y="418" font-size="9" fill="#C0392B">HAS_QUALITY_NOTIF</text>
+
+      <!-- Batch → ProcessOrder -->
+      <line x1="490" y1="370" x2="490" y2="510" stroke="#1E8449" stroke-width="2" marker-end="url(#arrowG)"/>
+      <text x="498" y="445" font-size="9" fill="#1E8449">PRODUCED_BY</text>
+
+      <!-- Batch → Batch (self-loop: FEEDS_INTO) -->
+      <path d="M 540 310 C 620 270, 620 370, 540 340" stroke="#5B2D8E" stroke-width="1.5" fill="none" marker-end="url(#arrowP)"/>
+      <text x="590" y="310" font-size="9" fill="#5B2D8E">FEEDS_INTO</text>
+
+      <!-- Batch → SourceSystem -->
+      <line x1="440" y1="300" x2="140" y2="280" stroke="#7D6608" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="270" y="282" font-size="9" fill="#7D6608">SOURCED_FROM</text>
+
+      <!-- ProcessOrder → Plant -->
+      <line x1="540" y1="530" x2="780" y2="180" stroke="#5B2D8E" stroke-width="1.2" stroke-dasharray="6,3" marker-end="url(#arrowP)"/>
+      <text x="680" y="370" font-size="9" fill="#5B2D8E" transform="rotate(-60 680 370)">EXECUTED_AT</text>
+
+      <!-- ProcessOrder → Material -->
+      <line x1="440" y1="540" x2="170" y2="200" stroke="#2471A3" stroke-width="1.2" stroke-dasharray="6,3" marker-end="url(#arrowB)"/>
+      <text x="280" y="370" font-size="9" fill="#2471A3" transform="rotate(55 280 370)">PRODUCES</text>
+
+      <!-- ProcessOrder → Operation -->
+      <line x1="540" y1="550" x2="780" y2="610" stroke="#5B2D8E" stroke-width="1.5" marker-end="url(#arrowP)"/>
+      <text x="660" y="570" font-size="9" fill="#5B2D8E">HAS_OPERATION</text>
+
+      <!-- ProcessOrder → PlannedOrder -->
+      <line x1="440" y1="550" x2="200" y2="670" stroke="#1E8449" stroke-width="1.5" marker-end="url(#arrowG)"/>
+      <text x="300" y="618" font-size="9" fill="#1E8449">ORIGINATES_FROM</text>
+
+      <!-- Operation → WorkCentre -->
+      <line x1="860" y1="640" x2="980" y2="580" stroke="#5B2D8E" stroke-width="1.5" marker-end="url(#arrowP)"/>
+      <text x="930" y="600" font-size="9" fill="#5B2D8E">USES_WORK_CENTRE</text>
+
+      <!-- Operation → Operation (self-loop: NEXT_OPERATION) -->
+      <path d="M 860 610 C 920 580, 920 650, 860 630" stroke="#5B2D8E" stroke-width="1.2" fill="none" marker-end="url(#arrowP)"/>
+      <text x="920" y="625" font-size="8" fill="#5B2D8E">NEXT_OP</text>
+
+      <!-- Material → ProductSubFamily -->
+      <line x1="160" y1="140" x2="380" y2="80" stroke="#2471A3" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="260" y="100" font-size="9" fill="#2471A3">BELONGS_TO_SUBFAMILY</text>
+
+      <!-- ProductSubFamily → ProductFamily -->
+      <line x1="480" y1="70" x2="650" y2="70" stroke="#2471A3" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="550" y="62" font-size="9" fill="#2471A3">BELONGS_TO_FAMILY</text>
+
+      <!-- Batch → ProcessOrder (CONSUMED_BY) -->
+      <line x1="470" y1="370" x2="460" y2="510" stroke="#1E8449" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowG)"/>
+      <text x="420" y="445" font-size="9" fill="#1E8449">CONSUMED_BY</text>
+
+      <!-- PlannedOrder → Batch (RECOMMENDS) -->
+      <line x1="220" y1="660" x2="440" y2="360" stroke="#1E8449" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowG)"/>
+      <text x="300" y="530" font-size="9" fill="#1E8449">RECOMMENDS</text>
+
+      <!-- ProcessOrder → Batch (ADJUSTS) -->
+      <line x1="520" y1="510" x2="520" y2="370" stroke="#1E8449" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowG)"/>
+      <text x="528" y="445" font-size="9" fill="#1E8449">ADJUSTS</text>
+
+      <!-- ── Nodes ── -->
+      <!-- ProductFamily -->
+      <rect x="640" y="44" width="130" height="48" rx="24" fill="#2471A3" filter="url(#shadow)"/>
+      <text x="705" y="74" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">ProductFamily</text>
+
+      <!-- ProductSubFamily -->
+      <rect x="360" y="44" width="150" height="48" rx="24" fill="#2471A3" filter="url(#shadow)"/>
+      <text x="435" y="74" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">ProductSubFamily</text>
+
+      <!-- Material -->
+      <rect x="80" y="140" width="130" height="48" rx="24" fill="#2471A3" filter="url(#shadow)"/>
+      <text x="145" y="170" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Material</text>
+
+      <!-- SourceSystem -->
+      <rect x="60" y="256" width="130" height="44" rx="22" fill="#7D6608" filter="url(#shadow)"/>
+      <text x="125" y="283" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">SourceSystem</text>
+
+      <!-- Vendor -->
+      <rect x="60" y="376" width="120" height="44" rx="22" fill="#888" filter="url(#shadow)"/>
+      <text x="120" y="403" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Vendor</text>
+
+      <!-- BATCH (Central) -->
+      <rect x="420" y="290" width="140" height="70" rx="35" fill="#5B2D8E" filter="url(#shadow)" stroke="#3C1361" stroke-width="2"/>
+      <text x="490" y="332" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">Batch</text>
+
+      <!-- Plant -->
+      <rect x="700" y="140" width="120" height="48" rx="24" fill="#5B2D8E" filter="url(#shadow)"/>
+      <text x="760" y="170" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Plant / Site</text>
+
+      <!-- StorageLocation -->
+      <rect x="830" y="256" width="140" height="44" rx="22" fill="#7D6608" filter="url(#shadow)"/>
+      <text x="900" y="283" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">StorageLocation</text>
+
+      <!-- InspectionLot -->
+      <rect x="100" y="470" width="140" height="44" rx="22" fill="#C0392B" filter="url(#shadow)"/>
+      <text x="170" y="498" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">InspectionLot</text>
+
+      <!-- LIMSLot -->
+      <rect x="100" y="550" width="130" height="44" rx="22" fill="#C0392B" filter="url(#shadow)"/>
+      <text x="165" y="578" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">LIMSLot</text>
+
+      <!-- QualityEvent -->
+      <rect x="560" y="480" width="140" height="44" rx="22" fill="#C0392B" filter="url(#shadow)"/>
+      <text x="630" y="508" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">QualityEvent</text>
+
+      <!-- QualityNotification -->
+      <rect x="710" y="480" width="170" height="44" rx="22" fill="#C0392B" filter="url(#shadow)"/>
+      <text x="795" y="508" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">QualityNotification</text>
+
+      <!-- ProcessOrder -->
+      <rect x="420" y="510" width="140" height="60" rx="30" fill="#1E8449" filter="url(#shadow)" stroke="#145A32" stroke-width="2"/>
+      <text x="490" y="546" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">ProcessOrder</text>
+
+      <!-- Operation -->
+      <rect x="760" y="600" width="120" height="44" rx="22" fill="#5B2D8E" filter="url(#shadow)"/>
+      <text x="820" y="628" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Operation</text>
+
+      <!-- PlannedOrder -->
+      <rect x="100" y="648" width="140" height="44" rx="22" fill="#1E8449" filter="url(#shadow)"/>
+      <text x="170" y="676" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">PlannedOrder</text>
+
+      <!-- WorkCentre -->
+      <rect x="930" y="556" width="130" height="44" rx="22" fill="#5B2D8E" filter="url(#shadow)"/>
+      <text x="995" y="584" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">WorkCentre</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════ 3. DETAILED CLASS DESCRIPTIONS ═══════════════ -->
+<section id="class-descriptions">
+  <h2>3. Detailed Class Descriptions</h2>
+
+  <!-- Batch -->
+  <h3>3.1 Batch <code>def-ops:Batch</code></h3>
+  <p>Central entity representing a production batch of material. Identity is the composite of <code>batchCode</code> + <code>plantCode</code>.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>batchCode</td><td>String</td><td>Batch identifier</td></tr>
+      <tr><td>plantCode</td><td>String</td><td>Manufacturing plant code</td></tr>
+      <tr><td>batchRecordIdentifier</td><td>String</td><td>Batch record reference</td></tr>
+      <tr><td>statusCode</td><td>String</td><td>Current batch status (see BatchStatusScheme)</td></tr>
+      <tr><td>batchCreationDate</td><td>Date</td><td>Date the batch was created in SAP</td></tr>
+      <tr><td>manufactureDate</td><td>Date</td><td>Actual manufacturing date</td></tr>
+      <tr><td>availabilityDate</td><td>Date</td><td>Date batch became available</td></tr>
+      <tr><td>bestBeforeDate</td><td>Date</td><td>Expiry / best-before date</td></tr>
+      <tr><td>lastChangeDate</td><td>Date</td><td>Last modification timestamp</td></tr>
+      <tr><td>totalQuantity</td><td>Decimal</td><td>Total batch quantity</td></tr>
+      <tr><td>baseUnitOfMeasure</td><td>String</td><td>Unit of measure (KG, L, EA, etc.)</td></tr>
+      <tr><td>deletionIndicator</td><td>Boolean</td><td>Soft-delete flag</td></tr>
+      <tr><td>vendorBatchCode</td><td>String</td><td>Supplier's batch code</td></tr>
+      <tr><td>countryOfOrigin</td><td>String</td><td>Manufacturing country</td></tr>
+      <tr><td>shelfLifePeriod</td><td>Integer</td><td>Shelf life duration</td></tr>
+      <tr><td>shelfLifeUnit</td><td>String</td><td>Shelf life unit (months, days)</td></tr>
+      <tr><td>procurementTypeCode</td><td>String</td><td>Procurement type (see ProcurementTypeScheme)</td></tr>
+      <tr><td>productLocationTypeCode</td><td>String</td><td>Location type (see LocationTypeScheme)</td></tr>
+      <tr><td>productFamilyName</td><td>String</td><td>Therapeutic area / product family</td></tr>
+      <tr><td>productSubFamilyName</td><td>String</td><td>Product sub-family (brand)</td></tr>
+      <tr><td>usageDecisionCode</td><td>String</td><td>QA usage decision (see UsageDecisionScheme)</td></tr>
+      <tr><td>goodsReceiptDatetime</td><td>Datetime</td><td>Goods receipt timestamp</td></tr>
+      <tr><td>samplingDatetime</td><td>Datetime</td><td>QC sampling timestamp</td></tr>
+      <tr><td>releaseDatetime</td><td>Datetime</td><td>Batch release timestamp</td></tr>
+      <tr><td>goodsIssueDatetime</td><td>Datetime</td><td>Goods issue timestamp</td></tr>
+      <tr><td>pickEntryDatetime</td><td>Datetime</td><td>Pick entry timestamp</td></tr>
+      <tr><td>pickPostingDatetime</td><td>Datetime</td><td>Pick posting timestamp</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ProcessOrder -->
+  <h3>3.2 ProcessOrder <code>mia:ProcessOrder</code></h3>
+  <p>Production order executed at manufacturing sites. Identity: <code>processOrderNumber</code> + <code>productionPlantCode</code>. Subclass of <code>def-ops:Order</code>.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>processOrderNumber</td><td>String</td><td>SAP process order number</td></tr>
+      <tr><td>orderTypeCode</td><td>String</td><td>Order type (see ProcessOrderTypeScheme)</td></tr>
+      <tr><td>orderCategoryCode</td><td>String</td><td>Order category</td></tr>
+      <tr><td>scheduledStartDatetime</td><td>Datetime</td><td>Planned start date/time</td></tr>
+      <tr><td>scheduledFinishDatetime</td><td>Datetime</td><td>Planned finish date/time</td></tr>
+      <tr><td>actualStartDatetime</td><td>Datetime</td><td>Actual production start</td></tr>
+      <tr><td>actualFinishDate</td><td>Date</td><td>Actual completion date</td></tr>
+      <tr><td>orderCreationDate</td><td>Date</td><td>Date order was created</td></tr>
+      <tr><td>totalOrderQuantity</td><td>Decimal</td><td>Target production quantity</td></tr>
+      <tr><td>enteredOrderItemQuantity</td><td>Decimal</td><td>Entered order item quantity</td></tr>
+      <tr><td>goodsReceivedQuantity</td><td>Decimal</td><td>Quantity received to stock</td></tr>
+      <tr><td>totalScrapQuantity</td><td>Decimal</td><td>Total scrap</td></tr>
+      <tr><td>reworkOrderIndicator</td><td>Boolean</td><td>Whether this is a rework order</td></tr>
+      <tr><td>closedIndicator</td><td>Boolean</td><td>Order closed flag</td></tr>
+      <tr><td>releasedIndicator</td><td>Boolean</td><td>Order released flag</td></tr>
+      <tr><td>techCompletedIndicator</td><td>Boolean</td><td>Technically completed flag</td></tr>
+      <tr><td>systemStatusesText</td><td>String</td><td>SAP system statuses</td></tr>
+      <tr><td>userStatusesText</td><td>String</td><td>User-defined statuses</td></tr>
+      <tr><td>finishedOperationsCount</td><td>Integer</td><td>Number of completed operations</td></tr>
+      <tr><td>totalOperationsCount</td><td>Integer</td><td>Total operations in order</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Material -->
+  <h3>3.3 Material <code>def-ops:Material</code></h3>
+  <p>Product/material master with global and local codes.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>localMaterialCode</td><td>String</td><td>Plant-level material number</td></tr>
+      <tr><td>globalMaterialCode</td><td>String</td><td>Global material identifier</td></tr>
+      <tr><td>materialName</td><td>String</td><td>Material description</td></tr>
+      <tr><td>materialTypeCode</td><td>String</td><td>Material type code</td></tr>
+      <tr><td>materialTypeName</td><td>String</td><td>Material type (see MaterialTypeScheme)</td></tr>
+      <tr><td>materialGroupName</td><td>String</td><td>Material grouping</td></tr>
+      <tr><td>strengthText</td><td>String</td><td>Dosage strength</td></tr>
+      <tr><td>procurementTypeCode</td><td>String</td><td>Procurement type</td></tr>
+      <tr><td>procurementTypeName</td><td>String</td><td>Procurement type name</td></tr>
+      <tr><td>baseUnitOfMeasure</td><td>String</td><td>Base unit of measure</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Operation -->
+  <h3>3.4 ProcessOrderOperation <code>mia:ProcessOrderOperation</code></h3>
+  <p>Individual manufacturing steps within a process order. Subclass of <code>def-ops:Operation</code>.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>operationCode</td><td>String</td><td>Operation identifier</td></tr>
+      <tr><td>operationName</td><td>String</td><td>Operation description</td></tr>
+      <tr><td>statusName</td><td>String</td><td>Current operation status</td></tr>
+      <tr><td>operationDatetime</td><td>Datetime</td><td>Operation execution timestamp</td></tr>
+      <tr><td>nextOperationCode</td><td>String</td><td>Pointer to the next operation in sequence</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Remaining classes (concise) -->
+  <h3>3.5 PlannedOrder <code>mia:PlannedOrder</code></h3>
+  <p>Planned production order before conversion to a process order. Subclass of <code>def-ops:Order</code>. Linked to ProcessOrder via <code>ORIGINATES_FROM</code>.</p>
+
+  <h3>3.6 InspectionLot <code>def-ops:Lot</code></h3>
+  <p>Quality inspection lot linked to batches. Carries inspection type (Final, In-Process, Incoming) and usage decision attributes.</p>
+
+  <h3>3.7 LIMSLot</h3>
+  <p>Laboratory Information Management System lot for lab testing, linked to batches via <code>HAS_LIMS_LOT</code>.</p>
+
+  <h3>3.8 QualityEvent <code>mia:QualityEvent</code></h3>
+  <p>Quality events affecting batches, including deviations, out-of-specification results, and CAPAs.</p>
+
+  <h3>3.9 QualityNotification <code>mia:QualityNotification</code></h3>
+  <p>Formal notifications raised for quality issues and deviations, linked to affected batches.</p>
+
+  <h3>3.10 Plant / Site <code>def-ops:Site</code></h3>
+  <p>Manufacturing or planning site. Subclass of Enterprise. Linked to batches, process orders, and storage locations.</p>
+
+  <h3>3.11 Vendor</h3>
+  <p>Supplier of raw materials. Linked to batches via <code>SUPPLIED_BY</code>.</p>
+
+  <h3>3.12 WorkCentre</h3>
+  <p>Production resource or equipment used to execute operations.</p>
+
+  <h3>3.13 StorageLocation</h3>
+  <p>Warehouse or storage area within a plant. Classified by location type (Production, Quality Control, Warehouse).</p>
+
+  <h3>3.14 ProductFamily</h3>
+  <p>Level-1 product grouping, typically by therapeutic area (e.g., Oncology, Respiratory).</p>
+
+  <h3>3.15 ProductSubFamily</h3>
+  <p>Level-2 product grouping, typically by brand (e.g., Tagrisso, Lynparza, Symbicort).</p>
+
+  <h3>3.16 SourceSystem</h3>
+  <p>ERP source system identifier (e.g., SAP ECC EUROPE, SAP ECC NAM). Batches and orders are linked via <code>SOURCED_FROM</code>.</p>
+</section>
+
+<!-- ═══════════════ 4. RELATIONSHIP DEFINITIONS ═══════════════ -->
+<section id="relationships">
+  <h2>4. Relationship Definitions</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Relationship</th><th>Source</th><th>Target</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>MADE_OF</td><td>Batch</td><td>Material</td><td>Batch is made of this material</td></tr>
+      <tr><td>2</td><td>MANUFACTURED_AT</td><td>Batch</td><td>Plant</td><td>Batch was manufactured at this plant</td></tr>
+      <tr><td>3</td><td>STORED_IN</td><td>Batch</td><td>StorageLocation</td><td>Batch is stored in this location</td></tr>
+      <tr><td>4</td><td>SUPPLIED_BY</td><td>Batch</td><td>Vendor</td><td>Raw material batch supplied by vendor</td></tr>
+      <tr><td>5</td><td>HAS_INSPECTION</td><td>Batch</td><td>InspectionLot</td><td>Batch has this quality inspection lot</td></tr>
+      <tr><td>6</td><td>HAS_LIMS_LOT</td><td>Batch</td><td>LIMSLot</td><td>Batch linked to LIMS testing lot</td></tr>
+      <tr><td>7</td><td>HAS_QUALITY_EVENT</td><td>Batch</td><td>QualityEvent</td><td>Batch affected by quality event</td></tr>
+      <tr><td>8</td><td>HAS_QUALITY_NOTIFICATION</td><td>Batch</td><td>QualityNotification</td><td>Batch has quality notification raised</td></tr>
+      <tr><td>9</td><td>PRODUCED_BY</td><td>Batch</td><td>ProcessOrder</td><td>Batch was produced by this order</td></tr>
+      <tr><td>10</td><td>SOURCED_FROM</td><td>Batch / ProcessOrder</td><td>SourceSystem</td><td>Entity originates from this ERP system</td></tr>
+      <tr><td>11</td><td>CONSUMED_BY</td><td>Batch</td><td>ProcessOrder</td><td>Batch consumed as input material</td></tr>
+      <tr><td>12</td><td>FEEDS_INTO</td><td>Batch</td><td>Batch</td><td>Material genealogy — output feeds into next batch</td></tr>
+      <tr><td>13</td><td>EXECUTED_AT</td><td>ProcessOrder</td><td>Plant</td><td>Order executed at this manufacturing site</td></tr>
+      <tr><td>14</td><td>PRODUCES</td><td>ProcessOrder</td><td>Material</td><td>Order produces this material</td></tr>
+      <tr><td>15</td><td>HAS_OPERATION</td><td>ProcessOrder</td><td>Operation</td><td>Order contains this manufacturing step</td></tr>
+      <tr><td>16</td><td>ORIGINATES_FROM</td><td>ProcessOrder</td><td>PlannedOrder</td><td>Process order converted from planned order</td></tr>
+      <tr><td>17</td><td>RECOMMENDS</td><td>PlannedOrder</td><td>Batch</td><td>Planned order recommends this batch</td></tr>
+      <tr><td>18</td><td>ADJUSTS</td><td>ProcessOrder</td><td>Batch</td><td>Process order adjusts batch attributes</td></tr>
+      <tr><td>19</td><td>USES_WORK_CENTRE</td><td>Operation</td><td>WorkCentre</td><td>Operation uses this equipment/resource</td></tr>
+      <tr><td>20</td><td>NEXT_OPERATION</td><td>Operation</td><td>Operation</td><td>Sequence chain linking operations in order</td></tr>
+      <tr><td>21</td><td>BELONGS_TO_SUBFAMILY</td><td>Material</td><td>ProductSubFamily</td><td>Material belongs to this product sub-family</td></tr>
+      <tr><td>22</td><td>BELONGS_TO_FAMILY</td><td>ProductSubFamily</td><td>ProductFamily</td><td>Sub-family grouped under product family</td></tr>
+      <tr><td>23</td><td>HAS_STORAGE</td><td>Plant</td><td>StorageLocation</td><td>Plant contains this storage location</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════ 5. REFERENCE DATA ═══════════════ -->
+<section id="reference-data">
+  <h2>5. Reference Data / Controlled Vocabularies</h2>
+  <p>The following controlled vocabularies ensure consistent classification across all source systems.</p>
+
+  <h4>BatchStatusScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Blocked</span>
+    <span class="vocab-chip">Created</span>
+    <span class="vocab-chip">In Production</span>
+    <span class="vocab-chip">Quality Control</span>
+    <span class="vocab-chip">Released</span>
+  </div>
+
+  <h4>OrderStatusScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Cancelled</span>
+    <span class="vocab-chip">Completed</span>
+    <span class="vocab-chip">Created</span>
+    <span class="vocab-chip">In Progress</span>
+    <span class="vocab-chip">Released</span>
+    <span class="vocab-chip">Technically Completed</span>
+  </div>
+
+  <h4>InspectionTypeScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Final</span>
+    <span class="vocab-chip">In-Process</span>
+    <span class="vocab-chip">Incoming</span>
+  </div>
+
+  <h4>ProcessOrderTypeScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Production</span>
+    <span class="vocab-chip">Rework</span>
+    <span class="vocab-chip">Sampling</span>
+  </div>
+
+  <h4>ProcurementTypeScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Manufacturing</span>
+    <span class="vocab-chip">Production</span>
+    <span class="vocab-chip">Purchase</span>
+    <span class="vocab-chip">Transfer</span>
+  </div>
+
+  <h4>UsageDecisionScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Approved</span>
+    <span class="vocab-chip">Pending</span>
+    <span class="vocab-chip">Rejected</span>
+  </div>
+
+  <h4>LocationTypeScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Production</span>
+    <span class="vocab-chip">Quality Control</span>
+    <span class="vocab-chip">Warehouse</span>
+  </div>
+
+  <h4>MaterialTypeScheme</h4>
+  <div class="vocab-chips">
+    <span class="vocab-chip">Finished Product</span>
+    <span class="vocab-chip">Intermediate</span>
+    <span class="vocab-chip">Raw Material</span>
+  </div>
+</section>
+
+<!-- ═══════════════ 6. DATA SOURCES & VOLUME ═══════════════ -->
+<section id="data-sources">
+  <h2>6. Data Sources &amp; Volume</h2>
+  <p>The ontology is populated from three CSV data tables extracted from SAP ERP systems:</p>
+  <table>
+    <thead><tr><th>Table</th><th>Row Count</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>batch_status</code></td><td>50,489</td><td>Batch lifecycle data including material, quality, and LIMS information</td></tr>
+      <tr><td><code>order_status</code></td><td>247,089</td><td>Process orders, operations, and scheduling data</td></tr>
+      <tr><td><code>order_batch_relationship</code></td><td>1,052,223</td><td>Consumption, recommendation, and adjustment relationships between orders and batches</td></tr>
+    </tbody>
+  </table>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="number">3</div>
+      <div class="label">Source Tables</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">1.35M</div>
+      <div class="label">Total Source Rows</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">6</div>
+      <div class="label">SAP Systems</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 7. GRAPH STATISTICS ═══════════════ -->
+<section id="graph-stats">
+  <h2>7. Graph Statistics</h2>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="number">810,276</div>
+      <div class="label">Total Nodes</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">2,060,803</div>
+      <div class="label">Total Relationships</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">16</div>
+      <div class="label">Node Types</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">23</div>
+      <div class="label">Relationship Types</div>
+    </div>
+  </div>
+
+  <h3>Node Breakdown by Class</h3>
+  <div style="margin:16px 0 24px;">
+    <div class="node-bar"><span class="bar-label">PlannedOrder</span><div class="bar" style="width:340px;background:#1E8449;"></div><span class="bar-count">264,824</span></div>
+    <div class="node-bar"><span class="bar-label">ProcessOrder</span><div class="bar" style="width:318px;background:#1E8449;"></div><span class="bar-count">246,770</span></div>
+    <div class="node-bar"><span class="bar-label">Batch</span><div class="bar" style="width:254px;background:#5B2D8E;"></div><span class="bar-count">197,479</span></div>
+    <div class="node-bar"><span class="bar-label">Operation</span><div class="bar" style="width:44px;background:#5B2D8E;"></div><span class="bar-count">34,106</span></div>
+    <div class="node-bar"><span class="bar-label">InspectionLot</span><div class="bar" style="width:42px;background:#C0392B;"></div><span class="bar-count">32,739</span></div>
+    <div class="node-bar"><span class="bar-label">LIMSLot</span><div class="bar" style="width:20px;background:#C0392B;"></div><span class="bar-count">15,315</span></div>
+    <div class="node-bar"><span class="bar-label">Material</span><div class="bar" style="width:19px;background:#2471A3;"></div><span class="bar-count">14,847</span></div>
+    <div class="node-bar"><span class="bar-label">QualityEvent</span><div class="bar" style="width:6px;background:#C0392B;"></div><span class="bar-count">1,118</span></div>
+    <div class="node-bar"><span class="bar-label">Vendor</span><div class="bar" style="width:5px;background:#888;"></div><span class="bar-count">1,010</span></div>
+    <div class="node-bar"><span class="bar-label">WorkCentre</span><div class="bar" style="width:4px;background:#5B2D8E;"></div><span class="bar-count">617</span></div>
+    <div class="node-bar"><span class="bar-label">ProductSubFamily</span><div class="bar" style="width:3px;background:#2471A3;"></div><span class="bar-count">520</span></div>
+    <div class="node-bar"><span class="bar-label">QualityNotification</span><div class="bar" style="width:3px;background:#C0392B;"></div><span class="bar-count">495</span></div>
+    <div class="node-bar"><span class="bar-label">Plant</span><div class="bar" style="width:2px;background:#5B2D8E;"></div><span class="bar-count">168</span></div>
+    <div class="node-bar"><span class="bar-label">StorageLocation</span><div class="bar" style="width:2px;background:#7D6608;"></div><span class="bar-count">135</span></div>
+    <div class="node-bar"><span class="bar-label">ProductFamily</span><div class="bar" style="width:2px;background:#2471A3;"></div><span class="bar-count">127</span></div>
+    <div class="node-bar"><span class="bar-label">SourceSystem</span><div class="bar" style="width:2px;background:#7D6608;"></div><span class="bar-count">6</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════ 8. SOURCE SYSTEM COVERAGE ═══════════════ -->
+<section id="source-systems">
+  <h2>8. Source System Coverage</h2>
+  <p>The ontology integrates data from six SAP ECC instances across global manufacturing regions:</p>
+  <table>
+    <thead><tr><th>Source System</th><th>Nodes</th><th>Share</th></tr></thead>
+    <tbody>
+      <tr><td>SAP ECC NAM</td><td>194,650</td><td>66.5%</td></tr>
+      <tr><td>SAP ECC EUROPE</td><td>49,724</td><td>17.0%</td></tr>
+      <tr><td>SAP ECC ASIA</td><td>30,488</td><td>10.4%</td></tr>
+      <tr><td>SAP ECC FRANCE</td><td>11,197</td><td>3.8%</td></tr>
+      <tr><td>SAP ECC PUERTO RICO</td><td>4,138</td><td>1.4%</td></tr>
+      <tr><td>SAP ECC LATAM</td><td>2,552</td><td>0.9%</td></tr>
+    </tbody>
+  </table>
+  <div style="margin:16px 0;">
+    <div class="node-bar"><span class="bar-label">SAP ECC NAM</span><div class="bar" style="width:400px;background:#5B2D8E;"></div><span class="bar-count">194,650</span></div>
+    <div class="node-bar"><span class="bar-label">SAP ECC EUROPE</span><div class="bar" style="width:102px;background:#7B4FAF;"></div><span class="bar-count">49,724</span></div>
+    <div class="node-bar"><span class="bar-label">SAP ECC ASIA</span><div class="bar" style="width:63px;background:#9B6DC6;"></div><span class="bar-count">30,488</span></div>
+    <div class="node-bar"><span class="bar-label">SAP ECC FRANCE</span><div class="bar" style="width:23px;background:#B48FD8;"></div><span class="bar-count">11,197</span></div>
+    <div class="node-bar"><span class="bar-label">SAP ECC PUERTO RICO</span><div class="bar" style="width:9px;background:#CCB2E5;"></div><span class="bar-count">4,138</span></div>
+    <div class="node-bar"><span class="bar-label">SAP ECC LATAM</span><div class="bar" style="width:5px;background:#E0D4EC;"></div><span class="bar-count">2,552</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════ 9. BUSINESS QUESTIONS & CYPHER ═══════════════ -->
+<section id="business-questions">
+  <h2>9. Business Questions This Ontology Enables</h2>
+  <p>The knowledge graph enables natural-language and Cypher-based exploration of complex manufacturing questions that would be difficult or impossible to answer with relational queries alone.</p>
+
+  <h3>9.1 Batch Genealogy Tracing</h3>
+  <p><em>"Trace all upstream raw material batches that fed into finished product batch B-12345 at plant P100."</em></p>
+<pre><span class="comment">// Recursive batch genealogy — trace all ancestors</span>
+<span class="kw">MATCH</span> path = (finished:<span class="fn">Batch</span> {batchCode: <span class="str">'B-12345'</span>, plantCode: <span class="str">'P100'</span>})
+      <span class="kw">&lt;-</span>[:<span class="var">FEEDS_INTO</span>*1..10]<span class="kw">-</span>(ancestor:<span class="fn">Batch</span>)
+<span class="kw">MATCH</span> (ancestor)-[:<span class="var">MADE_OF</span>]-&gt;(m:<span class="fn">Material</span>)
+<span class="kw">OPTIONAL MATCH</span> (ancestor)-[:<span class="var">SUPPLIED_BY</span>]-&gt;(v:<span class="fn">Vendor</span>)
+<span class="kw">RETURN</span> ancestor.batchCode <span class="kw">AS</span> batch,
+       m.materialName <span class="kw">AS</span> material,
+       v.vendorName <span class="kw">AS</span> supplier,
+       <span class="fn">length</span>(path) <span class="kw">AS</span> depth
+<span class="kw">ORDER BY</span> depth</pre>
+
+  <h3>9.2 Order Cycle Time Analysis</h3>
+  <p><em>"What is the average cycle time from order creation to technical completion, by plant and product family?"</em></p>
+<pre><span class="kw">MATCH</span> (po:<span class="fn">ProcessOrder</span>)-[:<span class="var">EXECUTED_AT</span>]-&gt;(p:<span class="fn">Plant</span>),
+      (po)-[:<span class="var">PRODUCES</span>]-&gt;(m:<span class="fn">Material</span>)-[:<span class="var">BELONGS_TO_SUBFAMILY</span>]-&gt;(sf)
+              -[:<span class="var">BELONGS_TO_FAMILY</span>]-&gt;(fam:<span class="fn">ProductFamily</span>)
+<span class="kw">WHERE</span> po.actualStartDatetime <span class="kw">IS NOT NULL</span>
+  <span class="kw">AND</span> po.actualFinishDate <span class="kw">IS NOT NULL</span>
+<span class="kw">RETURN</span> p.plantCode <span class="kw">AS</span> plant,
+       fam.name <span class="kw">AS</span> productFamily,
+       <span class="fn">avg</span>(<span class="fn">duration.between</span>(po.actualStartDatetime,
+           po.actualFinishDate)) <span class="kw">AS</span> avgCycleTime,
+       <span class="fn">count</span>(po) <span class="kw">AS</span> orderCount
+<span class="kw">ORDER BY</span> avgCycleTime <span class="kw">DESC</span></pre>
+
+  <h3>9.3 Quality Event Impact Analysis</h3>
+  <p><em>"For each quality event, find all downstream batches that may be affected through the material genealogy chain."</em></p>
+<pre><span class="kw">MATCH</span> (qe:<span class="fn">QualityEvent</span>)<span class="kw">&lt;-</span>[:<span class="var">HAS_QUALITY_EVENT</span>]<span class="kw">-</span>(affected:<span class="fn">Batch</span>)
+<span class="kw">OPTIONAL MATCH</span> path = (affected)-[:<span class="var">FEEDS_INTO</span>*1..5]-&gt;(downstream:<span class="fn">Batch</span>)
+<span class="kw">MATCH</span> (downstream)-[:<span class="var">MADE_OF</span>]-&gt;(m:<span class="fn">Material</span>)
+<span class="kw">RETURN</span> qe.eventId <span class="kw">AS</span> qualityEvent,
+       affected.batchCode <span class="kw">AS</span> affectedBatch,
+       <span class="fn">collect</span>(<span class="kw">DISTINCT</span> downstream.batchCode) <span class="kw">AS</span> downstreamBatches,
+       <span class="fn">collect</span>(<span class="kw">DISTINCT</span> m.materialName) <span class="kw">AS</span> impactedMaterials</pre>
+
+  <h3>9.4 Cross-Plant Material Flow</h3>
+  <p><em>"Show all material transfers between plants — where a batch manufactured at one plant is consumed by a process order at another."</em></p>
+<pre><span class="kw">MATCH</span> (b:<span class="fn">Batch</span>)-[:<span class="var">MANUFACTURED_AT</span>]-&gt;(source:<span class="fn">Plant</span>),
+      (b)-[:<span class="var">CONSUMED_BY</span>]-&gt;(po:<span class="fn">ProcessOrder</span>)-[:<span class="var">EXECUTED_AT</span>]-&gt;(dest:<span class="fn">Plant</span>)
+<span class="kw">WHERE</span> source &lt;&gt; dest
+<span class="kw">MATCH</span> (b)-[:<span class="var">MADE_OF</span>]-&gt;(m:<span class="fn">Material</span>)
+<span class="kw">RETURN</span> source.plantCode <span class="kw">AS</span> fromPlant,
+       dest.plantCode <span class="kw">AS</span> toPlant,
+       m.materialName <span class="kw">AS</span> material,
+       <span class="fn">count</span>(b) <span class="kw">AS</span> transferCount
+<span class="kw">ORDER BY</span> transferCount <span class="kw">DESC</span></pre>
+</section>
+
+<!-- ═══════════════ 10. GLOSSARY ═══════════════ -->
+<section id="glossary">
+  <h2>10. Glossary of Key Terms</h2>
+  <table>
+    <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td>Ontology</td><td>A formal, shared conceptualisation of a domain, defining classes, properties, and relationships that model real-world entities and their interactions.</td></tr>
+      <tr><td>Knowledge Graph</td><td>A graph-structured database (nodes and edges) that stores entities and their relationships, enabling traversal-based queries and pattern discovery.</td></tr>
+      <tr><td>Neo4j</td><td>A native graph database used to store and query the MIA knowledge graph using the Cypher query language.</td></tr>
+      <tr><td>Cypher</td><td>Neo4j's declarative graph query language for pattern matching and data retrieval.</td></tr>
+      <tr><td>Batch</td><td>A discrete quantity of material produced or procured in a single production run, uniquely identified by batch code and plant.</td></tr>
+      <tr><td>Process Order</td><td>An SAP production order that defines the manufacturing steps, materials, and quantities for producing a batch.</td></tr>
+      <tr><td>Material Genealogy</td><td>The chain of <code>FEEDS_INTO</code> relationships that traces how raw material batches flow through intermediate steps to finished products.</td></tr>
+      <tr><td>Inspection Lot</td><td>A quality control unit created for testing a batch against predefined specifications.</td></tr>
+      <tr><td>LIMS</td><td>Laboratory Information Management System — software for managing lab samples, tests, and results.</td></tr>
+      <tr><td>Work Centre</td><td>A production resource (machine, production line, or manual workstation) where operations are executed.</td></tr>
+      <tr><td>def-ops</td><td>AstraZeneca's reference operations vocabulary (<code>https://pid.astrazeneca.net/ref-ops/</code>), providing enterprise-standard class definitions.</td></tr>
+      <tr><td>Controlled Vocabulary</td><td>A predefined, finite set of allowed values for a property, ensuring data consistency across source systems.</td></tr>
+      <tr><td>Source System</td><td>An SAP ECC instance from which manufacturing data is extracted (e.g., SAP ECC NAM, SAP ECC EUROPE).</td></tr>
+      <tr><td>CAPA</td><td>Corrective and Preventive Action — a systematic process for investigating quality deviations and implementing fixes.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════ 11. VERSION HISTORY ═══════════════ -->
+<section id="version-history">
+  <h2>11. Version History</h2>
+  <table>
+    <thead><tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr></thead>
+    <tbody>
+      <tr><td>0.1</td><td>2025-07-15</td><td>Data Architecture Team</td><td>Initial draft — core classes (Batch, Material, Plant, ProcessOrder)</td></tr>
+      <tr><td>0.5</td><td>2025-08-10</td><td>Data Architecture Team</td><td>Added quality domain (InspectionLot, QualityEvent, QualityNotification), vendor and storage entities</td></tr>
+      <tr><td>0.8</td><td>2025-08-25</td><td>Data Architecture Team</td><td>Added product hierarchy (ProductFamily, ProductSubFamily), operation chain, controlled vocabularies</td></tr>
+      <tr><td>0.9</td><td>2025-09-01</td><td>Data Architecture Team</td><td>Integrated LIMSLot, PlannedOrder, SourceSystem; finalised all 23 relationship types</td></tr>
+      <tr><td>1.0</td><td>2025-09-05</td><td>Data Architecture Team</td><td>Final version for client sign-off — schema loaded and validated against production data</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════ 12. SIGN-OFF ═══════════════ -->
+<section id="sign-off">
+  <h2>12. Sign-Off</h2>
+  <p>By signing below, I confirm that I have reviewed the Manufacturing Insight Agent (MIA) Ontology v1.0 and approve it as an accurate representation of AstraZeneca's manufacturing domain for use in the MIA knowledge graph.</p>
+
+  <div class="signoff-grid">
+    <div class="signoff-box">
+      <div class="role">Business Owner</div>
+      <div class="field"><span>Name:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Title:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Signature:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Date:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+    </div>
+
+    <div class="signoff-box">
+      <div class="role">Data Architect</div>
+      <div class="field"><span>Name:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Title:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Signature:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Date:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+    </div>
+
+    <div class="signoff-box">
+      <div class="role">Technical Lead</div>
+      <div class="field"><span>Name:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Title:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Signature:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Date:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+    </div>
+
+    <div class="signoff-box">
+      <div class="role">Quality Lead</div>
+      <div class="field"><span>Name:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Title:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Signature:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+      <div class="field"><span>Date:</span><span style="min-width:180px;border-bottom:1px dotted #999;">&nbsp;</span></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer class="doc-footer">
+  AstraZeneca &mdash; Manufacturing Insight Agent Ontology v1.0 &mdash; Confidential &mdash; For Internal Use Only
+</footer>
+
+</body>
+</html>

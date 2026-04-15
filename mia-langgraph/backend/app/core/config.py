@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     # Embedding Model
     embedding_model: str = "cohere.embed-multilingual-v3"
 
+    # DynamoDB
+    session_table_name: str = "mia-session-history"
+    trace_table_name: str = "mia-langgraph-traces"
+
     # Server Configuration
     host: str = "0.0.0.0"
     port: int = 3001

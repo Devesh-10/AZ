@@ -1,0 +1,11 @@
+field_id,field_name,data_type,mandatory,validation_rules,source_spec
+HPC-001,Job ID,string,true,"non-empty; unique per cluster; matches pattern JOB-[0-9]+",SLURM/PBS Job Management Spec v4.0
+HPC-002,Queue Name,string,true,"one of: genomics, pkpd, molsim, general; validated against cluster config",HPC Queue Configuration Standard
+HPC-003,Resource Allocation (CPUs),integer,true,"range 1-1024; must not exceed queue limit; divisible by node CPU count",Resource Allocation Policy RA-001
+HPC-004,Memory Allocation (GB),integer,true,"range 1-2048; proportional to CPU allocation; max 16GB per CPU",Resource Allocation Policy RA-001
+HPC-005,Container Image Hash,string,true,"SHA256 format; must match approved image registry; Singularity/Apptainer format",Container Integrity Standard CI-002
+HPC-006,Execution Metadata,json,true,"must include: run_id scenario_id parameters_hash timestamp; scenario_id references approved scenarios",Metadata-Scenario Consistency Framework v2.1
+HPC-007,Reproducibility Checksum,string,true,"SHA256 of output; must match reference run within tolerance; deterministic for same input",Computational Reproducibility Standard CR-001
+HPC-008,Parallel Node Count,integer,true,"range 1-128; matches requested CPU/node_cpu_count; validated against scheduler allocation",Parallel Execution Policy PE-001
+HPC-009,Scenario Parameters,json,true,"must reference valid scenario_id; all parameters within defined bounds; version-controlled",Metadata-Scenario Consistency Framework v2.1
+HPC-010,ReFrame Test Suite ID,string,false,"references registered ReFrame test class; format RF-[A-Z]+-[0-9]+; validated against suite registry",ReFrame Integration Spec RF-001

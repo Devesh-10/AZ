@@ -1,0 +1,11 @@
+field_id,field_name,data_type,mandatory,validation_rules,source_spec,module
+3DP-001,Substance Name,string,yes,"Non-empty; INN or USAN preferred name; max 200 chars; must match WHO INN List entry",ICH M4Q 3.2.S.1,Module 3.2.S Drug Substance
+3DP-002,Manufacturer,string,yes,"Non-empty; must include site name and country code (ISO 3166-1 alpha-2); max 300 chars",ICH M4Q 3.2.S.2.1,Module 3.2.S Drug Substance
+3DP-003,Batch Formula,string,yes,"Non-empty; must list all components with quantities and units; JSON or structured text; max 2000 chars",ICH M4Q 3.2.P.3.2,Module 3.2.P Drug Product
+3DP-004,Specification Limits,string,yes,"Non-empty; must include parameter name with numeric upper and lower bounds and units; format: param|lower|upper|unit",ICH M4Q 3.2.S.4.1,Module 3.2.S Drug Substance
+3DP-005,Stability Data,string,yes,"Non-empty; must include condition (e.g. 25C/60%RH) and time points in months; CSV-structured within field",ICH M4Q 3.2.P.8.3,Module 3.2.P Drug Product
+3DP-006,Description,string,yes,"Non-empty; physical form and appearance; max 500 chars; must include colour and physical state",ICH M4Q 3.2.S.1.1,Module 3.2.S Drug Substance
+3DP-007,Container Closure,string,yes,"Non-empty; must specify material type and component description; max 500 chars; must reference DMF if applicable",ICH M4Q 3.2.P.7,Module 3.2.P Drug Product
+3DP-008,Manufacturing Process,string,yes,"Non-empty; must describe key synthesis or formulation steps; max 5000 chars; must include critical process parameters",ICH M4Q 3.2.S.2.2,Module 3.2.S Drug Substance
+3DP-009,Analytical Method,string,no,"Reference to validated analytical procedure; must include method ID and validation status; max 200 chars",ICH M4Q 3.2.S.4.2,Module 3.2.S Drug Substance
+3DP-010,Impurity Profile,string,no,"List of identified and unidentified impurities with acceptance criteria; format: impurity_name|limit_pct|qualified",ICH M4Q 3.2.S.3.2,Module 3.2.S Drug Substance

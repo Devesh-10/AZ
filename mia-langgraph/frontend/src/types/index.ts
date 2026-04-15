@@ -50,6 +50,7 @@ export interface ChatResponse {
   validationResult?: ValidationResult;
   followUpQuestion?: string;
   generatedSql?: string;
+  agentLogs?: AgentLogEntry[];
 }
 
 export interface ChatMessage {

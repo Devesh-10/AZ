@@ -50,7 +50,7 @@ class MIAState(TypedDict):
     conversation_history: Annotated[list, add_messages]
 
     # Routing
-    route_type: Literal["KPI", "COMPLEX", "REJECT", "CLARIFY"] | None
+    route_type: Literal["KPI", "COMPLEX", "CLARIFY"] | None
     route_reason: str | None
     matched_kpi: str | None
     extracted_filters: dict | None

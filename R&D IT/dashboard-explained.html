@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1400, height=900">
+    <title>Test Intelligence Agent - Metrics Explained</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fff;
+            padding: 30px 40px;
+            width: 1400px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 3px solid #830051;
+            padding-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            font-style: italic;
+            color: #2d2d2d;
+        }
+
+        .header h1 span {
+            font-weight: 700;
+            color: #830051;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .number {
+            background: #830051;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .metric-card .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .metric-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d2d2d;
+        }
+
+        .metric-card .value {
+            font-size: 20px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+
+        .metric-card .value.green { background: #e8f5e9; color: #2e7d32; }
+        .metric-card .value.gold { background: #fff8e1; color: #c4a000; }
+        .metric-card .value.blue { background: #e3f2fd; color: #1e88e5; }
+        .metric-card .value.maroon { background: #fce4ec; color: #830051; }
+
+        .metric-card .description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .metric-card .formula {
+            background: #f5f5f5;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #444;
+            margin-bottom: 12px;
+            border-left: 3px solid #c4a000;
+        }
+
+        .metric-card .formula strong {
+            color: #830051;
+        }
+
+        .metric-card .example {
+            background: #faf9f7;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #555;
+            border-left: 3px solid #2e7d32;
+        }
+
+        .metric-card .example strong {
+            color: #2e7d32;
+        }
+
+        .metric-card .why {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #1e88e5;
+            font-style: italic;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, #830051, #c4a000, #2e7d32);
+            margin: 30px 0;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .benefit-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .benefit-item h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #830051;
+            margin-bottom: 8px;
+        }
+
+        .benefit-item p {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .benefit-item .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .status-explanation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .status-card {
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .status-card.green {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 2px solid #2e7d32;
+        }
+
+        .status-card.maroon {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            border: 2px solid #830051;
+        }
+
+        .status-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .status-card.green h4 { color: #2e7d32; }
+        .status-card.maroon h4 { color: #830051; }
+
+        .status-card p {
+            font-size: 12px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .az-logo {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .az-logo .outer {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 43px solid #c4a000;
+            position: absolute;
+        }
+
+        .az-logo .inner {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 26px solid #830051;
+            position: absolute;
+            top: 17px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Metrics <span>Explained</span></h1>
+        <p>Test Intelligence Agent — Understanding Each Dashboard Metric</p>
+    </div>
+
+    <!-- SECTION 1: KPIs -->
+    <div class="section">
+        <div class="section-title">
+            <span class="number">1</span>
+            Key Performance Indicators (KPIs)
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Test Effort Reduction</h3>
+                    <span class="value green">25%</span>
+                </div>
+                <p class="description">
+                    Measures the percentage decrease in manual hours spent writing and maintaining test cases compared to the baseline before AI implementation.
+                </p>
+                <div class="formula">
+                    <strong>Formula:</strong> ((Baseline Hours - Current Hours) / Baseline Hours) × 100
+                </div>
+                <div class="example">
+                    <strong>3DP Example:</strong> Before: 40 hrs/sprint writing Module 2/3 validation tests → After: 30 hrs/sprint with AI assistance = 25% reduction
+                </div>
+                <p class="why">Why it matters: Direct cost savings and faster delivery cycles</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Coverage Increase</h3>
+                    <span class="value green">15%</span>
+                </div>
+                <p class="description">
+                    Measures the increase in test scenarios covered, including edge cases and regulatory validation paths that were previously untested.
+                </p>
+                <div class="formula">
+                    <strong>Formula:</strong> ((New Test Scenarios - Original Scenarios) / Original Scenarios) × 100
+                </div>
+                <div class="example">
+                    <strong>3DP Example:</strong> AI discovered 47 new edge cases for GxP validation and CDISC format compliance that manual testing missed
+                </div>
+                <p class="why">Why it matters: Reduces production defects and regulatory risks</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Data Quality Score</h3>
+                    <span class="value gold">90%</span>
+                </div>
+                <p class="description">
+                    Measures the validity rate of synthetic test data generated by the AI - how often the generated data passes schema validation and business rules.
+                </p>
+                <div class="formula">
+                    <strong>Formula:</strong> (Valid Synthetic Records / Total Generated Records) × 100
+                </div>
+                <div class="example">
+                    <strong>3DP Example:</strong> AI generates synthetic patient data for submission testing - 90% passes all CDISC and regulatory format checks on first attempt
+                </div>
+                <p class="why">Why it matters: High quality synthetic data enables testing without real patient data</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Platforms Integrated</h3>
+                    <span class="value blue">2</span>
+                </div>
+                <p class="description">
+                    Count of R&D IT platforms where the Test Intelligence Agent has been deployed and is actively generating test cases.
+                </p>
+                <div class="formula">
+                    <strong>Target:</strong> 2 primary platforms in Phase 1, extensible to additional platforms in future phases
+                </div>
+                <div class="example">
+                    <strong>Current:</strong> 3DP (Drug Development Data Platform) and BIKG (Biological Intelligence Knowledge Graph) — both LIVE
+                </div>
+                <p class="why">Why it matters: Demonstrates scalability and reusability of the agent</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: Usage Metrics -->
+    <div class="section">
+        <div class="section-title">
+            <span class="number">2</span>
+            Usage Metrics
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Tests Generated</h3>
+                    <span class="value green">1,247</span>
+                </div>
+                <p class="description">
+                    Total count of test cases automatically generated by the AI agent since deployment. Includes unit tests, integration tests, and validation scripts.
+                </p>
+                <div class="example">
+                    <strong>Breakdown:</strong> 523 regulatory validation tests, 412 data integrity tests, 189 API tests, 123 edge case scenarios
+                </div>
+                <p class="why">Why it matters: Shows adoption and productivity impact</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Active Users</h3>
+                    <span class="value blue">18</span>
+                </div>
+                <p class="description">
+                    Number of unique engineers, QA analysts, and data scientists who have used the agent in the last 30 days.
+                </p>
+                <div class="example">
+                    <strong>User Roles:</strong> 8 QA Engineers, 5 Data Engineers, 3 Developers, 2 Data Scientists across 3DP and BIKG teams
+                </div>
+                <p class="why">Why it matters: Indicates adoption rate and user engagement</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Avg Response Time</h3>
+                    <span class="value gold">2.3s</span>
+                </div>
+                <p class="description">
+                    Average time for the AI to generate a test case from a given requirement or code snippet. Lower is better.
+                </p>
+                <div class="formula">
+                    <strong>Measured:</strong> From request submission to test case delivery (P50 latency)
+                </div>
+                <div class="example">
+                    <strong>Comparison:</strong> Manual test writing: ~30 minutes per test case. AI generation: 2.3 seconds = 780x faster
+                </div>
+                <p class="why">Why it matters: Fast responses enable real-time developer workflows</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Success Rate</h3>
+                    <span class="value green">98.2%</span>
+                </div>
+                <p class="description">
+                    Percentage of AI requests that successfully generate valid, executable test cases without errors or timeouts.
+                </p>
+                <div class="formula">
+                    <strong>Formula:</strong> (Successful Generations / Total Requests) × 100
+                </div>
+                <div class="example">
+                    <strong>Failures (1.8%):</strong> Mostly due to ambiguous requirements or unsupported test frameworks - logged for improvement
+                </div>
+                <p class="why">Why it matters: High reliability builds user trust and adoption</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 3: Cost Tracking -->
+    <div class="section">
+        <div class="section-title">
+            <span class="number">3</span>
+            Cost Tracking (Monthly)
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>LLM API (Bedrock)</h3>
+                    <span class="value gold">$4,200</span>
+                </div>
+                <p class="description">
+                    Monthly spend on Claude API calls through AWS Bedrock for test generation, code analysis, and requirement parsing.
+                </p>
+                <div class="formula">
+                    <strong>Breakdown:</strong> ~3.2M input tokens + ~1.8M output tokens @ Claude Sonnet pricing
+                </div>
+                <div class="example">
+                    <strong>Optimization:</strong> Prompt caching enabled, reducing repeat queries by 40%. Cost per test: ~$0.12
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Embedding Service</h3>
+                    <span class="value gold">$850</span>
+                </div>
+                <p class="description">
+                    Cost of vector embeddings for similar test failure detection and semantic search across historical test cases.
+                </p>
+                <div class="formula">
+                    <strong>Usage:</strong> ~15M tokens embedded monthly for RAG-based test retrieval
+                </div>
+                <div class="example">
+                    <strong>Value:</strong> Enables "find similar past failures" feature - surfaces relevant test patterns from history
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Infrastructure</h3>
+                    <span class="value gold">$500</span>
+                </div>
+                <p class="description">
+                    AWS compute and storage costs including Lambda functions, API Gateway, OpenSearch (vector DB), and S3 storage.
+                </p>
+                <div class="formula">
+                    <strong>Components:</strong> Lambda ($180), OpenSearch ($220), API Gateway ($60), S3 ($40)
+                </div>
+                <div class="example">
+                    <strong>Architecture:</strong> Serverless-first design keeps costs low and scales automatically with usage
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Total Monthly Cost</h3>
+                    <span class="value maroon">$5,550</span>
+                </div>
+                <p class="description">
+                    Combined infrastructure and AI costs to operate the Test Intelligence Agent across both platforms.
+                </p>
+                <div class="formula">
+                    <strong>Budget:</strong> $7,500/month allocated → Currently 26% under budget
+                </div>
+                <div class="example">
+                    <strong>Cost per Platform:</strong> ~$2,775/month each for 3DP and BIKG = highly cost-effective
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 4: Model Performance -->
+    <div class="section">
+        <div class="section-title">
+            <span class="number">4</span>
+            Model Performance
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Test Accuracy</h3>
+                    <span class="value green">94%</span>
+                </div>
+                <p class="description">
+                    Percentage of AI-generated tests that correctly validate the intended functionality without false positives or false negatives.
+                </p>
+                <div class="formula">
+                    <strong>Validation:</strong> Human review of 200 random samples monthly + automated syntax/execution checks
+                </div>
+                <div class="example">
+                    <strong>Quality Gate:</strong> Tests must pass code review before deployment. 94% are approved on first submission.
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="header-row">
+                    <h3>Data Validity</h3>
+                    <span class="value green">91%</span>
+                </div>
+                <p class="description">
+                    Percentage of synthetic test data that passes all schema validations, referential integrity checks, and business rule constraints.
+                </p>
+                <div class="formula">
+                    <strong>Checks:</strong> CDISC format compliance, FDA/EMA field requirements, data type validation, range checks
+                </div>
+                <div class="example">
+                    <strong>3DP Example:</strong> Synthetic patient records for Module 3 submissions - 91% valid for immediate use in test environments
+                </div>
+            </div>
+
+            <div class="metric-card full-width">
+                <div class="header-row">
+                    <h3>User Satisfaction</h3>
+                    <span class="value green">4.2/5</span>
+                </div>
+                <p class="description">
+                    Average rating from user feedback surveys measuring ease of use, output quality, and time savings. Collected via in-app feedback and monthly surveys.
+                </p>
+                <div class="example">
+                    <strong>Feedback Themes:</strong> "Saves hours of repetitive work" (4.5), "Good test coverage suggestions" (4.3), "Easy to integrate" (4.0), "Sometimes needs refinement" (3.8)
+                </div>
+                <p class="why">Target: 4.0/5 minimum for continued investment. Currently exceeding target.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 5: Status Indicators -->
+    <div class="section">
+        <div class="section-title">
+            <span class="number">5</span>
+            Status Indicators
+        </div>
+        <div class="status-explanation">
+            <div class="status-card green">
+                <h4>✓ Budget Status: On Track</h4>
+                <p>
+                    <strong>What it means:</strong> Monthly operational costs ($5,550) are below the allocated budget ($7,500), leaving headroom for scaling or unexpected usage spikes.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Threshold:</strong> Green = Under budget | Yellow = Within 10% of budget | Red = Over budget
+                </p>
+            </div>
+            <div class="status-card maroon">
+                <h4>↑ ROI: $48K Annual Savings (3.2x)</h4>
+                <p>
+                    <strong>What it means:</strong> Based on 25% test effort reduction across teams, the agent saves ~$48,000 annually in engineering time, delivering a 3.2x return on the $15,000 annual operating cost.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Calculation:</strong> 32 hrs saved/sprint × $75/hr × 20 sprints/year = $48,000 savings
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 6: Platform Integration -->
+    <div class="section">
+        <div class="section-title">
+            <span class="number">6</span>
+            Platform-Specific Use Cases
+        </div>
+        <div class="benefits-list">
+            <div class="benefit-item">
+                <div class="icon">🧪</div>
+                <h4>3DP: Regulatory Testing</h4>
+                <p>Auto-generate validation tests for FDA/EMA submission modules (Module 2, 3), GxP compliance checks, and Patient Safety data validation</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">📊</div>
+                <h4>3DP: Data Pipeline Tests</h4>
+                <p>Validate Portfolio Tower data ingestion, Study Cycle Time benchmarking, and CRO operational data transformations</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">🔗</div>
+                <h4>BIKG: Query Testing</h4>
+                <p>Generate test cases for knowledge graph queries - gene-disease relationships, protein-drug interactions, pathway traversals</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">🧬</div>
+                <h4>BIKG: Entity Validation</h4>
+                <p>Validate biological entity data integrity, ontology term consistency, and cross-reference accuracy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="az-logo">
+        <div class="outer"></div>
+        <div class="inner"></div>
+    </div>
+</body>
+</html>

@@ -6,6 +6,17 @@ node_modules/
 dist/
 build/
 .aws-sam/
+cdk.out/
+*.zip
+lambda-build/
+lambda_package/
+
+# Large data exports (>100MB GitHub limit)
+neo4j-graph-schema/FOLDER/order_batch_relationship_*.csv
+neo4j-graph-schema/FOLDER/order_status_*.csv
+
+# Nested empty repo
+single-deployment/
 
 # Environment files
 .env

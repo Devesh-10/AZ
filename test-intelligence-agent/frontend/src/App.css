@@ -1,0 +1,75 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 3-Panel Layout */
+.app-main {
+  flex: 1;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chat-panel {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  transition: width var(--transition-normal);
+}
+
+.agent-panel {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  transition: width var(--transition-normal);
+}
+
+.results-panel {
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width var(--transition-normal);
+}
+
+/* Collapsed Agent Panel */
+.app-main.collapsed-agent .chat-panel {
+  width: 45%;
+}
+
+.app-main.collapsed-agent .agent-panel {
+  width: 50px;
+}
+
+.app-main.collapsed-agent .results-panel {
+  width: calc(55% - 50px);
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .chat-panel { width: 38%; }
+  .agent-panel { width: 24%; }
+  .results-panel { width: 38%; }
+}
+
+@media (max-width: 1200px) {
+  .chat-panel { width: 36%; }
+  .agent-panel { width: 26%; }
+  .results-panel { width: 38%; }
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    flex-direction: column;
+  }
+  .chat-panel { width: 100%; height: 45vh; }
+  .agent-panel { width: 100%; height: 20vh; }
+  .results-panel { width: 100%; height: 35vh; }
+}

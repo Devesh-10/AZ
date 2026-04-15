@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIA - LangGraph State Diagram</title>
+    <style>
+        :root {
+            --primary: #7c3a5c;
+            --primary-light: #a855f7;
+            --primary-dark: #5a2a42;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--primary-light), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .graph-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .node {
+            position: relative;
+            padding: 25px 40px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 180px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(124, 58, 92, 0.4);
+        }
+
+        .node h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .node p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .node-start {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border: 2px solid #3b82f6;
+        }
+
+        .node-supervisor {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            border: 2px solid var(--primary-light);
+        }
+
+        .node-kpi {
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+            border: 2px solid var(--success);
+        }
+
+        .node-analyst {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            border: 2px solid var(--info);
+        }
+
+        .node-clarify {
+            background: linear-gradient(135deg, #92400e 0%, #b45309 100%);
+            border: 2px solid var(--warning);
+        }
+
+        .node-validator {
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+            border: 2px solid #a855f7;
+        }
+
+        .node-viz {
+            background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
+            border: 2px solid #06b6d4;
+        }
+
+        .node-end {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            border: 2px solid #34d399;
+        }
+
+        .arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--primary-light);
+        }
+
+        .arrow-line {
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--primary-light), var(--primary));
+        }
+
+        .arrow-head {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--primary);
+        }
+
+        .arrow-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .branch {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .branch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .horizontal-line {
+            width: 400px;
+            height: 3px;
+            background: var(--primary);
+            position: relative;
+        }
+
+        .horizontal-line::before,
+        .horizontal-line::after,
+        .horizontal-line .middle {
+            content: '';
+            position: absolute;
+            top: 100%;
+            width: 3px;
+            height: 20px;
+            background: var(--primary);
+        }
+
+        .horizontal-line::before {
+            left: 0;
+        }
+
+        .horizontal-line::after {
+            right: 0;
+        }
+
+        .horizontal-line .middle {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .state-section {
+            margin-bottom: 50px;
+        }
+
+        .state-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .state-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .state-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .state-card h3 {
+            color: var(--primary-light);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .state-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .state-field:last-child {
+            border-bottom: none;
+        }
+
+        .field-name {
+            font-family: 'Courier New', monospace;
+            color: #06b6d4;
+        }
+
+        .field-type {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        .legend-color.supervisor { background: var(--primary); }
+        .legend-color.kpi { background: var(--success); }
+        .legend-color.analyst { background: var(--info); }
+        .legend-color.validator { background: #7c3aed; }
+        .legend-color.viz { background: #0891b2; }
+        .legend-color.end { background: var(--success); }
+
+        .condition-badge {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--primary-light);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .flow-diagram {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .merge-point {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 10px auto;
+        }
+
+        .parallel-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .branch {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .horizontal-line {
+                display: none;
+            }
+
+            .parallel-arrows {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SIA LangGraph State Diagram</h1>
+            <p>Sustainability Insight Agent - Multi-Agent Workflow</p>
+        </header>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color supervisor"></div>
+                <span>Supervisor</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color kpi"></div>
+                <span>KPI Agent</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color analyst"></div>
+                <span>Analyst Agent</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color validator"></div>
+                <span>Validator</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color viz"></div>
+                <span>Visualization</span>
+            </div>
+        </div>
+
+        <!-- Flow Diagram -->
+        <div class="flow-diagram">
+            <div class="graph-container">
+                <!-- START -->
+                <div class="node node-start">
+                    <h3>START</h3>
+                    <p>User Query</p>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                    <span class="arrow-label">user_query, session_id</span>
+                </div>
+
+                <!-- SUPERVISOR -->
+                <div class="node node-supervisor">
+                    <h3>SUPERVISOR</h3>
+                    <p>Semantic Router</p>
+                    <span class="condition-badge">route_after_supervisor()</span>
+                </div>
+
+                <!-- Branching -->
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                </div>
+
+                <div class="horizontal-line"><div class="middle"></div></div>
+
+                <div style="height: 20px;"></div>
+
+                <!-- Three branches -->
+                <div class="branch">
+                    <div class="branch-container">
+                        <div class="arrow">
+                            <div class="arrow-head"></div>
+                            <span class="arrow-label">route_type = "KPI"</span>
+                        </div>
+                        <div style="height: 10px;"></div>
+                        <div class="node node-kpi">
+                            <h3>KPI AGENT</h3>
+                            <p>Structured SQL</p>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="arrow">
+                            <div class="arrow-head"></div>
+                            <span class="arrow-label">route_type = "COMPLEX"</span>
+                        </div>
+                        <div style="height: 10px;"></div>
+                        <div class="node node-analyst">
+                            <h3>ANALYST</h3>
+                            <p>Complex Analysis</p>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="arrow">
+                            <div class="arrow-head"></div>
+                            <span class="arrow-label">route_type = "CLARIFY"</span>
+                        </div>
+                        <div style="height: 10px;"></div>
+                        <div class="node node-clarify">
+                            <h3>CLARIFY</h3>
+                            <p>Need More Info</p>
+                        </div>
+                        <div class="arrow">
+                            <div class="arrow-line" style="height: 180px;"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Merge to Validator -->
+                <div class="parallel-arrows">
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                        <div class="arrow-head"></div>
+                        <span class="arrow-label">kpi_results, visualization_config</span>
+                    </div>
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                        <div class="arrow-head"></div>
+                        <span class="arrow-label">analyst_result</span>
+                    </div>
+                </div>
+
+                <!-- VALIDATOR -->
+                <div class="node node-validator">
+                    <h3>VALIDATOR</h3>
+                    <p>Quality Check</p>
+                    <span class="condition-badge">route_after_validator()</span>
+                </div>
+
+                <!-- Conditional to Visualization -->
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                </div>
+
+                <div style="display: flex; gap: 100px; align-items: flex-start;">
+                    <div class="branch-container">
+                        <div class="arrow">
+                            <div class="arrow-head"></div>
+                            <span class="arrow-label">viz_config.series exists</span>
+                        </div>
+                        <div style="height: 10px;"></div>
+                        <div class="node node-viz">
+                            <h3>VISUALIZATION</h3>
+                            <p>Chart Config</p>
+                        </div>
+                        <div class="arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="arrow">
+                            <div class="arrow-head"></div>
+                            <span class="arrow-label">no visualization</span>
+                        </div>
+                        <div style="height: 10px;"></div>
+                        <div style="height: 80px; display: flex; align-items: center;">
+                            <div style="width: 3px; height: 100%; background: var(--primary);"></div>
+                        </div>
+                        <div class="arrow">
+                            <div class="arrow-head"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END -->
+                <div class="node node-end">
+                    <h3>END</h3>
+                    <p>Return Response</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- State Definition -->
+        <section class="state-section" style="margin-top: 60px;">
+            <h2>SIAState Definition</h2>
+
+            <div class="state-grid">
+                <!-- Input State -->
+                <div class="state-card">
+                    <h3>&#128229; Input</h3>
+                    <div class="state-field">
+                        <span class="field-name">user_query</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">session_id</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">conversation_history</span>
+                        <span class="field-type">list[Message]</span>
+                    </div>
+                </div>
+
+                <!-- Routing State -->
+                <div class="state-card">
+                    <h3>&#128268; Routing</h3>
+                    <div class="state-field">
+                        <span class="field-name">route_type</span>
+                        <span class="field-type">"KPI" | "COMPLEX" | "CLARIFY"</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">route_reason</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">matched_kpi</span>
+                        <span class="field-type">str | None</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">extracted_filters</span>
+                        <span class="field-type">dict | None</span>
+                    </div>
+                </div>
+
+                <!-- Results State -->
+                <div class="state-card">
+                    <h3>&#128202; Results</h3>
+                    <div class="state-field">
+                        <span class="field-name">kpi_results</span>
+                        <span class="field-type">list[KPIResult] | None</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">analyst_result</span>
+                        <span class="field-type">AnalystResult | None</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">generated_sql</span>
+                        <span class="field-type">str | None</span>
+                    </div>
+                </div>
+
+                <!-- Validation State -->
+                <div class="state-card">
+                    <h3>&#9989; Validation</h3>
+                    <div class="state-field">
+                        <span class="field-name">validation_passed</span>
+                        <span class="field-type">bool</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">validation_notes</span>
+                        <span class="field-type">str | None</span>
+                    </div>
+                </div>
+
+                <!-- Output State -->
+                <div class="state-card">
+                    <h3>&#128228; Output</h3>
+                    <div class="state-field">
+                        <span class="field-name">final_answer</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">visualization_config</span>
+                        <span class="field-type">dict | None</span>
+                    </div>
+                </div>
+
+                <!-- Logging State -->
+                <div class="state-card">
+                    <h3>&#128221; Telemetry</h3>
+                    <div class="state-field">
+                        <span class="field-name">agent_logs</span>
+                        <span class="field-type">list[AgentLog]</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 10px;">
+                        Uses reducer: <code>add_logs()</code> to accumulate logs from all agents
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Type Definitions -->
+        <section class="state-section">
+            <h2>Type Definitions</h2>
+
+            <div class="state-grid">
+                <div class="state-card">
+                    <h3>&#128196; AgentLog</h3>
+                    <div class="state-field">
+                        <span class="field-name">agent_name</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">input_summary</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">output_summary</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">reasoning_summary</span>
+                        <span class="field-type">str | None</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">status</span>
+                        <span class="field-type">"success" | "error"</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">timestamp</span>
+                        <span class="field-type">str</span>
+                    </div>
+                </div>
+
+                <div class="state-card">
+                    <h3>&#128200; KPIResult</h3>
+                    <div class="state-field">
+                        <span class="field-name">kpi_name</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">breakdown_by</span>
+                        <span class="field-type">str | None</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">data_points</span>
+                        <span class="field-type">list[dict]</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">explanation</span>
+                        <span class="field-type">str | None</span>
+                    </div>
+                </div>
+
+                <div class="state-card">
+                    <h3>&#128203; AnalystResult</h3>
+                    <div class="state-field">
+                        <span class="field-name">narrative</span>
+                        <span class="field-type">str</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">supporting_kpi_results</span>
+                        <span class="field-type">list[dict]</span>
+                    </div>
+                    <div class="state-field">
+                        <span class="field-name">insights</span>
+                        <span class="field-type">list[str]</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- State Flow -->
+        <section class="state-section">
+            <h2>State Mutations by Agent</h2>
+
+            <div class="state-grid">
+                <div class="state-card" style="border-left: 4px solid var(--primary);">
+                    <h3 style="color: var(--primary);">Supervisor</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Reads: user_query</p>
+                    <p style="color: var(--success);">Writes:</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.9rem;">
+                        <li>route_type</li>
+                        <li>route_reason</li>
+                        <li>matched_kpi</li>
+                        <li>extracted_filters</li>
+                        <li>agent_logs (+)</li>
+                    </ul>
+                </div>
+
+                <div class="state-card" style="border-left: 4px solid var(--success);">
+                    <h3 style="color: var(--success);">KPI Agent</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Reads: user_query, matched_kpi, extracted_filters</p>
+                    <p style="color: var(--success);">Writes:</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.9rem;">
+                        <li>kpi_results</li>
+                        <li>final_answer</li>
+                        <li>generated_sql</li>
+                        <li>visualization_config</li>
+                        <li>agent_logs (+)</li>
+                    </ul>
+                </div>
+
+                <div class="state-card" style="border-left: 4px solid var(--info);">
+                    <h3 style="color: var(--info);">Analyst Agent</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Reads: user_query</p>
+                    <p style="color: var(--success);">Writes:</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.9rem;">
+                        <li>analyst_result</li>
+                        <li>final_answer</li>
+                        <li>generated_sql</li>
+                        <li>agent_logs (+)</li>
+                    </ul>
+                </div>
+
+                <div class="state-card" style="border-left: 4px solid #7c3aed;">
+                    <h3 style="color: #a855f7;">Validator</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Reads: final_answer, kpi_results, analyst_result</p>
+                    <p style="color: var(--success);">Writes:</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.9rem;">
+                        <li>validation_passed</li>
+                        <li>validation_notes</li>
+                        <li>agent_logs (+)</li>
+                    </ul>
+                </div>
+
+                <div class="state-card" style="border-left: 4px solid #0891b2;">
+                    <h3 style="color: #06b6d4;">Visualization</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Reads: kpi_results, visualization_config</p>
+                    <p style="color: var(--success);">Writes:</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.9rem;">
+                        <li>visualization_config (update)</li>
+                        <li>agent_logs (+)</li>
+                    </ul>
+                </div>
+
+                <div class="state-card" style="border-left: 4px solid var(--warning);">
+                    <h3 style="color: var(--warning);">Clarify</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Reads: user_query</p>
+                    <p style="color: var(--success);">Writes:</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.9rem;">
+                        <li>final_answer</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 40px; color: var(--text-secondary); border-top: 1px solid var(--border); margin-top: 40px;">
+            <p>Sustainability Insight Agent (SIA) - LangGraph State Diagram</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Built with LangGraph + AWS Bedrock</p>
+        </footer>
+    </div>
+</body>
+</html>

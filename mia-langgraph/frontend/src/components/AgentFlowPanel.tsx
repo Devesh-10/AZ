@@ -1,53 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AgentLogEntry } from "../types";
-import { getTelemetry } from "../api/chatApi";
 import "./AgentFlowPanel.css";
 
 interface AgentFlowPanelProps {
   sessionId: string | null;
   isCollapsed?: boolean;
+  logs?: AgentLogEntry[];
 }
 
-const AgentFlowPanel: React.FC<AgentFlowPanelProps> = ({ sessionId, isCollapsed = false }) => {
-  const [logs, setLogs] = useState<AgentLogEntry[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+const AgentFlowPanel: React.FC<AgentFlowPanelProps> = ({ sessionId, isCollapsed = false, logs = [] }) => {
   const [expandedThinking, setExpandedThinking] = useState<Set<string>>(new Set());
   const [expandedMessages, setExpandedMessages] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState<'flow' | 'diagram'>('flow');
-
-  useEffect(() => {
-    if (!sessionId) {
-      setLogs([]);
-      return;
-    }
-
-    let isMounted = true;
-
-    const fetchLogs = async (isInitial = false) => {
-      if (isInitial) setIsLoading(true);
-      try {
-        const data = await getTelemetry(sessionId);
-        if (isMounted) {
-          // Only update if data actually changed
-          setLogs(prev => {
-            if (JSON.stringify(prev) === JSON.stringify(data)) return prev;
-            return data;
-          });
-        }
-      } catch (error) {
-        console.error("Failed to fetch telemetry:", error);
-      } finally {
-        if (isInitial && isMounted) setIsLoading(false);
-      }
-    };
-
-    fetchLogs(true);
-    const interval = setInterval(() => fetchLogs(false), 3000);
-    return () => {
-      isMounted = false;
-      clearInterval(interval);
-    };
-  }, [sessionId]);
+  const isLoading = false;
 
   const toggleThinking = (logId: string) => {
     setExpandedThinking(prev => {
@@ -73,13 +38,12 @@ const AgentFlowPanel: React.FC<AgentFlowPanelProps> = ({ sessionId, isCollapsed 
     });
   };
 
-  // Determine which path was taken based on most recent logs
+  // Determine which path was taken based on current query logs
   const getRoutingPath = () => {
-    // Use last 6 logs (most recent query)
-    const recentLogs = logs.slice(-6);
-    const agentNames = recentLogs.map(l => l.agentName);
-    const hasKpiGateway = agentNames.includes("KPI Gateway");
-    const hasAnalyst = agentNames.includes("Analyst");
+    // All logs are now for current query only
+    const agentNames = logs.map(l => l.agentName.toLowerCase());
+    const hasKpiGateway = agentNames.some(n => n.includes("kpi"));
+    const hasAnalyst = agentNames.some(n => n.includes("analyst"));
 
     if (hasAnalyst) return "analyst";
     if (hasKpiGateway) return "kpi";
@@ -89,58 +53,60 @@ const AgentFlowPanel: React.FC<AgentFlowPanelProps> = ({ sessionId, isCollapsed 
   const routingPath = getRoutingPath();
 
   const getAgentIcon = (agentName: string) => {
-    switch (agentName) {
-      case "Supervisor":
-        return (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-          </svg>
-        );
-      case "KPI Gateway":
-        return (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M3 3v18h18" />
-            <path d="M18 17V9M13 17V5M8 17v-3" />
-          </svg>
-        );
-      case "Analyst":
-        return (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-          </svg>
-        );
-      case "Validator":
-        return (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-            <polyline points="22 4 12 14.01 9 11.01" />
-          </svg>
-        );
-      case "Visualization":
-        return (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-        );
-      default:
-        return (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-        );
+    const name = agentName.toLowerCase();
+    if (name.includes("supervisor")) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+      );
     }
+    if (name.includes("kpi")) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 3v18h18" />
+          <path d="M18 17V9M13 17V5M8 17v-3" />
+        </svg>
+      );
+    }
+    if (name.includes("analyst")) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        </svg>
+      );
+    }
+    if (name.includes("validator")) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+      );
+    }
+    if (name.includes("visualization")) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+      );
+    }
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    );
   };
 
   const getAgentColor = (agentName: string) => {
-    switch (agentName) {
-      case "Supervisor": return { bg: "rgba(139, 92, 246, 0.2)", border: "#8b5cf6", text: "#a78bfa" };
-      case "KPI Gateway": return { bg: "rgba(16, 185, 129, 0.2)", border: "#10b981", text: "#34d399" };
-      case "Analyst": return { bg: "rgba(59, 130, 246, 0.2)", border: "#3b82f6", text: "#60a5fa" };
-      case "Validator": return { bg: "rgba(245, 158, 11, 0.2)", border: "#f59e0b", text: "#fbbf24" };
-      case "Visualization": return { bg: "rgba(236, 72, 153, 0.2)", border: "#ec4899", text: "#f472b6" };
-      default: return { bg: "rgba(107, 114, 128, 0.2)", border: "#6b7280", text: "#9ca3af" };
-    }
+    const name = agentName.toLowerCase();
+    if (name.includes("supervisor")) return { bg: "rgba(139, 92, 246, 0.2)", border: "#8b5cf6", text: "#a78bfa" };
+    if (name.includes("kpi")) return { bg: "rgba(16, 185, 129, 0.2)", border: "#10b981", text: "#34d399" };
+    if (name.includes("analyst")) return { bg: "rgba(59, 130, 246, 0.2)", border: "#3b82f6", text: "#60a5fa" };
+    if (name.includes("validator")) return { bg: "rgba(245, 158, 11, 0.2)", border: "#f59e0b", text: "#fbbf24" };
+    if (name.includes("visualization")) return { bg: "rgba(236, 72, 153, 0.2)", border: "#ec4899", text: "#f472b6" };
+    return { bg: "rgba(107, 114, 128, 0.2)", border: "#6b7280", text: "#9ca3af" };
   };
 
 
@@ -372,8 +338,9 @@ const AgentFlowPanel: React.FC<AgentFlowPanelProps> = ({ sessionId, isCollapsed 
       ) : (
         <div className="logs-section">
           <div className="flow-content">
-            {/* Show last 6 logs (most recent query) in chronological order */}
-            {logs.slice(-6).map((log, index, displayedLogs) => {
+            {/* Show all logs for the current query */}
+            {logs.map((log, index) => {
+              const displayedLogs = logs;
               const nextAgent = index < displayedLogs.length - 1 ? displayedLogs[index + 1].agentName : null;
               const isThinkingExpanded = expandedThinking.has(log.id);
               const isMessageExpanded = expandedMessages.has(log.id);

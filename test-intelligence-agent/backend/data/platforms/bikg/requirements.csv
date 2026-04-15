@@ -1,0 +1,9 @@
+field_id,field_name,data_type,mandatory,validation_rules,source_spec,module
+BIKG-001,Source Entity,string,yes,"Non-empty; must be a valid gene symbol (HGNC) or UniProt accession or ChEBI ID; max 100 chars",BIKG Internal Schema v4.2,Entity Nodes
+BIKG-002,Target Entity,string,yes,"Non-empty; must be a valid gene symbol (HGNC) or UniProt accession or disease ontology ID (MONDO/DOID); max 100 chars",BIKG Internal Schema v4.2,Entity Nodes
+BIKG-003,Relationship Type,enum,yes,"Must be one of: targets|inhibits|activates|associated_with|interacts_with|regulates|phosphorylates|binds_to; case-insensitive",BIKG Internal Schema v4.2,Edge Properties
+BIKG-004,Evidence Score,float,yes,"Numeric between 0.0 and 1.0 inclusive; minimum 3 decimal places; must not be null for curated edges",BIKG Internal Schema v4.2,Edge Properties
+BIKG-005,Source Database,enum,yes,"Must be one of: OMIM|ClinVar|DisGeNET|STRING|IntAct|ChEMBL|UniProt|PubChem|Reactome; case-sensitive",BIKG Internal Schema v4.2,Provenance
+BIKG-006,Ontology Term,string,yes,"Non-empty; valid CURIE format (prefix:identifier) e.g. HP:0001945 or GO:0008150; must resolve against latest ontology release",BIKG Internal Schema v4.2,Semantic Annotation
+BIKG-007,Species,enum,no,"Must be one of: Homo sapiens|Mus musculus|Rattus norvegicus|Danio rerio|Caenorhabditis elegans; Latin binomial",BIKG Internal Schema v4.2,Entity Metadata
+BIKG-008,Publication Reference,string,no,"Valid PubMed ID (PMID:XXXXXXXX) or DOI format (10.XXXX/...); max 100 chars; must be resolvable via PubMed API",BIKG Internal Schema v4.2,Provenance

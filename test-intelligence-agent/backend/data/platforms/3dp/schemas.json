@@ -1,0 +1,283 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astrazeneca.com/test-intelligence-agent/schemas/3dp/ctd_module3.json",
+  "title": "CTD Module 3 Drug Substance/Product Schema",
+  "description": "JSON Schema for validating Chemistry, Manufacturing, and Controls (CMC) data aligned with ICH M4Q CTD Module 3 requirements for drug substance and drug product characterisation.",
+  "type": "object",
+  "required": [
+    "substance_name",
+    "manufacturer",
+    "batch_formula",
+    "specification_limits",
+    "stability_data",
+    "description",
+    "container_closure",
+    "manufacturing_process"
+  ],
+  "properties": {
+    "substance_name": {
+      "type": "string",
+      "description": "International Nonproprietary Name (INN) or United States Adopted Name (USAN) of the drug substance",
+      "minLength": 1,
+      "maxLength": 200,
+      "examples": ["Osimertinib mesylate", "Durvalumab"]
+    },
+    "manufacturer": {
+      "type": "object",
+      "description": "Manufacturing site details including name, address, and country",
+      "required": ["site_name", "country_code"],
+      "properties": {
+        "site_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 250,
+          "examples": ["AstraZeneca Macclesfield"]
+        },
+        "country_code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code",
+          "pattern": "^[A-Z]{2}$",
+          "examples": ["GB", "SE", "US"]
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "fei_number": {
+          "type": "string",
+          "description": "FDA Establishment Identifier (FEI) number",
+          "pattern": "^[0-9]{7,10}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "batch_formula": {
+      "type": "array",
+      "description": "List of all components in the batch formula with quantities",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["component_name", "quantity", "unit", "function"],
+        "properties": {
+          "component_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMinimum": true
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["mg", "g", "kg", "mL", "L", "%w/w", "%v/v"]
+          },
+          "function": {
+            "type": "string",
+            "description": "Functional role of the component",
+            "enum": ["active_ingredient", "excipient", "solvent", "buffer", "preservative", "coating", "disintegrant", "lubricant"]
+          },
+          "grade": {
+            "type": "string",
+            "description": "Pharmacopoeial or compendial grade",
+            "examples": ["USP", "Ph. Eur.", "JP", "In-house"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "specification_limits": {
+      "type": "array",
+      "description": "Quality specification parameters with acceptance criteria",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["parameter", "lower_limit", "upper_limit", "unit"],
+        "properties": {
+          "parameter": {
+            "type": "string",
+            "minLength": 1,
+            "examples": ["Assay", "pH", "Water content", "Particle size D90"]
+          },
+          "lower_limit": {
+            "type": "number",
+            "description": "Lower acceptance limit"
+          },
+          "upper_limit": {
+            "type": "number",
+            "description": "Upper acceptance limit"
+          },
+          "unit": {
+            "type": "string",
+            "examples": ["%", "pH units", "%w/w", "um", "mg/kg"]
+          },
+          "method_reference": {
+            "type": "string",
+            "description": "Reference to validated analytical method",
+            "examples": ["HPLC-UV Method AM-2024-001"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "stability_data": {
+      "type": "array",
+      "description": "Stability study results at various conditions and time points",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["condition", "time_point_months", "parameter", "result", "specification_met"],
+        "properties": {
+          "condition": {
+            "type": "string",
+            "description": "Storage condition for the stability study",
+            "examples": ["25C/60%RH", "30C/65%RH", "40C/75%RH", "5C"]
+          },
+          "time_point_months": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 60
+          },
+          "parameter": {
+            "type": "string",
+            "examples": ["Assay", "Degradation products", "Dissolution", "Water content"]
+          },
+          "result": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "specification_met": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "description": {
+      "type": "object",
+      "description": "Physical description of the drug substance",
+      "required": ["physical_form", "colour"],
+      "properties": {
+        "physical_form": {
+          "type": "string",
+          "description": "Physical state of the substance",
+          "enum": ["powder", "crystalline solid", "amorphous solid", "liquid", "semi-solid", "lyophilised powder"],
+          "examples": ["crystalline solid"]
+        },
+        "colour": {
+          "type": "string",
+          "examples": ["white", "off-white", "pale yellow"]
+        },
+        "odour": {
+          "type": "string",
+          "examples": ["odourless", "slight characteristic odour"]
+        },
+        "molecular_formula": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9()]+$",
+          "examples": ["C28H33N7O2"]
+        },
+        "molecular_weight": {
+          "type": "number",
+          "minimum": 0,
+          "examples": [499.62]
+        }
+      },
+      "additionalProperties": false
+    },
+    "container_closure": {
+      "type": "object",
+      "description": "Container closure system description",
+      "required": ["material_type", "component_description"],
+      "properties": {
+        "material_type": {
+          "type": "string",
+          "examples": ["HDPE bottle", "Type I glass vial", "PVC/Aluminium blister"]
+        },
+        "component_description": {
+          "type": "string",
+          "maxLength": 500,
+          "examples": ["White HDPE bottle with child-resistant polypropylene cap and induction seal"]
+        },
+        "dmf_reference": {
+          "type": "string",
+          "description": "Drug Master File reference if applicable",
+          "pattern": "^DMF-[0-9]+$"
+        },
+        "extractables_leachables_ref": {
+          "type": "string",
+          "description": "Reference to E&L study report"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manufacturing_process": {
+      "type": "object",
+      "description": "Manufacturing process description with critical parameters",
+      "required": ["process_steps", "critical_process_parameters"],
+      "properties": {
+        "process_steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["step_number", "step_name", "description"],
+            "properties": {
+              "step_number": { "type": "integer", "minimum": 1 },
+              "step_name": { "type": "string" },
+              "description": { "type": "string", "maxLength": 2000 },
+              "in_process_controls": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "critical_process_parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["parameter_name", "target_value", "acceptable_range"],
+            "properties": {
+              "parameter_name": { "type": "string" },
+              "target_value": { "type": "string" },
+              "acceptable_range": { "type": "string" },
+              "unit": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "batch_size": {
+          "type": "string",
+          "examples": ["50 kg", "100 L"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "analytical_method": {
+      "type": "string",
+      "description": "Reference to validated analytical procedure",
+      "maxLength": 200
+    },
+    "impurity_profile": {
+      "type": "array",
+      "description": "Identified and unidentified impurities with acceptance criteria",
+      "items": {
+        "type": "object",
+        "required": ["impurity_name", "limit_pct", "qualified"],
+        "properties": {
+          "impurity_name": { "type": "string" },
+          "limit_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+          "qualified": { "type": "boolean" },
+          "structure_known": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

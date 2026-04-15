@@ -1,0 +1,10 @@
+{
+  "SiaLanggraphStack": {
+    "ApiUrl": "https://708wg2ha7a.execute-api.us-east-1.amazonaws.com/prod/",
+    "FrontendBucketName": "sia-langgraph-frontend-137756267389",
+    "SiaApiEndpoint5E482A51": "https://708wg2ha7a.execute-api.us-east-1.amazonaws.com/prod/",
+    "CloudFrontDistributionId": "E24I9OHNNSHPKE",
+    "LambdaFunctionName": "SiaLanggraphStack-SiaBackendHandler7E39AAF2-b2elUkHKt0JD",
+    "FrontendUrl": "https://d3nzm00hx1xdt8.cloudfront.net"
+  }
+}

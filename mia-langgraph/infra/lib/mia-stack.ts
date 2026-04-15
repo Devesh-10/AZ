@@ -5,6 +5,7 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as iam from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 import * as path from "path";
@@ -15,6 +16,36 @@ export class MiaLanggraphStack extends cdk.Stack {
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    // ==========================================
+    // DynamoDB Table for Session History
+    // ==========================================
+
+    const sessionTable = new dynamodb.Table(this, "MiaSessionTable", {
+      tableName: "mia-session-history",
+      partitionKey: {
+        name: "session_id",
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      timeToLiveAttribute: "ttl",
+    });
+
+    // ==========================================
+    // DynamoDB Table for LangGraph Traces & Query Cache
+    // ==========================================
+
+    const traceTable = new dynamodb.Table(this, "MiaTraceTable", {
+      tableName: "mia-langgraph-traces",
+      partitionKey: {
+        name: "query_hash",
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      timeToLiveAttribute: "ttl",
+    });
 
     // ==========================================
     // Lambda Function (pre-built locally)
@@ -33,9 +64,15 @@ export class MiaLanggraphStack extends cdk.Stack {
         KPI_MODEL: "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
         ANALYST_MODEL: "us.anthropic.claude-sonnet-4-20250514-v1:0",
         VALIDATOR_MODEL: "us.anthropic.claude-3-5-haiku-20241022-v1:0",
+        SESSION_TABLE_NAME: sessionTable.tableName,
+        TRACE_TABLE_NAME: traceTable.tableName,
       },
       description: "MIA LangGraph Backend - Manufacturing Insight Agent",
     });
+
+    // Grant DynamoDB permissions
+    sessionTable.grantReadWriteData(backendLambda);
+    traceTable.grantReadWriteData(backendLambda);
 
     // Grant Bedrock permissions
     backendLambda.addToRolePolicy(
@@ -124,7 +161,6 @@ export class MiaLanggraphStack extends cdk.Stack {
               cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
             cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
             allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-            originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
           },
           "/health": {
             origin: new origins.HttpOrigin(
@@ -195,6 +231,16 @@ export class MiaLanggraphStack extends cdk.Stack {
     new cdk.CfnOutput(this, "CloudFrontDistributionId", {
       value: distribution.distributionId,
       description: "CloudFront Distribution ID",
+    });
+
+    new cdk.CfnOutput(this, "SessionTableName", {
+      value: sessionTable.tableName,
+      description: "DynamoDB Session History Table",
+    });
+
+    new cdk.CfnOutput(this, "TraceTableName", {
+      value: traceTable.tableName,
+      description: "DynamoDB LangGraph Traces Table",
     });
   }
 }

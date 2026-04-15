@@ -24,6 +24,8 @@ export interface AnalystAgentResult {
 
 type QuestionIntent =
   | 'YIELD_ANALYSIS'
+  | 'OEE_ANALYSIS'
+  | 'RFT_ANALYSIS'
   | 'EQUIPMENT_ANALYSIS'
   | 'QUALITY_ISSUES'
   | 'TREND_ANALYSIS'
@@ -41,12 +43,28 @@ function classifyQuestion(userQuery: string, conversationHistory: { role: string
   const hasHistory = conversationHistory.length > 0;
   const previousTopics = conversationHistory.map(h => h.content.toLowerCase()).join(' ');
 
+  // Check for OEE-specific queries first
+  if (/\boee\b/.test(lowerQuery) || /equipment\s*effectiveness/i.test(lowerQuery) || /packaging\s*efficiency/i.test(lowerQuery)) {
+    return { intent: 'OEE_ANALYSIS', focusAreas: ['oee'] };
+  }
+
+  // Check for RFT-specific queries
+  if (/\brft\b/.test(lowerQuery) || /right\s*first\s*time/i.test(lowerQuery) || /first[\s-]*pass/i.test(lowerQuery)) {
+    return { intent: 'RFT_ANALYSIS', focusAreas: ['rft'] };
+  }
+
   if (/\b(improve|recommend|fix|should we|what can we do|how do we|how can we)\b/.test(lowerQuery)) {
     const focusAreas: string[] = [];
     if (lowerQuery.includes('yield') || previousTopics.includes('yield')) focusAreas.push('yield');
     if (lowerQuery.includes('oee') || previousTopics.includes('oee')) focusAreas.push('oee');
     if (lowerQuery.includes('rft') || previousTopics.includes('rft')) focusAreas.push('rft');
     if (lowerQuery.includes('quality') || lowerQuery.includes('reject') || previousTopics.includes('reject')) focusAreas.push('quality');
+
+    // Route to specific analysis if focus is clear
+    if (focusAreas.length === 1) {
+      if (focusAreas[0] === 'oee') return { intent: 'OEE_ANALYSIS', focusAreas };
+      if (focusAreas[0] === 'rft') return { intent: 'RFT_ANALYSIS', focusAreas };
+    }
     return { intent: 'IMPROVEMENT_RECO', focusAreas: focusAreas.length > 0 ? focusAreas : ['yield', 'quality'] };
   }
 
@@ -184,6 +202,130 @@ SELECT
     SUM(CASE WHEN yield_pct < 95 THEN 1 ELSE 0 END) as low_yield_count,
     SUM(CASE WHEN status='Rejected' THEN 1 ELSE 0 END) as rejected_count
 FROM MES_PASX_BATCHES;`;
+      break;
+    }
+
+    case 'OEE_ANALYSIS': {
+      // Get OEE data from weekly KPI
+      const weeklyKpi = repo.getWeeklyKpi();
+      const recentWeeks = weeklyKpi.slice(-12);
+      const avgOee = recentWeeks.reduce((sum, w) => sum + Number(w.oee_packaging_pct || 0), 0) / recentWeeks.length;
+      const targetOee = 80;
+      const oeeGap = targetOee - avgOee;
+
+      analysisContext = `
+OEE (Overall Equipment Effectiveness) ANALYSIS:
+
+Current Performance:
+- Average OEE: ${avgOee.toFixed(1)}% (Target: ${targetOee}%)
+- Gap to Target: ${oeeGap.toFixed(1)}%
+- Status: ${avgOee >= targetOee ? 'Meeting target' : 'Below target'}
+
+Recent Weekly OEE Trend:
+${recentWeeks.slice(-6).map(w =>
+  `- Week ${w.iso_week}: ${Number(w.oee_packaging_pct || 0).toFixed(1)}%`
+).join('\n')}
+
+OEE Components to Investigate:
+- Availability: Equipment uptime and changeover efficiency
+- Performance: Running speed vs designed speed
+- Quality: Good units vs total units produced
+
+Improvement Areas:
+1. Reduce unplanned downtime (impacts Availability)
+2. Optimize changeover times (impacts Availability)
+3. Address speed losses (impacts Performance)
+4. Reduce defects and rework (impacts Quality)`;
+
+      supportingResults = [{
+        kpiName: "oee_summary",
+        breakdownBy: "status",
+        dataPoints: [
+          { label: "Current OEE", value: Math.round(avgOee * 10) / 10 },
+          { label: "Target OEE", value: targetOee },
+          { label: "Gap to Target", value: Math.round(oeeGap * 10) / 10 },
+          { label: "Min OEE (recent)", value: Math.round(Math.min(...recentWeeks.map(w => Number(w.oee_packaging_pct || 0))) * 10) / 10 },
+          { label: "Max OEE (recent)", value: Math.round(Math.max(...recentWeeks.map(w => Number(w.oee_packaging_pct || 0))) * 10) / 10 },
+        ],
+        explanation: "OEE packaging performance summary"
+      }];
+
+      generatedSql = `-- OEE Analysis
+SELECT
+    iso_week,
+    ROUND(oee_packaging_pct, 1) as oee_pct,
+    80 as target_oee,
+    ROUND(80 - oee_packaging_pct, 1) as gap
+FROM KPI_STORE_WEEKLY
+ORDER BY iso_week DESC
+LIMIT 12;`;
+      break;
+    }
+
+    case 'RFT_ANALYSIS': {
+      // Get RFT data from weekly KPI
+      const weeklyKpi = repo.getWeeklyKpi();
+      const recentWeeks = weeklyKpi.slice(-12);
+      const avgRft = recentWeeks.reduce((sum, w) => sum + Number(w.rft_pct || 0), 0) / recentWeeks.length;
+      const targetRft = 92;
+      const rftGap = targetRft - avgRft;
+
+      // Calculate RFT-related batch stats
+      const reworkBatches = allBatches.filter(b => b.rework_flag);
+      const firstPassSuccess = totalBatches - reworkBatches.length - rejectedBatches.length;
+
+      analysisContext = `
+RFT (Right First Time) ANALYSIS:
+
+Current Performance:
+- Average RFT: ${avgRft.toFixed(1)}% (Target: ${targetRft}%)
+- Gap to Target: ${rftGap.toFixed(1)}%
+- Status: ${avgRft >= targetRft ? 'Meeting target' : 'Below target - requires attention'}
+
+Batch Analysis:
+- Total Batches: ${totalBatches}
+- First Pass Success: ${firstPassSuccess} (${((firstPassSuccess/totalBatches)*100).toFixed(1)}%)
+- Required Rework: ${reworkBatches.length} (${((reworkBatches.length/totalBatches)*100).toFixed(1)}%)
+- Rejected: ${rejectedBatches.length} (${((rejectedBatches.length/totalBatches)*100).toFixed(1)}%)
+
+Recent Weekly RFT Trend:
+${recentWeeks.slice(-6).map(w =>
+  `- Week ${w.iso_week}: ${Number(w.rft_pct || 0).toFixed(1)}%`
+).join('\n')}
+
+Root Causes of RFT Failures:
+1. Process deviations: ${batchesWithDeviations.length} batches affected
+2. Equipment issues: Check ${worstEquipment[0]?.[0] || 'underperforming equipment'}
+3. Quality rejections: ${rejectedBatches.length} batches
+
+Improvement Recommendations:
+1. Implement process controls to reduce deviations
+2. Focus on equipment maintenance for ${worstEquipment[0]?.[0] || 'low-performing equipment'}
+3. Review and optimize SOPs for recurring issues`;
+
+      supportingResults = [{
+        kpiName: "rft_summary",
+        breakdownBy: "status",
+        dataPoints: [
+          { label: "Current RFT", value: Math.round(avgRft * 10) / 10 },
+          { label: "Target RFT", value: targetRft },
+          { label: "Gap to Target", value: Math.round(rftGap * 10) / 10 },
+          { label: "First Pass Success", value: firstPassSuccess },
+          { label: "Rework Required", value: reworkBatches.length },
+          { label: "Rejected", value: rejectedBatches.length },
+        ],
+        explanation: "RFT (Right First Time) performance summary"
+      }];
+
+      generatedSql = `-- RFT Analysis
+SELECT
+    iso_week,
+    ROUND(rft_pct, 1) as rft_pct,
+    92 as target_rft,
+    ROUND(92 - rft_pct, 1) as gap
+FROM KPI_STORE_WEEKLY
+ORDER BY iso_week DESC
+LIMIT 12;`;
       break;
     }
 
@@ -451,12 +593,21 @@ INSTRUCTIONS:
 5. Do NOT include tables (they are added separately)
 6. Focus on insights, not just restating numbers`;
 
+  // Get OEE and RFT data for fallback narratives
+  const weeklyKpiData = repo.getWeeklyKpi();
+  const recentWeeksData = weeklyKpiData.slice(-12);
+  const avgOeeValue = recentWeeksData.reduce((sum, w) => sum + Number(w.oee_packaging_pct || 0), 0) / recentWeeksData.length;
+  const avgRftValue = recentWeeksData.reduce((sum, w) => sum + Number(w.rft_pct || 0), 0) / recentWeeksData.length;
+  const reworkBatchesCount = allBatches.filter(b => b.rework_flag).length;
+
   let narrative: string;
   try {
     narrative = await callClaudeForText(narrativePrompt, "Generate analysis");
   } catch {
     const fallbackNarratives: Record<QuestionIntent, string> = {
       'YIELD_ANALYSIS': `Current yield is ${avgYield.toFixed(1)}% against a 98% target (gap: ${(98-avgYield).toFixed(1)}%). ${lowYieldBatches.length} batches are below 95% yield. Equipment ${worstEquipment[0]?.[0]} shows the lowest yield at ${worstEquipment[0]?.[1].avgYield.toFixed(1)}%. Focus maintenance on underperforming equipment to close the gap.`,
+      'OEE_ANALYSIS': `OEE packaging efficiency is ${avgOeeValue.toFixed(1)}% against an 80% target (gap: ${(80-avgOeeValue).toFixed(1)}%). To improve OEE: 1) Reduce unplanned downtime to increase Availability. 2) Optimize changeover times between batches. 3) Address speed losses during production runs. 4) Reduce defects to improve Quality component.`,
+      'RFT_ANALYSIS': `RFT (Right First Time) is ${avgRftValue.toFixed(1)}% against a 92% target (gap: ${(92-avgRftValue).toFixed(1)}%). ${reworkBatchesCount} batches required rework and ${rejectedBatches.length} were rejected. To improve: 1) Implement stronger process controls. 2) Focus on ${worstEquipment[0]?.[0]} which has lowest yield. 3) Address ${batchesWithDeviations.length} deviation sources.`,
       'ROOT_CAUSE': `Root cause analysis: ${rejectedBatches.length} rejected batches (${((rejectedBatches.length/totalBatches)*100).toFixed(1)}%). Key contributor: Equipment ${worstEquipment[0]?.[0]} at ${worstEquipment[0]?.[1].avgYield.toFixed(1)}% yield. ${batchesWithDeviations.length} batches had deviations. Recommend: equipment maintenance and deviation reduction.`,
       'QUALITY_ISSUES': `Quality overview: ${releasedBatches.length} Released (${((releasedBatches.length/totalBatches)*100).toFixed(1)}%), ${quarantinedBatches.length} Quarantined (${((quarantinedBatches.length/totalBatches)*100).toFixed(1)}%), ${rejectedBatches.length} Rejected (${((rejectedBatches.length/totalBatches)*100).toFixed(1)}%). Focus on reviewing quarantined batches and reducing deviation sources.`,
       'EQUIPMENT_ANALYSIS': `Equipment comparison: ${bestEquipment[0]?.[0]} leads with ${bestEquipment[0]?.[1].avgYield.toFixed(1)}% yield. ${worstEquipment[0]?.[0]} needs attention at ${worstEquipment[0]?.[1].avgYield.toFixed(1)}%. The ${(bestEquipment[0]?.[1].avgYield - worstEquipment[0]?.[1].avgYield).toFixed(1)}% gap represents improvement potential.`,

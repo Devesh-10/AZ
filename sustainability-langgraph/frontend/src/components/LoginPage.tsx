@@ -52,7 +52,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     <line x1="15" y1="12" x2="3" y2="12"/>
                   </svg>
                 </div>
-                <h2>Welcome Back</h2>
+                <h2>SIA Agent Login</h2>
                 <p>Sign in to access your sustainability dashboard</p>
               </div>
 

@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R&D IT Agentic AI - Agent Mesh Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 1400px;
+            height: 788px;
+            background: #fff;
+            margin: 20px auto;
+            padding: 30px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 300;
+            color: #2d2d2d;
+        }
+
+        .header h1 span {
+            font-weight: 700;
+            color: #830051;
+        }
+
+        .header .subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #830051;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Architecture Diagram Styles */
+        .architecture-container {
+            display: flex;
+            gap: 20px;
+            height: 650px;
+        }
+
+        .layer {
+            background: #faf9f7;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .layer-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #830051;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        /* Control Plane */
+        .control-plane {
+            width: 100%;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .control-box {
+            flex: 1;
+            background: linear-gradient(135deg, #830051 0%, #a31065 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .control-box h4 {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .control-box p {
+            font-size: 9px;
+            opacity: 0.9;
+        }
+
+        /* Agent Cards */
+        .agents-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .agent-card {
+            flex: 1;
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid;
+            position: relative;
+        }
+
+        .agent-card.test { border-color: #2e7d32; }
+        .agent-card.dependency { border-color: #1565c0; }
+        .agent-card.knowledge { border-color: #c4a000; }
+        .agent-card.lineage { border-color: #7b1fa2; }
+
+        .agent-card .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .agent-card.test .icon { background: #e8f5e9; }
+        .agent-card.dependency .icon { background: #e3f2fd; }
+        .agent-card.knowledge .icon { background: #fff8e1; }
+        .agent-card.lineage .icon { background: #f3e5f5; }
+
+        .agent-card h3 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 5px;
+        }
+
+        .agent-card .desc {
+            font-size: 9px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .agent-card .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .agent-card .tool {
+            font-size: 8px;
+            padding: 3px 8px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            color: #555;
+        }
+
+        /* MCP Layer */
+        .mcp-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .mcp-server {
+            flex: 1;
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .mcp-server h4 {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .mcp-server p {
+            font-size: 8px;
+            opacity: 0.9;
+        }
+
+        /* AWS Services */
+        .aws-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .aws-service {
+            flex: 1;
+            background: #ff9900;
+            color: #232f3e;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .aws-service h4 {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .aws-service p {
+            font-size: 8px;
+        }
+
+        /* Connection Lines */
+        .connections {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        /* Platform boxes */
+        .platform-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .platform-box {
+            flex: 1;
+            background: #fff;
+            border-radius: 10px;
+            padding: 12px;
+            border: 2px solid #830051;
+            text-align: center;
+        }
+
+        .platform-box h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 5px;
+        }
+
+        .platform-box p {
+            font-size: 9px;
+            color: #666;
+        }
+
+        /* Slide 2+ specific styles */
+        .two-column {
+            display: flex;
+            gap: 30px;
+            height: 620px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .detail-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .detail-section h3 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-row .label {
+            font-size: 10px;
+            color: #555;
+        }
+
+        .detail-row .value {
+            font-size: 10px;
+            font-weight: 600;
+            color: #2d2d2d;
+        }
+
+        .flow-diagram {
+            background: #faf9f7;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .flow-number {
+            width: 24px;
+            height: 24px;
+            background: #830051;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .flow-content {
+            flex: 1;
+        }
+
+        .flow-content h4 {
+            font-size: 10px;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin-bottom: 2px;
+        }
+
+        .flow-content p {
+            font-size: 9px;
+            color: #666;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: #830051;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        /* Individual Agent Architecture */
+        .agent-arch-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 620px;
+        }
+
+        .agent-header-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+        }
+
+        .agent-header-bar.blue {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+        }
+
+        .agent-header-bar.gold {
+            background: linear-gradient(135deg, #c4a000 0%, #d4b100 100%);
+        }
+
+        .agent-header-bar.purple {
+            background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%);
+        }
+
+        .agent-header-bar .agent-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .agent-header-bar .agent-info h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .agent-header-bar .agent-info p {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .agent-arch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .arch-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .arch-box h4 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #830051;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .arch-list {
+            list-style: none;
+        }
+
+        .arch-list li {
+            font-size: 10px;
+            color: #555;
+            padding: 6px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .arch-list li:last-child {
+            border-bottom: none;
+        }
+
+        .arch-list li::before {
+            content: ">";
+            color: #830051;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .integration-flow {
+            grid-column: 1 / -1;
+            background: #faf9f7;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .int-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .int-step .icon-box {
+            width: 40px;
+            height: 40px;
+            background: #830051;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 18px;
+        }
+
+        .int-step h5 {
+            font-size: 10px;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 3px;
+        }
+
+        .int-step p {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .int-arrow {
+            font-size: 20px;
+            color: #c4a000;
+        }
+
+        /* AZ Logo */
+        .az-logo {
+            position: absolute;
+            bottom: 15px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .az-logo .outer {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid #c4a000;
+            position: absolute;
+        }
+
+        .az-logo .inner {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 21px solid #830051;
+            position: absolute;
+            top: 14px;
+            left: 8px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 15px;
+            left: 40px;
+            font-size: 10px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Overview Architecture -->
+    <div class="slide">
+        <div class="header">
+            <h1>R&D IT <span>Agent Mesh Integration Architecture</span></h1>
+            <p class="subtitle">4 Agentic AI Solutions integrated with AstraZeneca Agent Mesh Framework <span class="badge">Overview</span></p>
+        </div>
+
+        <!-- Control Plane -->
+        <div class="layer" style="margin-bottom: 15px;">
+            <div class="layer-title">Agent Mesh Control Plane</div>
+            <div class="control-plane">
+                <div class="control-box">
+                    <h4>Agent Registry</h4>
+                    <p>Discovery & registration of all R&D IT agents</p>
+                </div>
+                <div class="control-box">
+                    <h4>Policy Engine</h4>
+                    <p>Access control, rate limiting, compliance rules</p>
+                </div>
+                <div class="control-box">
+                    <h4>Observability Hub</h4>
+                    <p>Metrics, tracing, cost tracking across agents</p>
+                </div>
+                <div class="control-box">
+                    <h4>Secret Manager</h4>
+                    <p>Credentials, API keys, secure configuration</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agents Layer -->
+        <div class="layer" style="margin-bottom: 15px;">
+            <div class="layer-title">Agent Runtimes (ECS Fargate)</div>
+            <div class="agents-row">
+                <div class="agent-card test">
+                    <div class="icon">🧪</div>
+                    <h3>Test Intelligence Agent</h3>
+                    <div class="desc">Auto-generate test cases for regulatory validation</div>
+                    <div class="tools">
+                        <span class="tool">Code Analysis</span>
+                        <span class="tool">Test Generator</span>
+                        <span class="tool">Coverage Scanner</span>
+                    </div>
+                </div>
+                <div class="agent-card dependency">
+                    <div class="icon">🔗</div>
+                    <h3>Dependency Coordinator</h3>
+                    <div class="desc">Track & resolve cross-platform dependencies</div>
+                    <div class="tools">
+                        <span class="tool">Jira Parser</span>
+                        <span class="tool">Graph Builder</span>
+                        <span class="tool">Conflict Detector</span>
+                    </div>
+                </div>
+                <div class="agent-card knowledge">
+                    <div class="icon">📚</div>
+                    <h3>Knowledge Library Companion</h3>
+                    <div class="desc">RAG-powered Q&A for platform documentation</div>
+                    <div class="tools">
+                        <span class="tool">Doc Indexer</span>
+                        <span class="tool">Semantic Search</span>
+                        <span class="tool">Q&A Engine</span>
+                    </div>
+                </div>
+                <div class="agent-card lineage">
+                    <div class="icon">🌳</div>
+                    <h3>Auto-Lineage Agent</h3>
+                    <div class="desc">Automated data lineage & impact analysis</div>
+                    <div class="tools">
+                        <span class="tool">Schema Parser</span>
+                        <span class="tool">Lineage Tracker</span>
+                        <span class="tool">Impact Analyzer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MCP Layer -->
+        <div class="layer" style="margin-bottom: 15px;">
+            <div class="layer-title">MCP Servers (Model Context Protocol)</div>
+            <div class="mcp-row">
+                <div class="mcp-server">
+                    <h4>3DP MCP Server</h4>
+                    <p>Drug Development Data Platform APIs</p>
+                </div>
+                <div class="mcp-server">
+                    <h4>BIKG MCP Server</h4>
+                    <p>Knowledge Graph Query Interface</p>
+                </div>
+                <div class="mcp-server">
+                    <h4>Jira/ADO MCP Server</h4>
+                    <p>Project & Issue Management</p>
+                </div>
+                <div class="mcp-server">
+                    <h4>Confluence MCP Server</h4>
+                    <p>Documentation & Wiki Access</p>
+                </div>
+                <div class="mcp-server">
+                    <h4>Data Catalog MCP Server</h4>
+                    <p>Metadata & Lineage APIs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AWS Services -->
+        <div class="layer" style="margin-bottom: 15px;">
+            <div class="layer-title">AWS Foundation Services</div>
+            <div class="aws-row">
+                <div class="aws-service">
+                    <h4>Amazon Bedrock</h4>
+                    <p>Claude 3.5 / Claude 4</p>
+                </div>
+                <div class="aws-service">
+                    <h4>ElastiCache</h4>
+                    <p>Session & Response Cache</p>
+                </div>
+                <div class="aws-service">
+                    <h4>OpenSearch</h4>
+                    <p>Vector Store & Search</p>
+                </div>
+                <div class="aws-service">
+                    <h4>Keyspaces</h4>
+                    <p>Conversation History</p>
+                </div>
+                <div class="aws-service">
+                    <h4>SQS</h4>
+                    <p>Async Task Queue</p>
+                </div>
+                <div class="aws-service">
+                    <h4>S3</h4>
+                    <p>Document & Artifact Store</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Target Platforms -->
+        <div class="layer">
+            <div class="layer-title">Target Platforms</div>
+            <div class="platform-row">
+                <div class="platform-box">
+                    <h4>3DP - Drug Development Data Platform</h4>
+                    <p>Regulatory submissions, clinical data, patient safety</p>
+                </div>
+                <div class="platform-box">
+                    <h4>BIKG - Biological Intelligence Knowledge Graph</h4>
+                    <p>Gene-disease relationships, biological ontologies, pathway data</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-logo">
+            <div class="outer"></div>
+            <div class="inner"></div>
+        </div>
+        <div class="page-number">1 / 6</div>
+    </div>
+
+    <!-- SLIDE 2: Test Intelligence Agent Architecture -->
+    <div class="slide">
+        <div class="header">
+            <h1>Agent Architecture: <span>Test Intelligence Agent</span></h1>
+            <p class="subtitle">Automated test case generation for regulatory validation <span class="badge">Phase 1</span></p>
+        </div>
+
+        <div class="agent-arch-container">
+            <div class="agent-header-bar">
+                <div class="agent-icon">🧪</div>
+                <div class="agent-info">
+                    <h2>Test Intelligence Agent</h2>
+                    <p>Auto-generate, validate, and maintain test cases for FDA/EMA submission workflows</p>
+                </div>
+            </div>
+
+            <div class="agent-arch-grid">
+                <div class="arch-box">
+                    <h4>Input Sources</h4>
+                    <ul class="arch-list">
+                        <li>Code repositories (GitHub/GitLab)</li>
+                        <li>Requirements documents (Confluence)</li>
+                        <li>Existing test suites</li>
+                        <li>Regulatory specifications (CFR, ICH)</li>
+                        <li>Data schemas & validation rules</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Core Capabilities</h4>
+                    <ul class="arch-list">
+                        <li>Test case generation from code</li>
+                        <li>Edge case discovery</li>
+                        <li>Regulatory compliance checks</li>
+                        <li>Similar failure detection</li>
+                        <li>Coverage gap analysis</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Output Artifacts</h4>
+                    <ul class="arch-list">
+                        <li>Generated test cases (GxP format)</li>
+                        <li>Test coverage reports</li>
+                        <li>Validation evidence docs</li>
+                        <li>Defect predictions</li>
+                        <li>Audit trail records</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>MCP Tools</h4>
+                    <ul class="arch-list">
+                        <li>3DP Data Access API</li>
+                        <li>Code Repository Scanner</li>
+                        <li>Test Framework Executor</li>
+                        <li>Confluence Doc Fetcher</li>
+                        <li>Jira Issue Creator</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>AWS Services</h4>
+                    <ul class="arch-list">
+                        <li>Bedrock (Claude) - Test generation</li>
+                        <li>OpenSearch - Similar test lookup</li>
+                        <li>S3 - Test artifact storage</li>
+                        <li>SQS - Async test execution</li>
+                        <li>CloudWatch - Metrics & logs</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Platform Integration</h4>
+                    <ul class="arch-list">
+                        <li>3DP: Module 2/3 submission testing</li>
+                        <li>3DP: CDISC format validation</li>
+                        <li>BIKG: KG query validation</li>
+                        <li>BIKG: Ontology integrity checks</li>
+                        <li>Both: Audit trail compliance</li>
+                    </ul>
+                </div>
+
+                <div class="integration-flow">
+                    <div class="int-step">
+                        <div class="icon-box">1</div>
+                        <h5>Ingest</h5>
+                        <p>Code, docs, schemas</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box">2</div>
+                        <h5>Analyze</h5>
+                        <p>LLM parsing & understanding</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box">3</div>
+                        <h5>Generate</h5>
+                        <p>Test cases & edge cases</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box">4</div>
+                        <h5>Validate</h5>
+                        <p>Regulatory compliance check</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box">5</div>
+                        <h5>Deliver</h5>
+                        <p>Tests + evidence docs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-logo">
+            <div class="outer"></div>
+            <div class="inner"></div>
+        </div>
+        <div class="page-number">2 / 6</div>
+    </div>
+
+    <!-- SLIDE 3: Dependency Coordinator Architecture -->
+    <div class="slide">
+        <div class="header">
+            <h1>Agent Architecture: <span>Dependency Coordinator</span></h1>
+            <p class="subtitle">Cross-platform dependency tracking and conflict resolution <span class="badge">Phase 2</span></p>
+        </div>
+
+        <div class="agent-arch-container">
+            <div class="agent-header-bar blue">
+                <div class="agent-icon">🔗</div>
+                <div class="agent-info">
+                    <h2>Dependency Coordinator</h2>
+                    <p>Map, visualize, and predict dependencies across regulatory submissions and data pipelines</p>
+                </div>
+            </div>
+
+            <div class="agent-arch-grid">
+                <div class="arch-box">
+                    <h4>Input Sources</h4>
+                    <ul class="arch-list">
+                        <li>Jira/ADO tickets & epics</li>
+                        <li>Roadmap documents</li>
+                        <li>Release schedules</li>
+                        <li>Pipeline configurations</li>
+                        <li>Team calendars & capacity</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Core Capabilities</h4>
+                    <ul class="arch-list">
+                        <li>Dependency extraction from text</li>
+                        <li>Graph-based visualization</li>
+                        <li>Conflict prediction</li>
+                        <li>Critical path analysis</li>
+                        <li>Slack/delay impact assessment</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Output Artifacts</h4>
+                    <ul class="arch-list">
+                        <li>Dependency graphs (interactive)</li>
+                        <li>Conflict alerts & notifications</li>
+                        <li>Timeline risk reports</li>
+                        <li>Resource bottleneck flags</li>
+                        <li>Resolution recommendations</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>MCP Tools</h4>
+                    <ul class="arch-list">
+                        <li>Jira API (read/write)</li>
+                        <li>Azure DevOps Connector</li>
+                        <li>Confluence Page Reader</li>
+                        <li>Slack Notifier</li>
+                        <li>Calendar API</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>AWS Services</h4>
+                    <ul class="arch-list">
+                        <li>Bedrock (Claude) - Text parsing</li>
+                        <li>Neptune - Graph database</li>
+                        <li>ElastiCache - Real-time updates</li>
+                        <li>SNS - Alert notifications</li>
+                        <li>Lambda - Event processing</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Platform Integration</h4>
+                    <ul class="arch-list">
+                        <li>3DP: FDA/EMA submission timelines</li>
+                        <li>3DP: Cross-module dependencies</li>
+                        <li>BIKG: Data pipeline schedules</li>
+                        <li>BIKG: KG update dependencies</li>
+                        <li>Both: Release coordination</li>
+                    </ul>
+                </div>
+
+                <div class="integration-flow">
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #1565c0;">1</div>
+                        <h5>Collect</h5>
+                        <p>Tickets, roadmaps, schedules</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #1565c0;">2</div>
+                        <h5>Extract</h5>
+                        <p>LLM parses dependencies</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #1565c0;">3</div>
+                        <h5>Model</h5>
+                        <p>Build dependency graph</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #1565c0;">4</div>
+                        <h5>Analyze</h5>
+                        <p>Detect conflicts & risks</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #1565c0;">5</div>
+                        <h5>Alert</h5>
+                        <p>Notify + recommend</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-logo">
+            <div class="outer"></div>
+            <div class="inner"></div>
+        </div>
+        <div class="page-number">3 / 6</div>
+    </div>
+
+    <!-- SLIDE 4: Knowledge Library Companion Architecture -->
+    <div class="slide">
+        <div class="header">
+            <h1>Agent Architecture: <span>Knowledge Library Companion</span></h1>
+            <p class="subtitle">RAG-powered documentation search and Q&A <span class="badge">Phase 3</span></p>
+        </div>
+
+        <div class="agent-arch-container">
+            <div class="agent-header-bar gold">
+                <div class="agent-icon">📚</div>
+                <div class="agent-info">
+                    <h2>Knowledge Library Companion</h2>
+                    <p>Natural language Q&A across regulatory guidelines, platform docs, and biological knowledge</p>
+                </div>
+            </div>
+
+            <div class="agent-arch-grid">
+                <div class="arch-box">
+                    <h4>Input Sources</h4>
+                    <ul class="arch-list">
+                        <li>Confluence wikis & pages</li>
+                        <li>SharePoint documents</li>
+                        <li>FDA/EMA regulatory guidance</li>
+                        <li>Platform technical docs</li>
+                        <li>SOPs & training materials</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Core Capabilities</h4>
+                    <ul class="arch-list">
+                        <li>Semantic document search</li>
+                        <li>Natural language Q&A</li>
+                        <li>Multi-doc synthesis</li>
+                        <li>Citation & source linking</li>
+                        <li>Document summarization</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Output Artifacts</h4>
+                    <ul class="arch-list">
+                        <li>Answers with citations</li>
+                        <li>Document summaries</li>
+                        <li>Related content suggestions</li>
+                        <li>Knowledge gap reports</li>
+                        <li>FAQ auto-generation</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>MCP Tools</h4>
+                    <ul class="arch-list">
+                        <li>Confluence API</li>
+                        <li>SharePoint Connector</li>
+                        <li>3DP Doc Repository</li>
+                        <li>BIKG Ontology API</li>
+                        <li>Feedback Collector</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>AWS Services</h4>
+                    <ul class="arch-list">
+                        <li>Bedrock (Claude) - Q&A generation</li>
+                        <li>Bedrock (Titan) - Embeddings</li>
+                        <li>OpenSearch - Vector store</li>
+                        <li>S3 - Document storage</li>
+                        <li>Textract - PDF extraction</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Platform Integration</h4>
+                    <ul class="arch-list">
+                        <li>3DP: "How to prepare Module 3?"</li>
+                        <li>3DP: SOP lookup & guidance</li>
+                        <li>BIKG: "What genes affect X?"</li>
+                        <li>BIKG: Ontology definitions</li>
+                        <li>Both: Onboarding assistance</li>
+                    </ul>
+                </div>
+
+                <div class="integration-flow">
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #c4a000;">1</div>
+                        <h5>Index</h5>
+                        <p>Chunk & embed documents</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #c4a000;">2</div>
+                        <h5>Query</h5>
+                        <p>User asks question</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #c4a000;">3</div>
+                        <h5>Retrieve</h5>
+                        <p>Semantic search top-k</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #c4a000;">4</div>
+                        <h5>Generate</h5>
+                        <p>LLM synthesizes answer</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #c4a000;">5</div>
+                        <h5>Cite</h5>
+                        <p>Link sources + feedback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-logo">
+            <div class="outer"></div>
+            <div class="inner"></div>
+        </div>
+        <div class="page-number">4 / 6</div>
+    </div>
+
+    <!-- SLIDE 5: Auto-Lineage Agent Architecture -->
+    <div class="slide">
+        <div class="header">
+            <h1>Agent Architecture: <span>Auto-Lineage Agent</span></h1>
+            <p class="subtitle">Automated data lineage tracking and impact analysis <span class="badge">Enhancement</span></p>
+        </div>
+
+        <div class="agent-arch-container">
+            <div class="agent-header-bar purple">
+                <div class="agent-icon">🌳</div>
+                <div class="agent-info">
+                    <h2>Auto-Lineage Agent</h2>
+                    <p>Automatically trace data flows, detect schema changes, and assess downstream impact</p>
+                </div>
+            </div>
+
+            <div class="agent-arch-grid">
+                <div class="arch-box">
+                    <h4>Input Sources</h4>
+                    <ul class="arch-list">
+                        <li>Database schemas & DDL</li>
+                        <li>ETL/ELT pipeline configs</li>
+                        <li>dbt models & lineage</li>
+                        <li>API specifications</li>
+                        <li>Query logs & access patterns</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Core Capabilities</h4>
+                    <ul class="arch-list">
+                        <li>Schema change detection</li>
+                        <li>Column-level lineage tracking</li>
+                        <li>Impact analysis (what-if)</li>
+                        <li>Data quality monitoring</li>
+                        <li>Lineage documentation</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Output Artifacts</h4>
+                    <ul class="arch-list">
+                        <li>Lineage graphs (interactive)</li>
+                        <li>Impact assessment reports</li>
+                        <li>Schema change alerts</li>
+                        <li>Data catalog updates</li>
+                        <li>Compliance documentation</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>MCP Tools</h4>
+                    <ul class="arch-list">
+                        <li>Data Catalog API</li>
+                        <li>Schema Registry</li>
+                        <li>dbt Metadata API</li>
+                        <li>Database Introspector</li>
+                        <li>Slack/Teams Notifier</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>AWS Services</h4>
+                    <ul class="arch-list">
+                        <li>Bedrock (Claude) - Analysis</li>
+                        <li>Neptune - Lineage graph</li>
+                        <li>Glue Data Catalog - Metadata</li>
+                        <li>EventBridge - Change events</li>
+                        <li>Step Functions - Workflows</li>
+                    </ul>
+                </div>
+
+                <div class="arch-box">
+                    <h4>Platform Integration</h4>
+                    <ul class="arch-list">
+                        <li>3DP: Clinical data lineage</li>
+                        <li>3DP: Submission data tracing</li>
+                        <li>BIKG: KG data provenance</li>
+                        <li>BIKG: Ontology version tracking</li>
+                        <li>Both: Regulatory audit trails</li>
+                    </ul>
+                </div>
+
+                <div class="integration-flow">
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #7b1fa2;">1</div>
+                        <h5>Discover</h5>
+                        <p>Scan schemas & pipelines</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #7b1fa2;">2</div>
+                        <h5>Parse</h5>
+                        <p>Extract relationships</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #7b1fa2;">3</div>
+                        <h5>Model</h5>
+                        <p>Build lineage graph</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #7b1fa2;">4</div>
+                        <h5>Monitor</h5>
+                        <p>Detect changes</p>
+                    </div>
+                    <div class="int-arrow">→</div>
+                    <div class="int-step">
+                        <div class="icon-box" style="background: #7b1fa2;">5</div>
+                        <h5>Alert</h5>
+                        <p>Impact assessment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-logo">
+            <div class="outer"></div>
+            <div class="inner"></div>
+        </div>
+        <div class="page-number">5 / 6</div>
+    </div>
+
+    <!-- SLIDE 6: Agent Mesh Integration Summary -->
+    <div class="slide">
+        <div class="header">
+            <h1>Agent Mesh <span>Integration Summary</span></h1>
+            <p class="subtitle">How R&D IT agents connect to the enterprise Agent Mesh framework <span class="badge">Technical</span></p>
+        </div>
+
+        <div class="two-column">
+            <div class="column">
+                <div class="detail-section">
+                    <h3>Agent Mesh Components Used</h3>
+                    <div class="detail-row">
+                        <span class="label">Agent Registry</span>
+                        <span class="value">4 agents registered</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">MCP Servers</span>
+                        <span class="value">5 shared + 2 custom</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Policy Engine</span>
+                        <span class="value">GxP compliance rules</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Observability</span>
+                        <span class="value">Unified dashboard</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Secret Manager</span>
+                        <span class="value">Centralized credentials</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Shared Infrastructure</h3>
+                    <div class="detail-row">
+                        <span class="label">LLM Gateway</span>
+                        <span class="value">Bedrock (Claude 3.5/4)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Embedding Service</span>
+                        <span class="value">Titan Embeddings</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Vector Database</span>
+                        <span class="value">OpenSearch Serverless</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Graph Database</span>
+                        <span class="value">Amazon Neptune</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Compute</span>
+                        <span class="value">ECS Fargate (serverless)</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Security & Compliance</h3>
+                    <div class="detail-row">
+                        <span class="label">Authentication</span>
+                        <span class="value">SSO via Okta/ADFS</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Authorization</span>
+                        <span class="value">RBAC + ABAC policies</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Data Classification</span>
+                        <span class="value">PHI/PII guardrails</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Audit Logging</span>
+                        <span class="value">CloudTrail + custom</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="detail-section">
+                    <h3>Agent Communication Patterns</h3>
+                    <div class="flow-diagram">
+                        <div class="flow-step">
+                            <div class="flow-number">1</div>
+                            <div class="flow-content">
+                                <h4>Request Routing</h4>
+                                <p>Agent Mesh routes requests to appropriate agent based on intent</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">2</div>
+                            <div class="flow-content">
+                                <h4>Tool Discovery</h4>
+                                <p>Agents discover available MCP tools via registry lookup</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">3</div>
+                            <div class="flow-content">
+                                <h4>Policy Enforcement</h4>
+                                <p>Each tool call validated against compliance policies</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">4</div>
+                            <div class="flow-content">
+                                <h4>Cross-Agent Collaboration</h4>
+                                <p>Agents can invoke other agents for complex workflows</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">5</div>
+                            <div class="flow-content">
+                                <h4>Observability</h4>
+                                <p>All interactions traced, logged, and metered for cost</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Deployment Model</h3>
+                    <div class="detail-row">
+                        <span class="label">Environment</span>
+                        <span class="value">AWS GovCloud / AZ Cloud</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Containerization</span>
+                        <span class="value">Docker on ECS Fargate</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">CI/CD</span>
+                        <span class="value">GitHub Actions + CodePipeline</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">IaC</span>
+                        <span class="value">CDK / Terraform</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Monitoring</span>
+                        <span class="value">CloudWatch + Datadog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-logo">
+            <div class="outer"></div>
+            <div class="inner"></div>
+        </div>
+        <div class="page-number">6 / 6</div>
+    </div>
+
+</body>
+</html>

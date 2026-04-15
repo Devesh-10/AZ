@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIA Architecture - Sustainability Insight Agent</title>
+    <style>
+        :root {
+            --primary: #7c3a5c;
+            --primary-light: #a855f7;
+            --primary-dark: #5a2a42;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(124, 58, 92, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 .icon {
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 20px 0 15px;
+            color: var(--primary-light);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .architecture-diagram {
+            background: #0d1117;
+            border-radius: 15px;
+            padding: 30px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            white-space: pre;
+            color: #c9d1d9;
+            border: 1px solid var(--border);
+        }
+
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .flow-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flow-node {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1e2a4a 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px 30px;
+            text-align: center;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .flow-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(124, 58, 92, 0.4);
+        }
+
+        .flow-node.supervisor {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            border-color: var(--primary-light);
+        }
+
+        .flow-node.kpi {
+            border-color: var(--success);
+        }
+
+        .flow-node.analyst {
+            border-color: var(--info);
+        }
+
+        .flow-node.validator {
+            border-color: var(--warning);
+        }
+
+        .flow-node.end {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .flow-node h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .flow-node p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: var(--primary-light);
+        }
+
+        .arrow-down {
+            transform: rotate(90deg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(124, 58, 92, 0.1);
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tech-item {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateX(5px);
+            border-left-color: var(--primary-light);
+        }
+
+        .tech-item h4 {
+            color: var(--primary-light);
+            margin-bottom: 8px;
+        }
+
+        .tech-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .data-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .data-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            background: var(--bg-card);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .step-content h4 {
+            color: var(--primary-light);
+            margin-bottom: 5px;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+
+        .code-block .keyword {
+            color: #ff79c6;
+        }
+
+        .code-block .string {
+            color: #f1fa8c;
+        }
+
+        .code-block .number {
+            color: #bd93f9;
+        }
+
+        .code-block .comment {
+            color: #6272a4;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        .pattern-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .pattern-card h4 {
+            color: var(--primary-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pattern-card p {
+            color: var(--text-secondary);
+        }
+
+        .folder-tree {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            border: 1px solid var(--border);
+        }
+
+        .folder {
+            color: var(--info);
+        }
+
+        .file {
+            color: var(--text-secondary);
+        }
+
+        .file-important {
+            color: var(--primary-light);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .architecture-diagram {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sustainability Insight Agent (SIA)</h1>
+            <p>Multi-Agent AI System for Natural Language Sustainability Analytics</p>
+            <span class="badge">LangGraph + AWS Bedrock + Claude</span>
+        </header>
+
+        <!-- System Overview -->
+        <section>
+            <h2><span class="icon">&#128640;</span> System Overview</h2>
+            <div class="card">
+                <p>The Sustainability Insight Agent (SIA) is a multi-agent AI system built on <span class="highlight">LangGraph</span> that enables natural language queries against sustainability data. It uses <span class="highlight">AWS Bedrock Claude models</span> for intent classification and response generation, with <span class="highlight">deterministic SQL execution</span> via DuckDB.</p>
+            </div>
+        </section>
+
+        <!-- High-Level Architecture -->
+        <section>
+            <h2><span class="icon">&#127959;</span> High-Level Architecture</h2>
+            <div class="card">
+                <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         USER                                            │
+└─────────────────────────────────────────┬───────────────────────────────────────────────┘
+                                          │
+                                          ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              FRONTEND (React + TypeScript)                              │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌────────────────┐  │
+│  │  ChatInterface   │  │ AgentFlowPanel   │  │VisualizationPanel│  │    SqlPanel    │  │
+│  │  - Message List  │  │ - Agent Timeline │  │ - Bar/Line/Pie   │  │ - SQL Display  │  │
+│  │  - Input Box     │  │ - Status Icons   │  │ - Recharts       │  │ - Copy Button  │  │
+│  └──────────────────┘  └──────────────────┘  └──────────────────┘  └────────────────┘  │
+└─────────────────────────────────────────┬───────────────────────────────────────────────┘
+                                          │ HTTPS (POST /api/query)
+                                          ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  AWS CLOUD (us-east-1)                                  │
+│                                                                                         │
+│  ┌──────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                            CloudFront Distribution                                │  │
+│  │   - Edge caching for static assets    - CORS enabled                             │  │
+│  │   - API passthrough (no cache)        - SPA error handling                       │  │
+│  └──────────────────────────────────┬───────────────────────────────────────────────┘  │
+│                     ┌───────────────┴───────────────┐                                  │
+│                     ▼                               ▼                                  │
+│  ┌──────────────────────────────┐    ┌──────────────────────────────┐                  │
+│  │      S3 (Static Assets)      │    │      API Gateway (REST)      │                  │
+│  │   - React build files        │    │   - Lambda Proxy Integration │                  │
+│  └──────────────────────────────┘    └──────────────┬───────────────┘                  │
+│                                                      │                                  │
+│                                                      ▼                                  │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                           Lambda Function (Python 3.11)                            │ │
+│  │   Memory: 2048 MB  |  Timeout: 120s  |  Handler: lambda_handler.handler           │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────────────────────────────────────────────────────────────────┐  │ │
+│  │  │                         LangGraph Workflow Engine                            │  │ │
+│  │  │   Supervisor → KPI Agent / Analyst Agent → Validator → Visualization → END  │  │ │
+│  │  └─────────────────────────────────────────────────────────────────────────────┘  │ │
+│  │                    ┌───────────────────┼───────────────────┐                       │ │
+│  │                    ▼                   ▼                   ▼                       │ │
+│  │  ┌─────────────────────┐  ┌─────────────────┐  ┌─────────────────────┐            │ │
+│  │  │     AWS Bedrock     │  │     DuckDB      │  │     CSV Data        │            │ │
+│  │  │  - Claude Sonnet    │  │  (In-Memory)    │  │   /data/KPI/        │            │ │
+│  │  │  - Titan Embeddings │  │  SQL Execution  │  │   /data/Transact/   │            │ │
+│  │  └─────────────────────┘  └─────────────────┘  └─────────────────────┘            │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                </div>
+            </div>
+        </section>
+
+        <!-- Agent Workflow -->
+        <section>
+            <h2><span class="icon">&#128736;</span> Agent Workflow</h2>
+            <div class="card">
+                <div class="flow-container">
+                    <div class="flow-row">
+                        <div class="flow-node supervisor">
+                            <h4>&#128101; SUPERVISOR</h4>
+                            <p>Semantic Routing</p>
+                        </div>
+                    </div>
+                    <div class="arrow arrow-down">&#8595;</div>
+                    <div class="flow-row">
+                        <div class="flow-node kpi">
+                            <h4>&#128202; KPI AGENT</h4>
+                            <p>Structured SQL</p>
+                        </div>
+                        <div class="flow-node analyst">
+                            <h4>&#128200; ANALYST</h4>
+                            <p>Complex Analysis</p>
+                        </div>
+                        <div class="flow-node">
+                            <h4>&#10067; CLARIFY</h4>
+                            <p>Ambiguous Query</p>
+                        </div>
+                    </div>
+                    <div class="arrow arrow-down">&#8595;</div>
+                    <div class="flow-row">
+                        <div class="flow-node validator">
+                            <h4>&#9989; VALIDATOR</h4>
+                            <p>Quality Check</p>
+                        </div>
+                    </div>
+                    <div class="arrow arrow-down">&#8595;</div>
+                    <div class="flow-row">
+                        <div class="flow-node">
+                            <h4>&#128202; VISUALIZATION</h4>
+                            <p>Chart Config</p>
+                        </div>
+                        <div class="flow-node end">
+                            <h4>&#10004; END</h4>
+                            <p>Response Ready</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agent Details -->
+        <section>
+            <h2><span class="icon">&#129302;</span> Agent Details</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">&#128101;</div>
+                        <div>
+                            <h3 style="margin:0">Supervisor Agent</h3>
+                            <p style="color:var(--text-secondary);margin:0">Query Router</p>
+                        </div>
+                    </div>
+                    <ul style="color:var(--text-secondary);padding-left:20px">
+                        <li>Semantic embedding match against KPI catalogue</li>
+                        <li>Keyword boosting for domain terms</li>
+                        <li>Transactional pattern detection</li>
+                        <li>LLM verification for medium confidence</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">&#128202;</div>
+                        <div>
+                            <h3 style="margin:0">KPI Agent</h3>
+                            <p style="color:var(--text-secondary);margin:0">Structured Output</p>
+                        </div>
+                    </div>
+                    <ul style="color:var(--text-secondary);padding-left:20px">
+                        <li>Intent classification (20+ intents)</li>
+                        <li>Deterministic SQL template rendering</li>
+                        <li>DuckDB in-memory execution</li>
+                        <li>Chart visualization config</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">&#128200;</div>
+                        <div>
+                            <h3 style="margin:0">Analyst Agent</h3>
+                            <p style="color:var(--text-secondary);margin:0">Complex Analysis</p>
+                        </div>
+                    </div>
+                    <ul style="color:var(--text-secondary);padding-left:20px">
+                        <li>Semantic table search (embeddings)</li>
+                        <li>Multi-table data loading</li>
+                        <li>Aggregation & statistics</li>
+                        <li>Professional narrative output</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">&#9989;</div>
+                        <div>
+                            <h3 style="margin:0">Validator Agent</h3>
+                            <p style="color:var(--text-secondary);margin:0">Quality Assurance</p>
+                        </div>
+                    </div>
+                    <ul style="color:var(--text-secondary);padding-left:20px">
+                        <li>Response length validation</li>
+                        <li>Error pattern detection</li>
+                        <li>Data presence verification</li>
+                        <li>Conditional visualization routing</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Structured Output Pattern -->
+        <section>
+            <h2><span class="icon">&#128161;</span> Structured Output Pattern</h2>
+            <div class="card">
+                <h3>"LLM classifies WHAT, Code renders HOW"</h3>
+                <div class="data-flow">
+                    <div class="data-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>User Query</h4>
+                            <p>"What are the greenhouse gas emissions by scope type?"</p>
+                        </div>
+                    </div>
+                    <div class="data-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Intent Classification (LLM)</h4>
+                            <div class="code-block">
+{
+  "<span class="keyword">intent</span>": "<span class="string">GHG_BY_SCOPE</span>",
+  "<span class="keyword">time_type</span>": "<span class="string">current_year</span>",
+  "<span class="keyword">geography</span>": <span class="number">null</span>
+}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>SQL Template Lookup (Deterministic)</h4>
+                            <div class="code-block">
+<span class="keyword">SELECT</span> '<span class="string">Scope 1</span>' <span class="keyword">as</span> SCOPE_TYPE,
+       <span class="keyword">SUM</span>(SCOPE1_SITE_ENERGY_TCO2_QUANTITY + ...) <span class="keyword">as</span> EMISSIONS_TCO2
+<span class="keyword">FROM</span> GREENHOUSE_GAS_EMISSIONS_MONTHLY_SUMMARY
+<span class="keyword">WHERE</span> REPORTING_YEAR_NUMBER = <span class="number">2025</span>
+<span class="keyword">UNION ALL</span> ...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>SQL Execution (DuckDB)</h4>
+                            <table>
+                                <tr><th>SCOPE_TYPE</th><th>EMISSIONS_TCO2</th></tr>
+                                <tr><td>Scope 1</td><td>3,529.61</td></tr>
+                                <tr><td>Scope 2</td><td>1,845.45</td></tr>
+                                <tr><td>Total (Scope 1+2)</td><td>5,375.06</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="data-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Response Formatting (LLM)</h4>
+                            <p>Professional markdown with tables, insights, and recommendations using ONLY the exact values from SQL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWS Services -->
+        <section>
+            <h2><span class="icon">&#9729;</span> AWS Services</h2>
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Purpose</th>
+                            <th>Configuration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lambda</strong></td>
+                            <td>Backend compute</td>
+                            <td>Python 3.11, 2GB RAM, 120s timeout</td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Gateway</strong></td>
+                            <td>REST API</td>
+                            <td>Proxy integration, 100 req/s throttle</td>
+                        </tr>
+                        <tr>
+                            <td><strong>S3</strong></td>
+                            <td>Frontend hosting</td>
+                            <td>Private bucket with OAI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CloudFront</strong></td>
+                            <td>CDN & routing</td>
+                            <td>Edge caching, API passthrough</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bedrock</strong></td>
+                            <td>LLM inference</td>
+                            <td>Claude Sonnet, Titan Embeddings</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- LLM Models -->
+        <section>
+            <h2><span class="icon">&#129504;</span> LLM Models</h2>
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Model</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Supervisor</strong></td>
+                            <td>Claude 3.5 Sonnet</td>
+                            <td>Query routing & verification</td>
+                        </tr>
+                        <tr>
+                            <td><strong>KPI Agent</strong></td>
+                            <td>Claude 3.5 Sonnet</td>
+                            <td>Intent classification & response</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analyst Agent</strong></td>
+                            <td>Claude Sonnet 4</td>
+                            <td>Complex analysis & reports</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Validator</strong></td>
+                            <td>Claude 3.5 Haiku</td>
+                            <td>Quick validation checks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Embeddings</strong></td>
+                            <td>Titan v2</td>
+                            <td>Semantic similarity matching</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Key Design Patterns -->
+        <section>
+            <h2><span class="icon">&#128736;</span> Key Design Patterns</h2>
+            <div class="grid-2">
+                <div class="pattern-card">
+                    <h4>&#127919; Semantic Routing</h4>
+                    <p>Embeddings match queries to KPIs/tables with keyword boosting and LLM fallback for ambiguous queries.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>&#128221; Structured Output</h4>
+                    <p>LLM classifies intent (WHAT), code renders SQL (HOW). Eliminates SQL hallucination.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>&#9989; Deterministic Execution</h4>
+                    <p>Pre-defined SQL templates with DuckDB in-memory queries ensure consistent, reproducible results.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>&#128202; Multi-Agent Telemetry</h4>
+                    <p>Each agent logs execution details for full audit trail and timeline visualization.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>&#128200; Conditional Visualization</h4>
+                    <p>Charts only for KPI queries with data. Skip visualization for text-only analyst responses.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>&#9889; Serverless Architecture</h4>
+                    <p>Lambda + API Gateway for auto-scaling, pay-per-use compute with CloudFront edge delivery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section>
+            <h2><span class="icon">&#128451;</span> Data Sources</h2>
+            <div class="card">
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <h4>/data/KPI/</h4>
+                        <p>Summary tables: energy_monthly, ghg_emissions_monthly, water_monthly, waste_monthly, ev_transition_quarterly</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>/data/Transactional/</h4>
+                        <p>Detail records: fleet_asset_inventory, fleet_fuel_consumption, energy_consumption, water_usage</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>/data/Master/</h4>
+                        <p>Reference data: she_site, she_indicator, she_geography, she_market</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Directory Structure -->
+        <section>
+            <h2><span class="icon">&#128193;</span> Directory Structure</h2>
+            <div class="card">
+                <div class="folder-tree">
+<span class="folder">sustainability-langgraph/</span>
+├── <span class="folder">backend/</span>
+│   ├── <span class="folder">app/</span>
+│   │   ├── <span class="folder">agents/</span>
+│   │   │   ├── <span class="file-important">supervisor.py</span>      <span class="comment"># Query routing</span>
+│   │   │   ├── <span class="file-important">kpi_agent.py</span>       <span class="comment"># KPI queries + SQL</span>
+│   │   │   ├── <span class="file-important">analyst_agent.py</span>   <span class="comment"># Complex analysis</span>
+│   │   │   ├── <span class="file">validator_agent.py</span> <span class="comment"># Response validation</span>
+│   │   │   └── <span class="file">visualization_agent.py</span>
+│   │   ├── <span class="folder">core/</span>
+│   │   │   └── <span class="file">config.py</span>          <span class="comment"># Settings</span>
+│   │   ├── <span class="folder">models/</span>
+│   │   │   └── <span class="file-important">state.py</span>           <span class="comment"># SIAState definition</span>
+│   │   ├── <span class="folder">tools/</span>
+│   │   │   ├── <span class="file">data_catalogue.py</span>  <span class="comment"># KPI definitions</span>
+│   │   │   └── <span class="file">data_table_catalogue.py</span>
+│   │   └── <span class="file-important">graph.py</span>               <span class="comment"># LangGraph workflow</span>
+│   ├── <span class="folder">data/</span>
+│   │   ├── <span class="folder">KPI/</span>                   <span class="comment"># Summary CSV files</span>
+│   │   ├── <span class="folder">Transactional/</span>         <span class="comment"># Detail CSV files</span>
+│   │   └── <span class="folder">Master/</span>                <span class="comment"># Reference data</span>
+│   ├── <span class="file-important">main.py</span>                    <span class="comment"># FastAPI app</span>
+│   ├── <span class="file-important">lambda_handler.py</span>          <span class="comment"># Lambda adapter</span>
+│   └── <span class="file">requirements.txt</span>
+├── <span class="folder">frontend/</span>
+│   ├── <span class="folder">src/</span>
+│   │   ├── <span class="folder">components/</span>
+│   │   │   ├── <span class="file-important">ChatInterface.tsx</span>
+│   │   │   ├── <span class="file">AgentFlowPanel.tsx</span>
+│   │   │   ├── <span class="file">VisualizationPanel.tsx</span>
+│   │   │   └── <span class="file">SqlPanel.tsx</span>
+│   │   ├── <span class="folder">api/</span>
+│   │   │   └── <span class="file-important">chatApi.ts</span>
+│   │   └── <span class="folder">types/</span>
+│   │       └── <span class="file">index.ts</span>
+│   └── <span class="file">package.json</span>
+├── <span class="folder">infra/</span>
+│   └── <span class="folder">lib/</span>
+│       └── <span class="file-important">sia-stack.ts</span>           <span class="comment"># CDK infrastructure</span>
+└── <span class="folder">scripts/</span>
+    └── <span class="file">build-lambda.sh</span>            <span class="comment"># Build script</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Response Flow Example -->
+        <section>
+            <h2><span class="icon">&#128260;</span> Response Flow Example</h2>
+            <div class="card">
+                <div class="code-block">
+<span class="comment">// User Query</span>
+"<span class="string">What was our total energy consumption last year?</span>"
+
+<span class="comment">// 1. Supervisor</span>
+→ Routes to KPI Agent (energy keywords + high confidence)
+
+<span class="comment">// 2. KPI Agent</span>
+→ Intent: <span class="string">ENERGY_TOTAL_LAST_YEAR</span>
+→ SQL: <span class="keyword">SELECT SUM</span>(ENERGY_TOTAL_MWH_QUANTITY) <span class="keyword">FROM</span> energy_monthly_summary <span class="keyword">WHERE</span> year = <span class="number">2024</span>
+→ Result: <span class="number">244,650.66</span> MWh
+
+<span class="comment">// 3. Validator</span>
+→ Passes (response has data, no errors)
+
+<span class="comment">// 4. Visualization</span>
+→ Generates bar chart with monthly breakdown
+
+<span class="comment">// 5. Response</span>
+{
+  "<span class="keyword">answer</span>": "<span class="string">**Total Energy Consumption** is **244,650.66 MWh**...</span>",
+  "<span class="keyword">visualization_config</span>": { chartType: "<span class="string">bar</span>", series: [...] },
+  "<span class="keyword">generated_sql</span>": "<span class="string">SELECT ...</span>",
+  "<span class="keyword">agent_logs</span>": [supervisor, kpi_agent, validator, visualization]
+}
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Sustainability Insight Agent (SIA)</strong></p>
+            <p>Built with LangGraph, AWS Bedrock, React, and AWS CDK</p>
+            <p style="font-size:0.9rem;color:#666">AstraZeneca - Sustainability Analytics Platform</p>
+        </footer>
+    </div>
+</body>
+</html>

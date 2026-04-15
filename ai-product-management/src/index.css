@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* MIA-inspired Brand Palette */
+  --color-az-plum: #7c3a5c;
+  --color-az-plum-light: #9b4d73;
+  --color-az-plum-dark: #5a2a42;
+  --color-az-purple: #8b5cf6;
+  --color-az-purple-light: #a78bfa;
+  --color-az-gold: #f59e0b;
+  --color-az-gold-light: #fbbf24;
+  --color-az-gold-muted: #fbbf2433;
+  --color-az-crimson: #dc2626;
+  --color-az-crimson-light: #f87171;
+  --color-az-teal: #0f766e;
+  --color-az-teal-light: #14b8a6;
+  --color-az-blue: #3b82f6;
+  --color-az-blue-light: #60a5fa;
+  --color-az-surface: #f5f5f5;
+  --color-az-surface-warm: #f8f9fa;
+  --color-az-surface-card: #FFFFFF;
+  --color-az-border: #e5e7eb;
+  --color-az-border-light: #f0f0f0;
+  --color-az-text: #1a1a2e;
+  --color-az-text-secondary: #374151;
+  --color-az-text-tertiary: #6b7280;
+
+  /* Dark panel colors */
+  --color-az-dark: #1a1a2e;
+  --color-az-dark-mid: #16213e;
+  --color-az-dark-light: #0f172a;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: #f5f5f5;
+  color: #1a1a2e;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* MIA-style gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #7c3a5c 0%, #8b5cf6 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* MIA glass effect */
+.glass-panel {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* MIA-style dark glass */
+.dark-glass {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(26, 26, 46, 0.95);
+}

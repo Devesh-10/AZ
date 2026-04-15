@@ -10,38 +10,36 @@ from app.models.state import MIAState
 from app.agents.supervisor import supervisor_agent
 from app.agents.kpi_agent import kpi_agent
 from app.agents.analyst_agent import analyst_agent
-from app.agents.validator_agent import validator_agent, handle_clarification, handle_rejection
+from app.agents.validator_agent import validator_agent, handle_clarification
+from app.agents.visualization_agent import visualization_agent
 
 
-def route_after_supervisor(state: MIAState) -> Literal["kpi_agent", "analyst_agent", "clarify", "reject"]:
+def route_after_supervisor(state: MIAState) -> Literal["kpi_agent", "analyst_agent", "clarify"]:
     """
     Determine next node based on supervisor's routing decision.
+    Note: REJECT is no longer used - unknown queries go to analyst who handles gracefully.
     """
     route_type = state.get("route_type")
 
     if route_type == "KPI":
         return "kpi_agent"
-    elif route_type == "COMPLEX":
-        return "analyst_agent"
     elif route_type == "CLARIFY":
         return "clarify"
-    elif route_type == "REJECT":
-        return "reject"
     else:
-        # Default to analyst for unhandled cases
+        # COMPLEX, REJECT, or any unknown -> analyst handles it
         return "analyst_agent"
 
 
-def route_after_validation(state: MIAState) -> Literal["end", "retry"]:
+def route_after_validation(state: MIAState) -> Literal["visualization", "retry"]:
     """
-    Determine if response is ready to return or needs retry.
-    For now, always end - retry logic can be added later.
+    Determine if response is ready for visualization or needs retry.
+    For now, always go to visualization - retry logic can be added later.
     """
     is_valid = state.get("is_valid", False)
 
     # Could implement retry logic here
-    # For now, always proceed to end
-    return "end"
+    # For now, always proceed to visualization
+    return "visualization"
 
 
 def create_mia_graph() -> StateGraph:
@@ -52,7 +50,8 @@ def create_mia_graph() -> StateGraph:
     1. Supervisor Agent - routes query
     2. KPI Agent OR Analyst Agent - processes query
     3. Validator Agent - validates response
-    4. Return to user
+    4. Visualization Agent - generates chart config
+    5. Return to user
 
     Returns:
         Compiled StateGraph
@@ -65,8 +64,8 @@ def create_mia_graph() -> StateGraph:
     workflow.add_node("kpi_agent", kpi_agent)
     workflow.add_node("analyst_agent", analyst_agent)
     workflow.add_node("validator", validator_agent)
+    workflow.add_node("visualization", visualization_agent)
     workflow.add_node("clarify", handle_clarification)
-    workflow.add_node("reject", handle_rejection)
 
     # Set entry point
     workflow.set_entry_point("supervisor")
@@ -78,8 +77,7 @@ def create_mia_graph() -> StateGraph:
         {
             "kpi_agent": "kpi_agent",
             "analyst_agent": "analyst_agent",
-            "clarify": "clarify",
-            "reject": "reject"
+            "clarify": "clarify"
         }
     )
 
@@ -87,19 +85,21 @@ def create_mia_graph() -> StateGraph:
     workflow.add_edge("kpi_agent", "validator")
     workflow.add_edge("analyst_agent", "validator")
 
-    # Clarify and reject go directly to end
+    # Clarify goes directly to end
     workflow.add_edge("clarify", END)
-    workflow.add_edge("reject", END)
 
-    # Validator goes to end (could add retry logic)
+    # Validator goes to visualization (could add retry logic)
     workflow.add_conditional_edges(
         "validator",
         route_after_validation,
         {
-            "end": END,
+            "visualization": "visualization",
             "retry": "supervisor"  # Could retry from supervisor
         }
     )
+
+    # Visualization goes to end
+    workflow.add_edge("visualization", END)
 
     return workflow
 
@@ -129,6 +129,7 @@ def get_graph():
 async def run_query(session_id: str, user_query: str, conversation_history: list = None) -> dict:
     """
     Run a user query through the MIA workflow.
+    Checks trace cache first — returns cached result if same query was asked before.
 
     Args:
         session_id: Session identifier
@@ -139,6 +140,13 @@ async def run_query(session_id: str, user_query: str, conversation_history: list
         Final state with answer
     """
     from datetime import datetime
+    from app.core.trace_store import lookup_cached_result, save_trace
+
+    # Check cache for repeated queries
+    cached = lookup_cached_result(user_query)
+    if cached:
+        print(f"[Graph] Cache hit for query: {user_query[:80]}")
+        return cached
 
     graph = get_graph()
 
@@ -165,6 +173,21 @@ async def run_query(session_id: str, user_query: str, conversation_history: list
     # Run the graph
     try:
         final_state = await graph.ainvoke(initial_state)
+
+        # Save trace for future cache hits
+        agent_logs = [
+            {
+                "agent_name": log.get("agent_name", "Unknown"),
+                "input_summary": log.get("input_summary", ""),
+                "output_summary": log.get("output_summary", ""),
+                "reasoning_summary": log.get("reasoning_summary"),
+                "status": log.get("status", "unknown"),
+                "timestamp": log.get("timestamp", ""),
+            }
+            for log in final_state.get("agent_logs", [])
+        ]
+        save_trace(user_query, final_state, agent_logs)
+
         return final_state
     except Exception as e:
         # Return error state

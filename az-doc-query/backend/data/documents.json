@@ -1,0 +1,176 @@
+[
+  {
+    "id": "SOP-001",
+    "title": "SOP: Aseptic Manufacturing Process",
+    "type": "SOP",
+    "sections": [
+      {
+        "title": "Purpose & Scope",
+        "content": "This Standard Operating Procedure (SOP) defines the aseptic manufacturing process for injectable drug products at AstraZeneca manufacturing facilities. It applies to all personnel involved in the preparation, filling, and finishing of sterile injectable products across all AZ manufacturing sites. The procedure ensures compliance with EU GMP Annex 1, FDA 21 CFR Part 211, and internal AstraZeneca quality standards. All operators must be gown-qualified and have completed aseptic technique training within the past 12 months before participating in any aseptic operations."
+      },
+      {
+        "title": "Personnel Requirements",
+        "content": "All personnel entering Grade A/B cleanroom environments must complete the AZ Aseptic Gowning Qualification Program. This includes an initial three-day training course, a practical assessment with microbiological monitoring, and annual re-qualification. Operators must demonstrate proficiency in hand hygiene technique, gowning sequence (undergarments, hood, coverall, boots, gloves, goggles, mask), and aseptic transfer techniques. Any personnel failing the gowning assessment must undergo retraining before re-entry. A maximum of 4 operators are permitted in the Grade A fill zone at any time to minimize contamination risk."
+      },
+      {
+        "title": "Environmental Monitoring",
+        "content": "Continuous environmental monitoring is required during all aseptic operations. Grade A zones must maintain particle counts below 3,520 particles ≥0.5μm per m³ at rest and during operations. Settle plates (90mm diameter) must be exposed throughout the filling operation with an action limit of <1 CFU per 4-hour exposure. Active air sampling must be performed at the beginning, middle, and end of each batch using a volumetric air sampler collecting 1m³ per sample. All environmental monitoring data must be reviewed by the QA microbiologist within 5 business days. Excursions require a deviation report and root cause investigation per SOP-DEV-003."
+      },
+      {
+        "title": "Line Clearance & Setup",
+        "content": "Prior to each batch, a complete line clearance must be performed per the batch record checklist. All materials from the previous batch must be removed from the filling suite. Equipment surfaces must be wiped with 70% IPA followed by a sporicidal agent. Vaporized hydrogen peroxide (VHP) decontamination of the isolator must achieve a minimum 6-log reduction verified by biological indicators (Geobacillus stearothermophilus). The filling line must be assembled using pre-sterilized format parts specific to the container-closure configuration documented in the batch record. All CIP/SIP cycles must be complete and verified before introducing product."
+      }
+    ]
+  },
+  {
+    "id": "SOP-002",
+    "title": "SOP: Deviation Management & CAPA",
+    "type": "SOP",
+    "sections": [
+      {
+        "title": "Deviation Classification",
+        "content": "All deviations at AstraZeneca manufacturing sites are classified into three categories based on potential impact to product quality, patient safety, and regulatory compliance. Critical deviations involve direct impact to product sterility, potency, or identity and require immediate escalation to the Site Quality Head and Global Quality within 2 hours. Major deviations have potential impact to product quality and must be reported within 24 hours. Minor deviations have no direct quality impact but represent a departure from approved procedures. All deviations must be documented in the AZ TrackWise system within the classification timeframe."
+      },
+      {
+        "title": "Investigation Process",
+        "content": "Root cause investigation must begin within 48 hours of deviation identification. The investigation team must include at minimum: the area supervisor, a QA representative, and a subject matter expert. AstraZeneca employs the Fishbone (Ishikawa) methodology as the primary root cause analysis tool, supplemented by 5-Why analysis. All investigations must document: the event description, immediate containment actions, timeline of events, root cause hypothesis, supporting data, and confirmed root cause. For critical deviations, a cross-functional review board must approve the root cause determination. Investigation closure target is 30 calendar days for critical, 45 days for major, and 60 days for minor deviations."
+      },
+      {
+        "title": "CAPA Implementation",
+        "content": "Corrective and Preventive Actions (CAPAs) must address both the immediate cause and systemic root cause of the deviation. Each CAPA must have a clearly defined action owner, implementation date, and effectiveness check criteria. Preventive actions must include an assessment of horizontal deployment — determining whether the same risk exists in other processes, products, or sites. CAPA effectiveness checks must be performed 90 days after implementation. If the effectiveness check fails, the CAPA must be escalated to the Site Quality Council for review and a revised action plan. All CAPAs are tracked in TrackWise with automated escalation for overdue items."
+      }
+    ]
+  },
+  {
+    "id": "POL-001",
+    "title": "AZ Global Data Governance Policy",
+    "type": "Policy",
+    "sections": [
+      {
+        "title": "Data Classification",
+        "content": "AstraZeneca classifies all corporate data into four tiers: Public, Internal, Confidential, and Restricted. Public data may be freely shared externally. Internal data is for AZ employees and authorized contractors only. Confidential data includes trade secrets, unpublished clinical data, financial forecasts, and M&A intelligence — access is limited to named individuals with business justification. Restricted data includes patient-level clinical trial data subject to GDPR, HIPAA, and ICH E6(R2) — access requires Data Privacy Impact Assessment (DPIA) approval and is logged for audit purposes. All data must be classified at creation and tagged in the AZ Data Catalogue."
+      },
+      {
+        "title": "Data Stewardship",
+        "content": "Each data domain (Commercial, R&D, Manufacturing, Finance, HR) must have a designated Data Steward at the VP level who is accountable for data quality, lineage, and access control within their domain. Data Stewards approve all access requests for Confidential and Restricted data. They are responsible for maintaining data dictionaries, defining quality rules, and ensuring compliance with regional privacy regulations. Data Stewards meet quarterly in the AZ Data Governance Council to align on cross-domain standards, resolve conflicts, and review data quality scorecards. The Chief Data Officer chairs the council and has final authority on cross-domain disputes."
+      },
+      {
+        "title": "Data Retention & Disposal",
+        "content": "Data retention periods are determined by regulatory requirements and business need. GxP manufacturing records must be retained for the product shelf life plus one year, or a minimum of 15 years, whichever is longer. Clinical trial data must be retained for 25 years per ICH E6(R2). Financial records follow local statutory requirements (minimum 7 years). When retention periods expire, data must be disposed of using approved methods: physical shredding for paper documents, cryptographic erasure for digital media, and certified destruction for backup tapes. All disposal events must be documented in the AZ Records Management System with the disposal method, date, approver, and certificate of destruction."
+      }
+    ]
+  },
+  {
+    "id": "POL-002",
+    "title": "AZ Code of Conduct & Ethics Policy",
+    "type": "Policy",
+    "sections": [
+      {
+        "title": "Anti-Bribery & Corruption",
+        "content": "AstraZeneca has zero tolerance for bribery and corruption in all business activities worldwide. All employees, contractors, and third-party agents must comply with the UK Bribery Act 2010, the US Foreign Corrupt Practices Act (FCPA), and all local anti-corruption laws. Gifts and hospitality to healthcare professionals (HCPs) must not exceed local thresholds (typically $150 USD or equivalent) and must be pre-approved through the AZ Compliance Portal. Payments to government officials require Legal and Compliance review. Any suspected violations must be reported through the AZ Ethics Hotline (available 24/7 in 30+ languages) or directly to the Chief Compliance Officer."
+      },
+      {
+        "title": "Conflict of Interest",
+        "content": "All employees must disclose actual or potential conflicts of interest annually through the AZ COI Declaration system. Conflicts include: financial interests in competitors or suppliers exceeding $10,000, family members employed by competitors, outside board positions, and consulting arrangements. Disclosed conflicts are reviewed by the employee's line manager and the Ethics & Compliance team. Mitigation measures may include recusal from decision-making, divestiture of financial interests, or reassignment of responsibilities. Failure to disclose a material conflict of interest is grounds for disciplinary action, up to and including termination."
+      }
+    ]
+  },
+  {
+    "id": "TRAIN-001",
+    "title": "GMP Training Curriculum — Manufacturing",
+    "type": "Training",
+    "sections": [
+      {
+        "title": "New Hire Onboarding",
+        "content": "All new manufacturing employees at AstraZeneca must complete a structured GMP onboarding program within 30 days of start date. The program consists of: (1) GMP Fundamentals e-learning (8 hours) covering basic principles of Good Manufacturing Practice, documentation requirements, and data integrity. (2) Site-specific orientation (4 hours) covering facility layout, cleanroom classifications, material flow, and personnel flow. (3) Document control training (2 hours) on the AZ Document Management System (Veeva Vault QMS), including how to access SOPs, create/revise documents, and manage controlled copies. (4) Practical assessment where the employee demonstrates understanding by completing a mock batch record under supervision. Training must be documented in the Learning Management System (Cornerstone) with trainer sign-off."
+      },
+      {
+        "title": "Annual Refresher Training",
+        "content": "All manufacturing personnel must complete annual GMP refresher training by December 31 each year. The refresher curriculum is updated annually by the Training department in consultation with Quality and covers: regulatory updates from FDA, EMA, and MHRA inspections; lessons learned from deviations and CAPAs in the past year; data integrity refresher per MHRA Data Integrity guidance; and a practical skills assessment relevant to the employee's role. Refresher training must include at least one case study from actual site deviations (anonymized). Employees who do not complete refresher training by the deadline are restricted from performing GxP activities until completion. Training compliance rates are reported monthly to the Site Quality Council."
+      },
+      {
+        "title": "Aseptic Process Simulation (Media Fill)",
+        "content": "Operators involved in aseptic manufacturing must participate in at least two successful media fill runs per year. Media fills simulate the worst-case conditions of the manufacturing process using tryptic soy broth (TSB) in place of product. A successful media fill for a line filling ≤5,000 units requires zero contaminated units. For lines filling >5,000 units, the acceptance criteria is: zero contaminated units out of the total filled. Any contaminated unit triggers a failed media fill investigation, operator re-qualification, and a risk assessment of any product filled between the last successful media fill and the failed run. Results are documented per SOP-MF-001 and reported to the Sterile Manufacturing Review Board."
+      }
+    ]
+  },
+  {
+    "id": "RD-001",
+    "title": "Clinical Trial Protocol: AZD4547 Phase III",
+    "type": "R&D / Clinical",
+    "sections": [
+      {
+        "title": "Study Design",
+        "content": "AZD4547 Phase III is a randomized, double-blind, placebo-controlled, multicenter clinical trial evaluating the efficacy and safety of AZD4547 (an FGFR inhibitor) in patients with advanced gastric cancer harboring FGFR2 amplification. The study enrolls approximately 450 patients across 85 sites in 15 countries. Patients are randomized 2:1 to AZD4547 80mg twice daily plus paclitaxel versus placebo plus paclitaxel. The primary endpoint is progression-free survival (PFS) assessed by blinded independent central review (BICR). Key secondary endpoints include overall survival (OS), objective response rate (ORR), and patient-reported outcomes using the EORTC QLQ-C30."
+      },
+      {
+        "title": "Inclusion/Exclusion Criteria",
+        "content": "Key inclusion criteria: age ≥18 years; histologically confirmed advanced or metastatic gastric/gastroesophageal junction adenocarcinoma; documented FGFR2 gene amplification by FISH (ratio ≥2.0) or NGS; measurable disease per RECIST v1.1; ECOG performance status 0-1; adequate organ function (ANC ≥1.5×10⁹/L, platelets ≥100×10⁹/L, creatinine clearance ≥50 mL/min). Key exclusion criteria: prior FGFR-targeted therapy; uncontrolled hyperphosphatemia (>5.5 mg/dL); retinal disorders including history of retinal detachment; active CNS metastases; significant cardiovascular disease within 6 months. All patients must provide written informed consent per ICH-GCP and local regulatory requirements."
+      },
+      {
+        "title": "Safety Monitoring",
+        "content": "An independent Data Safety Monitoring Board (DSMB) reviews unblinded safety data every 6 months and after every 50th patient enrolled. The DSMB charter specifies pre-defined stopping rules for: (1) excessive treatment-related mortality (>5% in the AZD4547 arm), (2) unexpected serious adverse events occurring at >3× the expected rate, (3) futility based on interim PFS analysis at 50% information fraction. Known class-effect toxicities of FGFR inhibitors (hyperphosphatemia, nail toxicity, dry eyes, stomatitis) are managed per a pre-specified toxicity management algorithm in the protocol. All serious adverse events must be reported to the AZ Global Patient Safety team within 24 hours."
+      }
+    ]
+  },
+  {
+    "id": "RD-002",
+    "title": "Laboratory Notebook Standards — R&D",
+    "type": "R&D / Clinical",
+    "sections": [
+      {
+        "title": "Electronic Lab Notebook (ELN) Usage",
+        "content": "AstraZeneca R&D requires the use of the IDBS E-WorkBook electronic lab notebook system for all experimental documentation. All experiments must be recorded contemporaneously — entries should be made on the day the work is performed. Each experiment entry must include: objective/hypothesis, materials and methods (including lot numbers and equipment IDs), raw data, observations, calculations, results, and conclusions. Entries are electronically signed by the scientist and countersigned by a witness within 5 business days. The ELN system maintains a complete audit trail of all changes. Retrospective modifications must include a reason for change and are flagged for review."
+      },
+      {
+        "title": "Data Integrity Requirements",
+        "content": "All R&D data must comply with the ALCOA+ principles: Attributable, Legible, Contemporaneous, Original, Accurate, Complete, Consistent, Enduring, and Available. Raw data (instrument output files, chromatograms, spectra) must be stored in the original electronic format in the AZ Scientific Data Lake — conversion to PDF alone is not acceptable. Metadata must link raw data to the corresponding ELN experiment entry. Data deletion is prohibited; erroneous entries must be struck through (with reason) in the ELN. Backup copies are maintained per the AZ IT Disaster Recovery Plan with daily incremental and weekly full backups retained for 25 years. Annual data integrity audits are performed by the R&D Quality team."
+      }
+    ]
+  },
+  {
+    "id": "COMP-001",
+    "title": "Regulatory Submission Guidelines — CMC",
+    "type": "Compliance",
+    "sections": [
+      {
+        "title": "Module 3 — Quality (CTD)",
+        "content": "Chemistry, Manufacturing, and Controls (CMC) regulatory submissions at AstraZeneca follow the ICH Common Technical Document (CTD) format. Module 3 includes: 3.2.S Drug Substance — description, manufacture, characterization, control, reference standards, container closure, and stability; 3.2.P Drug Product — description, pharmaceutical development, manufacture, control of excipients, control of drug product, reference standards, container closure, and stability. All specifications must be justified with supporting data. Analytical method validation reports must demonstrate specificity, accuracy, precision, linearity, range, and robustness per ICH Q2(R1). Stability data must cover ICH conditions (25°C/60%RH, 30°C/65%RH, 40°C/75%RH) for minimum 6 months at time of submission."
+      },
+      {
+        "title": "Post-Approval Changes",
+        "content": "Post-approval changes to manufacturing processes, specifications, or sites must be managed through the AZ Regulatory Affairs change assessment process. Changes are categorized using ICH Q12 and regional guidelines (FDA SUPAC, EU variations regulation). Minor changes (e.g., tightening specifications) may require Type IA variation (EU) or Annual Report (US). Moderate changes (e.g., new analytical method) require Type IB variation or CBE-30 supplement. Major changes (e.g., new manufacturing site, process change affecting CQAs) require Type II variation or Prior Approval Supplement (PAS). All change assessments must be documented in the AZ Regulatory Intelligence System (IRIS) and approved by both RA and QA before implementation."
+      }
+    ]
+  },
+  {
+    "id": "COMP-002",
+    "title": "Pharmacovigilance & Safety Reporting",
+    "type": "Compliance",
+    "sections": [
+      {
+        "title": "Individual Case Safety Reports (ICSRs)",
+        "content": "AstraZeneca maintains a global pharmacovigilance system compliant with ICH E2B(R3), EU GVP Module VI, and FDA 21 CFR 314.80. All serious adverse events (SAEs) from clinical trials must be reported to the AZ Global Patient Safety database (Argus Safety) within 24 hours of awareness. Expedited reports (SUSARs — Suspected Unexpected Serious Adverse Reactions) must be submitted to regulatory authorities within 15 calendar days (7 days for fatal/life-threatening events). Non-serious adverse events must be entered within 5 business days. All ICSRs undergo medical review by a qualified physician before submission. The quality target is ≥98% of ICSRs meeting regulatory submission timelines."
+      },
+      {
+        "title": "Periodic Safety Update Reports (PSURs)",
+        "content": "AstraZeneca prepares Periodic Benefit-Risk Evaluation Reports (PBRERs, formerly PSURs) per ICH E2C(R2) for all marketed products. The PBRER includes: a comprehensive review of the safety profile, new safety signals detected through data mining (using Empirica Signal) and literature review, benefit-risk evaluation, and any proposed risk minimization measures. PSURs are submitted to the EMA per the EURD list schedule and to the FDA as required. Signal detection is performed monthly using disproportionality analysis (PRR, EBGM) against the AZ safety database and external databases (WHO VigiBase, FDA FAERS). Confirmed signals are escalated to the AZ Signal Management Team for assessment and response."
+      }
+    ]
+  },
+  {
+    "id": "IT-001",
+    "title": "IT Security & Access Control Policy",
+    "type": "Policy",
+    "sections": [
+      {
+        "title": "Identity & Access Management",
+        "content": "AstraZeneca implements a Zero Trust security model for all IT systems. Authentication requires multi-factor authentication (MFA) using Microsoft Entra ID (formerly Azure AD) with phishing-resistant methods (FIDO2 security keys or Microsoft Authenticator push). Privileged access to production systems requires just-in-time (JIT) elevation through CyberArk Privileged Access Manager with a maximum session duration of 4 hours. Access reviews are conducted quarterly for all systems processing Confidential or Restricted data. Service accounts must use managed identities where possible; shared credentials are prohibited. All authentication events are logged in Microsoft Sentinel with a 90-day hot retention and 2-year cold storage."
+      },
+      {
+        "title": "Endpoint & Network Security",
+        "content": "All AZ corporate endpoints (Windows, macOS, Linux) must be enrolled in Microsoft Intune for device management and compliance. Required security controls include: BitLocker/FileVault encryption, Microsoft Defender for Endpoint EDR agent, automated OS patching within 14 days of release (7 days for critical CVEs), and DNS filtering via Zscaler Internet Access. Network segmentation follows a micro-segmentation model using Illumio for GxP manufacturing systems. OT/ICS networks (manufacturing control systems, SCADA) are air-gapped from the corporate IT network with data diode connections for one-way telemetry transfer. Annual penetration testing is conducted by a third-party firm with findings remediated per the AZ Vulnerability Management SLA (Critical: 7 days, High: 30 days)."
+      }
+    ]
+  }
+]

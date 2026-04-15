@@ -175,14 +175,14 @@ DATA_TABLE_CATALOGUE = {
 
     "fleet_asset_inventory": {
         "name": "Fleet Asset Inventory",
-        "description": "Complete fleet vehicle inventory with asset details, type, and status.",
+        "description": "Complete fleet vehicle inventory with vehicle counts by powertrain type (Diesel, Petrol, BEV, Hybrid), geography, market, and year. Use this for diesel car count, petrol car count, BEV count trends, and vehicle breakdown by fuel type.",
         "file_path": "Transactional/fleet_asset_inventory.csv",
         "category": "Transactional",
-        "columns": [],
-        "key_columns": [],
-        "sample_values": {},
-        "sample_queries": ["List all fleet vehicles", "Vehicle inventory", "Fleet asset details"],
-        "aliases": ["fleet inventory", "vehicle list", "fleet assets"]
+        "columns": ["FLEET_ASSET_COUNT", "FLEET_ASSET_TYPE_NAME", "FLEET_FUEL_POWERTRAIN_TYPE_NAME", "REPORTING_YEAR_NUMBER", "REPORTING_QUARTER_NUMBER", "SHE_GEOGRAPHY_NAME", "SHE_MARKET_NAME"],
+        "key_columns": ["FLEET_ASSET_COUNT", "FLEET_FUEL_POWERTRAIN_TYPE_NAME", "REPORTING_YEAR_NUMBER"],
+        "sample_values": {"FLEET_FUEL_POWERTRAIN_TYPE_NAME": ["Diesel", "Petrol", "Battery Electric Car (BEV)", "Hybrid"]},
+        "sample_queries": ["Diesel car count trend by year", "Fleet asset count by powertrain type", "How many petrol cars?", "BEV adoption by market"],
+        "aliases": ["fleet inventory", "vehicle list", "fleet assets", "diesel car", "petrol car", "diesel count", "petrol count", "powertrain", "car count", "vehicle count", "by powertrain type"]
     },
 
     "fleet_fuel_consumption": {

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIA Ontology — Visual Guide</title>
+<style>
+/* ===== RESET & BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:#050a18;color:#e2e8f0}
+
+/* ===== SLIDE ENGINE ===== */
+.deck{width:100%;height:100%;position:relative}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .7s ease,transform .7s ease;transform:scale(.96);padding:60px 80px}
+.slide.active{opacity:1;pointer-events:all;transform:scale(1);z-index:2}
+
+/* ===== NAVIGATION ===== */
+.nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:14px;z-index:100}
+.nav-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;border:2px solid transparent}
+.nav-dot.active{background:#3b82f6;border-color:#60a5fa;box-shadow:0 0 16px rgba(59,130,246,.5)}
+.nav-dot:hover{background:rgba(255,255,255,.3)}
+.nav-arrows{position:fixed;top:50%;z-index:100;display:flex;justify-content:space-between;width:100%;padding:0 20px;transform:translateY(-50%);pointer-events:none}
+.nav-arrow{pointer-events:all;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:#94a3b8;font-size:20px;backdrop-filter:blur(10px)}
+.nav-arrow:hover{background:rgba(59,130,246,.2);border-color:#3b82f6;color:#fff}
+.slide-counter{position:fixed;top:28px;right:40px;z-index:100;color:#475569;font-size:14px;font-weight:500;letter-spacing:1px}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.bg-grid{position:fixed;inset:0;background-image:radial-gradient(rgba(59,130,246,.07) 1px,transparent 1px);background-size:40px 40px;z-index:0}
+.bg-glow{position:fixed;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:.12;z-index:0;pointer-events:none}
+.bg-glow.blue{background:#3b82f6;top:-200px;right:-100px}
+.bg-glow.purple{background:#8b5cf6;bottom:-200px;left:-100px}
+.bg-glow.emerald{background:#10b981;top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* ===== GLASS CARD ===== */
+.glass{background:rgba(15,23,42,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:20px}
+.glass-bright{background:rgba(30,41,69,.65);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1);border-radius:16px}
+
+/* ===== TYPOGRAPHY ===== */
+.slide-tag{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#3b82f6;margin-bottom:16px}
+.slide-title{font-size:52px;font-weight:800;line-height:1.15;color:#f8fafc;margin-bottom:12px;letter-spacing:-1px}
+.slide-title span.hl{background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.slide-subtitle{font-size:20px;color:#94a3b8;font-weight:400;max-width:750px;line-height:1.6}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 20px rgba(59,130,246,.15)}50%{box-shadow:0 0 40px rgba(59,130,246,.3)}}
+
+.slide.active .anim-1{animation:fadeUp .6s .15s both}
+.slide.active .anim-2{animation:fadeUp .6s .3s both}
+.slide.active .anim-3{animation:fadeUp .6s .45s both}
+.slide.active .anim-4{animation:fadeUp .6s .6s both}
+.slide.active .anim-5{animation:fadeUp .6s .75s both}
+.slide.active .anim-6{animation:fadeUp .6s .9s both}
+.slide.active .anim-scale{animation:scaleIn .7s .3s both}
+.slide.active .anim-slide{animation:slideRight .6s .4s both}
+
+/* ===== SLIDE 1: HERO ===== */
+.hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;width:100%;max-width:1400px;align-items:center}
+.hero-left{display:flex;flex-direction:column}
+.concept-pillars{display:flex;gap:20px;margin-top:40px}
+.pillar{flex:1;padding:28px 24px;border-radius:16px;text-align:center;transition:all .4s}
+.pillar:hover{transform:translateY(-4px)}
+.pillar .p-icon{font-size:36px;margin-bottom:14px;display:block}
+.pillar h3{font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:6px}
+.pillar .p-aka{font-size:12px;color:#3b82f6;font-weight:600;margin-bottom:8px;letter-spacing:.5px}
+.pillar p{font-size:13px;color:#94a3b8;line-height:1.5}
+.pillar.c1{border:1px solid rgba(59,130,246,.25);background:rgba(59,130,246,.06)}
+.pillar.c2{border:1px solid rgba(16,185,129,.25);background:rgba(16,185,129,.06)}
+.pillar.c3{border:1px solid rgba(249,115,22,.25);background:rgba(249,115,22,.06)}
+
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center;min-height:420px}
+
+/* Analogy Table */
+.analogy-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;background:rgba(15,23,42,.6);border:1px solid rgba(255,255,255,.06);margin-top:36px}
+.analogy-table th{padding:14px 20px;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#64748b;background:rgba(30,41,69,.5);font-weight:600;text-align:left}
+.analogy-table td{padding:13px 20px;font-size:14px;border-top:1px solid rgba(255,255,255,.04)}
+.analogy-table td:first-child{font-weight:700;color:#f1f5f9}
+.analogy-table .sql{color:#7dd3fc}
+.analogy-table .graph{color:#a78bfa}
+
+/* Hero Mini Graph */
+.mini-graph{width:100%;height:100%}
+.mini-graph .node{transition:all .3s}
+.mini-graph .node:hover{filter:brightness(1.3)}
+
+/* ===== SLIDE 2: GRAPH ===== */
+.graph-slide-layout{width:100%;max-width:1400px}
+.graph-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px}
+.graph-header-left{max-width:600px}
+.graph-stats{display:flex;gap:12px}
+.g-stat{padding:10px 20px;border-radius:10px;text-align:center;background:rgba(15,23,42,.6);border:1px solid rgba(255,255,255,.06)}
+.g-stat .num{font-size:24px;font-weight:800;color:#3b82f6}
+.g-stat .lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.graph-canvas{width:100%;border-radius:20px;padding:20px;position:relative;overflow:hidden;min-height:400px}
+.graph-canvas svg{width:100%;height:100%}
+
+/* Legend */
+.graph-legend{display:flex;gap:24px;margin-top:20px;justify-content:center}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#94a3b8}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+
+/* ===== SLIDE 3: DEEP DIVE ===== */
+.deep-layout{width:100%;max-width:1400px}
+.deep-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+.deep-card{padding:28px;border-radius:16px;position:relative;overflow:hidden}
+.deep-card h3{font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px}
+.deep-card .dc-sub{font-size:12px;color:#64748b;margin-bottom:16px}
+.deep-card .badge{display:inline-block;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600;margin-bottom:16px}
+.deep-card .badge.blue{background:rgba(59,130,246,.15);color:#60a5fa}
+.deep-card .badge.green{background:rgba(16,185,129,.15);color:#34d399}
+.deep-card .badge.amber{background:rgba(245,158,11,.15);color:#fbbf24}
+.deep-card .badge.purple{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* Property list */
+.prop-list{display:flex;flex-direction:column;gap:6px}
+.prop-row{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.03)}
+.prop-row .pr-name{flex:1;font-size:13px;font-weight:500;color:#e2e8f0}
+.prop-row .pr-type{font-size:12px;font-family:'Fira Code',monospace;padding:2px 8px;border-radius:5px}
+.pr-type.string{background:rgba(59,130,246,.1);color:#60a5fa}
+.pr-type.decimal{background:rgba(16,185,129,.1);color:#34d399}
+.pr-type.date{background:rgba(245,158,11,.1);color:#fbbf24}
+.pr-type.boolean{background:rgba(139,92,246,.1);color:#a78bfa}
+.pr-type.integer{background:rgba(236,72,153,.1);color:#f472b6}
+.pr-type.dateTime{background:rgba(245,158,11,.1);color:#fbbf24}
+.prop-row .pr-cat{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#475569;width:70px;text-align:right}
+
+/* Enum chips */
+.enum-section{margin-top:12px}
+.enum-section h4{font-size:13px;font-weight:600;color:#94a3b8;margin-bottom:8px}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{padding:5px 12px;border-radius:8px;font-size:12px;font-weight:500;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:#cbd5e1}
+.chip-label{font-size:11px;color:#64748b;margin-bottom:4px;font-weight:600}
+
+/* Real example */
+.real-example{margin-top:8px}
+.rex-row{display:flex;gap:8px;align-items:center;padding:6px 0;font-size:13px}
+.rex-row .rex-key{color:#64748b;width:140px;text-align:right;flex-shrink:0}
+.rex-row .rex-val{color:#e2e8f0;font-weight:500}
+.rex-row .rex-val.str{color:#7dd3fc}
+.rex-row .rex-val.num{color:#34d399}
+.rex-row .rex-val.dt{color:#fbbf24}
+.rex-row .rex-val.bool{color:#a78bfa}
+.rex-arrow{font-size:12px;color:#3b82f6;background:rgba(59,130,246,.1);padding:4px 12px;border-radius:6px;margin:10px 0;display:inline-block}
+
+/* Logo */
+.logo{position:fixed;top:26px;left:40px;z-index:100;font-size:15px;font-weight:700;color:#64748b;letter-spacing:1px}
+.logo span{color:#3b82f6}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow blue"></div>
+<div class="bg-glow purple"></div>
+
+<div class="logo"><span>MIA</span> ONTOLOGY</div>
+<div class="slide-counter"><span id="current">1</span> / 3</div>
+
+<!-- NAV -->
+<div class="nav-arrows">
+    <div class="nav-arrow" onclick="go(-1)">‹</div>
+    <div class="nav-arrow" onclick="go(1)">›</div>
+</div>
+<div class="nav">
+    <div class="nav-dot active" onclick="goTo(0)"></div>
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+</div>
+
+<div class="deck">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: WHAT IS AN ONTOLOGY -->
+<!-- ============================================================ -->
+<div class="slide active" id="s0">
+    <div class="hero-layout">
+        <div class="hero-left">
+            <div class="slide-tag anim-1">Manufacturing Insight Agent</div>
+            <h1 class="slide-title anim-2">What is an<br><span class="hl">Ontology?</span></h1>
+            <p class="slide-subtitle anim-3">An ontology defines the <strong style="color:#f1f5f9">vocabulary</strong> and <strong style="color:#f1f5f9">rules</strong> for a domain — what things exist, what we know about them, and how they connect.</p>
+
+            <div class="concept-pillars anim-4">
+                <div class="pillar c1 glass">
+                    <span class="p-icon">⬡</span>
+                    <h3>Classes</h3>
+                    <div class="p-aka">NOUNS</div>
+                    <p>Types of things.<br>Batch, Order, Site, Material</p>
+                </div>
+                <div class="pillar c2 glass">
+                    <span class="p-icon">≡</span>
+                    <h3>Data Properties</h3>
+                    <div class="p-aka">ADJECTIVES</div>
+                    <p>Facts about things.<br>batchCode, yield, date</p>
+                </div>
+                <div class="pillar c3 glass">
+                    <span class="p-icon">⟶</span>
+                    <h3>Object Properties</h3>
+                    <div class="p-aka">VERBS</div>
+                    <p>Links between things.<br>produces, executedAt</p>
+                </div>
+            </div>
+
+            <table class="analogy-table anim-5">
+                <thead><tr><th>Ontology</th><th>SQL Database</th><th>Graph Database</th></tr></thead>
+                <tbody>
+                    <tr><td>Class</td><td class="sql">Table</td><td class="graph">Node Label</td></tr>
+                    <tr><td>Data Property</td><td class="sql">Column</td><td class="graph">Node Property</td></tr>
+                    <tr><td>Object Property</td><td class="sql">Foreign Key / JOIN</td><td class="graph">Edge / Relationship</td></tr>
+                    <tr><td>Instance</td><td class="sql">Row</td><td class="graph">Node</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hero-right anim-scale">
+            <svg class="mini-graph" viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#3b82f6" opacity=".7"/></marker>
+                    <marker id="a2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#10b981" opacity=".7"/></marker>
+                    <marker id="a3" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#f59e0b" opacity=".7"/></marker>
+                    <marker id="a4" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#ef4444" opacity=".7"/></marker>
+                    <filter id="glow1"><feGaussianBlur stdDeviation="8" result="b"/><feComposite in="SourceGraphic" in2="b"/></filter>
+                </defs>
+
+                <!-- Edges (animated dash) -->
+                <line x1="250" y1="85" x2="250" y2="195" stroke="#10b981" stroke-width="2" opacity=".5" marker-end="url(#a2)" stroke-dasharray="6,4"/>
+                <line x1="250" y1="85" x2="415" y2="85" stroke="#3b82f6" stroke-width="2" opacity=".5" marker-end="url(#a1)" stroke-dasharray="6,4"/>
+                <line x1="195" y1="72" x2="100" y2="72" stroke="#3b82f6" stroke-width="2" opacity=".5" marker-end="url(#a1)" stroke-dasharray="6,4"/>
+                <line x1="250" y1="265" x2="415" y2="265" stroke="#f59e0b" stroke-width="2" opacity=".5" marker-end="url(#a3)" stroke-dasharray="6,4"/>
+                <line x1="250" y1="265" x2="110" y2="355" stroke="#ef4444" stroke-width="1.5" opacity=".4" marker-end="url(#a4)" stroke-dasharray="6,4"/>
+                <line x1="250" y1="265" x2="350" y2="370" stroke="#ef4444" stroke-width="1.5" opacity=".4" marker-end="url(#a4)" stroke-dasharray="6,4"/>
+
+                <!-- Edge Labels -->
+                <rect x="210" y="130" width="80" height="20" rx="6" fill="#0a0f1f" opacity=".9"/>
+                <text x="250" y="144" text-anchor="middle" fill="#10b981" font-size="10" font-weight="600">produces</text>
+                <rect x="290" y="58" width="110" height="20" rx="6" fill="#0a0f1f" opacity=".9"/>
+                <text x="345" y="72" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="600">executedAtSite</text>
+                <rect x="105" y="50" width="85" height="20" rx="6" fill="#0a0f1f" opacity=".9"/>
+                <text x="148" y="64" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="600">hasOperation</text>
+                <rect x="290" y="242" width="110" height="20" rx="6" fill="#0a0f1f" opacity=".9"/>
+                <text x="345" y="256" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="600">consistsOfMaterial</text>
+                <rect x="120" y="310" width="100" height="20" rx="6" fill="#0a0f1f" opacity=".9"/>
+                <text x="170" y="324" text-anchor="middle" fill="#ef4444" font-size="10" font-weight="600">qualityEvent</text>
+                <rect x="300" y="320" width="80" height="20" rx="6" fill="#0a0f1f" opacity=".9"/>
+                <text x="340" y="334" text-anchor="middle" fill="#ef4444" font-size="10" font-weight="600">qualityNotif</text>
+
+                <!-- ProcessOrder Node -->
+                <g class="node" filter="url(#glow1)">
+                    <rect x="195" y="40" width="110" height="50" rx="12" fill="#0f2040" stroke="#3b82f6" stroke-width="2"/>
+                    <text x="250" y="62" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="700">Process</text>
+                    <text x="250" y="78" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="700">Order</text>
+                </g>
+
+                <!-- Batch Node -->
+                <g class="node">
+                    <rect x="195" y="200" width="110" height="50" rx="12" fill="#0a2018" stroke="#10b981" stroke-width="2"/>
+                    <text x="250" y="230" text-anchor="middle" fill="#34d399" font-size="12" font-weight="700">Batch</text>
+                </g>
+
+                <!-- Site Node -->
+                <g class="node">
+                    <rect x="415" y="50" width="80" height="45" rx="12" fill="#1a1040" stroke="#8b5cf6" stroke-width="1.5"/>
+                    <text x="455" y="78" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700">Site</text>
+                </g>
+
+                <!-- Operation Node -->
+                <g class="node">
+                    <rect x="10" y="50" width="85" height="45" rx="12" fill="#0f2040" stroke="#3b82f6" stroke-width="1.5"/>
+                    <text x="52" y="78" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="700">Operation</text>
+                </g>
+
+                <!-- Material Node -->
+                <g class="node">
+                    <rect x="415" y="235" width="80" height="45" rx="12" fill="#1a1508" stroke="#f59e0b" stroke-width="1.5"/>
+                    <text x="455" y="263" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">Material</text>
+                </g>
+
+                <!-- QualityEvent Node -->
+                <g class="node">
+                    <rect x="40" y="345" width="110" height="42" rx="12" fill="#200a0a" stroke="#ef4444" stroke-width="1.5"/>
+                    <text x="95" y="370" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">QualityEvent</text>
+                </g>
+
+                <!-- QualityNotification Node -->
+                <g class="node">
+                    <rect x="290" y="355" width="130" height="42" rx="12" fill="#200a0a" stroke="#ef4444" stroke-width="1.5"/>
+                    <text x="355" y="380" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">QualityNotification</text>
+                </g>
+
+                <!-- Data Properties Preview -->
+                <rect x="195" y="255" width="110" height="80" rx="0 0 12 12" fill="rgba(10,32,24,.5)" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" opacity=".6"/>
+                <text x="205" y="275" fill="#6ee7b7" font-size="9" opacity=".8">batchCode: "B2025-007"</text>
+                <text x="205" y="290" fill="#6ee7b7" font-size="9" opacity=".8">yield: 97.5%</text>
+                <text x="205" y="305" fill="#6ee7b7" font-size="9" opacity=".8">mfgDate: 2025-03-15</text>
+                <text x="205" y="320" fill="#6ee7b7" font-size="9" opacity=".8">status → Released</text>
+
+                <!-- Labels -->
+                <text x="250" y="20" text-anchor="middle" fill="#475569" font-size="10" font-style="italic">Classes = Nodes &nbsp; • &nbsp; Object Properties = Edges &nbsp; • &nbsp; Data Properties = Attributes</text>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: FULL RELATIONSHIP GRAPH -->
+<!-- ============================================================ -->
+<div class="slide" id="s1">
+    <div class="graph-slide-layout">
+        <div class="graph-header">
+            <div class="graph-header-left">
+                <div class="slide-tag anim-1">Entity-Relationship Map</div>
+                <h1 class="slide-title anim-2" style="font-size:40px">The <span class="hl">Knowledge Graph</span></h1>
+                <p class="slide-subtitle anim-3" style="font-size:16px;margin-top:4px">15 classes, 20 relationships, 172 attributes — the complete MIA ontology as a graph</p>
+            </div>
+            <div class="graph-stats anim-4">
+                <div class="g-stat glass"><div class="num">15</div><div class="lbl">Classes</div></div>
+                <div class="g-stat glass"><div class="num">172</div><div class="lbl">Attributes</div></div>
+                <div class="g-stat glass"><div class="num">20</div><div class="lbl">Relationships</div></div>
+                <div class="g-stat glass"><div class="num">30</div><div class="lbl">Enum Values</div></div>
+            </div>
+        </div>
+
+        <div class="graph-canvas glass anim-scale">
+            <svg viewBox="0 0 1240 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="b1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#3b82f6" opacity=".6"/></marker>
+                    <marker id="b2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#10b981" opacity=".6"/></marker>
+                    <marker id="b3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#f59e0b" opacity=".6"/></marker>
+                    <marker id="b4" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#ef4444" opacity=".6"/></marker>
+                    <marker id="b5" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#8b5cf6" opacity=".6"/></marker>
+                    <filter id="ng"><feGaussianBlur stdDeviation="6" result="b"/><feComposite in="SourceGraphic" in2="b"/></filter>
+                </defs>
+
+                <!-- ===== EDGES ===== -->
+                <!-- ProcessOrder → Batch (produces) -->
+                <path d="M530,80 Q530,130 530,175" fill="none" stroke="#10b981" stroke-width="2" opacity=".45" marker-end="url(#b2)"/>
+                <rect x="488" y="118" width="72" height="18" rx="5" fill="#080e1a"/>
+                <text x="524" y="131" text-anchor="middle" fill="#10b981" font-size="10" font-weight="600">produces</text>
+
+                <!-- ProcessOrder → Batch (consumes) -->
+                <path d="M570,80 Q595,130 570,175" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity=".4" marker-end="url(#b3)"/>
+                <rect x="572" y="118" width="76" height="18" rx="5" fill="#080e1a"/>
+                <text x="610" y="131" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="600">consumes</text>
+
+                <!-- ProcessOrder → Site -->
+                <line x1="620" y1="55" x2="768" y2="55" stroke="#8b5cf6" stroke-width="1.8" opacity=".4" marker-end="url(#b5)"/>
+                <rect x="650" y="35" width="100" height="18" rx="5" fill="#080e1a"/>
+                <text x="700" y="48" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="600">executedAtSite</text>
+
+                <!-- ProcessOrder → Operation -->
+                <line x1="480" y1="60" x2="348" y2="60" stroke="#3b82f6" stroke-width="1.5" opacity=".4" marker-end="url(#b1)"/>
+                <rect x="370" y="42" width="95" height="18" rx="5" fill="#080e1a"/>
+                <text x="418" y="55" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="600">hasOperation</text>
+
+                <!-- ProcessOrder → Concept (status) -->
+                <path d="M620,75 Q700,110 770,120" fill="none" stroke="#6366f1" stroke-width="1.2" opacity=".35" stroke-dasharray="4,3" marker-end="url(#b5)"/>
+                <rect x="668" y="87" width="90" height="16" rx="5" fill="#080e1a"/>
+                <text x="713" y="99" text-anchor="middle" fill="#818cf8" font-size="9">hasOrderStatus</text>
+
+                <!-- PlannedOrder → Batch -->
+                <path d="M165,80 Q300,160 480,195" fill="none" stroke="#10b981" stroke-width="1.3" opacity=".3" stroke-dasharray="6,4" marker-end="url(#b2)"/>
+                <rect x="275" y="120" width="90" height="18" rx="5" fill="#080e1a"/>
+                <text x="320" y="133" text-anchor="middle" fill="#10b981" font-size="10">recommends</text>
+
+                <!-- Batch → Material -->
+                <line x1="620" y1="215" x2="768" y2="215" stroke="#f59e0b" stroke-width="1.8" opacity=".4" marker-end="url(#b3)"/>
+                <rect x="643" y="197" width="115" height="18" rx="5" fill="#080e1a"/>
+                <text x="700" y="210" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="600">consistsOfMaterial</text>
+
+                <!-- Batch → Concept (status) -->
+                <path d="M620,225 Q710,180 770,140" fill="none" stroke="#6366f1" stroke-width="1.2" opacity=".35" stroke-dasharray="4,3" marker-end="url(#b5)"/>
+                <rect x="672" y="167" width="95" height="16" rx="5" fill="#080e1a"/>
+                <text x="720" y="179" text-anchor="middle" fill="#818cf8" font-size="9">hasBatchStatus</text>
+
+                <!-- Batch → QualityEvent -->
+                <line x1="480" y1="240" x2="260" y2="315" stroke="#ef4444" stroke-width="1.5" opacity=".35" marker-end="url(#b4)"/>
+                <rect x="325" y="270" width="105" height="18" rx="5" fill="#080e1a"/>
+                <text x="378" y="283" text-anchor="middle" fill="#fca5a5" font-size="10">hasQualityEvent</text>
+
+                <!-- Batch → QualityNotification -->
+                <line x1="550" y1="240" x2="550" y2="310" stroke="#ef4444" stroke-width="1.5" opacity=".35" marker-end="url(#b4)"/>
+                <rect x="555" y="268" width="128" height="18" rx="5" fill="#080e1a"/>
+                <text x="619" y="281" text-anchor="middle" fill="#fca5a5" font-size="10">hasQualityNotif</text>
+
+                <!-- Batch → Lot -->
+                <line x1="620" y1="235" x2="770" y2="315" stroke="#8b5cf6" stroke-width="1.3" opacity=".35" marker-end="url(#b5)"/>
+                <rect x="660" y="270" width="105" height="18" rx="5" fill="#080e1a"/>
+                <text x="713" y="283" text-anchor="middle" fill="#a78bfa" font-size="10">hasInspectionLot</text>
+
+                <!-- Enterprise → Site (hierarchy) -->
+                <line x1="960" y1="55" x2="870" y2="55" stroke="#8b5cf6" stroke-width="1.2" opacity=".3" stroke-dasharray="3,3" marker-end="url(#b5)"/>
+
+                <!-- ===== NODES ===== -->
+                <!-- ProcessOrder -->
+                <g filter="url(#ng)">
+                    <rect x="480" y="30" width="140" height="55" rx="14" fill="#0c1e38" stroke="#3b82f6" stroke-width="2.5"/>
+                    <text x="550" y="55" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="800">ProcessOrder</text>
+                    <text x="550" y="72" text-anchor="middle" fill="#3b82f6" font-size="10" opacity=".6">93 props</text>
+                </g>
+
+                <!-- Batch -->
+                <g filter="url(#ng)">
+                    <rect x="480" y="185" width="140" height="55" rx="14" fill="#081e14" stroke="#10b981" stroke-width="2.5"/>
+                    <text x="550" y="210" text-anchor="middle" fill="#34d399" font-size="13" font-weight="800">Batch</text>
+                    <text x="550" y="227" text-anchor="middle" fill="#10b981" font-size="10" opacity=".6">96 props</text>
+                </g>
+
+                <!-- PlannedOrder -->
+                <rect x="80" y="35" width="140" height="50" rx="14" fill="#0c1e38" stroke="#3b82f6" stroke-width="1.5"/>
+                <text x="150" y="58" text-anchor="middle" fill="#60a5fa" font-size="12" font-weight="700">PlannedOrder</text>
+                <text x="150" y="73" text-anchor="middle" fill="#3b82f6" font-size="10" opacity=".6">15 props</text>
+
+                <!-- Operation -->
+                <rect x="240" y="35" width="108" height="50" rx="14" fill="#0c1e38" stroke="#3b82f6" stroke-width="1.5"/>
+                <text x="294" y="58" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="700">Operation</text>
+                <text x="294" y="73" text-anchor="middle" fill="#3b82f6" font-size="10" opacity=".6">7 props</text>
+
+                <!-- Site -->
+                <rect x="770" y="30" width="100" height="50" rx="14" fill="#150e30" stroke="#8b5cf6" stroke-width="1.8"/>
+                <text x="820" y="55" text-anchor="middle" fill="#a78bfa" font-size="12" font-weight="700">Site</text>
+                <text x="820" y="70" text-anchor="middle" fill="#8b5cf6" font-size="9" opacity=".6">plant / factory</text>
+
+                <!-- Enterprise -->
+                <rect x="960" y="30" width="110" height="50" rx="14" fill="#150e30" stroke="#8b5cf6" stroke-width="1"/>
+                <text x="1015" y="55" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">Enterprise</text>
+                <text x="1015" y="70" text-anchor="middle" fill="#8b5cf6" font-size="9" opacity=".5">→ Site → Area</text>
+
+                <!-- Material -->
+                <rect x="770" y="190" width="100" height="50" rx="14" fill="#1a1508" stroke="#f59e0b" stroke-width="1.8"/>
+                <text x="820" y="215" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700">Material</text>
+                <text x="820" y="230" text-anchor="middle" fill="#f59e0b" font-size="9" opacity=".6">product / API</text>
+
+                <!-- Concept (Status/Types) -->
+                <rect x="770" y="105" width="128" height="45" rx="14" fill="#1a1540" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="5,3"/>
+                <text x="834" y="126" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="600">skos:Concept</text>
+                <text x="834" y="141" text-anchor="middle" fill="#6366f1" font-size="9" opacity=".6">statuses / types</text>
+
+                <!-- QualityEvent -->
+                <rect x="150" y="308" width="130" height="45" rx="14" fill="#200a0a" stroke="#ef4444" stroke-width="1.5"/>
+                <text x="215" y="335" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">QualityEvent</text>
+
+                <!-- QualityNotification -->
+                <rect x="460" y="308" width="165" height="45" rx="14" fill="#200a0a" stroke="#ef4444" stroke-width="1.5"/>
+                <text x="543" y="335" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">QualityNotification</text>
+
+                <!-- Lot -->
+                <rect x="770" y="308" width="100" height="45" rx="14" fill="#150e30" stroke="#8b5cf6" stroke-width="1.2"/>
+                <text x="820" y="335" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700">Lot</text>
+
+                <!-- Ref Data Schemes (bottom strip) -->
+                <rect x="40" y="370" width="1160" height="26" rx="8" fill="rgba(99,102,241,.06)" stroke="rgba(99,102,241,.15)" stroke-width="1"/>
+                <text x="620" y="387" text-anchor="middle" fill="#64748b" font-size="10">
+                    Reference Data Schemes:  BatchStatus (5)  •  OrderStatus (6)  •  MaterialType (3)  •  ProcessOrderType (3)  •  InspectionType (3)  •  LocationType (3)  •  ProcurementType (4)  •  UsageDecision (3)
+                </text>
+            </svg>
+        </div>
+
+        <div class="graph-legend anim-5">
+            <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Order / Operation</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Batch (production)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Material (consumption)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Location / Reference</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Quality</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#6366f1;border:1px dashed #818cf8"></div>Status (enum)</div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: DEEP DIVE — PROPERTIES & REAL EXAMPLE -->
+<!-- ============================================================ -->
+<div class="slide" id="s2">
+    <div class="deep-layout">
+        <div class="graph-header" style="margin-bottom:18px">
+            <div class="graph-header-left">
+                <div class="slide-tag anim-1">Deep Dive</div>
+                <h1 class="slide-title anim-2" style="font-size:38px">Properties, Enums &<br><span class="hl">Real-World Example</span></h1>
+            </div>
+        </div>
+
+        <div class="deep-grid">
+            <!-- Card 1: Batch Properties -->
+            <div class="deep-card glass anim-3">
+                <h3>Batch — Key Properties</h3>
+                <span class="badge green">96 data properties</span>
+                <div class="prop-list">
+                    <div class="prop-row"><div class="pr-name">batchCode</div><div class="pr-type string">string</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">batchTotalQuantity</div><div class="pr-type decimal">decimal</div><div class="pr-cat">physical</div></div>
+                    <div class="prop-row"><div class="pr-name">manufactureDate</div><div class="pr-type date">date</div><div class="pr-cat">operational</div></div>
+                    <div class="prop-row"><div class="pr-name">limsDispositionCode</div><div class="pr-type string">string</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">limsFinishedTestsCount</div><div class="pr-type integer">integer</div><div class="pr-cat">operational</div></div>
+                    <div class="prop-row"><div class="pr-name">deletionIndicator</div><div class="pr-type boolean">boolean</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">productFamilyName</div><div class="pr-type string">string</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">shelfLifePeriodNumber</div><div class="pr-type integer">integer</div><div class="pr-cat">physical</div></div>
+                </div>
+            </div>
+
+            <!-- Card 2: ProcessOrder Properties -->
+            <div class="deep-card glass anim-4">
+                <h3>ProcessOrder — Key Properties</h3>
+                <span class="badge blue">93 data properties</span>
+                <div class="prop-list">
+                    <div class="prop-row"><div class="pr-name">processOrderNumber</div><div class="pr-type string">string</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">totalOrderQuantity</div><div class="pr-type decimal">decimal</div><div class="pr-cat">physical</div></div>
+                    <div class="prop-row"><div class="pr-name">actualStartDatetime</div><div class="pr-type dateTime">dateTime</div><div class="pr-cat">operational</div></div>
+                    <div class="prop-row"><div class="pr-name">scheduledFinishDatetime</div><div class="pr-type dateTime">dateTime</div><div class="pr-cat">operational</div></div>
+                    <div class="prop-row"><div class="pr-name">releasedIndicator</div><div class="pr-type boolean">boolean</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">closedIndicator</div><div class="pr-type boolean">boolean</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">producedBatchCode</div><div class="pr-type string">string</div><div class="pr-cat">tag</div></div>
+                    <div class="prop-row"><div class="pr-name">finishedOperationsCount</div><div class="pr-type integer">integer</div><div class="pr-cat">operational</div></div>
+                </div>
+            </div>
+
+            <!-- Card 3: Reference Data -->
+            <div class="deep-card glass anim-5">
+                <h3>Reference Data — Controlled Vocabularies</h3>
+                <div class="dc-sub">8 SKOS ConceptSchemes with 30 predefined enum values</div>
+                <div class="enum-section">
+                    <div class="chip-label">Batch Status</div>
+                    <div class="chip-row">
+                        <span class="chip" style="border-color:rgba(16,185,129,.3)">Created</span>
+                        <span class="chip" style="border-color:rgba(59,130,246,.3)">In Production</span>
+                        <span class="chip" style="border-color:rgba(139,92,246,.3)">Quality Control</span>
+                        <span class="chip" style="border-color:rgba(245,158,11,.3)">Blocked</span>
+                        <span class="chip" style="border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08)">Released</span>
+                    </div>
+                    <div class="chip-label">Order Status</div>
+                    <div class="chip-row">
+                        <span class="chip">Created</span>
+                        <span class="chip">In Progress</span>
+                        <span class="chip">Released</span>
+                        <span class="chip">Completed</span>
+                        <span class="chip">Tech. Completed</span>
+                        <span class="chip">Cancelled</span>
+                    </div>
+                    <div class="chip-label">Material Type</div>
+                    <div class="chip-row">
+                        <span class="chip">Raw Material</span>
+                        <span class="chip">Intermediate</span>
+                        <span class="chip">Finished Product</span>
+                    </div>
+                    <div class="chip-label">Usage Decision</div>
+                    <div class="chip-row">
+                        <span class="chip" style="border-color:rgba(16,185,129,.3)">Approved</span>
+                        <span class="chip" style="border-color:rgba(245,158,11,.3)">Pending</span>
+                        <span class="chip" style="border-color:rgba(239,68,68,.3)">Rejected</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Real-World Example -->
+            <div class="deep-card glass anim-6" style="border-color:rgba(59,130,246,.2)">
+                <h3>Real-World Example</h3>
+                <div class="dc-sub">A single production run modeled with the ontology</div>
+                <div class="real-example">
+                    <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">ProcessOrder</div>
+                    <div class="rex-row"><div class="rex-key">orderNumber</div><div class="rex-val str">"PO-2025-0042"</div></div>
+                    <div class="rex-row"><div class="rex-key">quantity</div><div class="rex-val num">5,000 units</div></div>
+                    <div class="rex-row"><div class="rex-key">actualStart</div><div class="rex-val dt">2025-03-15T08:00</div></div>
+                    <div class="rex-row"><div class="rex-key">status</div><div class="rex-val bool">→ Released</div></div>
+
+                    <div class="rex-arrow">── produces ──▶</div>
+
+                    <div style="font-size:11px;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Batch</div>
+                    <div class="rex-row"><div class="rex-key">batchCode</div><div class="rex-val str">"B2025-00007"</div></div>
+                    <div class="rex-row"><div class="rex-key">totalQuantity</div><div class="rex-val num">4,950 units</div></div>
+                    <div class="rex-row"><div class="rex-key">manufactureDate</div><div class="rex-val dt">2025-03-15</div></div>
+                    <div class="rex-row"><div class="rex-key">batchStatus</div><div class="rex-val bool">→ Released</div></div>
+
+                    <div class="rex-arrow" style="background:rgba(245,158,11,.1);color:#f59e0b">── consistsOfMaterial ──▶</div>
+
+                    <div style="font-size:11px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px">Material</div>
+                    <div class="rex-row"><div class="rex-key">materialId</div><div class="rex-val str">"MAT-9921" (Fasenra 30mg)</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.nav-dot');
+const counter = document.getElementById('current');
+
+function goTo(n) {
+    if (n < 0 || n >= slides.length) return;
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    counter.textContent = current + 1;
+}
+
+function go(dir) { goTo(current + dir); }
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft') go(-1);
+});
+
+// Touch support
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 60) go(diff > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>

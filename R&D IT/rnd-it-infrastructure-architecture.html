@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1700, height=950">
+    <title>R&D IT Agentic AI - Infrastructure Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 15px;
+        }
+
+        .page {
+            width: 1650px;
+            min-height: 920px;
+            background: #fff;
+            position: relative;
+            border: 3px solid #e74c3c;
+            border-radius: 8px;
+            margin: 50px auto 80px;
+            page-break-after: always;
+        }
+
+        .page-title {
+            position: absolute;
+            top: -45px;
+            left: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #830051;
+        }
+
+        .page-subtitle {
+            position: absolute;
+            top: -22px;
+            left: 0;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* AZ Network Label */
+        .az-network-label {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .az-network-label .aws-badge {
+            background: #232f3e;
+            color: #ff9900;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .az-network-label span {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* AWS Cloud boundary */
+        .aws-cloud {
+            position: absolute;
+            top: 35px;
+            left: 180px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #7b68ee;
+            border-radius: 8px;
+            background: rgba(123, 104, 238, 0.03);
+        }
+
+        .aws-cloud-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #fff;
+            padding: 0 8px;
+            font-size: 11px;
+            color: #7b68ee;
+            font-weight: 600;
+        }
+
+        /* Region */
+        .region-badge {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .region-badge .icon {
+            width: 20px;
+            height: 20px;
+            background: #2e7d32;
+            border-radius: 3px;
+        }
+
+        .region-badge span {
+            font-size: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* VPC */
+        .vpc {
+            position: absolute;
+            top: 45px;
+            left: 100px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #1976d2;
+            border-radius: 6px;
+            background: rgba(25, 118, 210, 0.02);
+        }
+
+        .vpc-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #fff;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .vpc-label .icon {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%);
+            border-radius: 3px;
+        }
+
+        .vpc-label span {
+            font-size: 10px;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        /* Private Subnet */
+        .private-subnet {
+            position: absolute;
+            top: 35px;
+            left: 15px;
+            width: 920px;
+            bottom: 120px;
+            border: 2px dashed #00838f;
+            border-radius: 6px;
+            background: rgba(0, 131, 143, 0.02);
+        }
+
+        .subnet-label {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .subnet-label .icon {
+            width: 16px;
+            height: 16px;
+            background: #00838f;
+            border-radius: 2px;
+        }
+
+        .subnet-label span {
+            font-size: 10px;
+            color: #00838f;
+            font-weight: 600;
+        }
+
+        /* AWS Service Icon Box */
+        .aws-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .aws-icon.orange { background: linear-gradient(135deg, #ff9900 0%, #ffad33 100%); }
+        .aws-icon.blue { background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%); }
+        .aws-icon.purple { background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%); }
+        .aws-icon.green { background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%); }
+        .aws-icon.red { background: linear-gradient(135deg, #c62828 0%, #e53935 100%); }
+        .aws-icon.teal { background: linear-gradient(135deg, #00695c 0%, #00897b 100%); }
+        .aws-icon.pink { background: linear-gradient(135deg, #ad1457 0%, #d81b60 100%); }
+        .aws-icon.dark { background: linear-gradient(135deg, #37474f 0%, #546e7a 100%); }
+
+        .service-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            position: absolute;
+        }
+
+        .service-box .label {
+            font-size: 9px;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+            max-width: 70px;
+        }
+
+        /* ECS Cluster boxes */
+        .ecs-cluster {
+            border: 2px dashed #ff9900;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            background: rgba(255, 153, 0, 0.03);
+        }
+
+        .ecs-cluster-label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #fff;
+            padding: 0 6px;
+            font-size: 9px;
+            color: #ff9900;
+            font-weight: 700;
+        }
+
+        /* Fargate Tasks */
+        .fargate-tasks {
+            display: flex;
+            gap: 8px;
+        }
+
+        .fargate-task {
+            width: 38px;
+            height: 45px;
+            background: linear-gradient(180deg, #ff9900 0%, #ffad33 100%);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .fargate-task::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #fff 0px,
+                #fff 4px,
+                transparent 4px,
+                transparent 6px
+            );
+            border-radius: 2px;
+        }
+
+        /* Control Plane box */
+        .control-plane {
+            border: 2px solid #00838f;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            background: rgba(0, 131, 143, 0.05);
+        }
+
+        .control-plane-label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #fff;
+            padding: 0 6px;
+            font-size: 9px;
+            color: #00838f;
+            font-weight: 700;
+        }
+
+        /* Registry boxes */
+        .registry-box {
+            width: 70px;
+            height: 50px;
+            background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 1.5px solid #1976d2;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .registry-box .icon {
+            font-size: 14px;
+        }
+
+        .registry-box .text {
+            font-size: 7px;
+            color: #1565c0;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Interface VPC Endpoints */
+        .vpc-endpoints {
+            position: absolute;
+            border: 2px solid #7b1fa2;
+            border-radius: 6px;
+            padding: 10px;
+            background: rgba(123, 31, 162, 0.03);
+        }
+
+        .vpc-endpoints-label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #fff;
+            padding: 0 6px;
+            font-size: 8px;
+            color: #7b1fa2;
+            font-weight: 700;
+        }
+
+        .endpoint-list {
+            font-size: 8px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Client box */
+        .client-box {
+            position: absolute;
+            left: 20px;
+            top: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .client-icon {
+            width: 55px;
+            height: 45px;
+            background: linear-gradient(180deg, #37474f 0%, #546e7a 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .client-label {
+            font-size: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* CI/CD and Observability sections */
+        .bottom-section {
+            position: absolute;
+            bottom: 15px;
+            display: flex;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 2px dashed #999;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .bottom-section-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #fff;
+            padding: 0 8px;
+            font-size: 9px;
+            color: #666;
+            font-weight: 700;
+        }
+
+        /* Agent boxes */
+        .agent-box {
+            border: 2px solid;
+            border-radius: 6px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: #fff;
+            min-width: 80px;
+        }
+
+        .agent-box.test { border-color: #2e7d32; background: linear-gradient(180deg, #e8f5e9 0%, #fff 100%); }
+        .agent-box.dep { border-color: #1565c0; background: linear-gradient(180deg, #e3f2fd 0%, #fff 100%); }
+        .agent-box.know { border-color: #c4a000; background: linear-gradient(180deg, #fff8e1 0%, #fff 100%); }
+        .agent-box.lineage { border-color: #7b1fa2; background: linear-gradient(180deg, #f3e5f5 0%, #fff 100%); }
+
+        .agent-box .icon {
+            font-size: 18px;
+        }
+
+        .agent-box .name {
+            font-size: 7px;
+            font-weight: 700;
+            text-align: center;
+            color: #333;
+        }
+
+        /* LangGraph box */
+        .langgraph-box {
+            border: 2px solid #00bcd4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            background: linear-gradient(180deg, #e0f7fa 0%, #fff 100%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .langgraph-box .logo {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .langgraph-box .text {
+            font-size: 9px;
+            font-weight: 700;
+            color: #00838f;
+        }
+
+        .langgraph-box .subtext {
+            font-size: 7px;
+            color: #666;
+        }
+
+        /* MCP Server section */
+        .mcp-server {
+            background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 1.5px solid #ff9800;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 7px;
+            font-weight: 600;
+            color: #e65100;
+        }
+
+        /* Small icon helper */
+        .sm-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* Legend */
+        .legend {
+            position: absolute;
+            bottom: -35px;
+            right: 0;
+            display: flex;
+            gap: 20px;
+            font-size: 9px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        /* ====== PAGE 2 - INTERACTION FLOW ====== */
+        .flow-container {
+            padding: 40px;
+        }
+
+        .flow-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .flow-header h1 {
+            font-size: 28px;
+            color: #830051;
+            margin-bottom: 10px;
+        }
+
+        .flow-header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .flow-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .flow-step-card {
+            background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step-card:hover {
+            border-color: #830051;
+            box-shadow: 0 4px 12px rgba(131, 0, 81, 0.15);
+        }
+
+        .flow-step-card .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: #830051;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(131, 0, 81, 0.3);
+        }
+
+        .flow-step-card .step-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .flow-step-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .flow-step-card p {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .flow-step-card .components {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+
+        .flow-step-card .components span {
+            font-size: 10px;
+            color: #830051;
+            font-weight: 600;
+        }
+
+        /* Arrow connectors */
+        .flow-arrow {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #830051;
+        }
+
+        .flow-step-card:nth-child(5) .flow-arrow,
+        .flow-step-card:nth-child(10) .flow-arrow {
+            display: none;
+        }
+
+        /* Architecture Summary */
+        .arch-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .summary-card h4 {
+            font-size: 16px;
+            color: #830051;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .summary-card ul {
+            list-style: none;
+        }
+
+        .summary-card li {
+            font-size: 12px;
+            color: #555;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-card li:last-child {
+            border-bottom: none;
+        }
+
+        .summary-card li .bullet {
+            width: 8px;
+            height: 8px;
+            background: #830051;
+            border-radius: 50%;
+        }
+
+        .key-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .service-tag {
+            background: linear-gradient(135deg, #830051 0%, #a0006a 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .service-tag.orange { background: linear-gradient(135deg, #ff9900 0%, #ffad33 100%); }
+        .service-tag.blue { background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%); }
+        .service-tag.teal { background: linear-gradient(135deg, #00838f 0%, #00acc1 100%); }
+        .service-tag.purple { background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%); }
+        .service-tag.green { background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%); }
+
+        @media print {
+            .page {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ====== PAGE 1: INFRASTRUCTURE ARCHITECTURE ====== -->
+<div style="position: relative; margin: 50px auto 50px; width: 1650px;">
+    <div class="page-title">R&D IT Agentic AI - Agent Mesh Infrastructure Architecture</div>
+    <div class="page-subtitle">4 AI Agents (Test Intelligence, Dependency Coordinator, Knowledge Library, Auto-Lineage) integrated with Agent Mesh Framework | Platforms: 3DP & BIKG</div>
+
+    <div class="page">
+        <!-- AZ Network Label -->
+        <div class="az-network-label">
+            <span style="font-weight: 600; color: #333;">Az Network</span>
+            <span class="aws-badge">aws</span>
+            <span>AWS Cloud</span>
+        </div>
+
+        <!-- Client -->
+        <div class="client-box">
+            <div class="client-icon">🖥️</div>
+            <div class="client-label">Client</div>
+        </div>
+
+        <!-- Route 53 -->
+        <div class="service-box" style="left: 95px; top: 165px;">
+            <div class="aws-icon teal">🌐</div>
+            <div class="label">Route 53</div>
+        </div>
+
+        <!-- ALB -->
+        <div class="service-box" style="left: 160px; top: 165px;">
+            <div class="aws-icon purple">⚖️</div>
+            <div class="label">ALB</div>
+        </div>
+
+        <!-- AWS Direct Connect -->
+        <div class="service-box" style="left: 50px; top: 420px;">
+            <div class="aws-icon teal">☁️</div>
+            <div class="label">AWS Direct Connect</div>
+        </div>
+
+        <!-- AWS Cloud Boundary -->
+        <div class="aws-cloud">
+            <div class="aws-cloud-label">AWS Cloud</div>
+
+            <!-- Region Badge -->
+            <div class="region-badge">
+                <div class="icon" style="background: #2e7d32; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">🏛️</div>
+                <span>Region (eu-west-1)</span>
+            </div>
+
+            <!-- VPC -->
+            <div class="vpc">
+                <div class="vpc-label">
+                    <div class="icon"></div>
+                    <span>VPC</span>
+                </div>
+
+                <!-- Private Subnet -->
+                <div class="private-subnet">
+                    <div class="subnet-label">
+                        <div class="icon"></div>
+                        <span>Private subnet</span>
+                    </div>
+
+                    <!-- Fargate Badge -->
+                    <div class="service-box" style="left: 15px; top: 25px;">
+                        <div class="aws-icon orange" style="width: 40px; height: 40px; font-size: 16px;">🚀</div>
+                        <div class="label">Fargate</div>
+                    </div>
+
+                    <!-- Frontend-ECS -->
+                    <div class="ecs-cluster" style="left: 70px; top: 20px; width: 170px; height: 110px;">
+                        <div class="ecs-cluster-label">Frontend-ECS</div>
+                        <div style="display: flex; gap: 15px; margin-top: 15px;">
+                            <div style="text-align: center;">
+                                <div class="fargate-tasks">
+                                    <div class="fargate-task"></div>
+                                    <div class="fargate-task"></div>
+                                </div>
+                                <div style="font-size: 7px; margin-top: 4px; color: #555;">User gateway</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="fargate-tasks">
+                                    <div class="fargate-task"></div>
+                                    <div class="fargate-task"></div>
+                                </div>
+                                <div style="font-size: 7px; margin-top: 4px; color: #555;">User gateway</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agent Runtime-ECS -->
+                    <div class="ecs-cluster" style="left: 260px; top: 20px; width: 340px; height: 110px;">
+                        <div class="ecs-cluster-label">Agent runtime-ECS (LangGraph)</div>
+                        <div style="display: flex; gap: 20px; margin-top: 15px; align-items: flex-start;">
+                            <div style="text-align: center;">
+                                <div class="fargate-tasks">
+                                    <div class="fargate-task"></div>
+                                    <div class="fargate-task"></div>
+                                </div>
+                                <div style="font-size: 7px; margin-top: 4px; color: #555;">Orchestrator</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="fargate-tasks">
+                                    <div class="fargate-task"></div>
+                                    <div class="fargate-task"></div>
+                                </div>
+                                <div style="font-size: 7px; margin-top: 4px; color: #555;">Agent loop</div>
+                            </div>
+                            <!-- LangGraph Box -->
+                            <div class="langgraph-box">
+                                <div class="logo">🔀</div>
+                                <div>
+                                    <div class="text">LangGraph</div>
+                                    <div class="subtext">State Machine</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cognito -->
+                    <div class="service-box" style="left: 15px; top: 145px;">
+                        <div class="aws-icon red" style="width: 40px; height: 40px; font-size: 16px;">🔐</div>
+                        <div class="label">Cognito</div>
+                    </div>
+
+                    <!-- PEP -->
+                    <div style="position: absolute; left: 70px; top: 145px; background: #ffebee; border: 2px solid #c62828; border-radius: 6px; padding: 6px 12px;">
+                        <div style="font-size: 9px; font-weight: 700; color: #c62828;">PEP</div>
+                    </div>
+
+                    <!-- Agent Environment-ECS -->
+                    <div class="ecs-cluster" style="left: 70px; top: 185px; width: 180px; height: 140px;">
+                        <div class="ecs-cluster-label">Agent Environment-ECS</div>
+
+                        <!-- MCP Section inside -->
+                        <div style="margin-top: 15px; display: flex; gap: 10px;">
+                            <div style="text-align: center;">
+                                <div style="background: #fff3e0; border: 1.5px solid #ff9800; border-radius: 4px; padding: 8px; width: 65px;">
+                                    <div style="font-size: 14px;">🔌</div>
+                                    <div style="font-size: 7px; font-weight: 600; color: #e65100;">MCP Server</div>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="background: #fff3e0; border: 1.5px solid #ff9800; border-radius: 4px; padding: 8px; width: 65px;">
+                                    <div style="font-size: 14px;">📡</div>
+                                    <div style="font-size: 7px; font-weight: 600; color: #e65100;">MCP Client</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PEP below MCP -->
+                        <div style="position: absolute; bottom: 8px; left: 10px; background: #ffebee; border: 2px solid #c62828; border-radius: 6px; padding: 4px 10px;">
+                            <div style="font-size: 8px; font-weight: 700; color: #c62828;">PEP</div>
+                        </div>
+                    </div>
+
+                    <!-- Mesh Control Plane-ECS -->
+                    <div class="control-plane" style="left: 270px; top: 145px; width: 330px; height: 180px;">
+                        <div class="control-plane-label">Mesh control plane-ECS</div>
+
+                        <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+                            <div class="registry-box">
+                                <div class="icon">📚</div>
+                                <div class="text">Agent Registry</div>
+                            </div>
+                            <div class="registry-box">
+                                <div class="icon">📜</div>
+                                <div class="text">PDP</div>
+                            </div>
+                            <div class="registry-box">
+                                <div class="icon">🛠️</div>
+                                <div class="text">Tool Registry</div>
+                            </div>
+                            <div class="registry-box">
+                                <div class="icon">📊</div>
+                                <div class="text">Instrumentation</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 R&D IT Agents -->
+                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #00838f;">
+                            <div style="font-size: 8px; font-weight: 700; color: #00838f; margin-bottom: 8px;">R&D IT Registered Agents</div>
+                            <div style="display: flex; gap: 8px;">
+                                <div class="agent-box test">
+                                    <div class="icon">🧪</div>
+                                    <div class="name">Test Intelligence</div>
+                                </div>
+                                <div class="agent-box dep">
+                                    <div class="icon">🔗</div>
+                                    <div class="name">Dependency Coordinator</div>
+                                </div>
+                                <div class="agent-box know">
+                                    <div class="icon">📚</div>
+                                    <div class="name">Knowledge Library</div>
+                                </div>
+                                <div class="agent-box lineage">
+                                    <div class="icon">🌳</div>
+                                    <div class="name">Auto-Lineage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right side services -->
+
+                <!-- ElastiCache -->
+                <div class="service-box" style="right: 330px; top: 55px;">
+                    <div class="aws-icon red">⚡</div>
+                    <div class="label">ElastiCache</div>
+                </div>
+
+                <!-- Interface VPC Endpoints -->
+                <div class="vpc-endpoints" style="right: 180px; top: 80px; width: 130px; height: 170px;">
+                    <div class="vpc-endpoints-label">Interface VPC endpoints</div>
+                    <div class="endpoint-list" style="margin-top: 10px;">
+                        bedrock-runtime<br>
+                        bedrock-guardrails<br>
+                        sqs<br>
+                        logs<br>
+                        cassandra<br>
+                        dynamodb<br>
+                        opensearch<br>
+                        s3<br>
+                        lambda
+                    </div>
+                </div>
+
+                <!-- Secrets Manager -->
+                <div class="service-box" style="right: 40px; top: 55px;">
+                    <div class="aws-icon red">🔐</div>
+                    <div class="label">Secrets Manager</div>
+                </div>
+
+                <!-- Keyspaces -->
+                <div class="service-box" style="right: 40px; top: 130px;">
+                    <div class="aws-icon blue">🗄️</div>
+                    <div class="label">Keyspaces</div>
+                </div>
+
+                <!-- SQS -->
+                <div class="service-box" style="right: 40px; top: 210px;">
+                    <div class="aws-icon pink">📬</div>
+                    <div class="label">Simple Queue Service</div>
+                </div>
+
+                <!-- Reasoning Engine section -->
+                <div style="position: absolute; right: 25px; top: 290px; border: 2px solid #00838f; border-radius: 8px; padding: 12px; background: rgba(0, 131, 143, 0.03); width: 130px;">
+                    <div style="font-size: 9px; font-weight: 700; color: #00838f; text-align: center; margin-bottom: 10px;">Reasoning engine</div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                        <div class="aws-icon teal" style="width: 40px; height: 40px;">🤖</div>
+                        <div style="font-size: 8px; font-weight: 600; color: #333;">Bedrock LLM</div>
+                        <div style="font-size: 7px; color: #666;">Claude 3.5 Sonnet</div>
+                        <div style="margin-top: 6px; background: #ffebee; border: 1.5px solid #c62828; border-radius: 4px; padding: 4px 8px;">
+                            <div style="font-size: 7px; font-weight: 700; color: #c62828;">Bedrock Guardrails</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lambda - AI Judge -->
+                <div class="service-box" style="right: 170px; top: 260px;">
+                    <div class="aws-icon orange" style="width: 45px; height: 45px;">λ</div>
+                    <div class="label">Lambda</div>
+                    <div style="font-size: 7px; color: #666;">AI Judge</div>
+                </div>
+
+                <!-- Knowledge Base Section -->
+                <div style="position: absolute; right: 25px; top: 430px; border: 2px solid #1565c0; border-radius: 8px; padding: 10px; background: rgba(21, 101, 192, 0.03); width: 270px;">
+                    <div style="font-size: 9px; font-weight: 700; color: #1565c0; margin-bottom: 10px;">Knowledge Base</div>
+                    <div style="display: flex; gap: 10px;">
+                        <div style="text-align: center;">
+                            <div class="aws-icon blue" style="width: 40px; height: 40px; font-size: 16px;">📊</div>
+                            <div style="font-size: 7px; font-weight: 600; color: #333; margin-top: 3px;">Embeddings</div>
+                            <div style="font-size: 6px; color: #666;">Titan</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="aws-icon purple" style="width: 40px; height: 40px; font-size: 16px;">🔍</div>
+                            <div style="font-size: 7px; font-weight: 600; color: #333; margin-top: 3px;">OpenSearch</div>
+                            <div style="font-size: 6px; color: #666;">Vector Store</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="aws-icon green" style="width: 40px; height: 40px; font-size: 16px;">🪣</div>
+                            <div style="font-size: 7px; font-weight: 600; color: #333; margin-top: 3px;">S3 Bucket</div>
+                            <div style="font-size: 6px; color: #666;">Artifacts</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="aws-icon orange" style="width: 40px; height: 40px; font-size: 16px;">📄</div>
+                            <div style="font-size: 7px; font-weight: 600; color: #333; margin-top: 3px;">DynamoDB</div>
+                            <div style="font-size: 6px; color: #666;">Checkpoint</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CI/CD Section -->
+                <div class="bottom-section" style="left: 15px; bottom: 15px; width: 400px;">
+                    <div class="bottom-section-label">CI/CD</div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #37474f 0%, #546e7a 100%);">📝</div>
+                        <div class="label">CodeCommit</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #37474f 0%, #546e7a 100%);">🔨</div>
+                        <div class="label">CodeBuild</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #37474f 0%, #546e7a 100%);">🚀</div>
+                        <div class="label">CodeDeploy</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #37474f 0%, #546e7a 100%);">🔄</div>
+                        <div class="label">CodePipeline</div>
+                    </div>
+                </div>
+
+                <!-- ECR -->
+                <div class="service-box" style="left: 450px; bottom: 25px;">
+                    <div class="aws-icon orange">📦</div>
+                    <div class="label">ECR</div>
+                </div>
+
+                <!-- Observability Section -->
+                <div class="bottom-section" style="right: 15px; bottom: 15px; width: 450px;">
+                    <div class="bottom-section-label">Observability</div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);">📊</div>
+                        <div class="label">Grafana</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);">📡</div>
+                        <div class="label">OpenTelemetry</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);">🔥</div>
+                        <div class="label">Prometheus</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%);">📝</div>
+                        <div class="label">CloudTrail</div>
+                    </div>
+                    <div class="service-box" style="position: relative;">
+                        <div class="sm-icon" style="background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%);">📈</div>
+                        <div class="label">CloudWatch</div>
+                    </div>
+                </div>
+
+                <!-- MCP Tools & Data Sources (External) -->
+                <div style="position: absolute; right: 170px; top: 330px; border: 2px dashed #ff5722; border-radius: 8px; padding: 12px; background: rgba(255, 87, 34, 0.02); width: 130px;">
+                    <div style="font-size: 9px; font-weight: 700; color: #ff5722; margin-bottom: 10px;">MCP Tools</div>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div class="mcp-server">3DP Platform</div>
+                        <div class="mcp-server">BIKG Graph</div>
+                        <div class="mcp-server">Jira / ADO</div>
+                        <div class="mcp-server">Confluence</div>
+                        <div class="mcp-server">Starburst</div>
+                        <div class="mcp-server">Collibra</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9900;"></div>
+            <span>ECS Fargate</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #00838f;"></div>
+            <span>Control Plane</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff5722;"></div>
+            <span>MCP Servers</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #7b1fa2;"></div>
+            <span>VPC Endpoints</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #2e7d32;"></div>
+            <span>MVP Agent</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #00bcd4;"></div>
+            <span>LangGraph</span>
+        </div>
+    </div>
+
+    <div class="page-number">Page 1 of 2</div>
+</div>
+
+<!-- ====== PAGE 2: AGENT INTERACTION FLOW ====== -->
+<div style="position: relative; margin: 50px auto 50px; width: 1650px;">
+    <div class="page-title">R&D IT Agentic AI - Agent Interaction Flow</div>
+    <div class="page-subtitle">Step-by-step request flow from user through Agent Mesh infrastructure to response</div>
+
+    <div class="page">
+        <div class="flow-container">
+            <div class="flow-header">
+                <h1>Agent Interaction Flow</h1>
+                <p>How users interact with R&D IT AI Agents through the Agent Mesh Framework</p>
+            </div>
+
+            <!-- First Row: Steps 1-5 -->
+            <div class="flow-steps-grid">
+                <div class="flow-step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🖥️</div>
+                    <h3>User Request</h3>
+                    <p>User submits a task via the Chat UI interface (e.g., "Generate tests for Module 3 submission")</p>
+                    <div class="components">
+                        <span>Client → Route 53 → ALB</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🔐</div>
+                    <h3>Authentication</h3>
+                    <p>Request authenticated via Cognito/Entra ID SSO. PEP validates token and enforces policies.</p>
+                    <div class="components">
+                        <span>ALB → Cognito → PEP</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">⚡</div>
+                    <h3>Session & Cache</h3>
+                    <p>User Gateway validates session, stores context in ElastiCache Redis for fast retrieval.</p>
+                    <div class="components">
+                        <span>Frontend-ECS → ElastiCache</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">📬</div>
+                    <h3>Task Queued</h3>
+                    <p>Task submitted to SQS queue for async processing. Ensures reliable delivery and scaling.</p>
+                    <div class="components">
+                        <span>Frontend-ECS → SQS</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-icon">📚</div>
+                    <h3>Agent Discovery</h3>
+                    <p>Orchestrator queries Agent Registry, selects appropriate agent (e.g., Test Intelligence).</p>
+                    <div class="components">
+                        <span>Orchestrator → Agent Registry</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row: Steps 6-10 -->
+            <div class="flow-steps-grid">
+                <div class="flow-step-card">
+                    <div class="step-number">6</div>
+                    <div class="step-icon">📜</div>
+                    <h3>Policy Check</h3>
+                    <p>PDP validates permissions against GxP compliance rules. Ensures proper data access controls.</p>
+                    <div class="components">
+                        <span>Orchestrator → PDP</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">7</div>
+                    <div class="step-icon">🔀</div>
+                    <h3>LangGraph Execution</h3>
+                    <p>Agent loop runs via LangGraph state machine. Checkpoints saved to DynamoDB for recovery.</p>
+                    <div class="components">
+                        <span>Agent Loop → LangGraph → DynamoDB</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">8</div>
+                    <div class="step-icon">🔌</div>
+                    <h3>Tool Invocation</h3>
+                    <p>MCP Client calls external tools (3DP, BIKG, GitHub, Confluence) via MCP Server protocol.</p>
+                    <div class="components">
+                        <span>MCP Client → MCP Server → Tools</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">9</div>
+                    <div class="step-icon">🤖</div>
+                    <h3>LLM + Guardrails</h3>
+                    <p>Agent calls Bedrock (Claude 3.5). Lambda AI Judge validates. Guardrails ensure safe output.</p>
+                    <div class="components">
+                        <span>Agent → Lambda → Bedrock + Guardrails</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="step-number">10</div>
+                    <div class="step-icon">📤</div>
+                    <h3>RAG & Response</h3>
+                    <p>Context retrieved via RAG from OpenSearch. Results stored in S3. Response returned to user.</p>
+                    <div class="components">
+                        <span>OpenSearch → S3 → User</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Summary -->
+            <div class="arch-summary">
+                <div class="summary-card">
+                    <h4>Key AWS Services</h4>
+                    <div class="key-services">
+                        <span class="service-tag orange">ECS Fargate</span>
+                        <span class="service-tag teal">Bedrock (Claude)</span>
+                        <span class="service-tag">Bedrock Guardrails</span>
+                        <span class="service-tag orange">Lambda (AI Judge)</span>
+                        <span class="service-tag purple">OpenSearch</span>
+                        <span class="service-tag blue">ElastiCache</span>
+                        <span class="service-tag">Keyspaces</span>
+                        <span class="service-tag blue">DynamoDB</span>
+                        <span class="service-tag green">S3</span>
+                        <span class="service-tag">SQS</span>
+                        <span class="service-tag">Cognito</span>
+                        <span class="service-tag teal">Route 53</span>
+                        <span class="service-tag purple">ALB</span>
+                        <span class="service-tag">Secrets Manager</span>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <h4>Agent Mesh Components</h4>
+                    <ul>
+                        <li><span class="bullet"></span><strong>Agent Registry:</strong> Discovers and routes to registered agents</li>
+                        <li><span class="bullet"></span><strong>Tool Registry:</strong> Catalogs available MCP tools and services</li>
+                        <li><span class="bullet"></span><strong>PDP (Policy Decision Point):</strong> Enforces GxP compliance rules</li>
+                        <li><span class="bullet"></span><strong>PEP (Policy Enforcement Point):</strong> Auth, rate limits, schema validation</li>
+                        <li><span class="bullet"></span><strong>MCP Server/Client:</strong> Standard protocol for agent-tool communication</li>
+                        <li><span class="bullet"></span><strong>LangGraph:</strong> State machine orchestration for agent execution</li>
+                        <li><span class="bullet"></span><strong>Instrumentation:</strong> OpenTelemetry, Prometheus, Grafana observability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-number">Page 2 of 2</div>
+</div>
+
+</body>
+</html>

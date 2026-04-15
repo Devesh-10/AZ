@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HPC Job Execution Record",
+  "description": "Schema for HPC job execution records including metadata-scenario consistency, resource allocation, and reproducibility verification",
+  "type": "object",
+  "required": ["job_id", "queue_name", "resource_allocation", "container", "execution_metadata", "reproducibility"],
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^JOB-[0-9]+$",
+      "description": "Unique SLURM/PBS job identifier"
+    },
+    "queue_name": {
+      "type": "string",
+      "enum": ["genomics", "pkpd", "molsim", "general"],
+      "description": "HPC queue/partition name"
+    },
+    "resource_allocation": {
+      "type": "object",
+      "required": ["cpus", "memory_gb", "nodes", "gpu_count"],
+      "properties": {
+        "cpus": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "memory_gb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2048
+        },
+        "nodes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "gpu_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "walltime_hours": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 168
+        }
+      }
+    },
+    "container": {
+      "type": "object",
+      "required": ["image_name", "image_hash", "runtime"],
+      "properties": {
+        "image_name": {
+          "type": "string",
+          "description": "Singularity/Apptainer container image name"
+        },
+        "image_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "runtime": {
+          "type": "string",
+          "enum": ["singularity", "apptainer", "docker"]
+        }
+      }
+    },
+    "execution_metadata": {
+      "type": "object",
+      "required": ["run_id", "scenario_id", "parameters_hash", "timestamp", "pipeline_name"],
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "pattern": "^RUN-[0-9]{8}-[0-9]{6}$"
+        },
+        "scenario_id": {
+          "type": "string",
+          "pattern": "^SCN-[A-Z]+-[0-9]+$",
+          "description": "References approved metadata-scenario from scenario registry"
+        },
+        "parameters_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "description": "Hash of all scenario parameters for reproducibility tracking"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pipeline_name": {
+          "type": "string",
+          "enum": ["nextflow-genomics", "nextflow-pkpd", "snakemake-molsim", "custom-r-pipeline"]
+        },
+        "pipeline_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "scenario_parameters": {
+      "type": "object",
+      "required": ["scenario_id", "parameter_set", "version"],
+      "properties": {
+        "scenario_id": {
+          "type": "string",
+          "pattern": "^SCN-[A-Z]+-[0-9]+$"
+        },
+        "parameter_set": {
+          "type": "object",
+          "description": "Key-value pairs of scenario parameters (e.g., sample_size, model_type, seed)"
+        },
+        "version": {
+          "type": "string"
+        },
+        "approved_by": {
+          "type": "string"
+        },
+        "approval_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "required": ["output_checksum", "reference_checksum", "is_reproducible"],
+      "properties": {
+        "output_checksum": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "reference_checksum": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "is_reproducible": {
+          "type": "boolean"
+        },
+        "tolerance": {
+          "type": "number",
+          "description": "Acceptable numerical tolerance for floating-point outputs"
+        }
+      }
+    },
+    "reframe_test": {
+      "type": "object",
+      "properties": {
+        "suite_id": {
+          "type": "string",
+          "pattern": "^RF-[A-Z]+-[0-9]+$"
+        },
+        "test_class": {
+          "type": "string"
+        },
+        "environment_tag": {
+          "type": "string",
+          "enum": ["production", "staging", "development"]
+        },
+        "sanity_patterns": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

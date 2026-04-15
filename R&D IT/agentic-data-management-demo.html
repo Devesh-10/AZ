@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Data Office Automation | AstraZeneca</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root{
+  --bg:#0f0f1e;--chat-bg:#141428;--flow-bg:linear-gradient(180deg,#1a1a2e,#16213e);
+  --card:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);
+  --text:#e4e4ef;--dim:#6b6b8d;--bright:#fff;
+  --purple:#8b5cf6;--green:#10b981;--blue:#3b82f6;--amber:#f59e0b;
+  --pink:#ec4899;--red:#ef4444;--teal:#14b8a6;--maroon:#830051;
+  --gold:#c4a000;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+/* TOP BAR */
+.topbar{height:48px;background:rgba(20,20,40,0.95);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;flex-shrink:0;backdrop-filter:blur(12px)}
+.topbar-brand{display:flex;align-items:center;gap:0.8rem}
+.topbar-az{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--gold)}
+.topbar-title{font-size:0.78rem;font-weight:600;color:var(--text);padding-left:0.8rem;border-left:1px solid var(--border)}
+.topbar-status{display:flex;align-items:center;gap:0.5rem;font-size:0.65rem;color:var(--green)}
+.topbar-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.4)}50%{box-shadow:0 0 0 6px rgba(16,185,129,0)}}
+
+/* MAIN LAYOUT */
+.main{flex:1;display:flex;overflow:hidden}
+
+/* LEFT: CHAT */
+.chat-panel{width:50%;display:flex;flex-direction:column;background:var(--chat-bg);border-right:1px solid var(--border)}
+.chat-header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.chat-header h2{font-size:0.85rem;font-weight:700;color:var(--bright)}
+.chat-header span{font-size:0.6rem;color:var(--dim);background:var(--card);padding:0.2rem 0.6rem;border-radius:4px;border:1px solid var(--border)}
+
+.chat-messages{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.chat-messages::-webkit-scrollbar{width:4px}
+.chat-messages::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+
+/* Welcome */
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;gap:1.5rem}
+.welcome-icon{font-size:3rem;opacity:0.3}
+.welcome h3{font-size:1.1rem;font-weight:700;color:var(--bright)}
+.welcome p{font-size:0.8rem;color:var(--dim);max-width:400px;line-height:1.6}
+.welcome-scenarios{display:flex;flex-direction:column;gap:0.5rem;width:100%;max-width:500px}
+.welcome-label{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);text-align:left;margin-top:0.5rem}
+.welcome-btn{text-align:left;padding:0.7rem 1rem;border-radius:10px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:0.78rem;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;line-height:1.4}
+.welcome-btn:hover{background:rgba(131,0,81,0.1);border-color:rgba(131,0,81,0.3);color:var(--bright)}
+.welcome-btn .wb-tag{font-size:0.55rem;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Messages */
+.msg{display:flex;gap:0.8rem;max-width:90%;animation:msgIn 0.3s ease}
+.msg-user{align-self:flex-end;flex-direction:row-reverse}
+.msg-assistant{align-self:flex-start}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg-avatar{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0}
+.msg-user .msg-avatar{background:rgba(131,0,81,0.2)}
+.msg-assistant .msg-avatar{background:rgba(59,130,246,0.2)}
+.msg-bubble{padding:0.8rem 1rem;border-radius:12px;font-size:0.8rem;line-height:1.65}
+.msg-user .msg-bubble{background:rgba(131,0,81,0.15);border:1px solid rgba(131,0,81,0.25);color:var(--text)}
+.msg-assistant .msg-bubble{background:var(--card);border:1px solid var(--border);color:var(--text)}
+.msg-bubble table{width:100%;border-collapse:collapse;margin:0.8rem 0;font-size:0.7rem}
+.msg-bubble th{text-align:left;padding:0.4rem 0.6rem;border-bottom:1px solid var(--border);color:var(--dim);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.5px;font-weight:700}
+.msg-bubble td{padding:0.4rem 0.6rem;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text)}
+.msg-bubble .badge{display:inline-block;padding:0.1rem 0.4rem;border-radius:3px;font-size:0.6rem;font-weight:700}
+.msg-bubble strong{color:var(--bright)}
+.msg-bubble code{background:rgba(255,255,255,0.06);padding:0.1rem 0.3rem;border-radius:3px;font-size:0.7rem;font-family:'SF Mono','Fira Code',monospace}
+
+/* Typing indicator */
+.typing{display:flex;gap:4px;padding:0.8rem 1rem}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:bounce 1.4s infinite}
+.typing span:nth-child(2){animation-delay:0.2s}
+.typing span:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* Chat input */
+.chat-input-area{padding:1rem 1.5rem;border-top:1px solid var(--border);background:rgba(20,20,40,0.5)}
+.quick-chips{display:flex;gap:0.4rem;margin-bottom:0.6rem;flex-wrap:wrap}
+.chip{padding:0.3rem 0.7rem;border-radius:6px;background:var(--card);border:1px solid var(--border);color:var(--dim);font-size:0.65rem;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif}
+.chip:hover{background:rgba(131,0,81,0.1);border-color:rgba(131,0,81,0.3);color:var(--text)}
+.chat-input-row{display:flex;gap:0.5rem}
+.chat-input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.7rem 1rem;color:var(--text);font-size:0.8rem;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s}
+.chat-input:focus{border-color:rgba(131,0,81,0.4)}
+.chat-input::placeholder{color:var(--dim)}
+.chat-send{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--maroon),var(--purple));border:none;color:#fff;font-size:1rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+.chat-send:hover{transform:scale(1.05)}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed}
+
+/* RIGHT: AGENT FLOW */
+.flow-panel{width:50%;background:var(--flow-bg);display:flex;flex-direction:column;overflow:hidden}
+.flow-header{padding:0.8rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.flow-header h3{font-size:0.75rem;font-weight:700;color:var(--bright)}
+.flow-tabs{display:flex;gap:0.3rem}
+.flow-tab{padding:0.3rem 0.7rem;border-radius:6px;background:transparent;border:1px solid transparent;color:var(--dim);font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif}
+.flow-tab.active{background:rgba(255,255,255,0.06);color:var(--bright);border-color:var(--border)}
+.flow-body{flex:1;overflow-y:auto;padding:1.2rem}
+.flow-body::-webkit-scrollbar{width:4px}
+.flow-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+
+/* Flow empty state */
+.flow-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;gap:1rem;position:relative}
+.flow-empty-ripple{position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid rgba(131,0,81,0.2);animation:ripple 3s ease-out infinite}
+.flow-empty-ripple:nth-child(2){animation-delay:1s}
+.flow-empty-ripple:nth-child(3){animation-delay:2s}
+@keyframes ripple{0%{transform:scale(1);opacity:0.5}100%{transform:scale(2.5);opacity:0}}
+.flow-empty-icon{font-size:2rem;opacity:0.3;position:relative;z-index:1}
+.flow-empty h4{font-size:0.85rem;font-weight:600;color:var(--bright);position:relative;z-index:1}
+.flow-empty p{font-size:0.72rem;color:var(--dim);position:relative;z-index:1}
+
+/* Pipeline Flow (MIA-style graphical) */
+.flow-steps{display:flex;flex-direction:column;align-items:center;gap:0;padding:0.5rem 0}
+@keyframes nodeIn{from{opacity:0;transform:scale(0.7)}to{opacity:1;transform:scale(1)}}
+@keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Each pipeline step: node + connector + optional expanded card */
+.pipe-step{display:flex;flex-direction:column;align-items:center;width:100%;animation:nodeIn 0.3s ease}
+
+/* The clickable node row: dot + agent name + status + summary */
+.pipe-node{display:flex;align-items:center;gap:0.6rem;padding:0.45rem 0.8rem;border-radius:10px;cursor:pointer;transition:all 0.2s;width:100%;max-width:420px}
+.pipe-node:hover{background:rgba(255,255,255,0.04)}
+
+/* Glowing dot */
+.pipe-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;border:2px solid;position:relative;transition:all 0.3s}
+.pipe-dot .pipe-glow{position:absolute;inset:-4px;border-radius:50%;opacity:0.3;filter:blur(6px);transition:opacity 0.3s}
+
+/* Agent info */
+.pipe-info{flex:1;min-width:0}
+.pipe-agent{font-size:0.7rem;font-weight:700;line-height:1.2}
+.pipe-summary{font-size:0.6rem;color:rgba(255,255,255,0.55);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Status + time on the right */
+.pipe-meta{display:flex;align-items:center;gap:0.4rem;flex-shrink:0}
+.pipe-status{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700}
+.pipe-status.ok{background:rgba(16,185,129,0.2);color:var(--green)}
+.pipe-status.err{background:rgba(239,68,68,0.2);color:var(--red)}
+.pipe-status.warn{background:rgba(245,158,11,0.2);color:var(--amber)}
+.pipe-time{font-size:0.5rem;color:var(--dim);font-family:'SF Mono',monospace}
+
+/* Connector line between nodes */
+.pipe-connector{width:3px;height:24px;border-radius:2px;transform-origin:top;animation:lineGrow 0.2s ease}
+
+/* Expandable detail panel */
+.pipe-detail{display:none;width:100%;max-width:420px;margin-top:0.3rem;margin-bottom:0.3rem;padding:0.6rem 0.8rem;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);animation:cardIn 0.2s ease;font-size:0.62rem;color:rgba(255,255,255,0.7);line-height:1.6}
+.pipe-detail.open{display:block}
+.pipe-detail strong{color:var(--text)}
+
+/* Legacy classes kept for approval gate + data table */
+.flow-sys{margin-top:0.5rem;padding:0.4rem 0.6rem;background:rgba(0,0,0,0.3);border-radius:6px;font-family:'SF Mono','Fira Code',monospace;font-size:0.6rem;color:var(--dim);border:1px solid rgba(255,255,255,0.04);line-height:1.5;word-break:break-all}
+.flow-result{margin-top:0.5rem;display:inline-block;padding:0.2rem 0.6rem;border-radius:5px;font-size:0.6rem;font-weight:700}
+
+/* Data table in flow */
+.flow-data-tbl{width:100%;border-collapse:collapse;margin-top:0.5rem;font-size:0.6rem}
+.flow-data-tbl th{text-align:left;padding:0.3rem 0.5rem;border-bottom:1px solid var(--border);color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:0.55rem}
+.flow-data-tbl td{padding:0.3rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.02);color:var(--text)}
+.flow-data-tbl tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* Approval gate */
+.approval-gate{margin-top:0.6rem;padding:0.8rem;border-radius:10px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);animation:gateIn 0.4s ease}
+@keyframes gateIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+.approval-gate-title{font-size:0.65rem;font-weight:700;color:var(--amber);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.approval-gate-body{font-size:0.65rem;color:var(--dim);margin-bottom:0.6rem;line-height:1.5}
+.approval-btns{display:flex;gap:0.5rem}
+.approval-btn{padding:0.4rem 1rem;border-radius:8px;font-size:0.65rem;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all 0.2s}
+.approval-btn:hover{transform:scale(1.03)}
+.approval-btn.approve{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.approval-btn.reject{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.approval-btn.modify{background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.3)}
+
+/* Impact simulation */
+.impact-sim{margin-top:0.6rem;padding:0.6rem;border-radius:8px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15)}
+.impact-sim-title{font-size:0.6rem;font-weight:700;color:var(--blue);margin-bottom:0.4rem}
+.impact-bar{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem}
+.impact-bar-label{font-size:0.58rem;color:var(--dim);width:80px;flex-shrink:0}
+.impact-bar-track{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.impact-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.impact-bar-val{font-size:0.58rem;color:var(--text);width:40px;text-align:right;font-weight:700}
+
+/* Knowledge base log */
+.kb-log{margin-top:0.5rem;padding:0.5rem 0.6rem;border-radius:6px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);font-size:0.58rem;color:var(--green);display:flex;align-items:center;gap:0.4rem}
+
+/* Dynamic workflow badge */
+.workflow-branch{margin-top:0.4rem;display:flex;gap:0.3rem;flex-wrap:wrap}
+.wf-badge{padding:0.15rem 0.5rem;border-radius:4px;font-size:0.55rem;font-weight:600}
+.wf-active{background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.3)}
+.wf-skipped{background:rgba(107,107,141,0.1);color:var(--dim);border:1px solid rgba(255,255,255,0.06);text-decoration:line-through;opacity:0.5}
+.wf-conditional{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2)}
+
+/* Diagram tab */
+.flow-diagram{display:flex;flex-direction:column;align-items:center;gap:0;padding:1rem}
+.diag-layer{width:100%;max-width:460px;margin-bottom:0.8rem}
+.diag-layer-title{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:0.4rem;padding-left:0.3rem}
+.diag-layer-box{border-radius:12px;padding:0.8rem;border:1px solid}
+.diag-layer-nodes{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center}
+.diag-node{min-width:120px;padding:0.6rem 0.8rem;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);text-align:center;transition:all 0.3s;position:relative;flex:1}
+.diag-node:hover{transform:scale(1.03)}
+.diag-node .dn-icon{font-size:1rem;margin-bottom:0.2rem}
+.diag-node .dn-name{font-size:0.65rem;font-weight:700;color:var(--bright)}
+.diag-node .dn-sys{font-size:0.5rem;color:var(--dim);margin-top:0.1rem}
+.diag-node .dn-phase{font-size:0.45rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-top:0.2rem;padding:0.1rem 0.3rem;border-radius:3px;display:inline-block}
+.diag-arrow-down{text-align:center;font-size:1rem;color:var(--dim);padding:0.2rem 0}
+.diag-glow{position:absolute;width:40px;height:40px;border-radius:50%;filter:blur(20px);opacity:0.25;top:50%;left:50%;transform:translate(-50%,-50%);z-index:-1}
+
+/* Glossary bar */
+.glossary-bar{background:rgba(20,20,40,0.95);border-top:1px solid var(--border);flex-shrink:0;backdrop-filter:blur(12px)}
+.glossary-toggle{width:100%;padding:0.4rem 1.5rem;background:none;border:none;color:var(--dim);font-size:0.6rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:color 0.2s}
+.glossary-toggle:hover{color:var(--text)}
+.glossary-toggle .gt-arrow{transition:transform 0.3s;font-size:0.5rem}
+.glossary-toggle.open .gt-arrow{transform:rotate(180deg)}
+.glossary-content{display:none;padding:0.5rem 1.5rem 0.8rem;overflow-x:auto}
+.glossary-content.open{display:flex;gap:1.2rem;flex-wrap:wrap}
+.gloss-item{min-width:180px;flex:1;max-width:280px}
+.gloss-term{font-size:0.6rem;font-weight:800;color:var(--bright);margin-bottom:0.15rem;display:flex;align-items:center;gap:0.3rem}
+.gloss-term .gloss-abbr{color:var(--amber);font-size:0.55rem;padding:0.05rem 0.3rem;border-radius:3px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)}
+.gloss-def{font-size:0.55rem;color:var(--dim);line-height:1.5}
+
+/* ═══ LOGIN SCREEN (multi-page) ═══ */
+.login-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow:hidden;transition:opacity 0.6s,transform 0.6s}
+.login-screen.hidden{opacity:0;transform:scale(1.02);pointer-events:none}
+
+/* Page container — slides horizontally */
+.login-pages{display:flex;width:200vw;height:100vh;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)}
+.login-page{width:100vw;height:100vh;overflow-y:auto;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:12rem 2rem 2rem}
+
+/* ═══ PAGE 1: Value Prop + Agents ═══ */
+.lp1-container{width:90%;max-width:1000px;text-align:center}
+.lp1-az{font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:4px;color:var(--gold);margin-bottom:0.8rem}
+.lp1-title{font-size:2rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:0.5rem}
+.lp1-title span{background:linear-gradient(135deg,#c77daa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lp1-sub{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7;max-width:650px;margin:0 auto 1.5rem}
+.lp1-powered{display:inline-flex;align-items:center;gap:0.6rem;padding:0.4rem 1rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:2rem}
+.lp1-powered-label{font-size:0.5rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.lp1-powered-name{font-size:0.7rem;font-weight:700;color:#fff}
+
+/* Agent grid */
+.lp1-section-label{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:0.8rem}
+.lp1-agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:0.6rem;margin-bottom:1.8rem}
+.lp1-agent{padding:0.7rem 0.6rem;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);text-align:center;transition:all 0.3s;cursor:default}
+.lp1-agent:hover{transform:translateY(-3px);background:rgba(255,255,255,0.06)}
+.lp1-agent-icon{font-size:1.3rem;margin-bottom:0.3rem}
+.lp1-agent-name{font-size:0.68rem;font-weight:700;margin-bottom:0.15rem}
+.lp1-agent-role{font-size:0.52rem;color:var(--dim);line-height:1.4}
+.lp1-agent-phase{font-size:0.42rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-top:0.3rem;padding:0.1rem 0.4rem;border-radius:3px;display:inline-block}
+
+/* Capabilities row */
+.lp1-caps{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.8rem}
+.lp1-cap{display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0.8rem;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)}
+.lp1-cap-icon{font-size:0.8rem}
+.lp1-cap-text{font-size:0.6rem;color:rgba(255,255,255,0.5);font-weight:500}
+.lp1-cap-text strong{color:var(--bright);font-weight:700}
+
+/* Continue button */
+.lp1-continue{padding:0.8rem 2.5rem;border-radius:12px;background:linear-gradient(135deg,#830051,#8b5cf6);border:none;color:#fff;font-size:0.85rem;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
+.lp1-continue:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(131,0,81,0.4)}
+.lp1-continue::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);transform:translateX(-100%);transition:transform 0.6s}
+.lp1-continue:hover::after{transform:translateX(100%)}
+
+/* ═══ PAGE 2: Login Form ═══ */
+.lp2-container{display:flex;width:90%;max-width:900px;min-height:460px;border-radius:20px;overflow:hidden;border:1px solid var(--border);background:rgba(20,20,40,0.6);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,0.5)}
+.lp2-hero{flex:1;background:linear-gradient(135deg,#0d0d1a 0%,#1a0a2e 40%,#2d0a3e 70%,#830051 100%);padding:2.5rem 2rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.lp2-hero::before{content:'';position:absolute;width:250px;height:250px;background:radial-gradient(circle,rgba(131,0,81,0.3),transparent 70%);top:-50px;right:-80px;border-radius:50%}
+.lp2-hero::after{content:'';position:absolute;width:180px;height:180px;background:radial-gradient(circle,rgba(139,92,246,0.2),transparent 70%);bottom:-40px;left:-60px;border-radius:50%}
+.lp2-hero-content{position:relative;z-index:1}
+.lp2-hero-az{font-size:0.55rem;font-weight:800;text-transform:uppercase;letter-spacing:4px;color:var(--gold);margin-bottom:0.5rem}
+.lp2-hero h2{font-size:1.3rem;font-weight:900;color:#fff;line-height:1.25;margin-bottom:0.5rem}
+.lp2-hero h2 span{background:linear-gradient(135deg,#c77daa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lp2-hero-sub{font-size:0.72rem;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:1.5rem}
+.lp2-features{position:relative;z-index:1;display:flex;flex-direction:column;gap:0.5rem}
+.lp2-feat{display:flex;align-items:center;gap:0.5rem;font-size:0.65rem;color:rgba(255,255,255,0.6)}
+.lp2-feat-check{color:var(--green);font-weight:700}
+.lp2-hero-bottom{position:relative;z-index:1;display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.5rem}
+.lp2-powered{padding:0.35rem 0.7rem;border-radius:7px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)}
+.lp2-powered-label{font-size:0.45rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.lp2-powered-name{font-size:0.6rem;font-weight:700;color:#fff}
+
+/* Login form (page 2 right) */
+.lp2-form{width:340px;padding:2.5rem 2rem;display:flex;flex-direction:column;justify-content:center;background:rgba(15,15,30,0.8)}
+.lp2-form-title{font-size:1rem;font-weight:800;color:var(--bright);margin-bottom:0.3rem}
+.lp2-form-sub{font-size:0.7rem;color:var(--dim);margin-bottom:1.5rem;line-height:1.5}
+.login-field{margin-bottom:1rem}
+.login-label{font-size:0.6rem;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;display:block}
+.login-input{width:100%;padding:0.7rem 1rem;border-radius:10px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:0.8rem;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s}
+.login-input:focus{border-color:rgba(131,0,81,0.5)}
+.login-input::placeholder{color:rgba(107,107,141,0.6)}
+.login-btn{width:100%;padding:0.8rem;border-radius:10px;background:linear-gradient(135deg,#830051,#8b5cf6);border:none;color:#fff;font-size:0.82rem;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.3s;margin-top:0.5rem;position:relative;overflow:hidden}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(131,0,81,0.4)}
+.login-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transform:translateX(-100%);transition:transform 0.6s}
+.login-btn:hover::after{transform:translateX(100%)}
+.login-divider{display:flex;align-items:center;gap:0.8rem;margin:1rem 0}
+.login-divider span{font-size:0.55rem;color:var(--dim);white-space:nowrap}
+.login-divider hr{flex:1;border:none;height:1px;background:var(--border)}
+.login-sso-btn{width:100%;padding:0.65rem;border-radius:10px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:0.72rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.login-sso-btn:hover{background:rgba(255,255,255,0.06);border-color:rgba(131,0,81,0.3)}
+.lp2-back{margin-top:1rem;background:none;border:none;color:var(--dim);font-size:0.6rem;font-family:'Inter',sans-serif;cursor:pointer;transition:color 0.2s}
+.lp2-back:hover{color:var(--text)}
+
+/* Tech stack strip */
+.login-stack{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:1rem}
+.login-stack-chip{padding:0.2rem 0.5rem;border-radius:5px;font-size:0.5rem;font-weight:600;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.5)}
+
+@media(max-width:900px){.main{flex-direction:column}.chat-panel,.flow-panel{width:100%;height:50%}.login-container{flex-direction:column;min-height:auto}.login-form-panel{width:100%}}
+
+/* ========== STORY PAGE ========== */
+.story-page{width:100vw;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;flex-shrink:0;padding:0 !important;display:block !important;align-items:initial !important;justify-content:initial !important}
+.story-section{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:12rem 2rem 3rem;position:relative}
+.story-section-inner{width:92%;max-width:1000px;text-align:center}
+.story-eyebrow{font-size:0.55rem;font-weight:800;text-transform:uppercase;letter-spacing:4px;color:var(--gold);margin-bottom:0.8rem}
+.story-headline{font-size:2.4rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:0.5rem}
+.story-accent-red{background:linear-gradient(135deg,#ef4444,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.story-accent-green{background:linear-gradient(135deg,#10b981,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.story-accent-purple{background:linear-gradient(135deg,#830051,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.story-subhead{font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7;max-width:650px;margin:0 auto 2rem}
+
+/* Pillar Grid */
+.pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:0 auto;max-width:960px}
+.pillar-card{border-radius:14px;padding:1.3rem 1rem;position:relative;overflow:hidden;text-align:left;transition:transform 0.3s,opacity 0.3s}
+.pillar-card h3{font-size:0.78rem;font-weight:800;color:#fff;margin:0 0 0.6rem}
+.pillar-icon{font-size:1.6rem;margin-bottom:0.6rem}
+
+/* Broken (Today) */
+.pillar-card--clickable{cursor:pointer}
+.pillar-card--clickable:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.pillar-card--clickable:active{transform:translateY(-1px)}
+.pillar-cta{margin-top:0.8rem;padding:0.5rem 0;text-align:center;font-size:0.58rem;font-weight:700;border-radius:8px;letter-spacing:0.5px;transition:all 0.2s}
+.pillar-card--broken .pillar-cta{color:#f87171;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.12)}
+.pillar-card--broken:hover .pillar-cta{background:rgba(239,68,68,0.12)}
+.pillar-card--connected .pillar-cta{color:#34d399;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12)}
+.pillar-card--connected:hover .pillar-cta{background:rgba(16,185,129,0.12)}
+.pillar-card--broken{background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12)}
+.pillar-card--broken::before{content:'';position:absolute;top:-1px;left:20%;width:60%;height:3px;background:linear-gradient(90deg,transparent,rgba(239,68,68,0.35),transparent)}
+.pain-item{font-size:0.6rem;color:rgba(255,255,255,0.5);padding:0.25rem 0 0.25rem 0.8rem;position:relative;line-height:1.5}
+.pain-item::before{content:'';position:absolute;left:0;top:0.55rem;width:4px;height:4px;border-radius:50%;background:#f87171}
+.pillar-stat{border-radius:10px;padding:0.7rem;text-align:center;margin-top:0.8rem}
+.pillar-stat--bad{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15)}
+.pillar-stat--bad .stat-number{font-size:1.6rem;font-weight:900;color:#f87171;line-height:1.2}
+.pillar-stat--bad .stat-label{font-size:0.5rem;color:rgba(255,255,255,0.35);margin-top:0.15rem}
+
+/* Connected (Tomorrow) */
+.pillar-card--connected{background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12)}
+.pillar-card--connected::before{content:'';position:absolute;top:-1px;left:20%;width:60%;height:3px;background:linear-gradient(90deg,transparent,rgba(16,185,129,0.5),transparent)}
+.vision-item{font-size:0.6rem;color:rgba(255,255,255,0.55);padding:0.25rem 0 0.25rem 0.8rem;position:relative;line-height:1.5}
+.vision-item::before{content:'✓';position:absolute;left:0;top:0.2rem;font-size:0.5rem;color:#34d399}
+.pillar-stat--good{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15)}
+.pillar-stat--good .stat-number{font-size:1.6rem;font-weight:900;color:#34d399;line-height:1.2}
+.pillar-stat--good .stat-label{font-size:0.5rem;color:rgba(255,255,255,0.35);margin-top:0.15rem}
+
+/* Fabric Connector */
+.fabric-connector{display:flex;align-items:center;gap:0.8rem;margin:0 auto 1.5rem;max-width:700px}
+.fabric-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(131,0,81,0.5),rgba(139,92,246,0.5),transparent)}
+.fabric-node{padding:0.45rem 1.4rem;border-radius:20px;background:linear-gradient(135deg,var(--maroon),#8b5cf6);color:#fff;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 30px rgba(131,0,81,0.3)}
+
+/* Hierarchy Visualization */
+.hierarchy-container{max-width:920px;margin:0 auto 1.5rem}
+.hier-tier{display:flex;justify-content:center;gap:1rem;position:relative}
+.hier-node{border-radius:12px;text-align:center;position:relative}
+.hier-node--orchestrator{padding:1.2rem 2.5rem;background:linear-gradient(135deg,rgba(131,0,81,0.18),rgba(139,92,246,0.12));border:2px solid rgba(131,0,81,0.4);display:inline-block;box-shadow:0 0 40px rgba(131,0,81,0.15)}
+.hier-node-icon{font-size:1.5rem;margin-bottom:0.3rem}
+.hier-node-name{font-size:0.72rem;font-weight:800;color:#fff}
+.hier-node-role{font-size:0.55rem;color:rgba(255,255,255,0.4);margin-top:0.2rem;max-width:280px;line-height:1.4}
+.hier-connectors{height:50px;position:relative;margin:0}
+.hier-connectors svg{width:100%;height:100%}
+.hier-connectors path{stroke-width:1.5;fill:none;opacity:0.5}
+.hier-tier--super{gap:0.8rem}
+.hier-node--super{flex:1;padding:0.9rem 0.5rem;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);border-top:3px solid var(--accent-color)}
+.hier-node--super .hier-node-icon{font-size:1.1rem;margin-bottom:0.15rem}
+.hier-node--super .hier-node-name{font-size:0.62rem;font-weight:700}
+.hier-node--super .hier-node-role{font-size:0.5rem;margin-top:0.1rem}
+.hier-tier--utility{gap:0.8rem;margin-top:0.4rem}
+.hier-utility-group{flex:1;display:flex;flex-direction:column;gap:0.25rem;align-items:center}
+.hier-node--utility{padding:0.3rem 0.7rem;border-radius:7px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);font-size:0.52rem;font-weight:600;color:rgba(255,255,255,0.5);width:90%;text-align:center}
+
+/* Query Flow Bar */
+.query-flow-bar{display:flex;align-items:center;justify-content:center;gap:0.3rem;margin:1.5rem auto 0;max-width:800px;flex-wrap:wrap}
+.qf-step{padding:0.4rem 0.9rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.55rem;font-weight:600;color:rgba(255,255,255,0.5)}
+.qf-highlight{background:linear-gradient(135deg,rgba(131,0,81,0.15),rgba(139,92,246,0.15));border-color:rgba(131,0,81,0.3);color:#c77daa}
+.qf-arrow{color:rgba(255,255,255,0.15);font-size:0.7rem;font-weight:300}
+
+/* Arch Footer (capabilities) */
+.arch-footer{margin-top:1.5rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.arch-caps{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center}
+.arch-cap{display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.7rem;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);font-size:0.52rem;color:rgba(255,255,255,0.45)}
+
+/* Scroll Indicator */
+.scroll-indicator{margin:2rem auto 0;display:flex;flex-direction:column;align-items:center;gap:0.3rem;color:rgba(255,255,255,0.2);font-size:0.55rem;animation:scrollBounce 2s infinite}
+.scroll-chevron{width:20px;height:20px;border-right:2px solid rgba(255,255,255,0.2);border-bottom:2px solid rgba(255,255,255,0.2);transform:rotate(45deg)}
+@keyframes scrollBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* Dot Navigation */
+.story-dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0.8rem;z-index:200}
+.story-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);cursor:pointer;transition:all 0.3s;border:none;padding:0}
+.story-dot.active{background:var(--maroon);box-shadow:0 0 10px rgba(131,0,81,0.5);transform:scale(1.3)}
+.story-dot:hover{background:rgba(255,255,255,0.3)}
+
+/* Section entrance animation */
+.story-animate{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease-out,transform 0.7s ease-out}
+.story-animate.visible{opacity:1;transform:translateY(0)}
+.story-animate-delay-1{transition-delay:0.1s}
+.story-animate-delay-2{transition-delay:0.2s}
+.story-animate-delay-3{transition-delay:0.3s}
+
+/* Story CTA section */
+.story-cta-inner{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.story-cta-btn{margin-top:2rem;padding:1rem 3rem;border-radius:14px;background:linear-gradient(135deg,var(--maroon),#8b5cf6);color:#fff;font-size:0.9rem;font-weight:700;font-family:'Inter',sans-serif;border:none;cursor:pointer;letter-spacing:0.5px;transition:all 0.3s;box-shadow:0 0 40px rgba(131,0,81,0.3)}
+.story-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(131,0,81,0.4)}
+
+/* Powered badge in story */
+.story-powered{margin-top:1rem;display:flex;align-items:center;gap:0.5rem;justify-content:center}
+.story-powered-label{font-size:0.5rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:2px}
+.story-powered-name{font-size:0.65rem;font-weight:700;color:rgba(139,92,246,0.7)}
+
+/* Fixed Global Banner — MIA LangGraph Premium Style */
+.global-banner{position:fixed;top:0;left:0;right:0;z-index:1100;background:linear-gradient(135deg,#1a0a1a 0%,#2d1528 50%,#1a0a1a 100%);border-bottom:1px solid rgba(124,58,92,0.25);padding:1.8rem 2rem 1.4rem;text-align:center;overflow:hidden}
+.global-banner::before{content:'';position:absolute;top:-50%;left:20%;width:300px;height:300px;background:radial-gradient(circle,rgba(124,58,92,0.2) 0%,transparent 70%);pointer-events:none}
+.global-banner::after{content:'';position:absolute;top:-30%;right:15%;width:250px;height:250px;background:radial-gradient(circle,rgba(139,92,246,0.12) 0%,transparent 70%);pointer-events:none}
+.global-banner-az{font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:5px;color:#c4a000;margin-bottom:0.6rem;position:relative;z-index:1}
+.global-banner-title{font-size:2.8rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:0.5rem;position:relative;z-index:1;letter-spacing:-0.5px}
+.global-banner-title span{background:linear-gradient(135deg,#d4a5c0,#c77daa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.global-banner-sub{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.6;max-width:680px;margin:0 auto 1rem;position:relative;z-index:1}
+.global-banner-sub strong{color:rgba(255,255,255,0.9);font-weight:700}
+.global-banner-chips{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.global-banner-chip{padding:0.35rem 0.8rem;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.58rem;font-weight:600;color:rgba(255,255,255,0.45);transition:all 0.2s}
+.global-banner-chip:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
+.global-banner-chip--accent{background:linear-gradient(135deg,rgba(124,58,92,0.2),rgba(139,92,246,0.15));border-color:rgba(139,92,246,0.3);color:rgba(212,165,192,0.9);font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- FIXED GLOBAL BANNER -->
+<div class="global-banner" id="globalBanner">
+  <div class="global-banner-az">AstraZeneca · Enterprise Data Strategy</div>
+  <div class="global-banner-title">Enterprise Data <span>Office Automation</span></div>
+  <div class="global-banner-sub">An <strong>intelligence layer</strong> that sits on top of your existing stack — SAP MDG, Informatica, Collibra, Snowflake, AWS. <strong>We don't replace anything. We make everything smarter.</strong></div>
+  <div class="global-banner-chips">
+    <span class="global-banner-chip">SAP MDG</span>
+    <span class="global-banner-chip">Informatica</span>
+    <span class="global-banner-chip">Collibra</span>
+    <span class="global-banner-chip">Snowflake</span>
+    <span class="global-banner-chip">Databricks</span>
+    <span class="global-banner-chip global-banner-chip--accent">Powered by Claude on AWS Bedrock</span>
+  </div>
+</div>
+
+<!-- LOGIN SCREEN (2-page flow) -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-pages" id="loginPages">
+
+    <!-- ═══ PAGE 1: THE STORY ═══ -->
+    <div class="login-page story-page" id="storyPage">
+
+      <!-- Dot Navigation -->
+      <div class="story-dots" id="storyDots">
+        <button class="story-dot active" data-target="storyToday" onclick="scrollToStory('storyToday')"></button>
+        <button class="story-dot" data-target="storyTomorrow" onclick="scrollToStory('storyTomorrow')"></button>
+        <button class="story-dot" data-target="storyArchitecture" onclick="scrollToStory('storyArchitecture')"></button>
+        <button class="story-dot" data-target="storyCTA" onclick="scrollToStory('storyCTA')"></button>
+      </div>
+
+      <!-- ─── SECTION A: YOUR DATA OFFICE TODAY ─── -->
+      <section class="story-section" id="storyToday">
+        <div class="story-section-inner">
+
+          <div class="story-eyebrow">The Challenge</div>
+          <h2 class="story-headline">Your Data Office <span class="story-accent-red">Today</span></h2>
+          <p class="story-subhead">Manual processes. Siloed teams. Reactive firefighting across 40+ systems. Every fix is a ticket. Every rule takes weeks.</p>
+
+          <div class="pillar-grid">
+            <div class="pillar-card pillar-card--broken pillar-card--clickable story-animate" onclick="launchDemo('material')">
+              <div class="pillar-icon">📊</div>
+              <h3>Data Quality</h3>
+              <div class="pain-item">Manual profiling across 40+ data sources</div>
+              <div class="pain-item">Issues found at batch release — not ingestion</div>
+              <div class="pain-item">No anomaly detection, no self-healing</div>
+              <div class="pain-item">DQ rules maintained manually in spreadsheets</div>
+              <div class="pillar-stat pillar-stat--bad">
+                <div class="stat-number">72 hrs</div>
+                <div class="stat-label">average time to detect a DQ issue</div>
+              </div>
+              <div class="pillar-cta">Click to see agents fix this →</div>
+            </div>
+
+            <div class="pillar-card pillar-card--broken pillar-card--clickable story-animate story-animate-delay-1" onclick="launchDemo('ehs')">
+              <div class="pillar-icon">🏷️</div>
+              <h3>Master Data Management</h3>
+              <div class="pain-item">3-week change request cycle in SAP MDG</div>
+              <div class="pain-item">Manual EHS/GHS hazard classification lookup</div>
+              <div class="pain-item">No impact analysis before applying a fix</div>
+              <div class="pain-item">Supplier onboarding takes 40+ days</div>
+              <div class="pillar-stat pillar-stat--bad">
+                <div class="stat-number">3 weeks</div>
+                <div class="stat-label">average material change request</div>
+              </div>
+              <div class="pillar-cta">Click to see agents fix this →</div>
+            </div>
+
+            <div class="pillar-card pillar-card--broken pillar-card--clickable story-animate story-animate-delay-2" onclick="launchDemo('policy')">
+              <div class="pillar-icon">📜</div>
+              <h3>Data Governance</h3>
+              <div class="pain-item">Policies documented in spreadsheets and wikis</div>
+              <div class="pain-item">Jira ticket → committee → IT configures Collibra</div>
+              <div class="pain-item">No continuous compliance monitoring</div>
+              <div class="pain-item">Governance rules disconnected from enforcement</div>
+              <div class="pillar-stat pillar-stat--bad">
+                <div class="stat-number">3 weeks</div>
+                <div class="stat-label">to create and enforce a governance rule</div>
+              </div>
+              <div class="pillar-cta">Click to see agents fix this →</div>
+            </div>
+
+            <div class="pillar-card pillar-card--broken pillar-card--clickable story-animate story-animate-delay-3" onclick="launchDemo('pii')">
+              <div class="pillar-icon">🔗</div>
+              <h3>Data Engineering</h3>
+              <div class="pain-item">Break-fix ETL — detect after downstream damage</div>
+              <div class="pain-item">No proactive lineage tracing</div>
+              <div class="pain-item">PII breaches found at quarterly audit</div>
+              <div class="pain-item">Cross-border compliance checked manually</div>
+              <div class="pillar-stat pillar-stat--bad">
+                <div class="stat-number">Quarterly</div>
+                <div class="stat-label">PII breach detection cycle</div>
+              </div>
+              <div class="pillar-cta">Click to see agents fix this →</div>
+            </div>
+          </div>
+
+          <div class="scroll-indicator">
+            <span>Scroll to see the vision</span>
+            <div class="scroll-chevron"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECTION B: YOUR DATA OFFICE TOMORROW ─── -->
+      <section class="story-section" id="storyTomorrow">
+        <div class="story-section-inner">
+          <div class="story-eyebrow">The Vision</div>
+          <h2 class="story-headline">Your Data Office <span class="story-accent-green">Tomorrow</span></h2>
+          <p class="story-subhead">Connected. Proactive. Self-healing. One intelligent control layer across your entire data estate.</p>
+
+          <div class="fabric-connector">
+            <div class="fabric-line"></div>
+            <div class="fabric-node">Enterprise Data Office Automation</div>
+            <div class="fabric-line"></div>
+          </div>
+
+          <div class="pillar-grid">
+            <div class="pillar-card pillar-card--connected pillar-card--clickable story-animate" onclick="launchDemo('material')">
+              <div class="pillar-icon">📊</div>
+              <h3>Data Quality</h3>
+              <div class="vision-item">Automated profiling on every ingestion</div>
+              <div class="vision-item">Real-time anomaly detection</div>
+              <div class="vision-item">Self-healing with 91% auto-fix rate</div>
+              <div class="vision-item">Auto-generated DQ rules per data source</div>
+              <div class="pillar-stat pillar-stat--good">
+                <div class="stat-number">Real-time</div>
+                <div class="stat-label">continuous quality monitoring</div>
+              </div>
+              <div class="pillar-cta">See it in action →</div>
+            </div>
+
+            <div class="pillar-card pillar-card--connected pillar-card--clickable story-animate story-animate-delay-1" onclick="launchDemo('ehs')">
+              <div class="pillar-icon">🏷️</div>
+              <h3>Master Data Management</h3>
+              <div class="vision-item">Intelligent ingestion + auto-classification</div>
+              <div class="vision-item">Impact simulation before every fix</div>
+              <div class="vision-item">EHS compliance resolved in minutes</div>
+              <div class="vision-item">Human approval gates at every write</div>
+              <div class="pillar-stat pillar-stat--good">
+                <div class="stat-number">4 min</div>
+                <div class="stat-label">EHS compliance resolution</div>
+              </div>
+              <div class="pillar-cta">See it in action →</div>
+            </div>
+
+            <div class="pillar-card pillar-card--connected pillar-card--clickable story-animate story-animate-delay-2" onclick="launchDemo('policy')">
+              <div class="pillar-icon">📜</div>
+              <h3>Data Governance</h3>
+              <div class="vision-item">Plain English intent → live policy rule</div>
+              <div class="vision-item">Continuous compliance monitoring</div>
+              <div class="vision-item">Impact analysis before publishing</div>
+              <div class="vision-item">Published directly to Collibra catalogue</div>
+              <div class="pillar-stat pillar-stat--good">
+                <div class="stat-number">3 min</div>
+                <div class="stat-label">from intent to live governance rule</div>
+              </div>
+              <div class="pillar-cta">See it in action →</div>
+            </div>
+
+            <div class="pillar-card pillar-card--connected pillar-card--clickable story-animate story-animate-delay-3" onclick="launchDemo('pii')">
+              <div class="pillar-icon">🔗</div>
+              <h3>Data Engineering</h3>
+              <div class="vision-item">Proactive lineage tracing across all pipelines</div>
+              <div class="vision-item">PII auto-lock in under 5 seconds</div>
+              <div class="vision-item">Automated remediation + steward escalation</div>
+              <div class="vision-item">Cross-border GDPR compliance in real-time</div>
+              <div class="pillar-stat pillar-stat--good">
+                <div class="stat-number">4.8 sec</div>
+                <div class="stat-label">PHI detected, locked, and masked</div>
+              </div>
+              <div class="pillar-cta">See it in action →</div>
+            </div>
+          </div>
+
+          <div class="scroll-indicator">
+            <span>How does it work?</span>
+            <div class="scroll-chevron"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECTION C: THE AGENT ARCHITECTURE ─── -->
+      <section class="story-section" id="storyArchitecture">
+        <div class="story-section-inner">
+          <div class="story-eyebrow">The Architecture</div>
+          <h2 class="story-headline">How It <span class="story-accent-purple">Works</span></h2>
+          <p class="story-subhead">One Orchestrator. Four domain Super Agents. Twelve specialist Utility Agents. The right agents activate for each query — no wasted compute, no unnecessary steps.</p>
+
+          <div class="hierarchy-container">
+            <!-- Tier 1: Orchestrator -->
+            <div class="hier-tier">
+              <div class="hier-node hier-node--orchestrator">
+                <div class="hier-node-icon">🎯</div>
+                <div class="hier-node-name">Orchestrator Agent</div>
+                <div class="hier-node-role">Routes queries. Composes pipelines. Consults the Knowledge Base. Decides which Super Agent leads.</div>
+              </div>
+            </div>
+
+            <!-- Connector SVG -->
+            <div class="hier-connectors">
+              <svg viewBox="0 0 800 50" preserveAspectRatio="none">
+                <path d="M400,0 L100,50" stroke="rgba(59,130,246,0.4)"/>
+                <path d="M400,0 L300,50" stroke="rgba(168,85,247,0.4)"/>
+                <path d="M400,0 L500,50" stroke="rgba(16,185,129,0.4)"/>
+                <path d="M400,0 L700,50" stroke="rgba(20,184,166,0.4)"/>
+              </svg>
+            </div>
+
+            <!-- Tier 2: Super Agents -->
+            <div class="hier-tier hier-tier--super">
+              <div class="hier-node hier-node--super" style="--accent-color:#3b82f6;border-top-color:#3b82f6">
+                <div class="hier-node-icon">📊</div>
+                <div class="hier-node-name" style="color:#60a5fa">DQ Super Agent</div>
+                <div class="hier-node-role">Data Quality</div>
+              </div>
+              <div class="hier-node hier-node--super" style="--accent-color:#a855f7;border-top-color:#a855f7">
+                <div class="hier-node-icon">🏷️</div>
+                <div class="hier-node-name" style="color:#c084fc">MDG Super Agent</div>
+                <div class="hier-node-role">Master Data</div>
+              </div>
+              <div class="hier-node hier-node--super" style="--accent-color:#10b981;border-top-color:#10b981">
+                <div class="hier-node-icon">📜</div>
+                <div class="hier-node-name" style="color:#34d399">Governance Super Agent</div>
+                <div class="hier-node-role">Policies & Compliance</div>
+              </div>
+              <div class="hier-node hier-node--super" style="--accent-color:#14b8a6;border-top-color:#14b8a6">
+                <div class="hier-node-icon">🔗</div>
+                <div class="hier-node-name" style="color:#2dd4bf">Engineering Super Agent</div>
+                <div class="hier-node-role">Pipelines & Lineage</div>
+              </div>
+            </div>
+
+            <!-- Connector SVG -->
+            <div class="hier-connectors">
+              <svg viewBox="0 0 800 40" preserveAspectRatio="none">
+                <!-- DQ group -->
+                <path d="M100,0 L60,40" stroke="rgba(59,130,246,0.25)"/>
+                <path d="M100,0 L100,40" stroke="rgba(59,130,246,0.25)"/>
+                <path d="M100,0 L140,40" stroke="rgba(59,130,246,0.25)"/>
+                <!-- MDG group -->
+                <path d="M300,0 L260,40" stroke="rgba(168,85,247,0.25)"/>
+                <path d="M300,0 L300,40" stroke="rgba(168,85,247,0.25)"/>
+                <path d="M300,0 L340,40" stroke="rgba(168,85,247,0.25)"/>
+                <!-- Gov group -->
+                <path d="M500,0 L460,40" stroke="rgba(16,185,129,0.25)"/>
+                <path d="M500,0 L500,40" stroke="rgba(16,185,129,0.25)"/>
+                <path d="M500,0 L540,40" stroke="rgba(16,185,129,0.25)"/>
+                <!-- Eng group -->
+                <path d="M700,0 L660,40" stroke="rgba(20,184,166,0.25)"/>
+                <path d="M700,0 L700,40" stroke="rgba(20,184,166,0.25)"/>
+                <path d="M700,0 L740,40" stroke="rgba(20,184,166,0.25)"/>
+              </svg>
+            </div>
+
+            <!-- Tier 3: Utility Agents -->
+            <div class="hier-tier hier-tier--utility">
+              <div class="hier-utility-group">
+                <div class="hier-node hier-node--utility" style="border-color:rgba(59,130,246,0.15);color:#60a5fa">DQ Monitor</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(59,130,246,0.15);color:#60a5fa">Root Cause</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(59,130,246,0.15);color:#60a5fa">Simulation</div>
+              </div>
+              <div class="hier-utility-group">
+                <div class="hier-node hier-node--utility" style="border-color:rgba(168,85,247,0.15);color:#c084fc">Discovery</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(168,85,247,0.15);color:#c084fc">Classification</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(168,85,247,0.15);color:#c084fc">Remediation</div>
+              </div>
+              <div class="hier-utility-group">
+                <div class="hier-node hier-node--utility" style="border-color:rgba(16,185,129,0.15);color:#34d399">Policy Agent</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(16,185,129,0.15);color:#34d399">Copilot</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(16,185,129,0.15);color:#34d399">Observability</div>
+              </div>
+              <div class="hier-utility-group">
+                <div class="hier-node hier-node--utility" style="border-color:rgba(20,184,166,0.15);color:#2dd4bf">Lineage</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(20,184,166,0.15);color:#2dd4bf">Escalation</div>
+                <div class="hier-node hier-node--utility" style="border-color:rgba(20,184,166,0.15);color:#2dd4bf">Workflow</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Query Flow -->
+          <div class="query-flow-bar">
+            <div class="qf-step">User asks a question</div>
+            <div class="qf-arrow">→</div>
+            <div class="qf-step qf-highlight">Orchestrator routes</div>
+            <div class="qf-arrow">→</div>
+            <div class="qf-step">Super Agent coordinates</div>
+            <div class="qf-arrow">→</div>
+            <div class="qf-step">Utility Agents execute</div>
+            <div class="qf-arrow">→</div>
+            <div class="qf-step">Human approves</div>
+          </div>
+
+          <!-- Powered by + Capabilities -->
+          <div class="arch-footer">
+            <div class="story-powered">
+              <span class="story-powered-label">Powered by</span>
+              <span class="story-powered-name">Claude on AWS Bedrock</span>
+            </div>
+            <div class="arch-caps">
+              <div class="arch-cap">📜 <strong>Deterministic</strong> policy engine</div>
+              <div class="arch-cap">🔒 <strong>Staging only</strong> — no production writes</div>
+              <div class="arch-cap">🏥 <strong>GxP-ready</strong> audit trails</div>
+              <div class="arch-cap">🇪🇺 <strong>AZ VPC only</strong> — data never leaves</div>
+            </div>
+          </div>
+
+          <div class="scroll-indicator">
+            <span>See it in action</span>
+            <div class="scroll-chevron"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECTION D: CTA ─── -->
+      <section class="story-section" id="storyCTA">
+        <div class="story-section-inner story-cta-inner">
+          <div class="story-eyebrow">Live Demo</div>
+          <h2 class="story-headline">See It In Action</h2>
+          <p class="story-subhead">Watch the Office Automation detect, diagnose, and resolve data issues across SAP MDG, Informatica, Collibra, and AWS — in real time.</p>
+          <button class="story-cta-btn" onclick="goToLogin()">Launch the Demo →</button>
+          <div class="story-powered" style="margin-top:1.5rem">
+            <span class="story-powered-label">Built on</span>
+            <span class="story-powered-name">SAP MDG · Informatica · Collibra · Snowflake · AWS Bedrock</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ═══ PAGE 2: Login Form ═══ -->
+    <div class="login-page">
+      <div class="lp2-container">
+
+        <!-- Left: Summary -->
+        <div class="lp2-hero">
+          <div class="lp2-hero-content">
+            <div class="lp2-hero-az">AstraZeneca</div>
+            <h2>Enterprise Data<br><span>Office Automation</span></h2>
+            <div class="lp2-hero-sub">4 pillars. One Office Automation. Zero production risk.</div>
+
+            <div class="lp2-features">
+              <div class="lp2-feat"><span class="lp2-feat-check">✓</span> Data Quality — auto-profiling, anomaly detection, self-healing</div>
+              <div class="lp2-feat"><span class="lp2-feat-check">✓</span> MDM — intelligent ingestion with impact simulation</div>
+              <div class="lp2-feat"><span class="lp2-feat-check">✓</span> Governance — intent-to-policy in 3 minutes</div>
+              <div class="lp2-feat"><span class="lp2-feat-check">✓</span> Engineering — proactive lineage + PII auto-lock</div>
+              <div class="lp2-feat"><span class="lp2-feat-check">✓</span> Human approval gates at every write</div>
+              <div class="lp2-feat"><span class="lp2-feat-check">✓</span> GxP-ready audit trails — no data leaves AZ VPC</div>
+            </div>
+          </div>
+
+          <div class="lp2-hero-bottom">
+            <div class="lp2-powered">
+              <div class="lp2-powered-label">Powered by</div>
+              <div class="lp2-powered-name">Claude on AWS Bedrock</div>
+            </div>
+            <div class="lp2-powered">
+              <div class="lp2-powered-label">Region</div>
+              <div class="lp2-powered-name">eu-west-1 (AZ VPC)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="lp2-form">
+          <div class="lp2-form-title">Sign In</div>
+          <div class="lp2-form-sub">Access the Office Automation demo environment</div>
+
+          <div class="login-field">
+            <label class="login-label">Email</label>
+            <input class="login-input" type="email" id="loginEmail" placeholder="name@astrazeneca.com" value="rekha.s@astrazeneca.com">
+          </div>
+          <div class="login-field">
+            <label class="login-label">Password</label>
+            <input class="login-input" type="password" id="loginPass" placeholder="Enter password" value="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+          </div>
+
+          <button class="login-btn" onclick="doLogin()">Sign In to Office Automation</button>
+
+          <div class="login-divider">
+            <hr><span>or</span><hr>
+          </div>
+          <button class="login-sso-btn" onclick="doLogin()">
+            <span>🔐</span> Sign in with AstraZeneca SSO
+          </button>
+
+          <div class="login-stack">
+            <div class="login-stack-chip">SAP MDG</div>
+            <div class="login-stack-chip">Informatica</div>
+            <div class="login-stack-chip">Collibra</div>
+            <div class="login-stack-chip">Snowflake</div>
+            <div class="login-stack-chip">Databricks</div>
+            <div class="login-stack-chip">AWS Bedrock</div>
+            <div class="login-stack-chip">Claude</div>
+          </div>
+
+          <button class="lp2-back" onclick="goToOverview()">← Back to overview</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-az">AstraZeneca</div>
+    <div class="topbar-title">Enterprise Data Office Automation</div>
+    <div style="padding-left:0.8rem;border-left:1px solid var(--border);font-size:0.55rem;color:rgba(139,92,246,0.7);font-weight:600">Powered by Claude on AWS Bedrock</div>
+  </div>
+  <div class="topbar-status"><div class="topbar-dot"></div> Connected: SAP MDG · Informatica · Collibra · AWS</div>
+</div>
+
+<div class="main">
+
+<!-- LEFT: CHAT -->
+<div class="chat-panel">
+  <div class="chat-header">
+    <h2>Data Control Assistant</h2>
+    <span>SAP MDG · Informatica · Collibra · AWS</span>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="welcome" id="welcome">
+      <div class="welcome-icon">🏛️</div>
+      <h3>Enterprise Data Office Automation</h3>
+      <p>Select a scenario to see how intelligent agents detect, diagnose, and resolve data issues in real-time.</p>
+      <div class="welcome-scenarios">
+        <div class="welcome-label" style="color:#60a5fa">Data Quality</div>
+        <button class="welcome-btn" onclick="runScenario('material')">
+          <div>A new supplier sends 500 records — how do we ensure quality?</div>
+          <div class="wb-tag">Profiling · Anomaly Detection · Auto-Fix · Approval Gate</div>
+        </button>
+
+        <div class="welcome-label" style="color:#c084fc">Master Data Management</div>
+        <button class="welcome-btn" onclick="runScenario('ehs')">
+          <div>A raw material is about to enter production — is it safe?</div>
+          <div class="wb-tag">Safety Check · Root Cause · Impact Simulation · Expert Approval</div>
+        </button>
+
+        <div class="welcome-label" style="color:#34d399">Data Governance</div>
+        <button class="welcome-btn" onclick="runPolicyAuthoring('All excipient materials must have valid shelf-life data before production release')">
+          <div>"All excipients must have shelf-life data" — create a policy</div>
+          <div class="wb-tag">Plain English → Policy Rule · Impact Scan · Governance Approval</div>
+        </button>
+        <button class="welcome-btn" onclick="runScenario('query')">
+          <div>Which data assets are below quality threshold, and who owns them?</div>
+          <div class="wb-tag">Natural Language Query · Governance Copilot</div>
+        </button>
+
+        <div class="welcome-label" style="color:#2dd4bf">Data Engineering</div>
+        <button class="welcome-btn" onclick="runScenario('pii')">
+          <div>Are there any patient data privacy risks in our analytics platform?</div>
+          <div class="wb-tag">Privacy Scan · Auto-Lock · Anonymisation · GDPR Compliance</div>
+        </button>
+        <button class="welcome-btn" onclick="runScenario('crossborder')">
+          <div>Is any clinical data moving across borders without the right approvals?</div>
+          <div class="wb-tag">Cross-Border Scan · Policy Enforcement · Compliant Alternatives</div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <div class="quick-chips">
+      <div class="chip" onclick="runScenario('material')">New supplier quality</div>
+      <div class="chip" onclick="runScenario('ehs')">Material safety check</div>
+      <div class="chip" onclick="runPolicyAuthoring('All excipient materials must have valid shelf-life data before production release')">Create a policy</div>
+      <div class="chip" onclick="runScenario('query')">Quality dashboard</div>
+      <div class="chip" onclick="runScenario('pii')">Patient data privacy</div>
+      <div class="chip" onclick="runScenario('crossborder')">Cross-border check</div>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask about data quality, compliance, governance..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()" id="sendBtn">→</button>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT: AGENT FLOW -->
+<div class="flow-panel">
+  <div class="flow-header">
+    <h3>Agent Execution Flow</h3>
+    <div class="flow-tabs">
+      <div class="flow-tab active" onclick="showFlowTab('timeline')">Timeline</div>
+      <div class="flow-tab" onclick="showFlowTab('diagram')">Architecture</div>
+    </div>
+  </div>
+  <div class="flow-body" id="flowBody">
+    <div class="flow-empty" id="flowEmpty">
+      <div class="flow-empty-ripple"></div>
+      <div class="flow-empty-ripple"></div>
+      <div class="flow-empty-ripple"></div>
+      <div class="flow-empty-icon">🤖</div>
+      <h4>Waiting for query</h4>
+      <p>Select a scenario or ask a question to see the agent execution flow</p>
+    </div>
+    <div class="flow-steps" id="flowSteps" style="display:none"></div>
+    <div id="flowDiagram" style="display:none"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- GLOSSARY BAR -->
+<div class="glossary-bar">
+  <button class="glossary-toggle" id="glossaryToggle" onclick="toggleGlossary()">
+    <span>Glossary &mdash; Key Terms & Acronyms</span>
+    <span class="gt-arrow">&#9660;</span>
+  </button>
+  <div class="glossary-content" id="glossaryContent">
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">EHS</span> Environment, Health & Safety</div>
+      <div class="gloss-def">Regulatory framework ensuring workplace safety and environmental compliance. In pharma, EHS governs hazardous material handling, labelling, and classification.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">GHS</span> Globally Harmonized System</div>
+      <div class="gloss-def">International standard for classifying and labelling hazardous chemicals (e.g., H302 = "Harmful if swallowed"). Required on all API raw materials before manufacturing.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">MDG</span> Master Data Governance</div>
+      <div class="gloss-def">SAP module for managing master data (materials, vendors, customers). All material changes go through MDG staging &rarr; workflow approval &rarr; production commit.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">GxP</span> Good Practice (GMP/GLP/GCP)</div>
+      <div class="gloss-def">Regulatory quality guidelines for pharma manufacturing (GMP), labs (GLP), and clinical trials (GCP). Systems touching production data require validated audit trails.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">PII/PHI</span> Personal / Health Information</div>
+      <div class="gloss-def">PII = personally identifiable data (name, DOB). PHI = protected health information (medical records). Both governed by GDPR with mandatory masking requirements.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">SCC</span> Standard Contractual Clauses</div>
+      <div class="gloss-def">EU-approved legal mechanism for transferring personal data outside the EEA. Required for any EU &rarr; US data movement under GDPR.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">DQ</span> Data Quality</div>
+      <div class="gloss-def">Measured across dimensions: completeness, accuracy, format validity, uniqueness, timeliness. AZ threshold is 95% for production-ready data.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">UoM</span> Unit of Measure</div>
+      <div class="gloss-def">Measurement unit for materials (KG, L, EA). Supplier APIs often use different standards (ISO 20022) than SAP (internal codes), causing mapping errors.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">CAS</span> Chemical Abstracts Service</div>
+      <div class="gloss-def">Unique numerical identifier for chemical substances (e.g., 103-90-2 = Acetaminophen). Used to look up GHS hazard classifications from reference databases.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term"><span class="gloss-abbr">CR</span> Change Request</div>
+      <div class="gloss-def">SAP MDG workflow object. Every data change creates a CR (e.g., CR-28491) that must be approved through the MDG governance workflow before production commit.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// LOGIN (2-page flow)
+// ═══════════════════════════════════════════════════════════════
+function goToLogin() {
+  document.getElementById('loginPages').style.transform = 'translateX(-100vw)';
+  document.getElementById('storyDots').style.display = 'none';
+}
+function goToOverview() {
+  document.getElementById('loginPages').style.transform = 'translateX(0)';
+  document.getElementById('storyDots').style.display = 'flex';
+}
+function doLogin() {
+  const screen = document.getElementById('loginScreen');
+  screen.classList.add('hidden');
+  document.getElementById('storyDots').style.display = 'none';
+  document.getElementById('globalBanner').style.display = 'none';
+  setTimeout(() => { screen.style.display = 'none'; }, 600);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LAUNCH DEMO — Click pillar card → skip login → run scenario
+// ═══════════════════════════════════════════════════════════════
+function launchDemo(scenarioKey) {
+  // 1. Hide login screen instantly
+  const screen = document.getElementById('loginScreen');
+  screen.classList.add('hidden');
+  document.getElementById('storyDots').style.display = 'none';
+  document.getElementById('globalBanner').style.display = 'none';
+  setTimeout(() => { screen.style.display = 'none'; }, 600);
+
+  // 2. Run the scenario after a brief delay for transition
+  setTimeout(() => {
+    if (scenarioKey === 'policy') {
+      runPolicyAuthoring('All excipient materials must have valid shelf-life data before production release');
+    } else {
+      runScenario(scenarioKey);
+    }
+  }, 700);
+}
+
+function toggleGlossary() {
+  const btn = document.getElementById('glossaryToggle');
+  const content = document.getElementById('glossaryContent');
+  btn.classList.toggle('open');
+  content.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// STORY PAGE — Scroll, Dot Nav, Entrance Animations
+// ═══════════════════════════════════════════════════════════════
+function scrollToStory(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Intersection Observer for dot navigation + entrance animations
+document.addEventListener('DOMContentLoaded', () => {
+  const storyPage = document.getElementById('storyPage');
+  if (!storyPage) return;
+
+  // Dot navigation
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.story-dot').forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.story-dot[data-target="${id}"]`);
+        if (dot) dot.classList.add('active');
+      }
+    });
+  }, { root: storyPage, threshold: 0.5 });
+
+  document.querySelectorAll('.story-section').forEach(s => sectionObserver.observe(s));
+
+  // Entrance animations
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { root: storyPage, threshold: 0.2 });
+
+  document.querySelectorAll('.story-animate').forEach(el => animObserver.observe(el));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DUMMY DATA — SAP MDG, Informatica, Collibra, AWS
+// ═══════════════════════════════════════════════════════════════
+const DUMMY_DATA = {
+  sap_mdg: {
+    materials: [
+      {id:'MAT-2024-0847',desc:'Acetaminophen API Grade',type:'API_RAW',uom:'KGS',ghs_class:null,supplier:'ChemCo-API',status:'Pending',plant:'DE01'},
+      {id:'MAT-2024-0848',desc:'Ibuprofen Sodium Salt',type:'API_RAW',uom:'KGS',ghs_class:'H302',supplier:'ChemCo-API',status:'Active',plant:'UK02'},
+      {id:'MAT-2024-0849',desc:'Microcrystalline Cellulose',type:'EXCIPIENT',uom:'KG',ghs_class:'None',supplier:'ExcipCo',status:'Active',plant:'US03'},
+      {id:'MAT-2024-0850',desc:'Magnesium Stearate',type:'EXCIPIENT',uom:'KGS',ghs_class:'None',supplier:'ChemCo-API',status:'Active',plant:'SE01'},
+      {id:'MAT-2024-0851',desc:'Titanium Dioxide',type:'EXCIPIENT',uom:'LTR',ghs_class:'H351',supplier:'ChemCo-API',status:'Pending',plant:'DE01'},
+      {id:'MAT-2024-0852',desc:'Polyethylene Glycol 400',type:'EXCIPIENT',uom:'LTR',ghs_class:null,supplier:'ChemCo-API',status:'Pending',plant:'UK02'},
+      {id:'MAT-2024-0853',desc:'',type:'API_RAW',uom:'PCE',ghs_class:'H301',supplier:'ChemCo-API',status:'Pending',plant:'US03'},
+    ],
+    change_requests: [
+      {cr:'CR-28491',material:'MAT-2024-0847',type:'Create',status:'Validation Hold',reason:'Missing GHS classification'},
+      {cr:'CR-28502',material:'BATCH-SUP-284',type:'Mass Update',status:'Staging',reason:'43 auto-fixes pending approval'},
+    ]
+  },
+  informatica: {
+    mappings: [
+      {name:'MAP_ChemCo_Material',source:'ChemCo API v2.3',target:'SAP MDG Staging',status:'Active',records:500,errors:47},
+      {name:'MAP_HCP_Veeva_SAP',source:'Veeva CRM',target:'Informatica MDM',status:'Active',records:12450,errors:23},
+      {name:'MAP_Clinical_DW',source:'Clinical Trial DB',target:'Databricks Analytics',status:'Warning',records:89200,errors:0},
+    ],
+    profiles: [
+      {field:'MATERIAL_DESC',completeness:'98.4%',accuracy:'97.1%',format:'94.2%'},
+      {field:'UOM_CODE',completeness:'100%',accuracy:'93.6%',format:'87.3%'},
+      {field:'GHS_HAZARD_CLASS',completeness:'72.1%',accuracy:'99.8%',format:'100%'},
+      {field:'SUPPLIER_CODE',completeness:'100%',accuracy:'100%',format:'100%'},
+    ]
+  },
+  collibra: {
+    assets: [
+      {name:'material_master',domain:'Material',owner:'Sarah Thompson',classification:'Internal',quality:'94.2%',lineage:'SAP MDG → Informatica → Collibra → 12 reports'},
+      {name:'hcp_golden_record',domain:'HCP',owner:'James Kumar',classification:'Confidential-PII',quality:'97.8%',lineage:'Veeva → Informatica MDM → BIKG → Analytics'},
+      {name:'clinical_trial_outcomes',domain:'Clinical',owner:'Maria Chen',classification:'RESTRICTED-PHI',quality:'99.1%',lineage:'CTMS → ETL Pipeline → Databricks → Reporting'},
+      {name:'supplier_quality_data',domain:'Supplier',owner:'Tom Williams',classification:'Internal',quality:'91.3%',lineage:'Supplier API → Informatica → Snowflake → QA Dashboard'},
+    ],
+    policies: [
+      {id:'EHS-401',name:'GHS Hazard Classification',scope:'All API Materials',enforcement:'Mandatory - Block on violation'},
+      {id:'GDPR-001',name:'Cross-Border Transfer',scope:'All PII/PHI Data',enforcement:'Mandatory - Auto-block'},
+      {id:'MDM-STD-002',name:'Material Description',scope:'All Materials',enforcement:'Warning - Escalate'},
+      {id:'DQ-THR-001',name:'Quality Score Threshold',scope:'All Domains',enforcement:'Alert at <95%'},
+    ]
+  },
+  aws: {
+    pipelines: [
+      {name:'ETL_ChemCo_Ingest',source:'ChemCo API',dest:'S3 Raw → Glue → SAP Staging',status:'Running',lastRun:'2 min ago'},
+      {name:'ETL_Clinical_Analytics',source:'CTMS',dest:'S3 → Glue → Databricks',status:'Warning',lastRun:'15 min ago'},
+      {name:'ETL_HCP_Sync',source:'Veeva CRM',dest:'S3 → Lambda → Informatica',status:'Healthy',lastRun:'1 hr ago'},
+    ],
+    bedrock: {model:'anthropic.claude-3-sonnet',region:'eu-west-1',vpc:'az-data-vpc',encryption:'AES-256-GCM'}
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// KNOWLEDGE BASE — shared memory that agents read AND write to
+// ═══════════════════════════════════════════════════════════════
+const KNOWLEDGE_BASE = {
+  patterns: [
+    {id:'PAT-001', type:'uom_mismatch', source:'ChemCo-API', count:7, last90d:true, resolution:'mapping_update'},
+    {id:'PAT-002', type:'missing_ghs', source:'ChemCo-API', count:4, last90d:true, resolution:'cas_lookup'},
+    {id:'PAT-003', type:'phi_masking_skip', source:'ETL_CT04', count:1, last90d:true, resolution:'pipeline_fix'},
+  ],
+  log: [] // agents write here during execution
+};
+
+// ═══════════════════════════════════════════════════════════════
+// AGENT COLORS
+// ═══════════════════════════════════════════════════════════════
+const AGENT_COLORS = {
+  'Orchestrator':  {bg:'rgba(131,0,81,0.15)',border:'#830051',text:'#c77daa',icon:'🎯'},
+  'Workflow':      {bg:'rgba(168,85,247,0.15)',border:'#a855f7',text:'#c084fc',icon:'⚙️'},
+  'Observability': {bg:'rgba(6,182,212,0.15)',border:'#06b6d4',text:'#22d3ee',icon:'👁️'},
+  'Discovery':     {bg:'rgba(139,92,246,0.15)',border:'#8b5cf6',text:'#a78bfa',icon:'🔍'},
+  'Classification':{bg:'rgba(236,72,153,0.15)',border:'#ec4899',text:'#f472b6',icon:'🏷️'},
+  'Policy':        {bg:'rgba(74,20,140,0.2)',border:'#7c3aed',text:'#a78bfa',icon:'📜'},
+  'Profiling':     {bg:'rgba(56,189,248,0.15)',border:'#38bdf8',text:'#7dd3fc',icon:'📈'},
+  'DQ Monitor':    {bg:'rgba(59,130,246,0.15)',border:'#3b82f6',text:'#60a5fa',icon:'📊'},
+  'Lineage':       {bg:'rgba(20,184,166,0.15)',border:'#14b8a6',text:'#2dd4bf',icon:'🔗'},
+  'Root Cause':    {bg:'rgba(16,185,129,0.15)',border:'#10b981',text:'#34d399',icon:'🔬'},
+  'Simulation':    {bg:'rgba(99,102,241,0.15)',border:'#6366f1',text:'#818cf8',icon:'🧪'},
+  'Remediation':   {bg:'rgba(46,125,50,0.15)',border:'#2e7d32',text:'#66bb6a',icon:'🔧'},
+  'Escalation':    {bg:'rgba(245,158,11,0.15)',border:'#f59e0b',text:'#fbbf24',icon:'🚨'},
+  'Copilot':       {bg:'rgba(131,0,81,0.15)',border:'#830051',text:'#c77daa',icon:'💬'},
+  'Rule Engine':   {bg:'rgba(234,179,8,0.15)',border:'#eab308',text:'#facc15',icon:'⚖️'},
+};
+
+// ═══════════════════════════════════════════════════════════════
+// SCENARIOS — Now with Capco-aligned agents
+// ═══════════════════════════════════════════════════════════════
+const SCENARIOS = {
+  material: {
+    userMsg: 'A new supplier sends 500 material records — how do we ensure data quality before they enter our systems?',
+    steps: [
+      {agent:'Orchestrator',summary:'Composing quality assurance pipeline for 500 incoming supplier records',
+       detail:'A new supplier batch has arrived. The Orchestrator checks the Knowledge Base for any known issues with this supplier and assembles the right team of agents.',
+       sys:'ORCHESTRATOR.compose(scenario="material_ingestion", source="supplier_batch", records=500)\nKNOWLEDGE_BASE.query(supplier) → 2 known patterns',
+       result:['Pipeline composed — 2 known supplier patterns loaded','ok'],duration:'0.3s',
+       kbRead: 'Read 2 patterns from prior supplier batches'},
+
+      {agent:'Workflow',summary:'Planning quality checks — 9 tasks across 3 conditional branches',
+       detail:'The Workflow Agent translates your governance policies into an executable plan. Based on past supplier history, it pre-activates branches for known issue types — unit-of-measure mismatches and missing safety classifications.',
+       sys:'WORKFLOW_ENGINE.decompose(policies=3) → 9 tasks, 3 branches',
+       result:['9 tasks planned — 3 branches conditionally activated','ok'],duration:'0.4s',
+       workflow: {
+         active: ['Discovery','Classification','Profiling','Policy','DQ Monitor','Root Cause','Remediation','Escalation'],
+         skipped: ['Lineage'],
+         conditional: ['Simulation → if confidence < 95%']
+       }},
+
+      {agent:'Discovery',summary:'500 records staged. 3 new data attributes auto-catalogued in Collibra.',
+       detail:'All 500 records have been ingested into the staging layer (not production). The agent detected 3 attributes from this supplier that weren\'t in the data catalogue and auto-registered them with proper classification tags.',
+       sys:'INFORMATICA.ingest(source="supplier_batch", target="staging", records=500)\nCOLLIBRA.registerAttributes(attrs=3)',
+       result:['500 records staged — 3 attributes catalogued','ok'],duration:'1.8s',
+       data:{title:'Sample Incoming Records',headers:['Material','Type','Unit','Safety Class','Status'],rows:[['Acetaminophen API Grade','Raw Material','KGS','—','Pending'],['Titanium Dioxide','Excipient','LTR','H351','Pending'],['(Missing name)','Raw Material','PCE','H301','Pending']]},
+       kbWrite: 'Wrote: 3 new attributes registered from supplier schema'},
+
+      {agent:'Classification',summary:'13 records flagged as regulated substances — auto-tagged for enhanced compliance',
+       detail:'AI-powered scan identified 13 materials containing chemical identifiers that require regulatory compliance checks. These have been auto-tagged as "Regulated Substance" in the governance catalogue — no manual tagging needed.',
+       sys:'BEDROCK.classify(records=500) → 13 regulated\nCOLLIBRA.setClassification(records=13, class="REGULATED_SUBSTANCE")',
+       result:['13 regulated records classified — catalogue updated','ok'],duration:'3.1s'},
+
+      {agent:'Profiling',summary:'Profiling 500 records across 12 quality dimensions — completeness, accuracy, format, timeliness',
+       detail:'Every incoming record is automatically profiled against <strong>12 quality dimensions</strong> before anything enters your systems:<br><br>• <strong>Completeness</strong> — are all required fields populated?<br>• <strong>Accuracy</strong> — do values match reference data?<br>• <strong>Format validity</strong> — are units, codes, and formats correct?<br>• <strong>Timeliness</strong> — is the data current?<br>• <strong>Uniqueness</strong> — are there duplicate records?<br>• <strong>Consistency</strong> — do related fields align?<br><br>This runs on every batch, every time — no manual profiling needed.',
+       sys:'PROFILING_ENGINE.run(records=500, dimensions=12)',
+       result:['500 records profiled across 12 dimensions','ok'],duration:'2.8s',
+       data:{title:'Quality Profile Results',headers:['Dimension','Completeness','Accuracy','Format'],rows:[['Material Name','98.4%','97.1%','94.2%'],['Unit of Measure','100%','93.6%','<span style="color:#ef4444">87.3%</span>'],['Safety Classification','<span style="color:#ef4444">72.1%</span>','99.8%','100%'],['Supplier Code','100%','100%','100%']]}},
+
+      {agent:'Policy',summary:'4 governance policies checked — 1 safety violation found, 8 data completeness warnings',
+       detail:'The Policy Agent ran deterministic rule checks (not AI — these are your exact governance rules):<br><br>• <strong>Safety classification</strong>: 1 material missing mandatory hazard data → <span style="color:#ef4444">Blocked</span><br>• <strong>Data privacy</strong>: No personal data in batch → ✓<br>• <strong>Completeness</strong>: 8 materials missing descriptions → ⚠ Warning<br>• <strong>Quality threshold</strong>: Below 95% target',
+       sys:'POLICY_REGISTRY.evaluate(rules=4) → 1 violation, 8 warnings',
+       result:['1 safety violation — material blocked from production','warn'],duration:'0.4s'},
+
+      {agent:'DQ Monitor',summary:'47 quality issues detected — quality score: 91.7% (below 95% target). 3 new rules auto-generated.',
+       detail:'Based on the profiling results, the DQ Monitor identified <strong>47 actionable issues</strong>:<br><br>• <strong>32</strong> unit-of-measure format mismatches (supplier uses different standard)<br>• <strong>8</strong> missing material descriptions<br>• <strong>7</strong> potential duplicate records<br><br>Overall quality score: <strong style="color:#ef4444">91.7%</strong> — below your 95% threshold.<br><br>The system has <strong>auto-generated 3 new quality rules</strong> to catch this pattern in all future supplier batches.',
+       sys:'DQ_MONITOR.analyse(profile_results) → issues: 47, quality: 91.7%\nDQ_RULES.autoGenerate(rules=3)',
+       result:['47 issues — quality: 91.7% — 3 new rules auto-generated','warn'],duration:'1.6s',
+       kbWrite: 'Wrote: 3 new quality rules for this supplier pattern'},
+
+      {agent:'Root Cause',summary:'Root cause identified — supplier uses different measurement standards. 7 similar incidents from 3 suppliers.',
+       detail:'The Knowledge Base revealed this is a <strong>systemic supplier onboarding issue</strong> — not a one-off error. 7 similar incidents from 3 different suppliers in the last 90 days, all caused by measurement standard mismatches.<br><br>The agent also identified: description gaps from the supplier feed, and 7 potential duplicates matching existing records.',
+       sys:'KNOWLEDGE_BASE.patternMatch(issue="uom_mismatch") → 7 prior incidents, 3 suppliers',
+       result:['Systemic supplier mapping gap — correlated with known patterns','ok'],duration:'4.2s',
+       kbRead: 'Read 2 known patterns: measurement mismatch (7 incidents) + missing safety data (4 incidents)'},
+
+      {agent:'Simulation',summary:'Impact simulation: 43 proposed fixes would restore quality from 91.7% → 98.4%',
+       detail:'Before applying any changes, the Simulation Agent models the impact:<br><br>• Unit corrections (32 records): quality impact <strong>+4.2%</strong><br>• Duplicate merges (5 records): quality impact <strong>+1.3%</strong><br>• Description enrichment (6 records): quality impact <strong>+1.2%</strong><br><br>12 downstream reports checked — <strong>zero breakage predicted</strong>. Safe to proceed.',
+       sys:'SIMULATION_ENGINE.run(fixes=43, check_downstream=true) → quality: 98.4%, impact: NONE',
+       result:['Simulation passed — safe to apply 43 fixes','ok'],duration:'1.8s',
+       impact: {
+         quality: {from:91.7,to:98.4},
+         downstream: {reports:12,broken:0},
+         confidence: 97.2,
+         costSaved: 4800
+       }},
+
+      {agent:'Observability',summary:'All agent actions compliant. Full audit trail generated. Zero policy drift.',
+       detail:'Every action taken by every agent in this pipeline has been logged and verified:<br><br>• <strong>8 agents</strong> invoked — all within authorised scope ✓<br>• <strong>Zero production writes</strong> — staging only ✓<br>• <strong>All data stayed within AZ</strong> — no external transmission ✓<br>• <strong>47 audit events</strong> logged with full provenance ✓',
+       sys:'OBSERVABILITY.audit(agents=8, production_writes=0, events=47)',
+       result:['Audit complete — all actions compliant','ok'],duration:'0.6s',
+       kbWrite: 'Wrote: Pipeline audit trail (47 events, 0 anomalies)'},
+
+      {agent:'Remediation',summary:'43 of 47 issues ready to fix. Awaiting your approval before applying.',
+       detail:'All changes will go to <strong>staging only</strong> — not production. Your MDG workflow approval is still required after staging.<br><br>• <strong>32 fixes</strong>: Unit-of-measure corrections (99.1% confidence)<br>• <strong>5 fixes</strong>: Duplicate merges (above 95% threshold)<br>• <strong>6 fixes</strong>: Description enrichment from reference data<br>• <strong>4 issues</strong>: Below confidence threshold → escalated to stewards',
+       sys:'MDG.prepareStagingFixes(fixes=43) → awaiting_approval',
+       result:['43 fixes prepared — waiting for approval','warn'],duration:'2.1s',
+       data:{title:'Proposed Fixes',headers:['Issue Type','Count','Method','Confidence','Status'],rows:[['Unit corrections','32','Automatic mapping','99.1%','Ready'],['Duplicate merges','5','AI matching','>95%','Ready'],['Description gaps','6','Reference lookup','94.2%','Ready'],['Low-confidence items','2','Below threshold','87-92%','<span style="color:#f59e0b">→ Escalate</span>'],['No reference match','2','Manual required','—','<span style="color:#f59e0b">→ Escalate</span>']]},
+       approval: {
+         title: 'Human Approval Required',
+         body: 'Apply 43 auto-fixes to the staging layer? All changes require your MDG workflow approval before going to production.',
+         options: ['approve','reject','modify'],
+         postApprove: {
+           summary: '43 fixes applied to staging. Change request created for MDG workflow approval.',
+           sys: 'MDG.writeStaging(fixes=43) → STATUS: staged_awaiting_workflow',
+           result: ['43 fixes applied to staging — change request created','ok']
+         }
+       }},
+
+      {agent:'Escalation',summary:'4 issues escalated to 2 domain stewards with full context and suggested fixes.',
+       detail:'Items below the auto-fix confidence threshold are routed to the right experts — not dropped:<br><br>• <strong>2 potential duplicates</strong> → MDM Steward (Priority: Medium)<br>• <strong>2 missing descriptions</strong> → Material Steward (Priority: Low)<br><br>Each steward receives: affected records, root cause analysis, 3 similar resolved cases, and a suggested fix.',
+       sys:'MDG.createWorkPackage(issues=4, stewards=2)',
+       result:['4 escalated with full context — quality restored: 98.4%','ok'],duration:'1.2s',
+       kbWrite: 'Wrote: Resolution pattern for supplier measurement mismatch confirmed effective'},
+    ],
+    finalMsg: `<strong>Data Quality Report</strong><br><br><table><tr><th>Metric</th><th>Result</th></tr><tr><td>Records Processed</td><td><strong>500</strong></td></tr><tr><td>Issues Detected</td><td>47</td></tr><tr><td>Auto-Fixed</td><td><strong>43</strong> (91.5%)</td></tr><tr><td>Escalated to Stewards</td><td>4</td></tr><tr><td>Quality Score</td><td>91.7% → <strong>98.4%</strong></td></tr><tr><td>Processing Time</td><td><strong>47 seconds</strong></td></tr><tr><td>Manual Equivalent</td><td>~2 days</td></tr><tr><td>Cost Avoided</td><td><strong>£4,800</strong></td></tr></table><br><strong>Without automation:</strong> Issues found days later at batch release → manufacturing delays, manual rework.<br><strong>With automation:</strong> Caught at ingestion → simulated → fixed → audited in under a minute. Zero production risk.`
+  },
+
+  ehs: {
+    userMsg: 'A raw material is about to enter production — but is it safe? Check for missing safety classifications.',
+    steps: [
+      {agent:'Orchestrator',summary:'Composing safety compliance check for incoming material',
+       detail:'A material is flagged as potentially missing mandatory safety (EHS/GHS) classification. The Orchestrator checks the Knowledge Base — this supplier has had this issue before.',
+       sys:'ORCHESTRATOR.compose(scenario="ehs_compliance")\nKNOWLEDGE_BASE.query() → 1 known pattern: missing safety data from this supplier',
+       result:['Pipeline composed — 1 known pattern loaded','ok'],duration:'0.2s',
+       kbRead: 'Read: 4 prior incidents of missing safety data from this supplier'},
+
+      {agent:'Workflow',summary:'Safety-critical plan: 6 tasks with impact simulation activated',
+       detail:'Because this involves a <strong>regulated safety field</strong>, the Workflow Agent activates the impact simulation branch — we model the consequences before making any change.',
+       sys:'WORKFLOW_ENGINE.decompose(policy="EHS-401") → 6 tasks\n→ SIMULATION=ACTIVE (regulated field)',
+       result:['6 tasks — simulation branch activated for safety field','ok'],duration:'0.3s',
+       workflow: {
+         active: ['DQ Monitor','Policy','Root Cause','Simulation','Remediation','Escalation'],
+         skipped: ['Lineage','Discovery','Classification'],
+         conditional: ['Simulation → activated (regulated field)']
+       }},
+
+      {agent:'DQ Monitor',summary:'CRITICAL: Active pharmaceutical ingredient missing mandatory hazard classification',
+       detail:'This material is classified as an <strong>active pharmaceutical ingredient</strong> — by AZ policy, it <strong>must</strong> have a hazard safety classification before it can enter production.<br><br>Current status: Hazard classification is <strong style="color:#ef4444">MISSING</strong>. This material cannot be released to manufacturing.',
+       sys:'DQ_MONITOR.inspect(material, field="hazard_class") → NULL (required field)',
+       result:['CRITICAL — safety-required field missing','err'],duration:'0.8s',
+       data:{title:'Material Safety Record',headers:['Field','Value','Status'],rows:[['Material','Acetaminophen API Grade','✓'],['Type','Active Pharmaceutical Ingredient','✓'],['Unit of Measure','KGS','<span style="color:#f59e0b">⚠ Non-standard</span>'],['Hazard Classification','MISSING','<span style="color:#ef4444">✗ CRITICAL</span>'],['Supplier','External Supplier','✓'],['Manufacturing Plant','Sweden (Södertälje)','✓']]}},
+
+      {agent:'Policy',summary:'Safety policy violated — material blocked from production release',
+       detail:'<strong>Deterministic rule check</strong> (not AI — this is your exact governance policy):<br><br>"All active pharmaceutical ingredients MUST have hazard classification before production release."<br><br>The material\'s change request has been <strong style="color:#ef4444">held at the validation gate</strong>. It cannot proceed to manufacturing until this is resolved.',
+       sys:'POLICY_REGISTRY.evaluate(rule="EHS-401") → BLOCK\nMDG.holdChangeRequest(reason="safety_violation")',
+       result:['Material blocked from production — safety violation','err'],duration:'0.3s'},
+
+      {agent:'Root Cause',summary:'Systemic supplier issue — this supplier doesn\'t include safety codes in their data feed.',
+       detail:'The Knowledge Base shows <strong>4 prior incidents</strong> from this same supplier — all with missing hazard classifications for new materials. This is a <strong>systemic supplier onboarding gap</strong>, not a one-off error.<br><br>Reference database lookup found the correct classification: <strong>Harmful if swallowed (H302)</strong> with 91% confidence.',
+       sys:'KNOWLEDGE_BASE.query() → 4 prior incidents, all resolved as H302\nREFERENCE_DB.lookup() → H302 (Harmful if swallowed), confidence: 91%',
+       result:['Systemic supplier issue — safety code H302 suggested (91% confidence)','ok'],duration:'3.8s'},
+
+      {agent:'Simulation',summary:'Impact simulation: applying the fix would unblock manufacturing and 3 pending production orders',
+       detail:'Before anyone makes a decision, the Simulation Agent models what happens if we apply the suggested fix:<br><br>• <strong>Safety policy</strong>: Would change from BLOCK → PASS ✓<br>• <strong>Change request</strong>: Would move to "Ready for Approval" ✓<br>• <strong>Manufacturing</strong>: Plant batch release unblocked ✓<br>• <strong>3 production orders</strong> currently waiting on this material<br>• <strong>Risk if wrong</strong>: Incorrect safety classification could cause an incident — <strong style="color:#ef4444">requires expert confirmation</strong>',
+       sys:'SIMULATION_ENGINE.run(proposed_fix="H302") → policy_pass: true, orders_unblocked: 3',
+       result:['Fix would unblock manufacturing — requires expert review','ok'],duration:'1.4s',
+       impact: {
+         quality: {from:0, to:100, label:'Safety Compliance'},
+         downstream: {reports:3,broken:0,label:'Production Orders'},
+         confidence: 91.0,
+         costSaved: 85000,
+         riskNote: 'Regulated field — requires EHS steward confirmation'
+       }},
+
+      {agent:'Remediation',summary:'Safety classification suggested — 91% confidence. Requires your expert approval.',
+       detail:'The system suggests <strong>Hazard Code H302</strong> (Harmful if swallowed) based on reference database lookup and 4 prior identical resolutions from this supplier.<br><br>Confidence: 91% — <strong>below the 95% auto-fix threshold</strong>. This is a regulated safety field — a human expert must confirm.',
+       sys:'MDG.prepareFix(field="hazard_class", value="H302", confidence=0.91)',
+       result:['Suggested fix: H302 — requires expert approval','warn'],duration:'1.1s',
+       approval: {
+         title: 'EHS Steward Approval Required',
+         body: 'Apply safety classification "H302 — Harmful if swallowed" to this material?<br><br>This is a regulated field with 91% confidence. 4 similar materials from this supplier were all confirmed as H302.<br><br>The AI suggests. Your expert decides.',
+         options: ['approve','reject','modify'],
+         postApprove: {
+           summary: 'Safety classification applied. Material change request moved to "Ready for Approval". Manufacturing can proceed.',
+           sys: 'MDG.writeFix(field="hazard_class", value="H302", approved_by="ehs_steward")',
+           result: ['Safety code applied — manufacturing unblocked','ok']
+         }
+       }},
+
+      {agent:'Observability',summary:'Full compliance audit logged. Regulated change documented with expert approval.',
+       detail:'Every step of this safety resolution has been logged:<br><br>• <strong>5 agents</strong> invoked — all within authorised scope ✓<br>• <strong>Regulated field change</strong> documented with evidence chain ✓<br>• <strong>Human expert approval</strong> captured with timestamp ✓<br>• <strong>Full GxP audit trail</strong> generated ✓',
+       sys:'OBSERVABILITY.audit(regulated_change=true, human_approval=true, events=12)',
+       result:['Audit complete — regulated change fully documented','ok'],duration:'0.4s',
+       kbWrite: 'Wrote: 5th incident from this supplier confirmed. Recommend supplier mapping update.'},
+    ],
+    finalMsg: `<strong>Safety Compliance Resolution</strong><br><br>An active pharmaceutical ingredient was caught <strong>before production release</strong> with a missing safety classification.<br><br>• Governance policy blocked the material automatically<br>• Root cause: systemic supplier data gap (4 prior incidents in Knowledge Base)<br>• Impact simulation confirmed: fix would unblock 3 production orders<br>• Safety code applied after expert approval<br>• Full GxP audit trail generated<br><br><strong>Without automation:</strong> Discovered at batch release → 3-5 day manufacturing delay → £85K cost per incident.<br><strong>With automation:</strong> Caught on ingestion → simulated → expert-approved → resolved in <strong>4 minutes</strong>. Zero manufacturing impact.`
+  },
+
+  pii: {
+    userMsg: 'Are there any patient data privacy risks in our analytics platform right now?',
+    steps: [
+      {agent:'Orchestrator',summary:'Launching privacy scan across the analytics platform',
+       detail:'Initiating a high-priority compliance scan for unmasked patient data. The Knowledge Base shows 1 prior incident — auto-escalation is enabled for any critical findings.',
+       sys:'ORCHESTRATOR.compose(scenario="phi_detection", auto_escalate=true)\nKNOWLEDGE_BASE.query(type="phi") → 1 prior incident',
+       result:['Pipeline composed — auto-escalation enabled','ok'],duration:'0.1s',
+       kbRead: 'Read: 1 prior patient data masking incident'},
+
+      {agent:'Workflow',summary:'Emergency protocol activated — patient data triggers immediate lock-down workflow',
+       detail:'Patient data detection activates a <strong>pre-approved emergency protocol</strong>. The system will automatically lock access to any affected tables before any remediation — no approval needed for the lock (this was pre-approved by the Data Protection Officer).',
+       sys:'WORKFLOW_ENGINE.decompose(protocol="PHI_EMERGENCY") → 7 tasks\n→ AUTO_LOCK=ENABLED (pre-approved protocol)',
+       result:['7 tasks — emergency protocol — auto-lock enabled','ok'],duration:'0.2s',
+       workflow: {
+         active: ['Classification','Policy','Lineage','Remediation','Escalation','Observability'],
+         skipped: ['DQ Monitor','Root Cause','Discovery'],
+         conditional: ['Auto-lock → activated (patient data protocol)']
+       }},
+
+      {agent:'Classification',summary:'CRITICAL: 1,247 patient records found with unmasked personal data',
+       detail:'AI-powered classification (running entirely within AZ infrastructure — no data leaves your environment) has detected unmasked patient data:<br><br>• <strong>Patient names</strong>: 1,247 records unmasked<br>• <strong>Dates of birth</strong>: 1,247 records unmasked<br>• <strong>Medical record numbers</strong>: 1,247 records unmasked<br><br>This data should have been anonymised before reaching the analytics platform.',
+       sys:'BEDROCK.classify(model="phi-classifier", vpc="internal") → 3 field types, 1247 records',
+       result:['CRITICAL: Patient data exposed — 1,247 records','err'],duration:'4.2s'},
+
+      {agent:'Policy',summary:'GDPR violation — table locked immediately — Data Protection Officer notified',
+       detail:'<strong>Automatic enforcement</strong> — pre-approved emergency protocol:<br><br>• Table access <strong>restricted to owners only</strong> — effective immediately<br>• GDPR 72-hour notification timer started<br>• Data Protection Officer auto-notified<br>• All queries to affected data are now blocked and logged',
+       sys:'IAM.restrictAccess(table, "OWNERS_ONLY")\nINCIDENT.create(type="GDPR", severity="P1")',
+       result:['Table locked — DPO notified — 0 unauthorised access','ok'],duration:'0.6s'},
+
+      {agent:'Lineage',summary:'Root cause found: masking step was skipped in the data pipeline. 3 other tables are clean.',
+       detail:'The Lineage Agent traced how patient data flowed from source to analytics:<br><br>Clinical source database<br>  → Data pipeline step 1: Extract ✓<br>  → Data pipeline step 2: Transform ✓<br>  → Data pipeline step 3: Validate ✓<br>  → Data pipeline step 4: <strong style="color:#ef4444">Mask patient data ❌ SKIPPED</strong><br>  → Analytics platform ← <strong>Unmasked data here</strong><br><br>3 other tables from the same pipeline — all checked clean.',
+       sys:'COLLIBRA.getLineage(depth=5) → step4.mask_phi: SKIPPED',
+       result:['Root cause: masking step skipped — 3 other tables clean','ok'],duration:'2.1s'},
+
+      {agent:'Remediation',summary:'All 1,247 patient records anonymised in staging. Analytics can continue safely.',
+       detail:'Patient data has been tokenised (anonymised) in the staging layer — <strong>not a direct production change</strong>:<br><br>• Patient names → anonymised<br>• Dates of birth → anonymised<br>• Medical record numbers → anonymised<br><br>All analytics queries can continue running with the anonymised data.',
+       sys:'REMEDIATION.tokenize(fields=3, method="SHA256", target="staging") → 1,247 records masked',
+       result:['1,247 records anonymised — staging only','ok'],duration:'3.4s'},
+
+      {agent:'Escalation',summary:'Critical ticket created — data engineering team to fix the pipeline with GDPR deadline',
+       detail:'An urgent ticket has been created for the data engineering team:<br><br>• <strong>Issue</strong>: Patient data masking step was skipped in the pipeline<br>• <strong>Impact</strong>: 1 table affected, 3 others verified clean<br>• <strong>Required fix</strong>: Re-enable masking step + add a validation gate<br>• <strong>GDPR deadline</strong>: 72 hours from detection<br>• <strong>Priority</strong>: <strong>P1 — CRITICAL</strong>',
+       sys:'JIRA.createTicket(priority="P1", summary="Pipeline masking step skipped")',
+       result:['P1 ticket created — pipeline fix in progress','ok'],duration:'0.5s'},
+
+      {agent:'Observability',summary:'GDPR incident fully documented. Zero unauthorised access. 72-hour compliance timer active.',
+       detail:'Full compliance validation of the response:<br><br>• <strong>Time to detect</strong>: 4.2 seconds<br>• <strong>Time to lock access</strong>: 0.6 seconds<br>• <strong>Unauthorised access events</strong>: 0 (locked before any query)<br>• <strong>GDPR 72-hour timer</strong>: Active — 71 hours 55 minutes remaining<br>• <strong>Full evidence package</strong> generated for Data Protection Officer',
+       sys:'OBSERVABILITY.audit(time_to_detect="4.2s", time_to_lock="0.6s", unauthorized=0)',
+       result:['GDPR incident documented — 0 exposure — timer active','ok'],duration:'0.3s',
+       kbWrite: 'Wrote: Pipeline masking skip pattern documented. Validation gate recommendation added.'},
+    ],
+    finalMsg: `<strong>Patient Data Privacy Report</strong><br><br>1,247 patient records were found with unmasked personal data in the analytics platform.<br><br>• <strong>Detected in 4.2 seconds</strong> — AI classification within AZ infrastructure<br>• <strong>Table locked in 0.6 seconds</strong> — pre-approved emergency protocol<br>• <strong>Root cause</strong>: masking step was skipped in the data pipeline<br>• <strong>All records anonymised</strong> — analytics can continue<br>• <strong>Zero unauthorised access</strong> — locked before anyone queried<br>• <strong>Critical ticket raised</strong> with GDPR 72-hour deadline<br><br><strong>Without automation:</strong> Discovered at quarterly audit → 3+ months of exposure → potential €20M GDPR fine.<br><strong>With automation:</strong> Detected, locked, anonymised, escalated — all within <strong>3 minutes</strong>. €0 fine.`
+  },
+
+  query: {
+    userMsg: 'Which data assets are below our quality threshold, and who owns them?',
+    steps: [
+      {agent:'Orchestrator',summary:'Routing to Governance Copilot — natural language query',
+       detail:'This is a read-only governance question — no data changes needed. The Orchestrator routes directly to the Copilot for a quick answer.',
+       sys:'ORCHESTRATOR.compose(scenario="governance_query") → Copilot only',
+       result:['Routed to Governance Copilot','ok'],duration:'0.1s'},
+
+      {agent:'Workflow',summary:'Lightweight plan: read-only query — no approvals or remediation needed',
+       detail:'This is a simple data lookup — no changes, no compliance checks, no approval gates. Just query and respond.',
+       sys:'WORKFLOW_ENGINE.decompose(intent="read_only") → 1 task: Copilot',
+       result:['1 task — read-only query','ok'],duration:'0.1s',
+       workflow: {
+         active: ['Copilot'],
+         skipped: ['Discovery','Classification','Policy','DQ Monitor','Lineage','Root Cause','Simulation','Remediation','Escalation'],
+         conditional: []
+       }},
+
+      {agent:'Copilot',summary:'4 data assets found below the 95% quality threshold with their owners',
+       detail:'The Copilot translated your natural language question into structured queries across your governance catalogue and quality scores, then enriched the results with ownership and classification data.<br><br>All processing within AZ infrastructure — your data never leaves.',
+       sys:'BEDROCK.generateQuery(input="assets below 95% quality")\nSNOWFLAKE.execute(query)\nCOLLIBRA.getOwners()',
+       result:['4 assets found below 95% quality threshold','ok'],duration:'2.8s',
+       data:{title:'Data Assets Below 95% Quality',headers:['Data Asset','Domain','Quality','Owner','Classification','Top Issue'],rows:[['Supplier Quality Data','Supplier','91.3%','Tom Williams','Internal','Completeness gaps'],['Material Master (batch)','Material','91.7%','Sarah Thompson','Internal','Format errors'],['Material Master','Material','94.2%','Sarah Thompson','Internal','Safety data gaps'],['HCP Addresses (APAC)','Healthcare','93.1%','James Kumar','Confidential','Address format drift']]}},
+    ],
+    finalMsg: `<strong>4 data assets below 95% quality threshold:</strong><br><br><table><tr><th>Asset</th><th>Quality</th><th>Owner</th><th>Top Issue</th></tr><tr><td>Supplier Quality Data</td><td style="color:#ef4444"><strong>91.3%</strong></td><td>Tom Williams</td><td>Completeness gaps</td></tr><tr><td>Material Master (batch)</td><td style="color:#ef4444"><strong>91.7%</strong></td><td>Sarah Thompson</td><td>Format errors</td></tr><tr><td>Material Master</td><td style="color:#f59e0b"><strong>94.2%</strong></td><td>Sarah Thompson</td><td>Safety data gaps</td></tr><tr><td>HCP Addresses (APAC)</td><td style="color:#f59e0b"><strong>93.1%</strong></td><td>James Kumar</td><td>Address format drift</td></tr></table><br>Answered in natural language. No SQL required. Data stays in your platform.`
+  },
+
+  crossborder: {
+    userMsg: 'Is any clinical data being moved across borders without the right approvals?',
+    steps: [
+      {agent:'Orchestrator',summary:'Scanning all active data pipelines for cross-border compliance risks',
+       detail:'Scanning every active data movement pipeline to check if any regulated data is crossing borders without proper contractual agreements (Standard Contractual Clauses).',
+       sys:'ORCHESTRATOR.compose(scenario="crossborder_scan", scope="all_pipelines")',
+       result:['Pipeline composed — scanning all active transfers','ok'],duration:'0.1s'},
+
+      {agent:'Workflow',summary:'Compliance scan: policy check → downstream impact → guidance → audit',
+       detail:'A full compliance scan: check all transfer policies, map any downstream impact from blocked transfers, provide compliant alternatives, and audit everything.',
+       sys:'WORKFLOW_ENGINE.decompose(protocol="CROSSBORDER_SCAN") → 4 tasks',
+       result:['4 tasks — full compliance scan','ok'],duration:'0.2s',
+       workflow: {
+         active: ['Policy','Lineage','Copilot','Observability'],
+         skipped: ['Discovery','Classification','DQ Monitor','Root Cause','Simulation','Remediation'],
+         conditional: ['Escalation → if violation found']
+       }},
+
+      {agent:'Policy',summary:'BLOCKED: EU clinical data being copied to US cluster without required contractual agreements',
+       detail:'<strong>Deterministic policy check</strong> on all active data movement:<br><br>• <strong style="color:#ef4444">1 BLOCKED</strong>: Clinical data transfer from EU (Frankfurt) → US (Virginia) — <strong>no Standard Contractual Clauses found</strong>. Transfer blocked at the gateway.<br>• 2 other cross-border transfers checked — both have valid agreements ✓<br><br>The block happened automatically. No data reached the US cluster.',
+       sys:'POLICY_ENGINE.scanPipelines(check="cross_border") → 1 blocked, 2 compliant',
+       result:['1 transfer blocked — 2 others compliant','err'],duration:'1.4s'},
+
+      {agent:'Lineage',summary:'16 downstream systems on the US cluster verified — none were exposed (block prevented it)',
+       detail:'The Lineage Agent traced all systems that would have been affected if the transfer had gone through:<br><br>• 12 downstream dashboards<br>• 4 machine learning models<br>• <strong>None currently contain EU regulated data</strong><br>• The automatic block prevented any propagation',
+       sys:'COLLIBRA.getDownstream(cluster="us-analytics") → 16 consumers, 0 exposed',
+       result:['0 downstream impact — blocked in time','ok'],duration:'1.8s'},
+
+      {agent:'Copilot',summary:'3 GDPR-compliant alternatives provided to the data team',
+       detail:'The team that requested the transfer has been notified and given compliant alternatives:<br><br><strong>Option 1:</strong> Anonymise the data in the EU region first, then transfer<br><strong>Option 2:</strong> Use the EU-region analytics cluster instead<br><strong>Option 3:</strong> Apply for Standard Contractual Clauses via the DPO team<br><br>Links to all relevant procedures and application forms provided.',
+       sys:'BEDROCK.chat(context="gdpr_transfer_block", guardrails="active")',
+       result:['Compliant alternatives provided — 0 regulatory risk','ok'],duration:'2.1s'},
+
+      {agent:'Observability',summary:'Cross-border scan fully documented. 1 block enforced. Zero data exposure.',
+       detail:'Full compliance audit of the scan:<br><br>• <strong>3 pipelines scanned</strong> — 1 blocked, 2 compliant ✓<br>• <strong>Block enforcement</strong> logged with full evidence ✓<br>• <strong>16 downstream systems</strong> verified clean ✓<br>• <strong>Zero data exfiltration</strong> — block prevented transfer ✓',
+       sys:'OBSERVABILITY.audit(pipelines=3, blocked=1, exposure=0)',
+       result:['Scan documented — compliance verified — 0 exposure','ok'],duration:'0.3s',
+       kbWrite: 'Wrote: Cross-border transfer blocked — no contractual clauses. Team notified with alternatives.'},
+    ],
+    finalMsg: `<strong>Cross-Border Compliance Report</strong><br><br>• <strong style="color:#ef4444">1 transfer blocked:</strong> EU clinical data → US analytics cluster (no contractual agreements)<br>• 2 other cross-border transfers: compliant ✓<br>• 16 downstream systems verified — 0 exposed<br>• Data team provided with 3 GDPR-compliant alternatives<br><br><strong>Without automation:</strong> Transfer happens silently. Discovered when the regulator asks — potential €20M+ fine.<br><strong>With automation:</strong> Blocked before execution. Zero exposure. Zero fine. Zero risk.`
+  },
+
+  datasource: {
+    userMsg: 'A new clinical trials data source just connected — what quality rules should govern it?',
+    steps: [
+      {agent:'Orchestrator',summary:'New data source detected — initiating auto-governance pipeline',
+       detail:'A new data source (<strong>Clinical Trials Management System — CTMS Phase III</strong>) has been connected to the platform. No governance rules exist yet. The Orchestrator activates the full auto-governance pipeline: profile → discover → generate rules → enforce.',
+       sys:'ORCHESTRATOR.compose(scenario="new_datasource_governance", source="CTMS_Phase3")',
+       result:['Auto-governance pipeline activated for new source','ok'],duration:'0.2s'},
+
+      {agent:'Discovery',summary:'Data source catalogued — 14 tables, 186 columns, 42,000 records discovered',
+       detail:'The Discovery Agent connects to the new source and maps its entire schema:<br><br>• <strong>14 tables</strong> detected (patients, visits, adverse_events, lab_results, dosing, sites...)<br>• <strong>186 columns</strong> across all tables<br>• <strong>42,000 records</strong> total volume<br>• <strong>Auto-registered</strong> in Collibra data catalogue with lineage tags',
+       sys:'COLLIBRA.registerSource(name="CTMS_Phase3", tables=14, columns=186)\nCATALOGUE.mapSchema()',
+       result:['Source catalogued — 14 tables, 186 columns','ok'],duration:'1.4s',
+       data:{title:'Discovered Tables',headers:['Table','Columns','Records','Classification'],rows:[['patients','32','8,400','<span style="color:#ef4444">PHI — Restricted</span>'],['adverse_events','18','3,200','<span style="color:#f59e0b">Clinical — Confidential</span>'],['lab_results','24','15,600','<span style="color:#f59e0b">Clinical — Confidential</span>'],['dosing_records','14','9,800','Clinical — Internal'],['site_master','12','5,000','Reference — Internal']]},
+       kbWrite:'Wrote: CTMS Phase III registered — 14 tables, 186 columns, 42K records'},
+
+      {agent:'Classification',summary:'Sensitive data detected — 3 tables contain PHI, 2 contain regulated clinical data',
+       detail:'AI-powered classification scanned all 186 columns and identified sensitive content:<br><br>• <strong style="color:#ef4444">3 tables with PHI</strong> — patient names, DOB, medical record numbers<br>• <strong style="color:#f59e0b">2 tables with regulated clinical data</strong> — adverse events, lab results<br>• <strong>9 tables</strong> — standard reference/operational data<br><br>Classification tags automatically applied in the catalogue.',
+       sys:'BEDROCK.classify(columns=186, model="sensitivity-classifier") → PHI:3, Regulated:2, Standard:9',
+       result:['5 sensitive tables identified and tagged','ok'],duration:'3.2s'},
+
+      {agent:'Profiling',summary:'Full quality profile complete — 186 columns scored across 12 dimensions',
+       detail:'Every column in the new source has been profiled automatically:<br><br>• <strong>Completeness</strong> — 7 columns below 90% (missing values)<br>• <strong>Format validity</strong> — 4 columns with inconsistent date formats<br>• <strong>Uniqueness</strong> — 2 potential duplicate patient records<br>• <strong>Referential integrity</strong> — 3 foreign key mismatches between tables<br>• <strong>Overall quality score</strong>: <strong style="color:#f59e0b">87.3%</strong> (below 95% threshold)',
+       sys:'PROFILING_ENGINE.run(source="CTMS_Phase3", columns=186, dimensions=12)',
+       result:['186 columns profiled — quality: 87.3%','warn'],duration:'4.1s',
+       data:{title:'Quality Profile Summary',headers:['Dimension','Columns Checked','Issues Found','Severity'],rows:[['Completeness','186','7 columns < 90%','<span style="color:#ef4444">High</span>'],['Format validity','186','4 inconsistent formats','<span style="color:#f59e0b">Medium</span>'],['Uniqueness','32 (patients)','2 potential duplicates','<span style="color:#f59e0b">Medium</span>'],['Referential integrity','14 FKs','3 mismatches','<span style="color:#ef4444">High</span>'],['Timeliness','186','0 stale columns','<span style="color:#10b981">Low</span>']]}},
+
+      {agent:'Rule Engine',summary:'9 quality rules auto-generated from profiling results and data classification',
+       detail:'Based on the profiling results and data sensitivity classification, the Rule Engine has <strong>automatically generated 9 governance rules</strong> tailored to this data source:<br><br><strong style="color:#ef4444">Critical (auto-generated):</strong><br>• R1: Patient PHI fields must be masked before analytics access<br>• R2: Adverse event records require completeness ≥ 99%<br>• R3: All clinical dates must use ISO 8601 format<br><br><strong style="color:#f59e0b">Standard (auto-generated):</strong><br>• R4: Foreign key integrity must pass between all related tables<br>• R5: No duplicate patient records (match on name + DOB + site)<br>• R6: Lab results must have valid reference ranges<br><br><strong style="color:#60a5fa">Recommended (auto-generated):</strong><br>• R7: Dosing records should have ≥ 95% completeness<br>• R8: Site master data must match global reference<br>• R9: All records must have audit trail timestamps',
+       sys:'RULE_ENGINE.generate(profile_results, classification_tags, policy_templates) → 9 rules\n→ 3 CRITICAL, 3 STANDARD, 3 RECOMMENDED',
+       result:['9 rules auto-generated — 3 critical, 3 standard, 3 recommended','ok'],duration:'2.6s',
+       data:{title:'Auto-Generated Rules',headers:['Rule','Scope','Severity','Enforcement'],rows:[['PHI masking required','patients, adverse_events, lab_results','<span style="color:#ef4444">Critical</span>','Block'],['Adverse event completeness ≥ 99%','adverse_events','<span style="color:#ef4444">Critical</span>','Block'],['ISO 8601 date format','All tables','<span style="color:#ef4444">Critical</span>','Block'],['Foreign key integrity','All relationships','<span style="color:#f59e0b">Standard</span>','Warn + Escalate'],['No duplicate patients','patients','<span style="color:#f59e0b">Standard</span>','Warn + Escalate'],['Valid lab reference ranges','lab_results','<span style="color:#f59e0b">Standard</span>','Warn'],['Dosing completeness ≥ 95%','dosing_records','<span style="color:#60a5fa">Recommended</span>','Warn'],['Site master reference match','site_master','<span style="color:#60a5fa">Recommended</span>','Warn'],['Audit trail timestamps','All tables','<span style="color:#60a5fa">Recommended</span>','Warn']]},
+       kbWrite:'Wrote: 9 auto-generated rules for CTMS Phase III source'},
+
+      {agent:'DQ Monitor',summary:'Rules applied retroactively — 23 existing violations found across 42,000 records',
+       detail:'All 9 rules were applied against the existing 42,000 records to show current compliance:<br><br>• <strong style="color:#ef4444">R1 violation</strong>: 8,400 patient records have unmasked PHI → auto-masking ready<br>• <strong style="color:#ef4444">R2 violation</strong>: 6 adverse event records missing required fields<br>• <strong style="color:#ef4444">R3 violation</strong>: 4 date format inconsistencies<br>• <strong style="color:#f59e0b">R4 violation</strong>: 3 foreign key mismatches<br>• <strong style="color:#f59e0b">R5 violation</strong>: 2 potential duplicate patients<br><br>Total: <strong>23 violations</strong> across 5 rules. 4 rules passed clean.',
+       sys:'DQ_MONITOR.enforceRetroactive(rules=9, records=42000) → violations: 23, clean: 4 rules',
+       result:['23 violations found — 4 rules passed clean','warn'],duration:'3.8s',
+       impact:{quality:{label:'Rule Compliance',from:87.3,to:99.2},downstream:{reports:8,broken:0},confidence:96.4,costSaved:125000,riskNote:'PHI masking is critical — must be enforced before any analytics access'}},
+
+      {agent:'Policy',summary:'9 rules packaged as governance policy — awaiting Data Office approval to enforce',
+       detail:'All 9 auto-generated rules have been packaged into a formal governance policy ready for publication:<br><br><div style="background:rgba(30,30,46,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem;margin:0.4rem 0"><div style="font-size:0.6rem;font-weight:700;color:#a78bfa;margin-bottom:0.4rem">POLICY: CTMS Phase III Data Governance</div><div style="font-size:0.55rem;color:var(--dim);line-height:1.5">• 3 Critical rules → <strong>Block enforcement</strong><br>• 3 Standard rules → <strong>Warn + Escalate</strong><br>• 3 Recommended rules → <strong>Warn only</strong><br>• Applies to: All future ingestion from this source<br>• Retroactive scan: 23 existing violations flagged</div></div>',
+       sys:'POLICY_REGISTRY.package(rules=9, source="CTMS_Phase3", status="PENDING")',
+       result:['Policy packaged — awaiting approval to enforce','warn'],duration:'0.5s',
+       approval:{
+         title:'Data Office Approval Required',
+         body:'<strong>Publish and enforce 9 auto-generated rules for CTMS Phase III?</strong><br><br>• 3 Critical rules (Block enforcement) — PHI masking, adverse event completeness, date formats<br>• 3 Standard rules (Warn + Escalate) — FK integrity, deduplication, lab ranges<br>• 3 Recommended rules (Warn) — dosing completeness, site reference, audit trails<br><br>23 existing violations will be flagged for remediation. All future ingestion will be validated automatically.',
+         options:['approve','reject','modify'],
+         postApprove:{
+           summary:'9 rules published to Collibra and enforced. All future CTMS Phase III ingestion will be validated. 23 existing violations assigned to stewards.',
+           sys:'COLLIBRA.publishPolicy(name="CTMS_Phase3_Governance", rules=9) → ENFORCED',
+           result:['9 rules enforced — all future ingestion validated automatically','ok']
+         }
+       }},
+
+      {agent:'Observability',summary:'Full governance lifecycle documented. 9 rules enforced. Continuous monitoring active.',
+       detail:'Complete audit trail generated for this auto-governance event:<br><br>• <strong>New source registered</strong> in catalogue ✓<br>• <strong>186 columns profiled</strong> across 12 dimensions ✓<br>• <strong>5 sensitive tables classified</strong> and tagged ✓<br>• <strong>9 rules auto-generated</strong> from profiling + classification ✓<br>• <strong>23 retroactive violations</strong> flagged for stewards ✓<br>• <strong>Continuous enforcement</strong> active on all future ingestion ✓<br><br>Next ingestion from CTMS Phase III will be automatically validated against all 9 rules.',
+       sys:'OBSERVABILITY.audit(source="CTMS_Phase3", rules_enforced=9, violations=23, monitoring=ACTIVE)',
+       result:['Audit complete — continuous enforcement active','ok'],duration:'0.4s',
+       kbWrite:'Wrote: CTMS Phase III fully governed — 9 rules enforced, 23 violations in remediation'},
+    ],
+    finalMsg:`<strong>Auto-Governance Report: CTMS Phase III</strong><br><br><table><tr><th>Metric</th><th>Result</th></tr><tr><td>Tables Discovered</td><td><strong>14</strong></td></tr><tr><td>Columns Profiled</td><td><strong>186</strong></td></tr><tr><td>Sensitive Tables</td><td>5 (3 PHI + 2 Regulated)</td></tr><tr><td>Rules Auto-Generated</td><td><strong>9</strong> (3 Critical, 3 Standard, 3 Recommended)</td></tr><tr><td>Existing Violations</td><td>23 → assigned to stewards</td></tr><tr><td>Quality Score</td><td>87.3% → <strong>99.2%</strong> (after remediation)</td></tr><tr><td>Processing Time</td><td><strong>~2 minutes</strong></td></tr><tr><td>Manual Equivalent</td><td>~3-4 weeks</td></tr></table><br><strong>Without automation:</strong> New data source sits ungoverned for weeks. Quality rules written manually. Violations found at quarterly audit.<br><strong>With automation:</strong> Connected → profiled → classified → rules generated → enforced — all in <strong>2 minutes</strong>. Every future record validated automatically.`
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let isProcessing = false;
+let approvalResolve = null;
+let activeAgents = new Set(); // Tracks which agents are active in current scenario
+
+// ═══════════════════════════════════════════════════════════════
+// FUNCTIONS
+// ═══════════════════════════════════════════════════════════════
+function showFlowTab(tab) {
+  document.querySelectorAll('.flow-tab').forEach((t,i) => t.classList.toggle('active', (tab==='timeline'?0:1)===i));
+  if (tab === 'diagram') {
+    document.getElementById('flowSteps').style.display = 'none';
+    document.getElementById('flowEmpty').style.display = 'none';
+    showDiagram();
+  } else {
+    document.getElementById('flowDiagram').style.display = 'none';
+    const steps = document.getElementById('flowSteps');
+    if (steps.children.length > 0) { steps.style.display = 'flex'; } else { document.getElementById('flowEmpty').style.display = 'flex'; }
+  }
+}
+
+function showDiagram() {
+  const d = document.getElementById('flowDiagram');
+  d.style.display = 'flex';
+  d.innerHTML = '';
+  d.style.cssText += 'display:flex;flex-direction:column;align-items:center;gap:0;padding:1rem 0.8rem;overflow-y:auto;';
+
+  const has = activeAgents.size > 0;
+  const isOn = (name) => activeAgents.has(name);
+
+  // Mapping: which utility agents belong to which super agent
+  const pillars = [
+    {name:'DQ Super Agent',label:'Data Quality',icon:'📊',color:'#3b82f6',rgb:'59,130,246',agents:['Profiling','DQ Monitor','Root Cause','Simulation']},
+    {name:'MDG Super Agent',label:'Master Data',icon:'🏷️',color:'#a855f7',rgb:'168,85,247',agents:['Discovery','Classification','Remediation']},
+    {name:'Gov Super Agent',label:'Governance',icon:'📜',color:'#10b981',rgb:'16,185,129',agents:['Policy','Copilot','Observability']},
+    {name:'Eng Super Agent',label:'Engineering',icon:'🔗',color:'#14b8a6',rgb:'20,184,166',agents:['Lineage','Escalation','Workflow']},
+  ];
+
+  // Helper: style for active vs inactive utility agent
+  function utilNode(name, rgb, color) {
+    const on = !has || isOn(name);
+    const bg = on ? `rgba(${rgb},0.15)` : `rgba(${rgb},0.03)`;
+    const border = on ? `rgba(${rgb},0.5)` : `rgba(${rgb},0.08)`;
+    const textColor = on ? color : `rgba(${rgb},0.25)`;
+    const shadow = on ? `box-shadow:0 0 8px rgba(${rgb},0.3);` : '';
+    const weight = on ? '700' : '500';
+    return `<div style="padding:0.25rem 0.4rem;border-radius:5px;background:${bg};border:1px solid ${border};font-size:0.45rem;font-weight:${weight};color:${textColor};width:90%;text-align:center;transition:all 0.3s ease;${shadow}">${name}</div>`;
+  }
+
+  // Check if any child agent of a super agent is active
+  function superActive(p) {
+    if (!has) return false;
+    return p.agents.some(a => isOn(a));
+  }
+
+  // Orchestrator is always active if any scenario is running
+  const orchOn = !has || isOn('Orchestrator');
+  const orchBg = orchOn ? 'linear-gradient(135deg,rgba(131,0,81,0.25),rgba(139,92,246,0.18))' : 'linear-gradient(135deg,rgba(131,0,81,0.08),rgba(139,92,246,0.04))';
+  const orchBorder = orchOn ? 'rgba(131,0,81,0.6)' : 'rgba(131,0,81,0.15)';
+  const orchShadow = orchOn ? '0 0 30px rgba(131,0,81,0.25)' : '0 0 10px rgba(131,0,81,0.05)';
+  const orchTextColor = orchOn ? '#fff' : 'rgba(255,255,255,0.3)';
+
+  // Status badge
+  const statusHtml = has
+    ? `<div style="font-size:0.5rem;color:var(--dim);margin-bottom:0.8rem;text-align:center"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#34d399;margin-right:4px;animation:pulse 1.5s infinite"></span>${activeAgents.size} agents active for this query</div>`
+    : `<div style="font-size:0.5rem;color:var(--dim);margin-bottom:0.8rem;text-align:center">Run a scenario to see agents activate</div>`;
+
+  d.innerHTML = `
+    <div style="text-align:center;margin-bottom:0.3rem">
+      <div style="font-size:0.5rem;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:0.3rem">Agent Architecture</div>
+      <div style="font-size:0.65rem;color:var(--dim)">Orchestrator → Super Agents → Utility Agents</div>
+    </div>
+    ${statusHtml}
+
+    <!-- Tier 1: Orchestrator -->
+    <div style="text-align:center;margin-bottom:0.3rem">
+      <div style="display:inline-block;padding:0.7rem 1.5rem;border-radius:12px;background:${orchBg};border:2px solid ${orchBorder};box-shadow:${orchShadow};transition:all 0.3s ease">
+        <div style="font-size:1.1rem">🎯</div>
+        <div style="font-size:0.6rem;font-weight:800;color:${orchTextColor}">Orchestrator</div>
+        <div style="font-size:0.45rem;color:rgba(255,255,255,${orchOn?'0.4':'0.15'});margin-top:0.1rem">Routes · Composes · Decides</div>
+      </div>
+    </div>
+
+    <!-- Connector T1→T2 -->
+    <div style="text-align:center;height:30px">
+      <svg viewBox="0 0 400 30" style="width:100%;height:100%" preserveAspectRatio="none">
+        ${pillars.map((p,i) => {
+          const x = [60,153,247,340][i];
+          const on = !has || superActive(p);
+          const opacity = on ? '0.5' : '0.1';
+          const sw = on ? '2' : '1';
+          return `<path d="M200,0 L${x},30" stroke="rgba(${p.rgb},${opacity})" stroke-width="${sw}" fill="none"/>`;
+        }).join('\n        ')}
+      </svg>
+    </div>
+
+    <!-- Tier 2: Super Agents -->
+    <div style="display:flex;gap:0.5rem;margin-bottom:0.3rem;width:100%">
+      ${pillars.map(p => {
+        const on = !has || superActive(p);
+        const bg = on ? `rgba(${p.rgb},0.08)` : 'rgba(255,255,255,0.01)';
+        const border = on ? `rgba(${p.rgb},0.3)` : 'rgba(255,255,255,0.04)';
+        const topBorder = on ? p.color : `rgba(${p.rgb},0.15)`;
+        const textColor = on ? p.color : `rgba(${p.rgb},0.3)`;
+        const shadow = on ? `box-shadow:0 0 12px rgba(${p.rgb},0.15);` : '';
+        const dimLabel = on ? 'var(--dim)' : 'rgba(255,255,255,0.1)';
+        return `<div style="flex:1;padding:0.6rem 0.3rem;border-radius:10px;background:${bg};border:1px solid ${border};border-top:3px solid ${topBorder};text-align:center;transition:all 0.3s ease;${shadow}">
+          <div style="font-size:0.85rem;${on?'':'opacity:0.3'}">${p.icon}</div>
+          <div style="font-size:0.52rem;font-weight:700;color:${textColor}">${p.name}</div>
+          <div style="font-size:0.42rem;color:${dimLabel}">${p.label}</div>
+        </div>`;
+      }).join('\n      ')}
+    </div>
+
+    <!-- Connector T2→T3 -->
+    <div style="text-align:center;height:22px">
+      <svg viewBox="0 0 400 22" style="width:100%;height:100%" preserveAspectRatio="none">
+        ${pillars.map((p,i) => {
+          const cx = [60,153,247,340][i];
+          const on = !has || superActive(p);
+          const opacity = on ? '0.35' : '0.06';
+          return [cx-20, cx, cx+20].map(tx =>
+            `<path d="M${cx},0 L${tx},22" stroke="rgba(${p.rgb},${opacity})" stroke-width="1" fill="none"/>`
+          ).join('\n        ');
+        }).join('\n        ')}
+      </svg>
+    </div>
+
+    <!-- Tier 3: Utility Agents -->
+    <div style="display:flex;gap:0.5rem;width:100%">
+      ${pillars.map(p =>
+        `<div style="flex:1;display:flex;flex-direction:column;gap:0.2rem;align-items:center">
+          ${p.agents.map(a => utilNode(a, p.rgb, p.color)).join('\n          ')}
+        </div>`
+      ).join('\n      ')}
+    </div>
+
+    <!-- Query Flow -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:0.25rem;margin-top:1rem;flex-wrap:wrap">
+      <div style="padding:0.25rem 0.5rem;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.45rem;font-weight:600;color:rgba(255,255,255,0.4)">User query</div>
+      <div style="color:rgba(255,255,255,0.15);font-size:0.5rem">→</div>
+      <div style="padding:0.25rem 0.5rem;border-radius:6px;background:rgba(131,0,81,0.12);border:1px solid rgba(131,0,81,0.25);font-size:0.45rem;font-weight:600;color:#c77daa">Orchestrator</div>
+      <div style="color:rgba(255,255,255,0.15);font-size:0.5rem">→</div>
+      <div style="padding:0.25rem 0.5rem;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.45rem;font-weight:600;color:rgba(255,255,255,0.4)">Super Agent</div>
+      <div style="color:rgba(255,255,255,0.15);font-size:0.5rem">→</div>
+      <div style="padding:0.25rem 0.5rem;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.45rem;font-weight:600;color:rgba(255,255,255,0.4)">Utility Agents</div>
+      <div style="color:rgba(255,255,255,0.15);font-size:0.5rem">→</div>
+      <div style="padding:0.25rem 0.5rem;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.45rem;font-weight:600;color:rgba(255,255,255,0.4)">Human approves</div>
+    </div>
+
+    <!-- Knowledge Base -->
+    <div style="margin-top:0.8rem;padding:0.5rem;border-radius:8px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12);text-align:center;width:100%">
+      <div style="font-size:0.48rem;font-weight:700;color:#34d399;margin-bottom:0.2rem">Knowledge Base (Shared Memory)</div>
+      <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+        <span style="font-size:0.42rem;color:var(--dim)">📚 Data Catalogues</span>
+        <span style="font-size:0.42rem;color:var(--dim)">📋 Policies & Rules</span>
+        <span style="font-size:0.42rem;color:var(--dim)">🧠 Pattern History</span>
+        <span style="font-size:0.42rem;color:var(--dim)">📝 Audit Trails</span>
+      </div>
+    </div>
+  `;
+}
+
+function addMsg(role, html) {
+  const w = document.getElementById('welcome');
+  if (w) w.style.display = 'none';
+  const m = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = `msg msg-${role}`;
+  d.innerHTML = `<div class="msg-avatar">${role==='user'?'👤':'🤖'}</div><div class="msg-bubble">${html}</div>`;
+  m.appendChild(d);
+  m.scrollTop = m.scrollHeight;
+}
+
+function addTyping() {
+  const m = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'msg msg-assistant';
+  d.id = 'typingMsg';
+  d.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  m.appendChild(d);
+  m.scrollTop = m.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingMsg');
+  if (t) t.remove();
+}
+
+async function addFlowStep(step, index, total, scenarioSteps) {
+  const container = document.getElementById('flowSteps');
+  container.style.display = 'flex';
+  document.getElementById('flowEmpty').style.display = 'none';
+
+  const ac = AGENT_COLORS[step.agent] || AGENT_COLORS['Orchestrator'];
+  const nextStep = scenarioSteps[index + 1];
+  const nextAc = nextStep ? (AGENT_COLORS[nextStep.agent] || ac) : ac;
+  const statusCls = step.result[1] === 'ok' ? 'ok' : step.result[1] === 'err' ? 'err' : 'warn';
+  const statusIcon = statusCls === 'ok' ? '✓' : statusCls === 'err' ? '✗' : '⚠';
+
+  // Track KB writes
+  if (step.kbWrite) {
+    KNOWLEDGE_BASE.log.push({time: new Date().toISOString(), agent: step.agent, action: step.kbWrite});
+  }
+
+  // Build detail content for the expandable panel
+  const detailId = 'pipedetail-' + index + '-' + Date.now();
+  let detailInner = step.detail;
+
+  if (step.data) {
+    detailInner += `<table class="flow-data-tbl" style="margin-top:0.5rem"><thead><tr>${step.data.headers.map(h=>'<th>'+h+'</th>').join('')}</tr></thead><tbody>${step.data.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')}</tbody></table>`;
+  }
+
+  if (step.impact) {
+    const imp = step.impact;
+    const qLabel = imp.quality.label || 'Quality Score';
+    detailInner += `<div style="display:flex;gap:0.6rem;margin-top:0.5rem;flex-wrap:wrap">
+      <div style="font-size:0.6rem;color:var(--green)">📊 ${qLabel}: ${imp.quality.from}→${imp.quality.to}%</div>
+      <div style="font-size:0.6rem;color:var(--green)">💰 £${imp.costSaved.toLocaleString()} saved</div>
+      ${imp.riskNote ? `<div style="font-size:0.6rem;color:var(--amber)">⚠ ${imp.riskNote}</div>` : ''}
+    </div>`;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'pipe-step';
+
+  el.innerHTML = `
+    <div class="pipe-node" onclick="togglePipeDetail('${detailId}')">
+      <div class="pipe-dot" style="border-color:${ac.border};background:${ac.bg}">
+        <div class="pipe-glow" style="background:${ac.border}"></div>
+        <span>${ac.icon}</span>
+      </div>
+      <div class="pipe-info">
+        <div class="pipe-agent" style="color:${ac.text}">${step.agent}</div>
+        <div class="pipe-summary">${step.summary}</div>
+      </div>
+      <div class="pipe-meta">
+        <div class="pipe-status ${statusCls}">${statusIcon}</div>
+        <span class="pipe-time">${step.duration}</span>
+      </div>
+    </div>
+    <div class="pipe-detail" id="${detailId}" style="border-color:${ac.border}22">
+      ${detailInner}
+      <div id="approval-slot-${index}"></div>
+    </div>
+    ${index < total - 1 ? `<div class="pipe-connector" style="background:linear-gradient(180deg,${ac.border},${nextAc.border})"></div>` : ''}
+  `;
+
+  container.appendChild(el);
+  const fb = document.getElementById('flowBody');
+  fb.scrollTop = fb.scrollHeight;
+
+  // If this step has an approval gate, show it and wait
+  if (step.approval) {
+    // Auto-expand the detail so the approval gate is visible
+    document.getElementById(detailId).classList.add('open');
+    await showApprovalGate(index, step);
+  }
+}
+
+function showApprovalGate(index, step) {
+  return new Promise((resolve) => {
+    const slot = document.getElementById(`approval-slot-${index}`);
+    const ap = step.approval;
+    slot.innerHTML = `
+      <div class="approval-gate">
+        <div class="approval-gate-title">✋ ${ap.title}</div>
+        <div class="approval-gate-body">${ap.body}</div>
+        <div class="approval-btns">
+          <button class="approval-btn approve" onclick="handleApproval(${index}, 'approve')">✓ Approve</button>
+          <button class="approval-btn reject" onclick="handleApproval(${index}, 'reject')">✗ Reject</button>
+          <button class="approval-btn modify" onclick="handleApproval(${index}, 'modify')">✎ Modify Threshold</button>
+        </div>
+      </div>
+    `;
+    const fb = document.getElementById('flowBody');
+    fb.scrollTop = fb.scrollHeight;
+
+    // Also show in chat
+    addMsg('assistant', `<strong>⏸ Approval Required</strong><br><br>${ap.body}<br><br><em>Use the approval buttons on the right panel to continue →</em>`);
+
+    approvalResolve = resolve;
+    window._currentApprovalStep = step;
+    window._currentApprovalIndex = index;
+  });
+}
+
+function handleApproval(index, action) {
+  const step = window._currentApprovalStep;
+  const slot = document.getElementById(`approval-slot-${index}`);
+  const ap = step.approval;
+
+  if (action === 'approve') {
+    slot.innerHTML = `
+      <div class="approval-gate" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.25)">
+        <div class="approval-gate-title" style="color:var(--green)">✓ Approved</div>
+        <div class="approval-gate-body">${ap.postApprove.summary}</div>
+        <div class="flow-sys">${ap.postApprove.sys}</div>
+        <div class="flow-result" style="background:rgba(16,185,129,0.1);color:#34d399;margin-top:0.4rem">${ap.postApprove.result[0]}</div>
+      </div>
+    `;
+    addMsg('assistant', `✓ <strong>Approved.</strong> ${ap.postApprove.summary}`);
+  } else if (action === 'reject') {
+    slot.innerHTML = `
+      <div class="approval-gate" style="background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25)">
+        <div class="approval-gate-title" style="color:var(--red)">✗ Rejected</div>
+        <div class="approval-gate-body">Changes not applied. Escalating to domain steward for manual review.</div>
+      </div>
+    `;
+    addMsg('assistant', `✗ <strong>Rejected.</strong> Changes not applied. Escalating to domain steward for manual review.`);
+  } else {
+    slot.innerHTML = `
+      <div class="approval-gate" style="background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.25)">
+        <div class="approval-gate-title" style="color:var(--purple)">✎ Threshold Modified</div>
+        <div class="approval-gate-body">Auto-fix threshold lowered from 95% to 90% for this batch. Re-evaluating... 2 additional fixes now qualify for auto-apply.</div>
+      </div>
+    `;
+    addMsg('assistant', `✎ <strong>Threshold modified.</strong> Auto-fix threshold lowered to 90% for this batch. 2 additional fixes now qualify.`);
+  }
+
+  const fb = document.getElementById('flowBody');
+  fb.scrollTop = fb.scrollHeight;
+
+  if (approvalResolve) {
+    approvalResolve(action);
+    approvalResolve = null;
+  }
+}
+
+function toggleExpand(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+function togglePipeDetail(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+async function runScenario(key) {
+  if (isProcessing) return;
+  isProcessing = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  const sc = SCENARIOS[key];
+  if (!sc) return;
+
+  // Track active agents for architecture view
+  activeAgents = new Set(sc.steps.map(s => s.agent));
+
+  // Reset KB log for this run
+  KNOWLEDGE_BASE.log = [];
+
+  // Clear flow
+  document.getElementById('flowSteps').innerHTML = '';
+  document.getElementById('flowSteps').style.display = 'flex';
+  document.getElementById('flowEmpty').style.display = 'none';
+  document.getElementById('flowDiagram').style.display = 'none';
+  document.querySelectorAll('.flow-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+
+  // User message
+  addMsg('user', sc.userMsg);
+
+  // Process steps
+  addTyping();
+  for (let i = 0; i < sc.steps.length; i++) {
+    await sleep(600 + Math.random() * 500);
+    removeTyping();
+    await addFlowStep(sc.steps[i], i, sc.steps.length, sc.steps);
+    if (i < sc.steps.length - 1) addTyping();
+  }
+  removeTyping();
+
+  // Final assistant message
+  await sleep(400);
+  addMsg('assistant', sc.finalMsg);
+
+  isProcessing = false;
+  document.getElementById('sendBtn').disabled = false;
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const val = input.value.trim();
+  if (!val || isProcessing) return;
+  input.value = '';
+
+  const lower = val.toLowerCase();
+  if (lower.includes('material') || lower.includes('supplier') || lower.includes('batch') || lower.includes('ingest')) {
+    runScenario('material');
+  } else if (lower.includes('ehs') || lower.includes('hazard') || lower.includes('ghs') || lower.includes('0847')) {
+    runScenario('ehs');
+  } else if (lower.includes('pii') || lower.includes('phi') || lower.includes('patient') || lower.includes('mask') || lower.includes('gdpr scan')) {
+    runScenario('pii');
+  } else if (lower.includes('quality') || lower.includes('owner') || lower.includes('below') || lower.includes('threshold')) {
+    runScenario('query');
+  } else if (lower.includes('cross') || lower.includes('border') || lower.includes('transfer') || lower.includes('gdpr')) {
+    runScenario('crossborder');
+  } else if (lower.includes('policy') || lower.includes('create rule') || lower.includes('new constraint') || lower.includes('add rule')) {
+    // Policy Authoring — Intent to Constraint
+    runPolicyAuthoring(val);
+  } else {
+    addMsg('user', val);
+    addMsg('assistant', `I can help with data control scenarios across your AZ stack. Try asking about:<br><br>• <strong>Material master ingestion</strong> — supplier batch quality<br>• <strong>EHS compliance</strong> — hazard classification gaps<br>• <strong>PII detection</strong> — unmasked patient data<br>• <strong>Quality queries</strong> — datasets below threshold<br>• <strong>Cross-border transfers</strong> — GDPR compliance<br>• <strong>Create a new policy rule</strong> — intent to constraint authoring`);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// POLICY AUTHORING — Intent → Constraint (Gap #5)
+// ═══════════════════════════════════════════════════════════════
+async function runPolicyAuthoring(userInput) {
+  if (isProcessing) return;
+  isProcessing = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  // Track active agents for architecture view
+  activeAgents = new Set(['Orchestrator','Copilot','DQ Monitor','Policy','Observability']);
+
+  // Clear flow
+  document.getElementById('flowSteps').innerHTML = '';
+  document.getElementById('flowSteps').style.display = 'flex';
+  document.getElementById('flowEmpty').style.display = 'none';
+  document.getElementById('flowDiagram').style.display = 'none';
+  document.querySelectorAll('.flow-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+
+  addMsg('user', userInput);
+
+  const steps = [
+    {agent:'Orchestrator',summary:'New governance rule requested — composing policy authoring pipeline',
+     detail:'A governance lead has expressed a new data rule in <strong>plain English</strong>. The Orchestrator assembles the right agents to draft, assess, and publish it.<br><br><div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:6px;padding:0.6rem;margin-top:0.4rem"><div style="font-size:0.6rem;color:#a78bfa;font-weight:700;margin-bottom:0.3rem">What you said (plain English)</div><div style="font-size:0.65rem;color:#e2e8f0;font-style:italic">"' + userInput + '"</div></div><br><div style="font-size:0.6rem;color:var(--muted)">Today this takes <strong style="color:#f87171">~3 weeks</strong>: Jira ticket → committee → IT configures → UAT → deploy.<br>With automation: <strong style="color:#34d399">~3 minutes</strong>.</div>',
+     sys:'ORCHESTRATOR.compose(scenario="policy_authoring", intent="' + userInput.substring(0, 60) + '...")',
+     result:['Pipeline composed — 5 agents activated','ok'],duration:'0.2s',
+     workflow: {active:['Copilot','Policy','DQ Monitor'],skipped:['Lineage','Remediation'],conditional:['Simulation']},
+     kbRead: 'Read: Existing policy catalogue (32 active rules)'},
+
+    {agent:'Copilot',summary:'AI translates plain English → structured governance rule',
+     detail:'The AI parses the governance lead\'s intent and maps it to a structured rule specification:<br><br><table style="width:100%;font-size:0.6rem;border-collapse:collapse"><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.3rem;color:var(--muted);width:35%">Scope</td><td style="padding:0.3rem;color:#e2e8f0"><strong>All excipient materials</strong> (478 active records)</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.3rem;color:var(--muted)">Constraint</td><td style="padding:0.3rem;color:#e2e8f0">Shelf-life data <strong>must be present</strong></td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.3rem;color:var(--muted)">Enforcement</td><td style="padding:0.3rem;color:#e2e8f0">Warn on ingestion → Block before production</td></tr><tr><td style="padding:0.3rem;color:var(--muted)">Confidence</td><td style="padding:0.3rem;color:#34d399"><strong>97.2%</strong> match</td></tr></table><br><div style="font-size:0.58rem;color:var(--muted)">The AI drafts. It does <strong>not</strong> decide. Your governance committee owns the sign-off.</div>',
+     sys:'BEDROCK.parseIntent(input="' + userInput.substring(0, 50) + '...") → structured_spec',
+     result:['Intent parsed — structured specification ready','ok'],duration:'1.8s',
+     kbRead: 'Read: Policy schema and enforcement levels'},
+
+    {agent:'DQ Monitor',summary:'Impact scan: 12 of 478 excipient records would fail this new rule',
+     detail:'Before anyone approves, the system scans <strong>all 478 active excipient records</strong> to show the real-world impact:<br><br><div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin:0.3rem 0"><div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:6px;padding:0.5rem;text-align:center"><div style="font-size:1.2rem;font-weight:800;color:#f87171">12</div><div style="font-size:0.55rem;color:#fca5a5">records would FAIL</div><div style="font-size:0.5rem;color:var(--muted)">missing shelf-life data</div></div><div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:6px;padding:0.5rem;text-align:center"><div style="font-size:1.2rem;font-weight:800;color:#34d399">466</div><div style="font-size:0.55rem;color:#6ee7b7">records PASS</div><div style="font-size:0.5rem;color:var(--muted)">already compliant</div></div></div><br><div style="font-size:0.58rem;color:var(--muted)">You see exactly what happens <strong>before</strong> you approve — no surprises.</div>',
+     sys:'DQ_MONITOR.impactScan(scope="excipient", rule="shelf_life_required") → 12 fail, 466 pass',
+     result:['Impact scan complete — 12 violations, 466 compliant','warn'],duration:'2.1s',
+     impact: {quality:{label:'Policy Compliance',from:97.5,to:100},downstream:{label:'Affected Downstream',reports:14,broken:3},confidence:97,costSaved:45000,riskNote:'12 materials need shelf-life data within 30 days of enforcement'},
+     data: {
+       title: 'Excipient Materials Missing Shelf Life',
+       headers: ['Material','Description','Supplier','Status','Shelf Life'],
+       rows: [
+         ['Lactose Monohydrate','Excipient — tablet binder','BASF Pharma','Active','<span style="color:#f87171">MISSING</span>'],
+         ['Microcrystalline Cellulose','Excipient — filler','DuPont','Active','<span style="color:#f87171">MISSING</span>'],
+         ['Magnesium Stearate','Excipient — lubricant','Peter Greven','Active','<span style="color:#f87171">MISSING</span>'],
+         ['Croscarmellose Sodium','Excipient — disintegrant','FMC BioPolymer','Active','<span style="color:#f87171">MISSING</span>']
+       ]
+     },
+     kbWrite: 'Wrote: Pre-publish impact analysis (12 violations in 478 records)'},
+
+    {agent:'Policy',summary:'Policy drafted — awaiting your governance approval',
+     detail:'The policy is drafted but <strong>NOT published</strong>. It is paused, waiting for a human decision.<br><br><div style="background:rgba(30,30,46,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem;margin:0.4rem 0"><div style="font-size:0.6rem;font-weight:700;color:#a78bfa;margin-bottom:0.5rem">POLICY DRAFT</div><table style="width:100%;font-size:0.58rem;border-collapse:collapse"><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.25rem;color:var(--muted);width:30%">Name</td><td style="padding:0.25rem;color:#e2e8f0">Excipient Shelf Life Requirement</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.25rem;color:var(--muted)">Scope</td><td style="padding:0.25rem;color:#e2e8f0">All excipient materials (478 records)</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.25rem;color:var(--muted)">Rule</td><td style="padding:0.25rem;color:#fbbf24">Shelf-life data must be present</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.25rem;color:var(--muted)">Enforcement</td><td style="padding:0.25rem;color:#e2e8f0">Warn on ingestion → Block before production</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:0.25rem;color:var(--muted)">Impact</td><td style="padding:0.25rem;color:#f87171">12 records currently non-compliant</td></tr><tr><td style="padding:0.25rem;color:var(--muted)">Status</td><td style="padding:0.25rem"><span style="background:rgba(245,158,11,0.15);color:#fbbf24;padding:0.15rem 0.4rem;border-radius:4px;font-size:0.55rem;font-weight:700">DRAFT — AWAITING APPROVAL</span></td></tr></table></div><br><div style="font-size:0.6rem;color:var(--green);font-weight:600">The AI accelerates the drafting. Your people own the decision.</div>',
+     sys:'POLICY_REGISTRY.draft(name="Excipient Shelf Life", scope="excipient", status="PENDING")',
+     result:['Policy drafted — governance approval required','warn'],duration:'0.6s',
+     approval: {
+       title: 'Governance Approval Required',
+       body: '<strong>Publish this policy?</strong> (Excipient Shelf Life Requirement)<br><br>• Scope: All excipient materials (478 records)<br>• Rule: Shelf-life data mandatory<br>• Enforcement: Warn on ingestion, block before production<br>• Impact: 12 records currently non-compliant — stewards will be notified<br><br><div style="font-size:0.58rem;color:var(--muted);margin-top:0.3rem">This decision is yours. The AI drafted it. You approve it.</div>',
+       options: ['approve','reject','modify'],
+       postApprove: {
+         summary: '<strong>Policy published to Collibra.</strong> Now enforced across all excipient ingestion. 12 non-compliant records flagged. Stewards notified.',
+         sys: 'COLLIBRA.publishPolicy(name="Excipient Shelf Life") → LIVE',
+         result: ['Policy live in Collibra — shelf life now enforced','ok']
+       }
+     },
+     kbWrite: 'Wrote: Excipient Shelf Life policy drafted, pending governance approval'},
+
+    {agent:'Observability',summary:'Policy published, audited, and 12 remediation tasks created for stewards',
+     detail:'<div style="display:flex;flex-direction:column;gap:0.3rem"><div style="display:flex;align-items:center;gap:0.4rem"><span style="color:#34d399">✓</span><span style="font-size:0.6rem;color:#e2e8f0">Policy logged with full audit trail</span></div><div style="display:flex;align-items:center;gap:0.4rem"><span style="color:#34d399">✓</span><span style="font-size:0.6rem;color:#e2e8f0">Published to Collibra governance catalogue</span></div><div style="display:flex;align-items:center;gap:0.4rem"><span style="color:#34d399">✓</span><span style="font-size:0.6rem;color:#e2e8f0">SAP MDG validation rule activated</span></div><div style="display:flex;align-items:center;gap:0.4rem"><span style="color:#34d399">✓</span><span style="font-size:0.6rem;color:#e2e8f0">Compliance team notified</span></div><div style="display:flex;align-items:center;gap:0.4rem"><span style="color:#fbbf24">⚠</span><span style="font-size:0.6rem;color:#e2e8f0"><strong>12 existing records</strong> flagged — steward remediation tasks created</span></div><div style="display:flex;align-items:center;gap:0.4rem"><span style="color:#34d399">✓</span><span style="font-size:0.6rem;color:#e2e8f0">Every future excipient ingestion will be validated automatically</span></div></div><br><div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:6px;padding:0.5rem;margin-top:0.3rem"><div style="font-size:0.6rem;color:#34d399;font-weight:700">Total time: ~3 minutes</div><div style="font-size:0.55rem;color:var(--muted);margin-top:0.2rem">Traditional process: Jira ticket → committee → IT configures → UAT → deploy = <strong style="color:#f87171">~3 weeks</strong></div></div>',
+     sys:'OBSERVABILITY.audit(action="POLICY_PUBLISHED", remediation_tasks=12)',
+     result:['Policy live — audit complete — 12 remediation tasks created','ok'],duration:'0.4s',
+     kbWrite: 'Wrote: Policy published — 12 retroactive violations, remediation initiated'},
+  ];
+
+  addTyping();
+  for (let i = 0; i < steps.length; i++) {
+    await sleep(600 + Math.random() * 500);
+    removeTyping();
+    await addFlowStep(steps[i], i, steps.length, steps);
+    if (i < steps.length - 1) addTyping();
+  }
+  removeTyping();
+
+  await sleep(400);
+  addMsg('assistant', `<strong>Policy Authoring Complete</strong><br><br>What just happened in ~3 minutes:<br><br>1. <strong>You spoke in plain English</strong> — "excipients must have shelf-life data"<br>2. <strong>AI translated it</strong> — into a structured governance rule<br>3. <strong>Impact was shown upfront</strong> — 12 of 478 records would be affected<br>4. <strong>You approved it</strong> — the governance lead owns the decision<br>5. <strong>It's now live</strong> — published to Collibra, enforced in SAP MDG, stewards notified<br><br><strong>The AI doesn't make governance decisions — your people do.</strong> It turns a 3-week process into a 3-minute conversation.`);
+
+  isProcessing = false;
+  document.getElementById('sendBtn').disabled = false;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
+</body>
+</html>

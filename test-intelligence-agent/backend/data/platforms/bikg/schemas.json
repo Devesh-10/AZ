@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astrazeneca.com/test-intelligence-agent/schemas/bikg/kg_relationship.json",
+  "title": "Knowledge Graph Relationship Schema",
+  "description": "JSON Schema for validating biological knowledge graph edges (relationships) in the BIKG platform. Each record represents a directed edge between two biological entities with provenance and evidence metadata.",
+  "type": "object",
+  "required": [
+    "source_entity",
+    "target_entity",
+    "relationship_type",
+    "evidence_score",
+    "source_database",
+    "ontology_term"
+  ],
+  "properties": {
+    "source_entity": {
+      "type": "object",
+      "description": "The source node of the relationship edge",
+      "required": ["identifier", "entity_type"],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Entity identifier (HGNC symbol, UniProt accession, or ChEBI ID)",
+          "minLength": 1,
+          "maxLength": 100,
+          "examples": ["EGFR", "P00533", "CHEBI:49603"]
+        },
+        "entity_type": {
+          "type": "string",
+          "description": "Type of biological entity",
+          "enum": ["gene", "protein", "compound", "disease", "pathway", "phenotype", "cell_type"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name of the entity",
+          "examples": ["Epidermal growth factor receptor"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "target_entity": {
+      "type": "object",
+      "description": "The target node of the relationship edge",
+      "required": ["identifier", "entity_type"],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "examples": ["MONDO:0005233", "DOID:162", "TP53"]
+        },
+        "entity_type": {
+          "type": "string",
+          "enum": ["gene", "protein", "compound", "disease", "pathway", "phenotype", "cell_type"]
+        },
+        "name": {
+          "type": "string",
+          "examples": ["Non-small cell lung carcinoma"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "relationship_type": {
+      "type": "string",
+      "description": "Type of biological relationship between entities",
+      "enum": [
+        "targets",
+        "inhibits",
+        "activates",
+        "associated_with",
+        "interacts_with",
+        "regulates",
+        "phosphorylates",
+        "binds_to"
+      ]
+    },
+    "evidence_score": {
+      "type": "number",
+      "description": "Confidence score for the relationship (0.0 to 1.0)",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [0.95, 0.72, 0.451]
+    },
+    "source_database": {
+      "type": "string",
+      "description": "Authoritative database from which the relationship was curated",
+      "enum": [
+        "OMIM",
+        "ClinVar",
+        "DisGeNET",
+        "STRING",
+        "IntAct",
+        "ChEMBL",
+        "UniProt",
+        "PubChem",
+        "Reactome"
+      ]
+    },
+    "ontology_term": {
+      "type": "string",
+      "description": "Ontology CURIE for semantic annotation of the relationship or entities",
+      "pattern": "^[A-Za-z]+:[0-9]+$",
+      "examples": ["HP:0001945", "GO:0008150", "MONDO:0005233"]
+    },
+    "species": {
+      "type": "string",
+      "description": "Species context for the relationship",
+      "enum": [
+        "Homo sapiens",
+        "Mus musculus",
+        "Rattus norvegicus",
+        "Danio rerio",
+        "Caenorhabditis elegans"
+      ]
+    },
+    "publication_reference": {
+      "type": "string",
+      "description": "PubMed ID or DOI supporting the relationship",
+      "pattern": "^(PMID:[0-9]+|10\\.[0-9]{4,}/[^\\s]+)$",
+      "maxLength": 100,
+      "examples": ["PMID:34567890", "10.1038/s41586-023-06390-2"]
+    },
+    "curation_status": {
+      "type": "string",
+      "description": "Whether the edge has been manually curated or auto-extracted",
+      "enum": ["manually_curated", "auto_extracted", "community_curated", "predicted"]
+    },
+    "edge_metadata": {
+      "type": "object",
+      "description": "Additional metadata for the relationship edge",
+      "properties": {
+        "created_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "last_validated_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+$"
+        },
+        "directionality": {
+          "type": "string",
+          "enum": ["directed", "undirected", "bidirectional"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
