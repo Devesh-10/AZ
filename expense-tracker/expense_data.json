@@ -1,0 +1,38 @@
+{
+  "currency": "EUR",
+  "monthly_income": 5755,
+  "subscriptions": [
+    {"name": "Claude Max Plan", "monthly_cost": 110.70, "category": "ai_tools", "essential": false, "added": "2026-04-23", "status": "CANCELLED"},
+    {"name": "Replit Pro", "monthly_cost": 35.00, "category": "ai_tools", "essential": false, "added": "2026-04-23", "status": "CANCELLED"},
+    {"name": "OpenAI ChatGPT", "monthly_cost": 21.50, "category": "ai_tools", "essential": false, "added": "2026-04-23", "status": "active"},
+    {"name": "Microsoft", "monthly_cost": 5.00, "category": "ai_tools", "essential": true, "added": "2026-04-23", "status": "active"},
+    {"name": "Netflix", "monthly_cost": 23.99, "category": "streaming", "essential": false, "added": "2026-04-23", "status": "CANCELLED"},
+    {"name": "Apple (x2)", "monthly_cost": 20.98, "category": "streaming", "essential": false, "added": "2026-04-23", "status": "active"},
+    {"name": "Sky TV", "monthly_cost": 44.00, "category": "streaming", "essential": false, "added": "2026-04-23", "status": "active"},
+    {"name": "Sky Digital", "monthly_cost": 27.00, "category": "streaming", "essential": false, "added": "2026-04-23", "status": "active"},
+    {"name": "Sky Sports", "monthly_cost": 15.00, "category": "streaming", "essential": false, "added": "2026-04-23", "status": "active"},
+    {"name": "Plus Subs (x2)", "monthly_cost": 17.98, "category": "streaming", "essential": false, "added": "2026-04-23", "status": "active"},
+    {"name": "GoMo Mobile", "monthly_cost": 14.99, "category": "utilities", "essential": true, "added": "2026-04-23", "status": "active"},
+      ],
+  "personal_expenses": [
+    {"name": "Mortgage (Bankinter)", "monthly_cost": 1871.74, "category": "housing", "essential": true},
+    {"name": "Electricity (Pinergy/EI)", "monthly_cost": 370.00, "category": "utilities", "essential": true},
+    {"name": "Broadband (Virgin Media)", "monthly_cost": 54.99, "category": "utilities", "essential": true},
+    {"name": "Insurance (Zurich Life)", "monthly_cost": 29.43, "category": "insurance", "essential": true},
+    {"name": "Insurance (Premium Credit)", "monthly_cost": 109.37, "category": "insurance", "essential": true},
+    {"name": "Gym (Westwood)", "monthly_cost": 99.00, "category": "fitness", "essential": false},
+    {"name": "Groceries", "monthly_cost": 135.00, "category": "food", "essential": true},
+    {"name": "Coffee", "monthly_cost": 79.00, "category": "food", "essential": false},
+    {"name": "Eating Out", "monthly_cost": 95.00, "category": "food", "essential": false},
+    {"name": "Transport (Uber/Petrol/Tolls)", "monthly_cost": 312.00, "category": "transport", "essential": true}
+  ],
+  "loans": [
+    {"person": "Nitish", "total_borrowed": 3000, "amount_paid": 0, "monthly_repayment": 0, "purpose": "house", "added": "2026-04-23"},
+    {"person": "Shweta", "total_borrowed": 800, "amount_paid": 0, "monthly_repayment": 0, "purpose": "house", "added": "2026-04-23"},
+    {"person": "Maneesh", "total_borrowed": 500, "amount_paid": 0, "monthly_repayment": 0, "purpose": "house", "added": "2026-04-23"},
+    {"person": "Rishi", "total_borrowed": 300, "amount_paid": 0, "monthly_repayment": 0, "purpose": "house", "added": "2026-04-23"},
+    {"person": "Ashish", "total_borrowed": 200, "amount_paid": 0, "monthly_repayment": 0, "purpose": "house", "added": "2026-04-23"},
+    {"person": "Piyush", "total_borrowed": 1000, "amount_paid": 0, "monthly_repayment": 0, "purpose": "house", "added": "2026-04-23"},
+    {"person": "Rakesh (security deposit)", "total_borrowed": 700, "amount_paid": 0, "monthly_repayment": 0, "purpose": "security deposit return", "added": "2026-04-23"}
+  ]
+}

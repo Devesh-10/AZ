@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devesh - Finance Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface2: #1a1a26;
+            --surface3: #22222e;
+            --border: #2a2a3a;
+            --text: #eeeef0;
+            --text2: #9999aa;
+            --text3: #666678;
+            --green: #00d68f;
+            --green-bg: rgba(0,214,143,0.1);
+            --red: #ff4d6a;
+            --red-bg: rgba(255,77,106,0.1);
+            --blue: #4d8eff;
+            --blue-bg: rgba(77,142,255,0.1);
+            --yellow: #ffb84d;
+            --yellow-bg: rgba(255,184,77,0.1);
+            --purple: #9966ff;
+            --purple-bg: rgba(153,102,255,0.1);
+            --orange: #ff7a4d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        /* ── Sidebar ── */
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar {
+            width: 260px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+        .sidebar .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+        .sidebar .subtitle { font-size: 0.75rem; color: var(--text3); margin-bottom: 32px; }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text2);
+            margin-bottom: 4px;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        .nav-item:hover { background: var(--surface2); color: var(--text); }
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(77,142,255,0.15), rgba(153,102,255,0.1));
+            color: var(--blue);
+            font-weight: 600;
+        }
+        .nav-item .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+        .nav-item .badge {
+            margin-left: auto;
+            background: var(--red);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 16px;
+            background: var(--surface2);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .sidebar-footer .label { font-size: 0.7rem; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .sidebar-footer .amount { font-size: 1.3rem; font-weight: 700; color: var(--green); }
+        .sidebar-footer .sub { font-size: 0.75rem; color: var(--text3); margin-top: 2px; }
+
+        /* ── Main content ── */
+        .main { margin-left: 260px; flex: 1; padding: 28px 32px; }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+        .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+        .page-header .date { color: var(--text3); font-size: 0.85rem; }
+
+        /* ── Cards grid ── */
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .stat-card .icon-bg {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+        .stat-card .label { font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; font-weight: 600; }
+        .stat-card .value { font-size: 1.7rem; font-weight: 700; }
+        .stat-card .change { font-size: 0.78rem; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+
+        /* ── Two column layout ── */
+        .two-col { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; margin-bottom: 24px; }
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+        /* ── Panel ── */
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .panel-header h2 { font-size: 1rem; font-weight: 600; }
+        .panel-header .pill {
+            background: var(--surface3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text2);
+        }
+
+        /* ── Donut chart ── */
+        .donut-container { display: flex; align-items: center; gap: 30px; }
+        .donut-wrapper { position: relative; width: 180px; height: 180px; flex-shrink: 0; }
+        .donut-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .donut-center .val { font-size: 1.3rem; font-weight: 700; }
+        .donut-center .lbl { font-size: 0.7rem; color: var(--text3); }
+        .legend { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .legend-item { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+        .legend-val { margin-left: auto; font-weight: 600; color: var(--text2); }
+
+        /* ── Bar chart ── */
+        .bar-h { display: flex; flex-direction: column; gap: 10px; }
+        .bar-h-row { display: flex; align-items: center; gap: 12px; }
+        .bar-h-label { width: 120px; font-size: 0.8rem; color: var(--text2); text-align: right; flex-shrink: 0; }
+        .bar-h-track { flex: 1; height: 28px; background: var(--surface3); border-radius: 8px; overflow: hidden; }
+        .bar-h-fill {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .bar-h-pct { width: 50px; font-size: 0.8rem; color: var(--text3); text-align: right; }
+
+        /* ── Table ── */
+        table { width: 100%; border-collapse: collapse; }
+        thead th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 0.72rem;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+        tbody td {
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid rgba(42,42,58,0.5);
+        }
+        tbody tr { transition: background 0.15s; }
+        tbody tr:hover { background: var(--surface2); }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tag-green { background: var(--green-bg); color: var(--green); }
+        .tag-red { background: var(--red-bg); color: var(--red); }
+        .tag-yellow { background: var(--yellow-bg); color: var(--yellow); }
+        .tag-blue { background: var(--blue-bg); color: var(--blue); }
+
+        /* ── Debt cards ── */
+        .debt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+        .debt-item {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            transition: all 0.2s;
+        }
+        .debt-item:hover { border-color: var(--blue); transform: translateY(-1px); }
+        .debt-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .debt-person { font-weight: 600; font-size: 1rem; }
+        .debt-amount { font-size: 1.2rem; font-weight: 700; color: var(--red); }
+        .debt-purpose { font-size: 0.75rem; color: var(--text3); margin-bottom: 10px; }
+        .debt-progress { width: 100%; height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+        .debt-progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width 0.5s; }
+        .debt-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text3); }
+        .debt-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface3);
+            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .debt-btn:hover { background: var(--blue); border-color: var(--blue); }
+        .debt-item.is-paid { opacity: 0.5; }
+        .debt-item.is-paid .debt-amount { color: var(--green); text-decoration: line-through; }
+
+        /* ── Savings action items ── */
+        .savings-list { display: flex; flex-direction: column; gap: 10px; }
+        .savings-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .savings-row:hover { border-color: var(--green); }
+        .savings-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .savings-icon.done { background: var(--green-bg); }
+        .savings-icon.pending { background: var(--yellow-bg); }
+        .savings-info { flex: 1; }
+        .savings-info .action { font-size: 0.9rem; font-weight: 500; }
+        .savings-info .status { font-size: 0.75rem; margin-top: 2px; }
+        .savings-info .status.done { color: var(--green); }
+        .savings-info .status.pending { color: var(--yellow); }
+        .savings-amount { font-size: 1.1rem; font-weight: 700; color: var(--green); white-space: nowrap; }
+        .savings-total {
+            background: linear-gradient(135deg, rgba(0,214,143,0.1), rgba(0,214,143,0.05));
+            border: 1px solid rgba(0,214,143,0.2);
+            border-radius: 14px;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+        .savings-total .label { font-size: 1rem; font-weight: 700; }
+        .savings-total .val { font-size: 1.8rem; font-weight: 800; color: var(--green); }
+        .savings-total .sub { font-size: 0.8rem; color: var(--green); opacity: 0.7; }
+
+        /* ── Filters ── */
+        .filters { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+        .filter-select {
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .filter-select:hover { border-color: var(--blue); }
+        .filter-select:focus { outline: none; border-color: var(--blue); }
+
+        /* ── Alert ── */
+        .alert-box {
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.5;
+        }
+        .alert-box .alert-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .alert-success { background: var(--green-bg); border: 1px solid rgba(0,214,143,0.2); color: var(--green); }
+        .alert-warning { background: var(--yellow-bg); border: 1px solid rgba(255,184,77,0.2); color: var(--yellow); }
+        .alert-danger { background: var(--red-bg); border: 1px solid rgba(255,77,106,0.2); color: var(--red); }
+
+        /* ── Income list ── */
+        .income-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(42,42,58,0.4);
+        }
+        .income-row:last-child { border-bottom: none; }
+        .income-source { font-size: 0.9rem; }
+        .income-amount { font-weight: 600; }
+        .income-amount.positive { color: var(--green); }
+        .income-amount.ended { color: var(--red); text-decoration: line-through; font-size: 0.85rem; }
+
+        .hidden { display: none !important; }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeInUp 0.4s ease forwards; }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .two-col { grid-template-columns: 1fr; }
+            .three-col { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 16px; }
+            .stat-grid { grid-template-columns: 1fr; }
+            .debt-grid { grid-template-columns: 1fr; }
+            .donut-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">FinanceHub</div>
+        <div class="subtitle">Devesh Sharma &middot; McKesson</div>
+
+        <button class="nav-item active" onclick="showTab('overview', this)">
+            <span class="icon">&#9673;</span> Overview
+        </button>
+        <button class="nav-item" onclick="showTab('subscriptions', this)">
+            <span class="icon">&#9881;</span> Subscriptions
+        </button>
+        <button class="nav-item" onclick="showTab('expenses', this)">
+            <span class="icon">&#9733;</span> Expenses
+        </button>
+        <button class="nav-item" onclick="showTab('debts', this)">
+            <span class="icon">&#9888;</span> Debts
+            <span class="badge" id="debtBadge">€6,500</span>
+        </button>
+        <button class="nav-item" onclick="showTab('savings', this)">
+            <span class="icon">&#10003;</span> Savings Plan
+        </button>
+        <button class="nav-item" onclick="showTab('transactions', this)">
+            <span class="icon">&#8644;</span> Transactions
+        </button>
+
+        <div class="sidebar-footer">
+            <div class="label">Monthly Remaining</div>
+            <div class="amount" id="sidebarRemaining">€0</div>
+            <div class="sub">After all bills & subs</div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- ═══ OVERVIEW ═══ -->
+        <div id="tab-overview" class="animate-in">
+            <div class="page-header">
+                <div>
+                    <h1>Financial Overview</h1>
+                    <div class="date">From May 2026 &middot; Devesh Sharma &middot; McKesson (€120K)</div>
+                </div>
+            </div>
+
+            <div class="alert-box alert-danger" id="reminderVM">
+                <span class="alert-icon">&#9888;</span>
+                <div>
+                    <strong>REMINDER - May 2026:</strong> Pay €150 Virgin Media early termination fee and cancel account 85601988. Call <strong>1908</strong>. This saves you €455 over 11 months.
+                    <button onclick="document.getElementById('reminderVM').style.display='none'" style="margin-left:12px;background:rgba(255,255,255,0.15);border:none;color:#fff;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:0.8rem">Dismiss</button>
+                </div>
+            </div>
+
+            <div class="alert-box alert-success">
+                <span class="alert-icon">&#10004;</span>
+                New role at McKesson: €120K + 15% bonus. Rent ended. 5 subs cancelled. Net monthly up from €5,463 to €5,755 (+€292/mo).
+            </div>
+
+            <div class="stat-grid" id="overviewCards"></div>
+
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Expense Breakdown</h2>
+                        <span class="pill">Monthly</span>
+                    </div>
+                    <div class="bar-h" id="expenseBarChart"></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Spending Split</h2>
+                        <span class="pill">Categories</span>
+                    </div>
+                    <div class="donut-container">
+                        <div class="donut-wrapper">
+                            <canvas id="donutCanvas" width="180" height="180"></canvas>
+                            <div class="donut-center">
+                                <div class="val" id="donutTotal">€0</div>
+                                <div class="lbl">per month</div>
+                            </div>
+                        </div>
+                        <div class="legend" id="donutLegend"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Income Sources</h2>
+                    <span class="pill">Bank Data</span>
+                </div>
+                <div class="income-row"><span class="income-source">Salary (McKesson - P5 AI & Automation Lead)</span><span class="income-amount positive">€5,755/mo net (€120K gross)</span></div>
+                <div class="income-row"><span class="income-source">15% Annual Bonus (potential)</span><span class="income-amount positive">€18,000/yr (~€9,360 net)</span></div>
+                <div class="income-row"><span class="income-source">Employer Pension (8%)</span><span class="income-amount positive">€800/mo (€9,600/yr)</span></div>
+                <div class="income-row"><span class="income-source">Landlord Security Deposit (expected)</span><span class="income-amount positive">+€1,200 (one-off)</span></div>
+            </div>
+        </div>
+
+        <!-- ═══ SUBSCRIPTIONS ═══ -->
+        <div id="tab-subscriptions" class="hidden animate-in">
+            <div class="page-header">
+                <h1>Subscriptions</h1>
+            </div>
+            <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);" id="subCards"></div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>All Subscriptions</h2>
+                </div>
+                <table>
+                    <thead><tr><th>Service</th><th>Category</th><th>Monthly</th><th>Annual</th><th>Essential</th><th>Status</th></tr></thead>
+                    <tbody id="subsTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ EXPENSES ═══ -->
+        <div id="tab-expenses" class="hidden animate-in">
+            <div class="page-header">
+                <h1>Monthly Expenses</h1>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Fixed & Variable Costs</h2>
+                    <span class="pill">Recurring</span>
+                </div>
+                <table>
+                    <thead><tr><th>Expense</th><th>Category</th><th>Monthly</th><th>Annual</th><th>Essential</th></tr></thead>
+                    <tbody id="expensesTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ DEBTS ═══ -->
+        <div id="tab-debts" class="hidden animate-in">
+            <div class="page-header">
+                <h1>Debts & Repayments</h1>
+            </div>
+
+            <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat-card">
+                    <div class="icon-bg" style="background:var(--red)"></div>
+                    <div class="label">Total Owed</div>
+                    <div class="value" style="color:var(--red)" id="debtTotal2">€0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-bg" style="background:var(--green)"></div>
+                    <div class="label">Paid Off</div>
+                    <div class="value" style="color:var(--green)" id="debtPaid2">€0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-bg" style="background:var(--blue)"></div>
+                    <div class="label">Security Deposit Coming</div>
+                    <div class="value" style="color:var(--blue)">+€1,200</div>
+                    <div class="change" style="color:var(--text3)">From landlord</div>
+                </div>
+            </div>
+
+            <div class="alert-box alert-warning">
+                <span class="alert-icon">&#9888;</span>
+                Strategy: Use landlord's €1,200 deposit to pay Rakesh (€700) + Ashish (€200) + Rishi (€300). Clears 3 debts instantly.
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><h2>People You Owe</h2></div>
+                <div class="debt-grid" id="debtGrid"></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Repayment Plan</h2>
+                    <span class="pill">3 Months</span>
+                </div>
+                <table>
+                    <thead><tr><th>Month</th><th>Ashish</th><th>Rishi</th><th>Maneesh</th><th>Rakesh</th><th>Shweta</th><th>Piyush</th><th>Nitish</th><th>Total</th></tr></thead>
+                    <tbody>
+                        <tr><td>May 2026</td><td>€200</td><td>€300</td><td>€500</td><td>€700</td><td>€400</td><td>€500</td><td>€500</td><td style="font-weight:700;color:var(--red)">€3,100</td></tr>
+                        <tr><td>Jun 2026</td><td>-</td><td>-</td><td>-</td><td>-</td><td>€400</td><td>€500</td><td>€1,000</td><td style="font-weight:700;color:var(--red)">€1,900</td></tr>
+                        <tr><td>Jul 2026</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>€1,500</td><td style="font-weight:700;color:var(--red)">€1,500</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ SAVINGS ═══ -->
+        <div id="tab-savings" class="hidden animate-in">
+            <div class="page-header">
+                <h1>Savings Plan</h1>
+            </div>
+
+            <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat-card">
+                    <div class="icon-bg" style="background:var(--green)"></div>
+                    <div class="label">Already Saving</div>
+                    <div class="value" style="color:var(--green)">€273/mo</div>
+                    <div class="change" style="color:var(--green)">Claude + Replit + Netflix + Shaadi + Virgin Media</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-bg" style="background:var(--yellow)"></div>
+                    <div class="label">Potential Extra</div>
+                    <div class="value" style="color:var(--yellow)">€149/mo</div>
+                    <div class="change" style="color:var(--yellow)">Sky + OpenAI + coffee + eating out</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-bg" style="background:var(--blue)"></div>
+                    <div class="label">Salary Increase</div>
+                    <div class="value" style="color:var(--blue)">+€292/mo</div>
+                    <div class="change" style="color:var(--text3)">McKesson vs Accenture net pay</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><h2>Savings Actions</h2></div>
+                <div class="savings-list">
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel Claude Max</div>
+                            <div class="status done">DONE - Cancelled</div>
+                        </div>
+                        <div class="savings-amount">€111/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel Replit Pro</div>
+                            <div class="status done">DONE - Cancels May 19</div>
+                        </div>
+                        <div class="savings-amount">€35/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel Netflix</div>
+                            <div class="status done">DONE - Cancelled</div>
+                        </div>
+                        <div class="savings-amount">€24/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel Shaadi.com</div>
+                            <div class="status done">DONE - Cancelled</div>
+                        </div>
+                        <div class="savings-amount">€48/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel Virgin Media (moving out)</div>
+                            <div class="status done">DONE - Ending with tenancy</div>
+                        </div>
+                        <div class="savings-amount">€55/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel Deliveroo Plus (x2 accounts!)</div>
+                            <div class="status done">DONE - Cancelled</div>
+                        </div>
+                        <div class="savings-amount">€18/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Stop Rent (Joseph Kane)</div>
+                            <div class="status done">DONE - Ending this month</div>
+                        </div>
+                        <div class="savings-amount">€1,475/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon done">&#10003;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel old Sky TV duplicate (€44/mo!)</div>
+                            <div class="status done">ACTION NEEDED - Call 0818 719 819 + ask for refund (~€176)</div>
+                        </div>
+                        <div class="savings-amount">€44/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon pending">&#9679;</div>
+                        <div class="savings-info">
+                            <div class="action">Cancel OpenAI ChatGPT</div>
+                            <div class="status pending">PENDING - You'll have Claude Pro</div>
+                        </div>
+                        <div class="savings-amount">€21/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon pending">&#9679;</div>
+                        <div class="savings-info">
+                            <div class="action">Reduce coffee spending 50%</div>
+                            <div class="status pending">PENDING - ~12 coffees/mo, make at home</div>
+                        </div>
+                        <div class="savings-amount">€40/mo</div>
+                    </div>
+                    <div class="savings-row">
+                        <div class="savings-icon pending">&#9679;</div>
+                        <div class="savings-info">
+                            <div class="action">Reduce eating out & delivery 40%</div>
+                            <div class="status pending">PENDING - Cook more at home</div>
+                        </div>
+                        <div class="savings-amount">€38/mo</div>
+                    </div>
+                </div>
+
+                <div class="savings-total">
+                    <div>
+                        <div class="label">Total Potential Savings</div>
+                        <div class="sub">If all actions completed</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="val">€1,897/mo</div>
+                        <div class="sub">€22,764/year</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TRANSACTIONS ═══ -->
+        <div id="tab-transactions" class="hidden animate-in">
+            <div class="page-header">
+                <h1>Bank Transactions</h1>
+            </div>
+
+            <div class="filters">
+                <select id="monthFilter" class="filter-select" onchange="filterTransactions()">
+                    <option value="all">All Months</option>
+                    <option value="Jan">January</option>
+                    <option value="Feb">February</option>
+                    <option value="Mar">March</option>
+                    <option value="Apr" selected>April</option>
+                </select>
+                <select id="typeFilter" class="filter-select" onchange="filterTransactions()">
+                    <option value="all">All Types</option>
+                    <option value="debit">Debits Only</option>
+                    <option value="credit">Credits Only</option>
+                </select>
+                <select id="catFilter" class="filter-select" onchange="filterTransactions()">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+
+            <div class="panel" style="padding:0; overflow:hidden;">
+                <table>
+                    <thead><tr><th>Date</th><th>Description</th><th>Category</th><th style="text-align:right">Amount</th></tr></thead>
+                    <tbody id="transactionsTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const D = {
+    salary: 5755,
+    subs: [
+        {name:"Claude Max Plan", cost:110.70, cat:"AI Tools", essential:false, status:"cancelled"},
+        {name:"Replit Pro", cost:35.00, cat:"AI Tools", essential:false, status:"cancelled"},
+        {name:"Netflix", cost:23.99, cat:"Streaming", essential:false, status:"cancelled"},
+        {name:"OpenAI ChatGPT", cost:21.50, cat:"AI Tools", essential:false, status:"active"},
+        {name:"Microsoft", cost:5.00, cat:"AI Tools", essential:true, status:"active"},
+        {name:"YouTube Premium (Apple)", cost:17.99, cat:"Education", essential:true, status:"active"},
+        {name:"iCloud Storage", cost:2.99, cat:"Storage", essential:true, status:"active"},
+        {name:"Sky TV (OLD - CANCEL!)", cost:44.00, cat:"TV/Internet", essential:false, status:"cancelled"},
+        {name:"Sky Digital (current bundle)", cost:27.00, cat:"TV/Internet", essential:true, status:"active"},
+        {name:"Sky Sports", cost:15.00, cat:"TV/Internet", essential:false, status:"active"},
+        {name:"Deliveroo Plus (x2)", cost:17.98, cat:"Food Delivery", essential:false, status:"cancelled"},
+        {name:"GoMo Mobile", cost:14.99, cat:"Utilities", essential:true, status:"active"},
+    ],
+    expenses: [
+        {name:"Mortgage (Bankinter)", cost:1871.74, cat:"Housing", essential:true},
+        {name:"Electricity (Pinergy)", cost:200.00, cat:"Utilities", essential:true},
+        {name:"Insurance (Premium Credit)", cost:109.37, cat:"Insurance", essential:true},
+        {name:"Gym (Westwood)", cost:99.00, cat:"Fitness", essential:false},
+        {name:"Eating Out & Delivery", cost:95.00, cat:"Food", essential:false},
+        {name:"Coffee", cost:79.00, cat:"Food", essential:false},
+        {name:"Groceries", cost:135.00, cat:"Food", essential:true},
+        {name:"Transport", cost:312.00, cat:"Transport", essential:true},
+        {name:"Insurance (Zurich Life)", cost:29.43, cat:"Insurance", essential:true},
+        {name:"iPhone 17 Pro (Humm)", cost:68.18, cat:"Instalment", essential:true},
+    ],
+    debts: [
+        {person:"Nitish", amount:3000, paid:0, purpose:"House"},
+        {person:"Piyush", amount:1000, paid:0, purpose:"House"},
+        {person:"Shweta", amount:800, paid:0, purpose:"House"},
+        {person:"Rakesh", amount:700, paid:0, purpose:"Security Deposit"},
+        {person:"Maneesh", amount:500, paid:0, purpose:"House"},
+        {person:"Rishi", amount:300, paid:0, purpose:"House"},
+        {person:"Ashish", amount:200, paid:0, purpose:"House"},
+        {person:"Virgin Media (cancel fee)", amount:150, paid:0, purpose:"Early termination - May 2026"},
+        {person:"Humm/Flexi-Fi (iPhone 17 Pro)", amount:1636.27, paid:0, purpose:"24mo instalment - 18.62% APR - pay off early to save interest"},
+    ],
+    tx: []
+};
+
+const csv=`02/03/2026,VDP-APPLE.COM/BILL,Apple,2.99,0
+02/03/2026,VDP-APPLE.COM/BILL,Apple,17.99,0
+02/03/2026,VDP-NETFLIX,Netflix,23.99,0
+02/03/2026,VDP-OPENAI,OpenAI,21.32,0
+02/03/2026,VDP-PINERGY,Electricity,258.24,0
+02/03/2026,VDP-PLUS SUBS,Plus,8.99,0
+02/03/2026,VDP-PLUS SUBS,Plus,8.99,0
+02/03/2026,VDP-Revolut,Revolut,100.00,0
+02/03/2026,VDP-Sky Sports,Sky,15.00,0
+02/03/2026,D/D Bankinter,Mortgage,1871.74,0
+02/03/2026,D/D SKY DIGITAL,Sky,27.00,0
+02/03/2026,D/D VIRGIN MEDIA,Broadband,54.99,0
+02/03/2026,D/D Zurich Life,Insurance,29.43,0
+03/03/2026,D/D WESTWOOD,Gym,99.00,0
+04/03/2026,*MOBI JOSEPH KANE,Rent,2280.00,0
+06/03/2026,VDP-CLAUDE.AI,Claude AI,34.16,0
+09/03/2026,VDC-ADIDAS,Shopping,211.75,0
+09/03/2026,VDC-PUMA,Shopping,67.36,0
+10/03/2026,VDP-Microsoft,Microsoft,4.80,0
+10/03/2026,VDP-Revolut,Revolut,500.00,0
+10/03/2026,VDC-STARBUCKS,Coffee,3.14,0
+11/03/2026,RAKESH CHAND,Subtenant,0,1200.00
+11/03/2026,VDP-Go ibibo,Travel,478.00,0
+13/03/2026,D/D PREMIUM CREDIT,Insurance,109.37,0
+16/03/2026,VDP-Revolut,Revolut,100.00,0
+16/03/2026,D/D SKY TV,Sky,44.00,0
+18/03/2026,VDP-Revolut,Revolut,100.00,0
+18/03/2026,VDP-UBER,Uber,2.59,0
+18/03/2026,VDP-UBER,Uber,3.23,0
+18/03/2026,VDP-UBER,Uber,3.36,0
+18/03/2026,D/D Bankinter,Mortgage,1871.74,0
+18/03/2026,VDC-SAPPHIRE FOODS,Eating Out,5.88,0
+18/03/2026,VDC-STARBUCKS,Coffee,8.97,0
+19/03/2026,VDP-OPENAI,OpenAI,21.91,0
+19/03/2026,VDP-REPLIT,Replit,35.55,0
+19/03/2026,VDP-UBER,Uber,1.94,0
+20/03/2026,VDP-UBER,Uber,0.60,0
+20/03/2026,VDP-UBER,Uber,2.74,0
+20/03/2026,VDP-UBER,Uber,3.07,0
+20/03/2026,VDC-HOTEL,Hotel,102.23,0
+20/03/2026,VDC-PVR INOX,Entertainment,12.77,0
+23/03/2026,VDP-BIGTREE,Eating Out,10.32,0
+23/03/2026,VDP-BIGTREE,Eating Out,23.75,0
+23/03/2026,VDC-HOTEL,Hotel,5.33,0
+27/03/2026,SALARY,Salary,0,5462.74
+30/03/2026,VDP-APPLE.COM/BILL,Apple,2.99,0
+30/03/2026,VDP-CRICKET LEINST,Sports,28.00,0
+30/03/2026,VDP-DELIVEROO,Deliveroo,8.99,0
+30/03/2026,VDP-DELIVEROO,Deliveroo,8.99,0
+30/03/2026,FEE-QTR,Bank Fee,30.78,0
+30/03/2026,D/D VIRGIN MEDIA,Broadband,54.99,0
+30/03/2026,VDC-HOTEL,Hotel,34.13,0
+31/03/2026,VDP-PINERGY,Electricity,143.79,0
+31/03/2026,VDP-Yotel,Hotel,225.00,0
+01/04/2026,D/D WESTWOOD,Gym,99.00,0
+01/04/2026,D/D Zurich Life,Insurance,29.43,0
+01/04/2026,VDC-HOTEL,Hotel,33.96,0
+01/04/2026,VDC-STARBUCKS,Coffee,15.88,0
+02/04/2026,VDP-APPLE.COM/BILL,Apple,17.99,0
+02/04/2026,VDP-NETFLIX,Netflix,23.99,0
+02/04/2026,VDP-OPENAI,OpenAI,21.94,0
+02/04/2026,VDP-Revolut,Revolut,20.00,0
+02/04/2026,VDP-Revolut,Revolut,130.00,0
+02/04/2026,VDP-Revolut,Revolut,200.00,0
+02/04/2026,VDP-UBER,Uber,2.18,0
+02/04/2026,*MOBI JOSEPH KANE,Rent,2280.00,0
+02/04/2026,D/D SKY DIGITAL,Sky,27.00,0
+02/04/2026,VDC-RADISSON,Hotel,28.06,0
+02/04/2026,VDC-RADISSON,Hotel,35.39,0
+02/04/2026,VDC-RESTAURANT,Eating Out,1.90,0
+07/04/2026,VDP-CLAUDE.AI,Claude AI,110.70,0
+07/04/2026,D/D Electric Ireland,Electricity,520.73,0
+07/04/2026,VDC-CARPO COFFEE,Coffee,2.00,0
+07/04/2026,VDC-MCDONALDS,Eating Out,0.95,0
+07/04/2026,VDC-MCDONALDS,Eating Out,13.35,0
+07/04/2026,VDC-MCDONALDS,Eating Out,22.00,0
+07/04/2026,VDC-CENTRA,Groceries,27.59,0
+07/04/2026,VDC-HMS Host,Eating Out,5.46,0
+07/04/2026,VDC-HMS Host,Eating Out,10.61,0
+07/04/2026,VDC-HOME STORE,Shopping,39.99,0
+07/04/2026,VDC-Insomnia,Coffee,5.15,0
+07/04/2026,VDC-Insomnia,Coffee,5.15,0
+07/04/2026,VDC-Insomnia,Coffee,5.15,0
+07/04/2026,VDC-Insomnia,Coffee,12.30,0
+07/04/2026,VDC-Insomnia,Coffee,18.55,0
+07/04/2026,VDC-Joe And The Juice,Coffee,12.40,0
+07/04/2026,VDC-MAXOL,Petrol,110.43,0
+07/04/2026,VDC-RADISSON,Hotel,5.88,0
+07/04/2026,VDC-RADISSON,Hotel,21.98,0
+07/04/2026,VDC-RADISSON,Hotel,47.57,0
+07/04/2026,VDC-RADISSON,Hotel,47.57,0
+07/04/2026,VDC-SumUp,Other,48.00,0
+07/04/2026,VDC-TESCO,Groceries,25.54,0
+07/04/2026,VDC-TESCO,Groceries,25.66,0
+07/04/2026,VDC-TESCO,Groceries,42.88,0
+07/04/2026,VDC-Woodies,Shopping,22.99,0
+07/04/2026,VDC-YOTELAIR,Hotel,2.50,0
+07/04/2026,VDC-YOTELAIR,Hotel,7.50,0
+08/04/2026,VDC-Insomnia,Coffee,5.15,0
+09/04/2026,VDP-GOMO,Mobile,14.99,0
+09/04/2026,VDP-Revolut,Revolut,100.00,0
+09/04/2026,VDC-Insomnia,Coffee,5.15,0
+10/04/2026,VDP-MICROSOFT,Microsoft,5.38,0
+13/04/2026,RAKESH CHAND,Subtenant,0,180.00
+13/04/2026,RAKESH CHAND,Subtenant,0,640.00
+13/04/2026,VDP-UBER,Uber,35.40,0
+13/04/2026,D/D PREMIUM CREDIT,Insurance,109.37,0
+13/04/2026,VDC-Liffey Valley,Shopping,2.50,0
+14/04/2026,VDP-EFLOW,Tolls,707.74,0
+14/04/2026,D/D SKY TV,Sky,44.00,0
+14/04/2026,VDC-Insomnia,Coffee,5.15,0
+14/04/2026,VDC-MCCABES,Pharmacy,29.38,0
+15/04/2026,VDC-Insomnia,Coffee,4.75,0
+16/04/2026,DEVESH SHARMA,Self Transfer,0,200.00
+16/04/2026,LAL CHAND SHARMA,Family,0,1337.00
+16/04/2026,VDP-Revolut,Revolut,10.00,0
+16/04/2026,PYMT FEE,Bank Fee,6.35,0
+16/04/2026,VDC-CENTRA,Groceries,8.50,0
+16/04/2026,VDC-Insomnia,Coffee,3.90,0
+20/04/2026,VDP-OPENAI,OpenAI,21.37,0
+20/04/2026,VDP-Revolut,Revolut,10.00,0
+20/04/2026,VDP-REPLIT,Replit,34.60,0
+20/04/2026,D/D Bankinter,Mortgage,1871.74,0
+20/04/2026,VDC-CENTRA,Groceries,8.75,0
+20/04/2026,VDC-Coffee Bean,Coffee,10.60,0
+20/04/2026,VDC-MCEVOYS PUB,Pub,12.40,0
+20/04/2026,VDC-PHOENIX PARK,Entertainment,7.30,0
+21/04/2026,HHH,Other Income,0,300.00
+21/04/2026,VDP-Revolut,Revolut,10.00,0
+22/04/2026,VDP-HOTEL,Hotel,97.65,0
+22/04/2026,*TPP Devesh Sharma,Other,10.00,0`;
+
+csv.split('\n').forEach(l => {
+    const p = l.split(',');
+    if(p.length>=5) D.tx.push({date:p[0],desc:p[1],cat:p[2],debit:parseFloat(p[3])||0,credit:parseFloat(p[4])||0});
+});
+
+// Populate category filter
+const allCats = [...new Set(D.tx.map(t=>t.cat))].sort();
+const catSel = document.getElementById('catFilter');
+allCats.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o); });
+
+const fmt = n => '€'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const fmtShort = n => n >= 1000 ? '€'+(n/1000).toFixed(1)+'k' : fmt(n);
+
+function showTab(id, btn) {
+    document.querySelectorAll('[id^="tab-"]').forEach(el => el.classList.add('hidden'));
+    document.getElementById('tab-'+id).classList.remove('hidden');
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+}
+
+function renderOverview() {
+    const activeSubs = D.subs.filter(s=>s.status==='active');
+    const subCost = activeSubs.reduce((a,s)=>a+s.cost,0);
+    const expCost = D.expenses.reduce((a,e)=>a+e.cost,0);
+    const total = subCost + expCost;
+    const remaining = D.salary - total;
+    const debtTotal = D.debts.reduce((a,d)=>a+(d.amount-d.paid),0);
+    const cancelledTotal = D.subs.filter(s=>s.status==='cancelled').reduce((a,s)=>a+s.cost,0);
+
+    document.getElementById('sidebarRemaining').textContent = fmt(remaining);
+    document.getElementById('sidebarRemaining').style.color = remaining >= 0 ? 'var(--green)' : 'var(--red)';
+
+    document.getElementById('overviewCards').innerHTML = `
+        <div class="stat-card">
+            <div class="icon-bg" style="background:var(--green)"></div>
+            <div class="label">Monthly Salary</div>
+            <div class="value" style="color:var(--green)">${fmt(D.salary)}</div>
+            <div class="change" style="color:var(--text3)">Net take-home</div>
+        </div>
+        <div class="stat-card">
+            <div class="icon-bg" style="background:var(--red)"></div>
+            <div class="label">Monthly Expenses</div>
+            <div class="value" style="color:var(--red)">${fmt(total)}</div>
+            <div class="change" style="color:var(--text3)">${((total/D.salary)*100).toFixed(0)}% of income</div>
+        </div>
+        <div class="stat-card">
+            <div class="icon-bg" style="background:var(--yellow)"></div>
+            <div class="label">Outstanding Debt</div>
+            <div class="value" style="color:var(--yellow)">${fmt(debtTotal)}</div>
+            <div class="change" style="color:var(--text3)">Owed to ${D.debts.filter(d=>d.amount-d.paid>0).length} people</div>
+        </div>
+        <div class="stat-card">
+            <div class="icon-bg" style="background:var(--purple)"></div>
+            <div class="label">Monthly Remaining</div>
+            <div class="value" style="color:${remaining>=0?'var(--green)':'var(--red)'}">${fmt(remaining)}</div>
+            <div class="change" style="color:var(--green)">${fmt(cancelledTotal)}/mo saved from cancellations</div>
+        </div>
+    `;
+
+    // Bar chart
+    const cats = {};
+    D.expenses.forEach(e => { cats[e.cat] = (cats[e.cat]||0) + e.cost; });
+    cats['Subscriptions'] = subCost;
+    const sorted = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+    const max = sorted[0][1];
+    const colors = ['#ff4d6a','#ff7a4d','#ffb84d','#00d68f','#4d8eff','#9966ff','#ff4da6','#4dd6ff','#88ff4d'];
+
+    document.getElementById('expenseBarChart').innerHTML = sorted.map(([cat,val],i) => `
+        <div class="bar-h-row">
+            <div class="bar-h-label">${cat}</div>
+            <div class="bar-h-track">
+                <div class="bar-h-fill" style="width:${(val/max*100)}%;background:${colors[i%colors.length]}">${fmt(val)}</div>
+            </div>
+            <div class="bar-h-pct">${((val/D.salary)*100).toFixed(1)}%</div>
+        </div>
+    `).join('');
+
+    // Donut
+    drawDonut(cats);
+}
+
+function drawDonut(cats) {
+    const canvas = document.getElementById('donutCanvas');
+    const ctx = canvas.getContext('2d');
+    const cx=90, cy=90, r=75, inner=50;
+    const colors = ['#ff4d6a','#ff7a4d','#ffb84d','#00d68f','#4d8eff','#9966ff','#ff4da6','#4dd6ff','#88ff4d'];
+    const entries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+    const total = entries.reduce((a,[,v])=>a+v,0);
+
+    ctx.clearRect(0,0,180,180);
+    let start = -Math.PI/2;
+    entries.forEach(([cat,val],i) => {
+        const slice = (val/total)*Math.PI*2;
+        ctx.beginPath();
+        ctx.arc(cx,cy,r,start,start+slice);
+        ctx.arc(cx,cy,inner,start+slice,start,true);
+        ctx.closePath();
+        ctx.fillStyle = colors[i%colors.length];
+        ctx.fill();
+        start += slice;
+    });
+
+    document.getElementById('donutTotal').textContent = fmt(total);
+
+    document.getElementById('donutLegend').innerHTML = entries.map(([cat,val],i) => `
+        <div class="legend-item">
+            <div class="legend-dot" style="background:${colors[i%colors.length]}"></div>
+            <span>${cat}</span>
+            <span class="legend-val">${fmt(val)}</span>
+        </div>
+    `).join('');
+}
+
+function renderSubs() {
+    const active = D.subs.filter(s=>s.status==='active');
+    const cancelled = D.subs.filter(s=>s.status==='cancelled');
+    const activeCost = active.reduce((a,s)=>a+s.cost,0);
+    const cancelledCost = cancelled.reduce((a,s)=>a+s.cost,0);
+
+    document.getElementById('subCards').innerHTML = `
+        <div class="stat-card"><div class="label">Active Cost</div><div class="value" style="color:var(--red)">${fmt(activeCost)}/mo</div><div class="change" style="color:var(--text3)">${active.length} subscriptions</div></div>
+        <div class="stat-card"><div class="label">Cancelled</div><div class="value" style="color:var(--green)">${fmt(cancelledCost)}/mo</div><div class="change" style="color:var(--green)">Saved! ${cancelled.length} cancelled</div></div>
+        <div class="stat-card"><div class="label">Annual Active Cost</div><div class="value" style="color:var(--yellow)">${fmt(activeCost*12)}/yr</div></div>
+    `;
+
+    document.getElementById('subsTable').innerHTML = D.subs.map(s => `
+        <tr>
+            <td style="${s.status==='cancelled'?'text-decoration:line-through;color:var(--text3)':''}">${s.name}</td>
+            <td>${s.cat}</td>
+            <td>${fmt(s.cost)}</td>
+            <td style="color:var(--text3)">${fmt(s.cost*12)}</td>
+            <td>${s.essential?'<span class="tag tag-yellow">Essential</span>':'<span class="tag" style="background:var(--surface3);color:var(--text3)">Optional</span>'}</td>
+            <td>${s.status==='active'?'<span class="tag tag-green">Active</span>':'<span class="tag tag-red">Cancelled</span>'}</td>
+        </tr>
+    `).join('');
+}
+
+function renderExpenses() {
+    const total = D.expenses.reduce((a,e)=>a+e.cost,0);
+    document.getElementById('expensesTable').innerHTML = D.expenses.map(e => `
+        <tr>
+            <td>${e.name}</td>
+            <td>${e.cat}</td>
+            <td style="font-weight:600">${fmt(e.cost)}</td>
+            <td style="color:var(--text3)">${fmt(e.cost*12)}</td>
+            <td>${e.essential?'<span class="tag tag-yellow">Essential</span>':'<span class="tag" style="background:var(--surface3);color:var(--text3)">Optional</span>'}</td>
+        </tr>
+    `).join('') + `
+        <tr style="border-top:2px solid var(--border)">
+            <td style="font-weight:700">TOTAL</td><td></td>
+            <td style="font-weight:700;color:var(--red)">${fmt(total)}</td>
+            <td style="font-weight:700;color:var(--text3)">${fmt(total*12)}</td>
+            <td></td>
+        </tr>`;
+}
+
+function renderDebts() {
+    const totalOwed = D.debts.reduce((a,d)=>a+d.amount,0);
+    const totalPaid = D.debts.reduce((a,d)=>a+d.paid,0);
+    document.getElementById('debtTotal2').textContent = fmt(totalOwed);
+    document.getElementById('debtPaid2').textContent = fmt(totalPaid);
+    document.getElementById('debtBadge').textContent = fmt(totalOwed-totalPaid);
+
+    document.getElementById('debtGrid').innerHTML = D.debts.map(d => {
+        const rem = d.amount - d.paid;
+        const pct = (d.paid/d.amount)*100;
+        const done = rem <= 0;
+        return `<div class="debt-item ${done?'is-paid':''}">
+            <div class="debt-top">
+                <div class="debt-person">${d.person}</div>
+                <div class="debt-amount">${done?'PAID':fmt(rem)}</div>
+            </div>
+            <div class="debt-purpose">${d.purpose}</div>
+            <div class="debt-progress"><div class="debt-progress-fill" style="width:${pct}%"></div></div>
+            <div class="debt-meta"><span>${fmt(d.paid)} paid</span><span>of ${fmt(d.amount)}</span></div>
+            ${done?'':`<button class="debt-btn" onclick="payDebt('${d.person}')">Record Payment</button>`}
+        </div>`;
+    }).join('');
+}
+
+function payDebt(person) {
+    const amt = parseFloat(prompt('How much are you paying '+person+'? (EUR)'));
+    if(!amt||isNaN(amt)) return;
+    const d = D.debts.find(x=>x.person===person);
+    if(d) { d.paid = Math.min(d.paid+amt, d.amount); renderDebts(); renderOverview(); }
+}
+
+function filterTransactions() {
+    const mf = document.getElementById('monthFilter').value;
+    const tf = document.getElementById('typeFilter').value;
+    const cf = document.getElementById('catFilter').value;
+
+    let filtered = D.tx;
+    if(mf!=='all') {
+        const mm={Jan:'01',Feb:'02',Mar:'03',Apr:'04'}[mf];
+        filtered = filtered.filter(t=>t.date.includes('/'+mm+'/'));
+    }
+    if(tf==='debit') filtered=filtered.filter(t=>t.debit>0);
+    if(tf==='credit') filtered=filtered.filter(t=>t.credit>0);
+    if(cf!=='all') filtered=filtered.filter(t=>t.cat===cf);
+
+    document.getElementById('transactionsTable').innerHTML = filtered.map(t => {
+        const isC = t.credit>0;
+        return `<tr>
+            <td style="color:var(--text3);white-space:nowrap;font-size:0.82rem">${t.date}</td>
+            <td>${t.desc}</td>
+            <td><span class="tag tag-blue">${t.cat}</span></td>
+            <td style="text-align:right;font-weight:600;color:${isC?'var(--green)':'var(--red)'}">${isC?'+'+fmt(t.credit):'-'+fmt(t.debit)}</td>
+        </tr>`;
+    }).join('');
+}
+
+// Init
+renderOverview();
+renderSubs();
+renderExpenses();
+renderDebts();
+filterTransactions();
+</script>
+</body>
+</html>
